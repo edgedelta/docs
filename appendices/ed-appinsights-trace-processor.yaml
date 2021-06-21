@@ -1,0 +1,222 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: edgedelta
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: edgedelta
+subjects:
+- kind: ServiceAccount
+  name: edgedelta
+  namespace: edgedelta
+roleRef:
+  kind: ClusterRole
+  name: edgedelta
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: edgedelta
+  labels:
+    k8s-app: edgedelta-logging
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources:
+  - namespaces
+  - pods
+  verbs:
+  - get
+  - watch
+  - list
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: edgedelta
+  namespace: edgedelta
+  labels:
+---
+
+# Edgedelta application insight integration deployment contains 3 containers:
+# 1. Http recorder which listens on a port and appends incoming requests to a file. 
+# 2. Edgedelta agent which tails the request dumps and processes them
+# 3. (optional) busybox container for debugging purposes. Can be removed in production.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ed-appinsight-integration 
+  namespace: edgedelta
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ed-appinsight-integration
+  template:
+    metadata:
+      labels:
+        app: ed-appinsight-integration
+    spec:
+      serviceAccountName: edgedelta
+      nodeSelector:
+        # uncomment or change this based on your node selection criteria
+        agentpool: processors
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: capturedrequests
+          hostPath:
+            path: /var/captured_requests/
+        - name: varlog
+          hostPath:
+            path: /var/log
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers
+      containers:
+      - name: httprecorder
+        image: docker.io/edgedelta/httprecorder:latest
+        ports:
+        - containerPort: 80
+        command:
+          - /edgedelta/httprecorder
+          - --record_directory
+          - /var/captured_requests/
+          - --filter_uris
+          - /v2/track
+          # uncomment below section to generate fake trace events. Each trace has ~50 events
+          # - --generate_appins_trace_per_sec
+          # - "100"
+          # - --appins_key
+          # - ef295578-7859-4975-9282-c8efdc16a4f6
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            memory: 256Mi
+        volumeMounts:
+          - mountPath: /var/captured_requests/
+            name: capturedrequests
+        imagePullPolicy: Always
+      - name: agent
+        image: docker.io/edgedelta/agent:latest
+        env:
+          - name: ED_API_KEY
+            valueFrom:
+              # kubectl create secret generic ed-api-key \
+              #   --namespace=edgedelta \
+              #   --from-literal=ed-api-key="2c7a5780-..."
+              secretKeyRef:
+                key: ed-api-key
+                name: ed-api-key
+          - name: ED_HOST_OVERRIDE
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          # Uncomment to check agent's verbose logs
+          #- name: ED_TRACE_FILES
+          #  value: "buffered_trace_processor.go,pusher.go"
+        command:
+          - /edgedelta/edgedelta
+        resources:
+          limits:
+            memory: 4Gi
+          requests:
+            memory: 1Gi
+        volumeMounts:
+          - name: varlog
+            mountPath: /var/log
+            readOnly: true
+          - name: varlibdockercontainers
+            mountPath: /var/lib/docker/containers
+            readOnly: true
+          - mountPath: /var/captured_requests/
+            name: capturedrequests
+        imagePullPolicy: Always
+      # Include busybox container for debugging purposes
+      # Connect to it via following command:
+      # kubectl exec -it ed-appinsight-integration-5488d78b96-7ktb6 --container busybox -n edgedelta -- sh
+      - name: busybox
+        image: docker.io/busybox
+        args:
+        - /bin/sh
+        - -c
+        - >
+            i=1;
+            while true;
+            do
+            echo "$i: $(date)"
+            echo "$(date) INFO $i"
+            i=$((i+1));
+            sleep 1000;
+            done
+        volumeMounts:
+          - name: varlog
+            mountPath: /var/log
+            readOnly: true
+          - name: varlibdockercontainers
+            mountPath: /var/lib/docker/containers
+            readOnly: true
+          - mountPath: /var/captured_requests/
+            name: capturedrequests
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ed-appinsight-integration
+  namespace: edgedelta
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app: ed-appinsight-integration
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: taylan@edgedelta.com
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+          podTemplate:
+            spec:
+              nodeSelector:
+                "kubernetes.io/os": linux
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: edgedelta-ingress
+  namespace: edgedelta
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+    # Change this ingest endpoint with your own dns 
+    # The DNS must have A record pointing to cluster's ingress IP address.
+    # kubectl --namespace ingress-basic get services -o wide nginx-ingress-ingress-nginx-controller
+    - ingest.edgedelta.<Your DNS Zone>
+    secretName: tls-secret
+  rules:
+    # Set host to same value as above.
+  - host: ingest.edgedelta.<Your DNS Zone>
+    http:
+      paths:
+      - backend:
+          serviceName: ed-appinsight-integration
+          servicePort: 80
+        path: /(.*)

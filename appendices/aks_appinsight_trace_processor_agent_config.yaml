@@ -1,0 +1,48 @@
+version: v2
+
+agent_settings:
+  tag: azure-serverless-test
+  log:
+    level: info
+
+inputs:
+  files:
+    - labels: captured_requests
+      path: /var/captured_requests/body_*.json
+      enable_incoming_line_anomalies: true
+
+filters:
+  - name: appinsight_trace_filter
+    type: buffered-trace
+    # trace_id_pattern  must be a regex with single capture group.
+    trace_id_pattern: \"ai\.operation\.id\":\"(?P<id>\w+)"
+    # failure_pattern is the regex pattern which is used to determine whether the trace events should be considered failure.
+    # all failed traces pass the filter.
+    failure_pattern: \"prop__status\":\"Failed\"
+    # latency_pattern is an optional regex pattern which extracts latency value from trace events.
+    latency_pattern: \"prop__executionDuration\":\"(?P<latency>\d+)\"
+    # latency_threshold is the limit for trace latencies in milliseconds. Traces whose duration exceed this threshold will pass the filter.
+    latency_threshold: 3000
+    # success_sample_rate is a floating number between 0 and 1. Default is 0.01 which means 1% of successful traces passes the filter.
+    success_sample_rate: 0
+    # trace_deadline is the duration to wait after last event of an operation seen. 
+    # Once deadline is reached filtering/sampling will be applied to the events of trace
+    trace_deadline: 5s
+
+outputs:
+  streams:
+    - name: app-insights
+      type: azure
+      # replace endpoint and instrumentation key with your app insight endpoint/key
+      endpoint: "https://centralus-0.in.applicationinsights.azure.com/v2/track" 
+      api_key: "INSTRUMENTATION_KEY"
+      features: log
+   
+workflows:
+  function-trace-forward-workflow:
+    filter: appinsight_trace_filter
+    input_labels:
+      - captured_requests
+    destinations:
+      - app-insights
+      
