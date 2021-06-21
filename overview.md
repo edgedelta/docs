@@ -47,7 +47,7 @@ The Edge Delta agent is built with the ["Go" programming language](https://golan
 
 \(Atypical\) If the agents do not have outbound internet connectivity, the Edge Delta agent works with a local configuration file \(config.yml\).
 
-![The Federated Learning \(FL\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](.gitbook/assets/screen-shot-2021-01-27-at-10.46.11-am.png)
+![The Federated Learning Edge \(FLE\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](.gitbook/assets/screen-shot-2021-01-27-at-10.46.11-am.png)
 
 In either deployment model, the configuration file is used to configure the global settings for the agent, sources used by the agent \([Inputs](https://docs.edgedelta.com/configuration/inputs)\), monitors/rules performed by the agent \([Processors](https://docs.edgedelta.com/configuration/processors)\), and the destinations where analytics, insights, alerts and automation are streamed \([Outputs](https://docs.edgedelta.com/configuration/outputs)\).
 
