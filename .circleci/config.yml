@@ -23,6 +23,7 @@ jobs:
             --cache-control "max-age=3600"
           aws-access-key-id: DOCS_PUBLISHER_KEY_ID
           aws-secret-access-key: DOCS_PUBLISHER_KEY
+          aws-region: DEFAULT_AWS_REGION
           from: /docs/_book
           to: s3://$DOCS_POC_BUCKET_NAME
 
