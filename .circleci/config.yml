@@ -1,12 +1,13 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.1
+  aws-s3: circleci/aws-s3@2.0.0
 
 jobs:
-  build-and-publish:  
+  build_and_publish_page:
     docker:
       - image: honkit/honkit
+    working_directory: /docs
     steps:
       - checkout
       - run:
@@ -16,8 +17,17 @@ jobs:
             npm install -g gitbook-plugin-hints
             honkit init
             honkit build
+      - aws-s3/sync:
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=3600"
+          aws-access-key-id: DOCS_PUBLISHER_KEY_ID
+          aws-secret-access-key: DOCS_PUBLISHER_KEY
+          from: /docs/_book
+          to: s3://$DOCS_POC_BUCKET_NAME
 
 workflows:
-  sample: 
+  main:
     jobs:
-      - build-and-publish
+      - build_and_publish_page:
+          context: docs
