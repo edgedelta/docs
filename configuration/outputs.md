@@ -11,11 +11,11 @@ description: >-
 
 Outputs are the mechanism that tells the Edge Delta agent which destinations to send collected & generated data such as metrics, patterns, alerts etc.
 
-[**Streaming destinations**](https://docs.edgedelta.com/configuration/outputs.md#streaming-destinations) are typically centralized monitoring platforms such as Splunk, Sumo Logic, Datadog, Snowflake, New Relic, Elastic, etc.
+[**Streaming destinations**](https://docs.edgedelta.com/configuration/outputs#streaming-destinations) are typically centralized monitoring platforms such as Splunk, Sumo Logic, Datadog, Snowflake, New Relic, Elastic, etc.
 
-[**Trigger destinations**](https://docs.edgedelta.com/configuration/outputs.md#trigger-destinations) are alerting and automation systems such as PagerDuty, Slack, ServiceNow, OpsGenie, Runbook, etc. that Edge Delta can be configured to send alerts and notifications when anomalies are detected or various conditions are met.
+[**Trigger destinations**](https://docs.edgedelta.com/configuration/outputs#trigger-destinations) are alerting and automation systems such as PagerDuty, Slack, ServiceNow, OpsGenie, Runbook, etc. that Edge Delta can be configured to send alerts and notifications when anomalies are detected or various conditions are met.
 
-[**Archive destinations**](https://docs.edgedelta.com/configuration/outputs.md#archive-destinations) are storage solutions that Edge Delta can be configured to send compressed raw data logs periodically.
+[**Archive destinations**](https://docs.edgedelta.com/configuration/outputs#archive-destinations) are storage solutions that Edge Delta can be configured to send compressed raw data logs periodically.
 
 _Note:_ Output destinations can be specified per-config or at organization level. [Integrations](https://docs.edgedelta.com/configuration/processors) page can be used to create new integration destinations and add them to existing configs.
 
