@@ -1,6 +1,6 @@
 {
-      "plugins": ["hints"],
-      "structure": {
-        "readme": "overview.md"
-      }
+  "plugins": ["hints", "-fontsettings"],
+  "structure": {
+    "readme": "overview.md"
+  }
 }
