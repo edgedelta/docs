@@ -27,7 +27,6 @@ jobs:
           aws-region: DEFAULT_AWS_REGION
           from: /docs/_book
           to: s3://$DOCS_BUCKET_NAME
-
 workflows:
   main:
     jobs:
