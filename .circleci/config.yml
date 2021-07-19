@@ -1,0 +1,23 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1
+
+jobs:
+  build-and-publish:  
+    docker:
+      - image: honkit/honkit
+    steps:
+      - checkout
+      - run:
+          name: Build and Publish
+          command: |
+            npm install
+            npm install -g gitbook-plugin-hints
+            honkit init
+            honkit build
+
+workflows:
+  sample: 
+    jobs:
+      - build-and-publish
