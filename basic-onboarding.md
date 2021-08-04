@@ -4,6 +4,13 @@ description: >-
   and deployment of the Edge Delta service.
 ---
 
+
+<div class="heading">
+    <img src="./.gitbook/assets/logo.png">
+</div>
+
+
+
 # Basic Onboarding
 
 ## Create An Edge Delta Account

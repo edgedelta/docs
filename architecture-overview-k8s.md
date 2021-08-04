@@ -3,6 +3,9 @@ description: >-
   The following document outlines a high-level overview of the Edge Delta
   architecture in relation to a Kubernetes deployment.
 ---
+<div class="heading">
+    <img src="./.gitbook/assets/logo.png">
+</div>
 
 # Architecture Overview - K8s
 

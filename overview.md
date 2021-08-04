@@ -2,6 +2,9 @@
 title: Windows
 weight: 1
 ---
+<div class="heading">
+    <img src="./.gitbook/assets/logo.png">
+</div>
 
 # Edge Delta Overview
 
@@ -52,4 +55,3 @@ The Edge Delta agent is built with the ["Go" programming language](https://golan
 In either deployment model, the configuration file is used to configure the global settings for the agent, sources used by the agent \([Inputs](https://docs.edgedelta.com/configuration/inputs)\), monitors/rules performed by the agent \([Processors](https://docs.edgedelta.com/configuration/processors)\), and the destinations where analytics, insights, alerts and automation are streamed \([Outputs](https://docs.edgedelta.com/configuration/outputs)\).
 
 In cases where there is no outbound internet connectivity, the configuration file is created automatically after installation and loaded into memory at runtime. After making changes to the `config.yml` file, the changes are loaded on agent process restart.
-

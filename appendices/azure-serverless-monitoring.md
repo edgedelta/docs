@@ -1,3 +1,8 @@
+
+<div class="heading">
+    <img src="./.gitbook/assets/logo.png">
+</div>
+
 # Azure Function Monitoring Setup
 
 Azure functions generate various telemetry data e.g. \(Traces, Error, Exceptions, RemoteDependencies and Requests\). Such telemetry data is ingested directly to application insight from Azure functions. Azure provides builtin primitive sampling techniques mentioned [here](https://docs.microsoft.com/en-us/azure/azure-monitor/app/sampling). Edge Delta provides smarter sampling options such as collecting telemetry data only from failed functions and from small percentage of successful ones. By applying such processing, Application Insight telemetry ingestion costs can be reduced drastically. Below are the steps describing deployment of Edge Delta components to an AKS cluster.

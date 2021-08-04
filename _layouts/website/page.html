@@ -1,0 +1,30 @@
+{% extends template.self %}
+
+{% block head %}
+    <style>
+        .book-summary {
+            right: 0px;
+            left: auto !important;
+        }
+        .book-body{
+            top: 0 !important;
+            left: 0 !important;
+            right: 300px !important;
+        }
+        .book-header {
+            display: none;
+        }
+        .heading{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .page-inner{
+            margin: 20px;
+            padding: 50px 300px 20px 300px;
+            max-width: none !important;
+        }
+
+    </style>
+{% endblock %}
+
