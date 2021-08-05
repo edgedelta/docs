@@ -43,6 +43,20 @@ _Note_: Analyzing patterns in high log volume environments can be compute intens
 
 The simple keyword match processor checks for basic regex match in the logs, counts the matching logs and generates anomaly scores. The counts are rolled up by the agent with given _interval_ and emitted as metrics. Thresholds can be set to get notified when anomalies occur \(e.g. metric value spikes or drops unexpectedly\).
 
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| pattern | Regular expression pattern to define which strings to match on. _Note:_ It must follow Golang regex protocol, e.g. "error\|ERROR" | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
+| **trigger\_thresholds** | The trigger\_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
+|   anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+|   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+|   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+|   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+
+
 **Example config:**
 
 ```text
@@ -58,18 +72,6 @@ Metrics generated from example config:
 * _error.count_: Total count of matches within an interval
 * _error.anomaly1_: Anomaly score of current interval based on total count history. represents the how anomalous the current error count is compared to its history. Score is in the range of \[0,100\].
 
-| Key | Description | Required |
-| :--- | :--- | :--- |
-| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
-| pattern | Regular expression pattern to define which strings to match on. | Yes |
-| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
-| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
-| **trigger\_thresholds** | The trigger\_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
-|   anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
-|   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
-|   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
-|   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
 
 ## Numeric Capture Processor
 
@@ -78,7 +80,7 @@ Numeric capture processor supports exact same configuration as **Simple Keyword 
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
-| pattern | Regular expression pattern which has a named group that is numeric value. e.g. "\(\d+\)" | Yes |
+| pattern | Regular expression pattern which has a named group. The matching part of the log will be extracted and converted to a floating point number. _Note:_ named capture groups must follow Golang regex protocol, e.g. "\(?P&lt;latency&gt;\\\d+\)ms" | Yes |
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger\_thresholds** | The trigger\_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
@@ -93,18 +95,19 @@ Numeric capture processor supports exact same configuration as **Simple Keyword 
 ```text
 regexes:
   - name: "response_time"
-    pattern: "completed in (\\d+)ms"
+    pattern: "completed in (?P<latency>\\d+)ms"
     trigger_thresholds:
       anomaly_probability_percentage: 90
 ```
 
 When such regular expression pattern is provided the following statistics are generated and emitted as metrics
 
-* response\_time.count: total count of matches in current interval
-* response\_time.avg: average of captured numeric values. e.g. average response time in above example.
-* response\_time.min: minimum of captured numeric values.
-* response\_time.max: maximum of captured numeric values.
-* response\_time.anomaly1: anomaly score based on history of average values.
+
+* _response\_time\_latency.count_: total count of matches in current interval
+* _response\_time\_latency.avg_: average of captured numeric values. e.g. average response time in above example.
+* _response\_time\_latency.min_: minimum of captured numeric values.
+* _response\_time\_latency.max_: maximum of captured numeric values.
+* _response\_time\_latency.anomaly1_: anomaly score based on history of average values.
 
 ## Dimension Counter Processor
 
@@ -115,7 +118,7 @@ Dimension counter supports exact same configuration as **Simple Keyword Match** 
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
-| pattern | Regular expression pattern containing a named capture group representing the dimension. _Note:_ named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)" | Yes |
+| pattern | Regular expression pattern containing a named capture group representing the dimension. _Note:_ named capture groups must follow Golang regex protocol, e.g.  "level=\(?P&lt;level&gt;\\\w+\)" | Yes |
 | dimensions | List of named capture group fields to use as dynamic dimensions \(group by\). Each dimension specified here must have a corresponding named capture group in the pattern field for this processor. | Yes |
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
@@ -157,7 +160,7 @@ It supports same configurations as **Dimension Counter Processor** with the diff
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
-| pattern | Regular expression pattern containing one named capture group representing dimension and one or more numeric named captured groups. _Note:_ named capture groups must follow Golang regex protocol, ex:  "status\_code=\(?P&lt;status\_code&gt;\d+\)"\_ | Yes |
+| pattern | Regular expression pattern containing one named capture group representing dimension and one or more numeric named captured groups. _Note:_ named capture groups must follow Golang regex protocol, e.g. "\(?P&lt;method&gt;\\\w+\) took \(?P&lt;latency&gt;\\\d+\) ms"\ | Yes |
 | dimensions | List of named capture group fields to use as dynamic dimensions \(group by\). Each dimension specified here must have a corresponding named capture group in the pattern field for this processor. | Yes |
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
