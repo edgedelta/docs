@@ -25,7 +25,36 @@ Run helm installation command and create "edgedelta" namespace to use agent with
 helm install edgedelta edgedelta/edgedelta --set apiKey=<API-KEY> -n edgedelta --create-namespace
 ```
 
-If you have a custom values file to configure [Environment Variables](environment-variables.md) use below command instead within the same folder with values.yaml:
+If you need to configure [Environment Variables](environment-variables.md) and other advanced options download the default [values.yml](https://edgedelta.github.io/charts/edgedelta/values.yaml) file.
+
+You can use either apiKey or secretApiKey in values.yml file to set your API-KEY.
+
+If you use apiKey it will be kept in clear text as part of your pod property. Change values.yml file as below:
+
+```yaml
+apiKey: "API-KEY"
+```
+
+If you want to use secretApiKey as a Kubernetes secret, change values.yml as below:
+
+```yaml
+# apiKey: ""
+
+secretApiKey:
+  name: "ed-api-key"
+  key: "ed-api-key"
+```
+
+You need to create API-KEY as a Kubernetes secret using command below:
+
+```text
+kubectl create namespace edgedelta
+kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="API-KEY"
+```
+
+You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file.
+
+Use below command to install helm chart using values.yml in the same folder:
 
 ```text
 helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f values.yaml
