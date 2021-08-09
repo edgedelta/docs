@@ -18,15 +18,15 @@ jobs:
             apk --no-cache add curl
             apk --no-cache add sudo
       - persist_to_workspace:
-          root: /docs/site
+          root: .
           paths:
-            -  /docs/site
+            -  .
   publish_page:
     docker:
       - image: 'cimg/python:3.6'
     steps:
       - attach_workspace:
-          at: /docs/site
+          at: .
       - aws-s3/sync:
           arguments: |
             --acl public-read \
