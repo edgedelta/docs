@@ -12,9 +12,9 @@ jobs:
       - checkout
       - run:
           name: Build and Publish
-          command: mkdocs build
-      - install-aws-deps:
           command: |
+            mkdocs build
+            # Install aws deps
             apk --no-cache add curl
             apk --no-cache add sudo
       - aws-s3/sync:
