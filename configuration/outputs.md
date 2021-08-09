@@ -358,6 +358,48 @@ If enabled, the SignalFx integration will stream analytics and insights to an Si
         features: "metric,log"
 ```
 
+### Humio
+
+If enabled, the Humio integration will stream analytics and insights to an Humio endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "humio" to stream data to Humio | Yes |
+| endpoint | Humio endpoint. One can use cloud one as well as self-hosted one. | Yes |
+| token | Humio API token. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```yaml
+      - name: humio-integration
+        type: humio
+        endpoint: http://localhost:8080
+        token: "<add humio api token here>"
+        features: "metric,log"
+```
+
+### Loggly
+
+If enabled, the SolarWinds Loggly integration will stream analytics and insights to an Loggly endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "loggly" to stream data to Loggly | Yes |
+| endpoint | Loggly endpoint. One can use cloud one as well as self-hosted one. Default one is https://logs-01.loggly.com | Yes |
+| token | Loggly API token. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```yaml
+      - name: loggly-integration
+        type: loggly
+        endpoint: https://logs-01.loggly.com
+        token: "<add loggly api token here>"
+        features: "metric,log"
+```
+
 ## Trigger Destinations
 
 ### **Slack**
@@ -374,9 +416,55 @@ If enabled, the Slack integration will stream notifications and alerts to the sp
 | suppression\_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents \(the ones sharing same tag in config\). | No |
 | notify\_content | Used to customize the notification content. It supports templating. | No |
 
+```yaml
+      - name: slack-integration
+        type: slack
+        endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+        notify_content:
+          title: "Anomaly Detected: {{.ProcessorDescription}}"
+          disable_default_fields: false
+          custom_fields:
+            "Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
+            "Current Value": "{{.CurrentValue}}"
+            "Threshold Value": "{{.ThresholdValue}}"
+            "Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
+            "Matched Term": "{{.MatchedTerm}}"
+```
+
+**Getting started with Slack Incoming Webhooks:** [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
+
+### **Microsoft Teams**
+
+If enabled, the Microsoft Teams integration will stream notifications and alerts to the specified Teams channel using hook URL
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "teams" to send alerts to Microsoft Teams | Yes |
+| endpoint | Microsoft Teams Webhook URL | Yes |
+| suppression\_window | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once agent detects an issue and notifies this Microsoft Teams endpoint it will suppress any new issues for this duration. Default is "20m". | No |
+| suppression\_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents \(the ones sharing same tag in config\). | No |
+| notify\_content | Used to customize the notification content. It supports templating. | No |
+
+```yaml
+      - name: microsoft-teams-integration
+        type: teams
+        endpoint: "https://outlook.office.com/webhookb2/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX@XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/IncomingWebhook/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+        notify_content:
+          title: "Anomaly Detected: {{.ProcessorDescription}}"
+          disable_default_fields: false
+          custom_fields:
+            "Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
+            "Current Value": "{{.CurrentValue}}"
+            "Threshold Value": "{{.ThresholdValue}}"
+            "Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
+            "Matched Term": "{{.MatchedTerm}}"
+```
+
 #### **Notify Content**
 
-Notify Content is optional way to customize the notification content for slack/webhook triggers. It supports templating.  
+Notify Content is optional way to customize the notification content for some (such as Slack, Microsoft Teams, Webhook etc.) triggers. It supports templating.
  **Available template fields**:
 
 * **Tag**: User defined tag to describe the environment. e.g. prod\_us\_west\_2\_cluster.
@@ -412,14 +500,14 @@ Notify Content is optional way to customize the notification content for slack/w
 * if the value is empty the item will not be sent to slack
 * the keys are sorted alphabetically before sending to slack so they will not appear in the order specified in the config
 
-**Title**: Title text for webhook message. It can be customized with custom template fields.  
- **Disable default fields**: It is used for disabling default fields in notify message. Its value is false by default.  
- **Custom Fields**: You can extend the notification content by adding name-value pairs. You can build by using template fields given above.  
+**Title**: Title text for webhook message. It can be customized with custom template fields.
+ **Disable default fields**: It is used for disabling default fields in notify message. Its value is false by default.
+ **Custom Fields**: You can extend the notification content by adding name-value pairs. You can build by using template fields given above.
  **Advanced Content**: It provides full flexibility to define the payload in slack notification post requests.
 
 * Advanced content overrides the other settings\(title, custom fields...\)
 * Custom templates are also supported in advanced content.
-* You can use block kit builder tool provided by slack [https://app.slack.com/block-kit-builder](https://app.slack.com/block-kit-builder) prior to test.
+* You can use block kit builder tool provided by Slack [https://app.slack.com/block-kit-builder](https://app.slack.com/block-kit-builder) prior to test.
 
 ```yaml
        notify_content:
@@ -480,22 +568,184 @@ Notify Content is optional way to customize the notification content for slack/w
            }
 ```
 
+### **Pagerduty**
+
+If enabled, the Pagerduty integration will stream notifications and alerts to the specified Pagerduty API endpoint
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "pagerduty" to send alerts to Pagerduty | Yes |
+| endpoint | Pagerduty API endpoint URL | Yes |
+| custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
+| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+
 ```yaml
-      - name: slack-integration
-        type: slack
-        endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+      - name: pagerduty-integration
+        type: pagerduty
+        endpoint: "https://api.pagerduty.com/XXXXX"
         notify_content:
-          title: "Anomaly Detected: {{.ProcessorDescription}}"
-          disable_default_fields: false
-          custom_fields:
-            "Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
-            "Current Value": "{{.CurrentValue}}"
-            "Threshold Value": "{{.ThresholdValue}}"
-            "Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
-            "Matched Term": "{{.MatchedTerm}}"
+          advanced_content: |
+            {
+              "incident": {
+                "type": "incident",
+                "title": "{{ .Title }}",
+                "service": {
+                  "id": "<ID of the pagerduty service which can be fetched via services rest API>",
+                  "type": "service_reference"
+                },
+                "body": {
+                  "type": "incident_body",
+                  "details": "<Message for your incident>"
+                }
+              }
+            }
 ```
 
-**Getting started with Slack Incoming Webhooks:** [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
+### **Jira**
+
+If enabled, the Jira integration (it makes use of CodeBarrel webhook) will stream notifications and alerts to the specified Jira webhook URL
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "jira" to send alerts to Jira | Yes |
+| endpoint | Jira webhook URL | Yes |
+| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+
+```yaml
+      - name: jira-integration
+        type: jira
+        endpoint: "https://automation.codebarrel.io/pro/hooks/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+        notify_content:
+          advanced_content: |
+            {
+              "data": {
+                "title": "{{ .Title }}",
+                "message": "{{ .Message }}"
+              }
+            }
+```
+
+### **Service Now**
+
+If enabled, the Service Now integration will stream notifications and alerts to the specified Service Now API endpoint
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "servicenow" to send alerts to Webhook | Yes |
+| endpoint | Webhook URL | Yes |
+| username | Username for Service Now basic authentication | No |
+| password | Password for Service Now basic authentication | No |
+| custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
+| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+
+```yaml
+      - name: webhook-integration
+        type: webhook
+        endpoint: "localhost"
+        payload:
+          signature: "{{.MetricName}}"
+          source_id: "{{.Host}}"
+          external_id: "{{.EDAC}}"
+          manager: "edgedelta"
+          source: "{{.Host}}"
+          class: "application"
+          agent_location: "{{.Host}}"
+          type: "{{.SourceType}}"
+          agent_time: "{{.Epoch}}"
+        notify_content:
+          advanced_content: |
+            {
+              "foo": {
+                "title": "{{ .Title }}",
+                "message": "{{ .Message }}",
+                "foo2": "bar2"
+              }
+            }
+```
+
+### **Webhook**
+
+If enabled, the Webhook integration will stream notifications and alerts to the specified Webhook URL
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "servicenow" to send alerts to Service Now | Yes |
+| endpoint | Service Now API endpoint | Yes |
+| username | Username for Service Now basic authentication | No |
+| password | Password for Service Now basic authentication | No |
+| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+
+```yaml
+      - name: service-now-integration
+        type: servicenow
+        endpoint: "https://instance.service-now.com/api/now/table/incident"
+        notify_content:
+          advanced_content: |
+            {
+              'short_description': 'Raw POST Anomaly Detected: {{.ProcessorDescription}}',
+              'assignment_group':'287ebd7da9fe198100f92cc8d1d2154e',
+              'urgency':'2',
+              'impact':'2'
+            }
+```
+
+### **AWS Lambda**
+
+If enabled, the AWS Lambda integration will stream notifications and alerts to the specified AWS Lambda FaaS endpoint
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "awslambda" to send alerts to AWS Lambda | Yes |
+| endpoint | AWS Lambda FaaS Endpoint | Yes |
+| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+
+```yaml
+      - name: aws-lambda-integration
+        type: awslambda
+        endpoint: "https://XXXXXXXXXX.execute-api.XXXXXXXXX.amazonaws.com/XXXX/XXXXXX"
+        notify_content:
+          advanced_content: |
+            {
+              "foo": "bar",
+              "title": "{{ .Title }}",
+              "message": "{{ .Message }}"
+            }
+```
+
+### **Azure Functions**
+
+If enabled, the Azure Functions integration will stream notifications and alerts to the specified AWS Lambda FaaS endpoint
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "azurefunctions" to send alerts to Azure Functions | Yes |
+| endpoint | Azure Functions FaaS Endpoint | Yes |
+| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+
+```yaml
+      - name: azure-functions-integration
+        type: azurefunctions
+        endpoint: "https://XXXXXXXXXX.azurewebsites.net/XXXX/XXXXXX"
+        notify_content:
+          advanced_content: |
+            {
+              "foo": "bar",
+              "title": "{{ .Title }}",
+              "message": "{{ .Message }}"
+            }
+```
 
 ### Examples
 
@@ -578,3 +828,94 @@ If enabled, the Google Cloud Storage integration will stream logs to an GCS endp
         hmac_secret: my_hmac_secret_123
 ```
 
+### **DigitalOcean Spaces**
+
+If enabled, the DigitalOcean Spaces integration will stream logs to an DigitalOcean Spaces endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "dos" to send archived logs to DigitalOcean Spaces | Yes |
+| bucket | Target DOS bucket to send archived logs. | Yes |
+| access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
+| secret\_key | Secret Key associated with the access key specified. | Yes |
+
+```yaml
+      - name: my-digitalocean-spaces
+        type: dos
+        endpoint: nyc3.digitaloceanspaces.com
+        bucket: ed-test-bucket
+        access_key: my_access_key_123
+        secret_key: my_secret_key_123
+```
+
+### **IBM Object Storage**
+
+If enabled, the IBM Object Storage integration will stream logs to an IBM Object Storage endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "ibmos" to send archived logs to IBM Object Storage | Yes |
+| bucket | Target IBM OS bucket to send archived logs. | Yes |
+| access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
+| secret\_key | Secret Key associated with the access key specified. | Yes |
+
+```yaml
+      - name: my-ibm-object-storage
+        type: ibmos
+        endpoint: s3-api.us-geo.objectstorage.softlayer.net
+        bucket: ed-test-bucket
+        access_key: my_access_key_123
+        secret_key: my_secret_key_123
+```
+
+### **Minio**
+
+If enabled, the Minio integration will stream logs to an Minio endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "minio" to send archived logs to Minio | Yes |
+| bucket | Target Minio bucket to send archived logs. | Yes |
+| access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
+| secret\_key | Secret Key associated with the access key specified. | Yes |
+| disable\_ssl | Disable SSL requirement when pushing logs to Minio endpoint | No |
+| s3\_force\_path\_style | Force archive destination to use `{endpoint}/{bucket}` format instead of `{bucket}.{endpoint}/` when reaching buckets`) | No |
+
+```yaml
+      - name: my-minio
+        type: minio
+        endpoint: play.min.io:9000
+        bucket: ed-test-bucket
+        access_key: my_access_key_123
+        secret_key: my_secret_key_123
+        disable_ssl: true
+        s3_force_path_style: true
+```
+
+### **Zenko CloudServer**
+
+If enabled, the Zenko CloudServer integration will stream logs to an CloudServer endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://docs.edgedelta.com/configuration/processors). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
+| type | Must be set to "minio" to send archived logs to Minio | Yes |
+| bucket | Target Minio bucket to send archived logs. | Yes |
+| access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
+| secret\_key | Secret Key associated with the access key specified. | Yes |
+
+```yaml
+      - name: my-zenko-cloudserver
+        type: minio
+        endpoint: s3-api.us-geo.objectstorage.softlayer.net
+        bucket: ed-test-bucket
+        access_key: my_access_key_123
+        secret_key: my_secret_key_123
+```
