@@ -3,5 +3,6 @@ theme:
   name: material
   logo: assets/logo.png
   favicon: assets/favicon.png
+  custom_dir: overrides
 extra_css:
   - stylesheets/style.css 
