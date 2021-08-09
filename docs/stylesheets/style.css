@@ -1,15 +1,21 @@
-.md-header__button.md-logo img{
+.md-header__button.md-logo img {
     width: unset !important;
     height: unset !important;
 }
-.md-header{
+.md-header {
     background-color: rgba(28,26,47,255);
 }
-.md-nav__button.md-logo{
+.md-nav__button.md-logo {
     margin: unset !important;
     padding: .35rem !important;
 }
-.md-nav__button.md-logo img{
+.md-nav__button.md-logo img {
     height: unset !important;
     width: unset !important;
+}
+
+@media screen and (max-width: 76.1875em) {
+    .md-nav .md-nav__title[for=__drawer] {
+        background-color: rgba(28,26,47,255) !important;
+    }
 }
