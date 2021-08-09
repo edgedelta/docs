@@ -14,5 +14,5 @@ The agent requires outbound network access to Edge Delta central systems to be f
 
 ## Outputs
 
-[Outputs](https://github.com/eddocs/doc/tree/a6aded8b92dfc48361ba1a2d3d258bc3645f1b89/installation/configuration/outputs.md) to 3rd party or on premise systems also require outbound network access. While configuring agents make sure **endpoint** of configured output is also accessible by agent through the network.
+[Outputs](../configuration/outputs.md) to 3rd party or on premise systems also require outbound network access. While configuring agents make sure **endpoint** of configured output is also accessible by agent through the network.
 

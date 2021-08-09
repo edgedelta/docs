@@ -5,3 +5,14 @@
 .md-header{
     background-color: rgba(28,26,47,255);
 }
+.md-footer-meta.md-typeset{
+    display: none;
+}
+.md-nav__button.md-logo{
+    margin: unset !important;
+    padding: .35rem !important;
+}
+.md-nav__button.md-logo img{
+    height: unset !important;
+    width: unset !important;
+}

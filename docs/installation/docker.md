@@ -23,7 +23,7 @@ Replace the &lt;YOUR\_API\_KEY&gt; field from the command below with your config
 Container must have internet access to fetch the configuration.
 
 {% hint style="info" %}
-More information about [CCB](../configuration/ccb.md) can be found under [Configuration](../configuration/) section
+More information about [CCB](../configuration/ccb.md) can be found under [Configuration](../configuration/README.md) section
 {% endhint %}
 
 ```text

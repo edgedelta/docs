@@ -26,7 +26,7 @@ _Note_: Analyzing patterns in high log volume environments can be compute intens
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents a cluster's retention The clusters that don't have any new logs for last retention period will be dropped and will no longer be reported until seen again. | Yes |
 | cpu\_friendly | When set to 'true' the CPU aware rate limiting is enabled. This makes the agent honor the given CPU limit \(specified at top level agent\_settings section\) by dropping some percentage of events in order to keep agent's CPU usage below the given limit. Unless you have more than 1k logs per second don't worry about this setting. | Yes |
 | throttle\_limit\_per\_sec | Puts a hard limit on how many logs should be clustered per second from a single source. If cpu\_friendly is enabled then this will be ignored. | Yes |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
 **Example config:**
 
@@ -54,7 +54,7 @@ The simple keyword match processor checks for basic regex match in the logs, cou
 |   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
 |   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
 |   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
 
 **Example config:**
@@ -88,7 +88,7 @@ Numeric capture processor supports exact same configuration as **Simple Keyword 
 |   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
 |   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
 |   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
 **Example config:**
 
@@ -127,7 +127,7 @@ Dimension counter supports exact same configuration as **Simple Keyword Match** 
 |   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
 |   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
 |   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
 **Example config:** Count per log level
 
@@ -169,7 +169,7 @@ It supports same configurations as **Dimension Counter Processor** with the diff
 |   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
 |   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
 |   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
 **Example config:**
 
@@ -223,7 +223,7 @@ Trace processor configuration looks similar to **Simple Keyword Match Processor*
 |   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
 |   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
 |   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
 **Example config:**
 
@@ -248,7 +248,7 @@ Top-K processor keeps track of top K records \(e.g. k=10\) where the records are
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting interval. At every interval the top records will be reported and they will be removed locally. | Yes |
 | lower\_limit | If a lower limit is provided only records whose count is greater than the limit will be able to make it to top k. | No |
 | separator | separator is used to combine the named group values together to form a record key. Default is comma ',' | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
 **Example config:**
 
@@ -288,7 +288,7 @@ Ratio processor configuration looks similar to **Simple Keyword Match** processo
 |   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
 |   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
 |   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
-| filters | List of filter names to be applied before running this processor. See [Filters](https://docs.edgedelta.com/configuration/filters) documentation for details about filters. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
 **Example config:**
 

@@ -106,5 +106,5 @@ Below example change allows you to also monitor log files in `/var/log/ecs/` on 
 ...
 ```
 
-Do not forget to add file input in agent yaml config to monitor mounted path which is `/host/var/log/ecs/` in above sample. See [files](https://docs.edgedelta.com/configuration/inputs#files) for further details.
+Do not forget to add file input in agent yaml config to monitor mounted path which is `/host/var/log/ecs/` in above sample. See [files](../configuration/inputs.md#files) for further details.
 
