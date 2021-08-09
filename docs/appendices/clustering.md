@@ -4,8 +4,8 @@ When a new log passes through the pipeline, the variants are identified via a pr
 
 There are modes for calculating similarities:
 
-* [Drain](https://docs.edgedelta.com/appendices/clustering#drain)
-* [Levenshtein Distance](https://docs.edgedelta.com/appendices/clustering#levenshtein-distance)
+  - [Drain](#drain)
+  - [Levenshtein Distance](#levenshtein-distance)
 
 The goal of calculating similarities is to transform raw log messages into structured log messages by clustering them based on their similarities.
 

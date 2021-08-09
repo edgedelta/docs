@@ -39,16 +39,16 @@ workflows:
     jobs:
       - build_page:
           context: docs
-#          filters:
-#            branches:
-#             only:
-#              - master
+          filters:
+            branches:
+             only:
+              - master
       - publish_page:
           requires:
             - build_page
           context: docs
-#          filters:
-#            branches:
-#             only:
-#              - master
+          filters:
+            branches:
+             only:
+              - master
 

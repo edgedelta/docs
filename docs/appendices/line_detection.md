@@ -44,8 +44,8 @@ log: {
 
 We use 2 methods to turn these multiple logs into a single log:
 
-* [Specifying Line Pattern](https://docs.edgedelta.com/appendices/line_detection#specifying-line-pattern)
-* [Auto Line Detection](https://docs.edgedelta.com/appendices/line_detection#auto-line-detection)
+  - [Specifying Line Pattern](#specifying-line-pattern)
+  - [Auto Line Detection](#auto-line-detection)
 
 ## Specifying Line Pattern
 

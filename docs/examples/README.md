@@ -11,7 +11,7 @@ description: >-
 * [Linux Configuration](linux-configuration.md)
 * [Windows Configuration](windows-configuration.md)
 * [Docker Configuration](docker-configuration.md)
-* [Kubernetes Configuration](https://docs.edgedelta.com/examples/kubernetes-example)
+* [Kubernetes Configuration](kubernetes-example.md)
 
 
 

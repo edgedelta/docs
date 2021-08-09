@@ -8,7 +8,7 @@ description: >-
 
 The example configuration is a default, working configuration requiring no changes to be deployed. 
 
-Examples of initial changes to customize to your environment would be adding specific [Inputs](https://docs.edgedelta.com/configuration/inputs), [Processors](https://docs.edgedelta.com/configuration/processors), or [Outputs](https://docs.edgedelta.com/configuration/outputs) to various [Streaming](https://docs.edgedelta.com/configuration/outputs#streaming-destinations) and [Trigger](https://docs.edgedelta.com/configuration/outputs#trigger-destinations) destinations. 
+Examples of initial changes to customize to your environment would be adding specific [Inputs](../configuration/inputs.md), [Processors](../configuration/processors.md), or [Outputs](../configuration/outputs.md) to various [Streaming](../configuration/outputs.md#streaming-destinations) and [Trigger](../configuration/outputs.md#trigger-destinations) destinations. 
 
 Please comment/uncomment parameters as needed, as well as populate the appropriate values to create your desired configuration.
 

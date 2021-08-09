@@ -71,5 +71,5 @@ After initial deployment, the onboarding wizard can be accessed via [admin.edged
 * No background service is running on target host
 * No data is being reported to streaming destination
 
-If any issues appear after deploying the agent, view troubleshooting section for given OS of agent deployment \(see [Installation](https://docs.edgedelta.com/installation) documentation, select appropriate OS, and navigate to _**Troubleshooting**_ section of documentation\)
+If any issues appear after deploying the agent, view troubleshooting section for given OS of agent deployment \(see [Installation](./installation/README.md) documentation, select appropriate OS, and navigate to _**Troubleshooting**_ section of documentation\)
 

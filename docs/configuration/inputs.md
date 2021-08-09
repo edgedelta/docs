@@ -14,22 +14,22 @@ The labels are used to map inputs to specific monitoring rules, or streaming and
 
 There are a number of different input types supported by the Edge Delta service. Select from the following input types below to review the appropriate documentation:
 
-* [Agent Stats](https://docs.edgedelta.com/configuration/inputs#agent-stats)
-* [System Stats](https://docs.edgedelta.com/configuration/inputs#system-stats)
-* [Container Stats \(Docker\)](https://docs.edgedelta.com/configuration/inputs#container-stats-docker)
-* [Files](https://docs.edgedelta.com/configuration/inputs#files)
-* [Ports](https://docs.edgedelta.com/configuration/inputs#ports)
-* [Windows Events](https://docs.edgedelta.com/configuration/inputs#windows-events)
-* [Containers \(Docker\)](https://docs.edgedelta.com/configuration/inputs#containers-docker)
-* [Kubernetes](https://docs.edgedelta.com/configuration/inputs#kubernetes)
-* [AWS ECS](https://docs.edgedelta.com/configuration/inputs#aws-ecs)
-* [Kafka](https://docs.edgedelta.com/configuration/inputs#kafka)
-* [Execs \(Scripted Input\)](https://docs.edgedelta.com/configuration/inputs#execs-scripted-input)
-* [Kubernetes Events](https://docs.edgedelta.com/configuration/inputs#kubernetes-events)
+* [Agent Stats](./inputs.md#agent-stats)
+* [System Stats](./inputs.md#system-stats)
+* [Container Stats \(Docker\)](./inputs.md#container-stats-docker)
+* [Files](./inputs.md#files)
+* [Ports](./inputs.md#ports)
+* [Windows Events](./inputs.md#windows-events)
+* [Containers \(Docker\)](./inputs.md#containers-docker)
+* [Kubernetes](./inputs.md#kubernetes)
+* [AWS ECS](./inputs.md#aws-ecs)
+* [Kafka](./inputs.md#kafka)
+* [Execs \(Scripted Input\)](./inputs.md#execs-scripted-input)
+* [Kubernetes Events](./inputs.md#kubernetes-events)
 
 You can specify the filters to monitor sources of containers, Kubernetes and AWS ECS.
 
-* [Input filters](https://docs.edgedelta.com/configuration/inputs#filters-for-containers-kubernetes-and-aws-ecs)
+* [Input filters](./inputs.md#filters-for-containers-kubernetes-and-aws-ecs)
 
 ## Agent Stats
 

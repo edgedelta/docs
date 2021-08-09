@@ -156,7 +156,7 @@ Filter names are used to apply filters to inputs, workflows and processors. When
             - mask_card
   ```
 
-  See [Inputs](https://docs.edgedelta.com/configuration/inputs) documentation for details about inputs that can be filtered.
+  See [Inputs](./inputs.md) documentation for details about inputs that can be filtered.
 
 * Below is an example workflow with _error_ filter:
 
@@ -178,7 +178,7 @@ Filter names are used to apply filters to inputs, workflows and processors. When
         - slack-devops-integration
   ```
 
-  See [Workflows](https://docs.edgedelta.com/configuration/workflows) documentation for details about workflows that can be filtered.
+  See [Workflows](./workflows.md) documentation for details about workflows that can be filtered.
 
 * Below is an example Dimension Counter Processor with _not\_debug_ filter.
 
@@ -193,5 +193,5 @@ Filter names are used to apply filters to inputs, workflows and processors. When
         - not_debug
   ```
 
-See [Processors](https://docs.edgedelta.com/configuration/processors) documentation for details about processors that can be filtered.
+See [Processors](./processors.md) documentation for details about processors that can be filtered.
 

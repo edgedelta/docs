@@ -2,5 +2,6 @@ site_name: Edge Delta Docs
 theme:
   name: material
   logo: assets/logo.png
+  favicon: assets/favicon.png
 extra_css:
-  - stylesheets/style.css
+  - stylesheets/style.css 
