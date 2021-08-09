@@ -47,6 +47,8 @@ workflows:
 #             only:
 #              - master
       - publish_page:
+          requires:
+            - build_page
           context: docs
 #          filters:
 #            branches:
