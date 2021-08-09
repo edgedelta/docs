@@ -18,9 +18,9 @@ jobs:
             apk --no-cache add curl
             apk --no-cache add sudo
       - persist_to_workspace:
-          root: .
+          root: site
           paths:
-            -  .
+            -  site
   publish_page:
     docker:
       - image: 'cimg/python:3.6'
@@ -35,7 +35,7 @@ jobs:
           aws-access-key-id: DOCS_PUBLISHER_KEY_ID
           aws-secret-access-key: DOCS_PUBLISHER_KEY
           aws-region: DEFAULT_AWS_REGION
-          from: /docs/site
+          from: site
           to: s3://$DOCS_BUCKET_NAME
 workflows:
   main:
