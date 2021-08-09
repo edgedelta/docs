@@ -14,13 +14,10 @@ jobs:
           name: Build and Publish
           command: |
             mkdocs build
-            # Install aws deps
-            apk --no-cache add curl
-            apk --no-cache add sudo
       - persist_to_workspace:
-          root: site
+          root: .
           paths:
-            -  site
+            -  .
   publish_page:
     docker:
       - image: 'cimg/python:3.6'
