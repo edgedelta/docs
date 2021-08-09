@@ -4,7 +4,7 @@ orbs:
   aws-s3: circleci/aws-s3@2.0.0
 
 jobs:
-  build_and_publish_page:
+  build_page:
     docker:
       - image: squidfunk/mkdocs-material
     working_directory: /docs
@@ -17,6 +17,16 @@ jobs:
             # Install aws deps
             apk --no-cache add curl
             apk --no-cache add sudo
+      - persist_to_workspace:
+          root: /docs/site
+          paths:
+            -  /docs/site
+  publish_page:
+    docker:
+      - image: 'cimg/python:3.6'
+    steps:
+      - attach_workspace:
+          at: /docs/site
       - aws-s3/sync:
           arguments: |
             --acl public-read \
@@ -30,9 +40,16 @@ jobs:
 workflows:
   main:
     jobs:
-      - build_and_publish_page:
+      - build_page:
           context: docs
 #          filters:
 #            branches:
 #             only:
 #              - master
+      - publish_page:
+          context: docs
+#          filters:
+#            branches:
+#             only:
+#              - master
+
