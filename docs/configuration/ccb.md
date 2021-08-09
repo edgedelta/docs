@@ -12,17 +12,17 @@ With CCB, users can use the Edge Delta UI to create and manage configuration fil
 
 Additionally, CCB allows users to update and modify configuration files directly through the UI, automatically propagating changes down to running agents.  
 
-![](../.gitbook/assets/edge_delta_agentsettings.jpg)
+![](.././assets/edge_delta_agentsettings.jpg)
 
 ## Creating a New Configuration
 
 In the Edge Delta admin portal, click the green "Create Configuration" button in the top right corner to generate a new configuration.
 
-![](../.gitbook/assets/edge_delta_createconfig.jpg)
+![](.././assets/edge_delta_createconfig.jpg)
 
 Start with a template or create your own from scratch:
 
-![](../.gitbook/assets/screen-shot-2021-06-01-at-12.32.07-pm.png)
+![](.././assets/screen-shot-2021-06-01-at-12.32.07-pm.png)
 
 Once you've saved your configuration, you will return to the configuration portal, where your new configuration will be listed, as well as an API Key associated with the configuration. 
 
@@ -32,11 +32,11 @@ The API Key is utilized as part of the agent deployment process, allowing new ag
 
 All configuration changes are tracked and auditable in the Edge Delta UI:
 
-![](../.gitbook/assets/edge_delta_confighistory.jpg)
+![](.././assets/edge_delta_confighistory.jpg)
 
 Individual changes can be shown, or you can diff a specific version from current:
 
-![](../.gitbook/assets/edge_delta_change1.jpg)
+![](.././assets/edge_delta_change1.jpg)
 
 
 

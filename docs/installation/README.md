@@ -26,9 +26,9 @@ If you have a deployment environment with restricted outgoing network policy see
 
 Linux Example:
 
-![](../.gitbook/assets/edge_delta_deploy.jpg)
+![](../assets/edge_delta_deploy.jpg)
 
 Kubernetes Example:
 
-![](../.gitbook/assets/edge_delta_dk8s.jpg)
+![](../assets/edge_delta_dk8s.jpg)
 

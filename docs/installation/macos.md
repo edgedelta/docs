@@ -16,7 +16,7 @@ Go to [admin.edgedelta.com](https://admin.edgedelta.com) \(or contact the Edge D
 
 Replace the &lt;YOUR\_API\_KEY&gt; field from the command below with your configuration API Key from the administration portal:
 
-![](../.gitbook/assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
+![](../assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
 
 Replace the &lt;DOWNLOAD\_URL&gt; field from the command below with the installation endpoint URL you received from the Edge Delta team.
 

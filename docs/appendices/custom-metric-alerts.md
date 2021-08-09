@@ -28,7 +28,7 @@ For example, below screenshot shows an alert configuration which fires if sum of
 
 _Note:_ Tag is specified at [agent\_settings](https://docs.edgedelta.com/configuration/agent-settings) section of the config
 
-![](../.gitbook/assets/custom-metric-alert.png)
+![](.././assets/custom-metric-alert.png)
 
 You can delete or update previously created Custom Metrtic Alerts on [Monitors Page](https://admin.edgedelta.com/monitors).
 

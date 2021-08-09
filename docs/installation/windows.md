@@ -26,7 +26,7 @@ You can change the installation directory where the Edge Delta agent will instal
 
 When prompted, provide the appropriate configuration API Key from the administration portal, and complete installation.
 
-![](../.gitbook/assets/image%20%282%29.png)
+![](../assets/image%20%282%29.png)
 
 ## Command Line Silent Installation
 
