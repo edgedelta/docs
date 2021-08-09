@@ -21,13 +21,13 @@ To accelerate this process we design a parse tree with fixed depth and nodes wit
 
 Since we use drain log parse tree for clustering based on the common prefix, we can easily merge the clusters by using their ancestors in the tree. Merge level determines how many level we will go up in the tree.
 
-![Drain algorithm visual overview](../.gitbook/assets/drain_algorithm.png)
+![Drain algorithm visual overview](.././assets/drain_algorithm.png)
 
 ## Levenshtein Distance
 
 Levenshtein distance is a string metric for measuring the difference between two sequences. The Levenshtein distance between two words is the minimum number of single-character edits \(insertions, deletions or substitutions\) required to change one word into the other.
 
-![Levenshtein algorithm visual overview](../.gitbook/assets/levenshtein.png)
+![Levenshtein algorithm visual overview](.././assets/levenshtein.png)
 
 When a new raw log message arrives we preprocess it with Ragel FSM Based Tokenization process. Then we use Levenshtein distance algorithm for calculating similarities between tokens, and if similarity is above certain threshold then we decide that these logs belongs to the same log group. The similarity calculation is based on minimum number of operations required for making two tokens same. If required operation number is below certain threshold, then they are more similar and grouped in same log group. Otherwise, a new log group will be created based on the log message.
 

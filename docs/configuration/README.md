@@ -27,7 +27,7 @@ These pieces work together to tell the agent which datasets should be analyzed, 
 
 **See diagram below for more details**
 
-![The Federated Learning Edge \(FLE\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](../.gitbook/assets/image%20%2812%29.png)
+![The Federated Learning Edge \(FLE\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](.././assets/image%20%2812%29.png)
 
 ## Details
 

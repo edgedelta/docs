@@ -1,7 +1,3 @@
----
-title: Windows
-weight: 1
----
 
 # Edge Delta Overview
 
@@ -9,7 +5,7 @@ weight: 1
 
 In today's modern architectures, whether your infrastructure is physical, virtual, on-premise, in the cloud, containerized or serverless, applications and systems produce a large volume of telemetry \(logs, metrics, events, traces, etc.\). Real-time analytics and stream processing are used to capture the current state of these systems and provide intelligent insight. This empowers teams to be able to observe, monitor, predict, alert, and remediate in an automated manner, ensuring uptime and availability of critical production systems.
 
-![](.gitbook/assets/screen-shot-2021-06-01-at-12.22.39-pm.png)
+![](./assets/screen-shot-2021-06-01-at-12.22.39-pm.png)
 
 Edge Delta is an automated observability platform that gives enterprises distributed stream processing, federated machine learning, and intelligent data pipeline capabilities. Decoupling where data is analyzed from where it is stored empowers DevOps, Security, and SRE teams to consume and optimally route all forms of machine data output \(logs, metrics, traces\) with the scalability and efficiency to eliminate technical and financial limits. This results in organizations that can identify and remediate operational and security incidents more accurately, orders of magnitude faster and more securely than previously possible with traditional centralized systems like Splunk, Datadog, and Elastic.
 
@@ -23,17 +19,17 @@ Before Edge Delta, the traditional centralized platforms had limitations which f
 
 Modern enterprises and leaders in the market are making significant investments in their observability teams. Integrating, enriching, and improving the capabilities of conventional platforms such as Splunk, Datadog, Elastic, New Relic, and Sumo Logic - Edge Delta now provides companies with distributed stream processing, federated machine learning, and intelligent observability pipelines to achieve the insights and context to make better decisions. This innovative new approach allows DevOps, Security, and SRE teams to analyze large volumes of streaming data without the cost, delay, or complexity of requiring data to be indexed, helping customers decouple where machine data is analyzed from where it is stored.
 
-![The Edge Delta platform is distributed, allowing analysis without the need to centralize raw data first](.gitbook/assets/image%20%2814%29.png)
+![The Edge Delta platform is distributed, allowing analysis without the need to centralize raw data first](./assets/image%20%2814%29.png)
 
 ## Distributed Intelligence - Four Stage Approach
 
-![](.gitbook/assets/di4stages%20%281%29.png)
+![](./assets/di4stages%20%281%29.png)
 
 ## Typical Architecture
 
 For a standard installation, the analysis initially starts at the agents, where raw logs, metrics, and telemetry is pre-processed and applied to both streams and triggers:
 
-![Anomaly Captures, Insights, and Alerts and Automation, Raw Logs are all easily integrated. ](.gitbook/assets/image%20%285%29.png)
+![Anomaly Captures, Insights, and Alerts and Automation, Raw Logs are all easily integrated. ](./assets/image%20%285%29.png)
 
 The agent analyzes all data in real time, where it then can feed the Anomaly Captures, Analytics and Insights, and Alerts and Automation into existing systems.
 
@@ -47,9 +43,8 @@ The Edge Delta agent is built with the ["Go" programming language](https://golan
 
 \(Atypical\) If the agents do not have outbound internet connectivity, the Edge Delta agent works with a local configuration file \(config.yml\).
 
-![The Federated Learning Edge \(FLE\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](.gitbook/assets/screen-shot-2021-01-27-at-10.46.11-am.png)
+![The Federated Learning Edge \(FLE\) applies distributed machine learning, statistical analysis, and stream-processing algorithms to incoming data, resulting in dynamically generated outputs \(streams and triggers\)](./assets/screen-shot-2021-01-27-at-10.46.11-am.png)
 
 In either deployment model, the configuration file is used to configure the global settings for the agent, sources used by the agent \([Inputs](https://docs.edgedelta.com/configuration/inputs)\), monitors/rules performed by the agent \([Processors](https://docs.edgedelta.com/configuration/processors)\), and the destinations where analytics, insights, alerts and automation are streamed \([Outputs](https://docs.edgedelta.com/configuration/outputs)\).
 
 In cases where there is no outbound internet connectivity, the configuration file is created automatically after installation and loaded into memory at runtime. After making changes to the `config.yml` file, the changes are loaded on agent process restart.
-

@@ -4,6 +4,8 @@ description: >-
   and deployment of the Edge Delta service.
 ---
 
+
+
 # Basic Onboarding
 
 ## Create An Edge Delta Account
@@ -18,15 +20,15 @@ After initial deployment, the onboarding wizard can be accessed via [admin.edged
 
 **1.\) Select an Operating System or Architecture Type for Deployment**
 
-![](.gitbook/assets/screen-shot-2021-01-26-at-2.13.18-pm.png)
+![](./assets/screen-shot-2021-01-26-at-2.13.18-pm.png)
 
 **2.\) Copy Pre-configured Deploy Command\(s\) and Run In Appropriate Terminal**
 
-![](.gitbook/assets/screen_shot_2021-01-26_at_2_14_48_pm%20%281%29.jpg)
+![](./assets/screen_shot_2021-01-26_at_2_14_48_pm%20%281%29.jpg)
 
 **3.\) Wait a few seconds for agent\(s\) to deploy and authenticate with the Edge Delta Backend, and navigate to the Status Page to get started!**
 
-![](.gitbook/assets/screen-shot-2021-01-26-at-2.22.57-pm.png)
+![](./assets/screen-shot-2021-01-26-at-2.22.57-pm.png)
 
 ## Deploy From Existing Configuration
 
@@ -34,11 +36,11 @@ After initial deployment, the onboarding wizard can be accessed via [admin.edged
 2. Identify the appropriate configuration you would like to use for deployment, or create a new configuration
 3. Hit the **Deploy** button on the right-hand side of the configuration
 
-![](.gitbook/assets/screen_shot_2021-01-26_at_2_24_55_pm.jpg)
+![](./assets/screen_shot_2021-01-26_at_2_24_55_pm.jpg)
 
 1. **Copy** the appropriate deployment command \(based on the OS of the server Edge Delta will be deployed\)
 
-![](.gitbook/assets/screen_shot_2021-01-26_at_2_27_36_pm%20%281%29.jpg)
+![](./assets/screen_shot_2021-01-26_at_2_27_36_pm%20%281%29.jpg)
 
 1. Run the deployment command on the target server or cluster to deploy Edge Delta
    1. Docker, Linux, and MacOS: paste and run the command in the terminal 

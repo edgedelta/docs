@@ -18,7 +18,7 @@ When it is time to run the Edge Delta container, you can either have the Edge De
 
 Replace the &lt;YOUR\_API\_KEY&gt; field from the command below with your configuration API Key from the administration portal:
 
-![](../.gitbook/assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
+![](../assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
 
 Container must have internet access to fetch the configuration.
 

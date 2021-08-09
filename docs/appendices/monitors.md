@@ -17,7 +17,7 @@ Monitors provides actionable insights by exposing anomalous behaviours identifie
 
 All monitors created on the system are visible on [Monitors Page](https://admin.edgedelta.com/monitors). By default there are two monitors defined for each organization sending notifications to the organization creator.
 
-![](../.gitbook/assets/monitors_default.png)
+![](.././assets/monitors_default.png)
 
 To create a new monitor click **+ Add Button** on [Monitors Page](https://admin.edgedelta.com/monitors). Custom Metrics monitors can be only created [Metrics Page](https://admin.edgedelta.com/metrics)
 
@@ -38,7 +38,7 @@ All monitor types have below configuration fields:
 | Timezone | Timezone that will be used in prerendered charts in notifications body |
 | Enabled | If set **No** monitor will stop sending notifications |
 
-![](../.gitbook/assets/common_monitor_options.png)
+![](.././assets/common_monitor_options.png)
 
 ## Monitor Types
 
@@ -53,7 +53,7 @@ Pattern Check monitors have below configuration options:
 | Scope | Source tags where events will be collected and analyzed in. See [Agent Settings](../configuration/agent-settings.md) about tags |
 | Merge Level | Merge level sets the eagerness to cluster similar logs as log patterns centrally. Level none disables central clustering for this monitor |
 
-![](../.gitbook/assets/pattern_options.png)
+![](.././assets/pattern_options.png)
 
 ### Pattern Check
 

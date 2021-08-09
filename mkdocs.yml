@@ -1,0 +1,6 @@
+site_name: Edge Delta Docs
+theme:
+  name: material
+  logo: assets/logo.png
+extra_css:
+  - stylesheets/style.css
