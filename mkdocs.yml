@@ -11,6 +11,7 @@ nav:
   - Basic Onboarding: basic-onboarding.md
   - Architecture Overview - K8s: architecture-overview-k8s.md
   - Installation:
+    - Overview: installation/index.md
     - Environment Variables: installation/environment-variables.md
     - Windows: installation/windows.md
     - Linux: installation/linux.md
@@ -21,6 +22,7 @@ nav:
     - Amazon ECS: installation/amazon-ecs.md
     - Agent Network Access Requirements: installation/network-access.md
   - Configuration:
+    - Overview: configuration/index.md
     - Cloud Configuration Backend: configuration/ccb.md
     - Agent Settings: configuration/agent-settings.md
     - Inputs: configuration/inputs.md
@@ -30,11 +32,13 @@ nav:
     - Workflows: configuration/workflows.md
     - Variables: configuration/variables.md
   - Examples:
+    - Overview: examples/index.md
     - Linux Configuration: examples/linux-configuration.md
     - Windows Configuration: examples/windows-configuration.md
     - Kubernetes Configuration: examples/kubernetes-example.md
     - Docker Configuration: examples/docker-configuration.md
   - Appendices:
+    - Overview: appendices/index.md
     - Elastic Index Setup: appendices/elastic-index.md
     - Azure Function Monitoring Setup: appendices/azure-serverless-monitoring.md
     - Clustering Details: appendices/clustering.md
