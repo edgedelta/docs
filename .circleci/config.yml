@@ -4,19 +4,26 @@ orbs:
   aws-s3: circleci/aws-s3@2.0.0
 
 jobs:
-  build_and_publish_page:
+  build_page:
     docker:
-      - image: honkit/honkit
+      - image: squidfunk/mkdocs-material
     working_directory: /docs
     steps:
       - checkout
       - run:
           name: Build and Publish
           command: |
-            npm install
-            npm install -g gitbook-plugin-hints
-            honkit init
-            honkit build
+            mkdocs build
+      - persist_to_workspace:
+          root: .
+          paths:
+            -  .
+  publish_page:
+    docker:
+      - image: 'cimg/python:3.6'
+    steps:
+      - attach_workspace:
+          at: .
       - aws-s3/sync:
           arguments: |
             --acl public-read \
@@ -25,14 +32,23 @@ jobs:
           aws-access-key-id: DOCS_PUBLISHER_KEY_ID
           aws-secret-access-key: DOCS_PUBLISHER_KEY
           aws-region: DEFAULT_AWS_REGION
-          from: /docs/_book
+          from: site
           to: s3://$DOCS_BUCKET_NAME
 workflows:
   main:
     jobs:
-      - build_and_publish_page:
+      - build_page:
           context: docs
           filters:
             branches:
              only:
               - master
+      - publish_page:
+          requires:
+            - build_page
+          context: docs
+          filters:
+            branches:
+             only:
+              - master
+

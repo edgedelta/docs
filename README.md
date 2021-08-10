@@ -1,7 +1,0 @@
-# What is Edge Delta?
-
-In today's modern architectures, whether your infrastructure is physical, virtual, on-premise, in the cloud, containerized or serverless, applications and systems produce a large volume of telemetry \(logs, metrics, events, traces, etc.\). Real-time analytics and stream processing are used to capture the current state of these systems and provide intelligent insight. This empowers teams to be able to observe, monitor, predict, alert, and remediate in an automated manner, ensuring uptime and availability of critical production systems.
-
-![](.gitbook/assets/screen-shot-2021-06-01-at-12.22.39-pm.png)
-
-Edge Delta is an automated observability platform that gives enterprises distributed stream processing, federated machine learning, and intelligent data pipeline capabilities. Decoupling where data is analyzed from where it is stored empowers DevOps, Security, and SRE teams to consume and optimally route all forms of machine data output \(logs, metrics, traces\) with the scalability and efficiency to eliminate technical and financial limits. This results in organizations that can identify and remediate operational and security incidents more accurately, orders of magnitude faster and more securely than previously possible with traditional centralized systems like Splunk, Datadog, and Elastic.
