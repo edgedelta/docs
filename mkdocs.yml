@@ -5,4 +5,42 @@ theme:
   favicon: assets/favicon.png
   custom_dir: overrides
 extra_css:
-  - stylesheets/style.css 
+  - stylesheets/style.css
+nav:
+  - Edge Delta Overview: index.md
+  - Basic Onboarding: basic-onboarding.md
+  - Architecture Overview - K8s: architecture-overview-k8s.md
+  - Installation:
+    - Environment Variables: installation/environment-variables.md
+    - Windows: installation/windows.md
+    - Linux: installation/linux.md
+    - Docker: installation/docker.md
+    - MacOS: installation/macos.md
+    - Kubernetes: installation/kubernetes.md
+    - Kubernetes via Helm: installation/helm.md
+    - Amazon ECS: installation/amazon-ecs.md
+    - Agent Network Access Requirements: installation/network-access.md
+  - Configuration:
+    - Cloud Configuration Backend: configuration/ccb.md
+    - Agent Settings: configuration/agent-settings.md
+    - Inputs: configuration/inputs.md
+    - Filters: configuration/filters.md
+    - Outputs: configuration/outputs.md
+    - Processors: configuration/processors.md
+    - Workflows: configuration/workflows.md
+    - Variables: configuration/variables.md
+  - Examples:
+    - Linux Configuration: examples/linux-configuration.md
+    - Windows Configuration: examples/windows-configuration.md
+    - Kubernetes Configuration: examples/kubernetes-example.md
+    - Docker Configuration: examples/docker-configuration.md
+  - Appendices:
+    - Elastic Index Setup: appendices/elastic-index.md
+    - Azure Function Monitoring Setup: appendices/azure-serverless-monitoring.md
+    - Clustering Details: appendices/clustering.md
+    - MultiLine Detection: appendices/line_detection.md
+    - Ingestion to ED Backend Preferences: appendices/data_preferences.md
+    - Benchmark Test Results: appendices/benchmark_results.md
+    - Custom Metric Alerts: appendices/custom-metric-alerts.md
+    - Monitors: appendices/monitors.md
+    - Prometheus Scraping: appendices/prometheus-scraping.md
