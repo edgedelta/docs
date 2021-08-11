@@ -79,6 +79,27 @@ Show helm installed packages in "edgedelta" namespace
 ```text
 helm ls -n edgedelta
 ```
+## Value.yml Paramaters
+
+| Name | Description | Example Value |
+| :--- | :--- | :--- |
+| apiKey | API Key used to pull agent's configuration details (generated via ED Admin Portal), should not be specified when secretApiKey is set | "8d32..." |
+| secretApiKey.name | Reference to Edge Delta Agent API Key secret name in same namespace, should not be specified when apiKey is set | "ed-api-key" |
+| storePort | Reference to Edge Delta Agent API Key secret key in same namespace, should not be specified when apiKey is set | "ed-api-key" |
+| httpProxy | Proxy details for routing Edge Delta agent's outbound traffic through an HTTP internal proxy | "http://127.0.0.1:3128" |
+| httpsProxy | Proxy details for routing Edge Delta agent's outbound traffic through an HTTPS internal proxy | "https://127.0.0.1:3128" |
+| noProxy | Disable proxy for requests hitting a specific destination | "https://your-endpoint.com" |
+| edWorkflows | Colon (:) separated workflow names that will enable all matching workflows and disable the rest together with edWorkflowPrefixes | "billing-workflow:error-workflow" |
+| edWorkflowPrefixes | Colon (:) separated workflow prefixes that will enable all matching workflows according their prefixes and disable the rest together with edWorkflows | "billing:error" |
+| persistingCursorProps.enabled | Enable/disable persistent cursor feature | false |
+| persistingCursorProps.hostMountPath | Host mount path | /var/lib/edgedelta |
+| persistingCursorProps.containerMountPath | Container mount path | /var/lib/edgedelta |
+| resources.limits.cpu | Maximum cpu usage limit for agent pod | 1000m |
+| resources.limits.memory | Maximum memory usage limit for agent pod | 512Mi |
+| resources.requests.cpu| Minimum requested cpu for agent pod | 200m |
+| resources.requests.memory | Minimum requested memory for agent pod |256Mi |
+| image | Agent docker image | edgedelta/agent |
+
 
 ## Useful Tips
 
