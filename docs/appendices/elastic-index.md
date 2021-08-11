@@ -65,38 +65,174 @@ PUT _template/ed-agent-log?include_type_name
       "number_of_replicas": "1"
     }
   },
-  "aliases": {},
   "mappings": {
     "_doc": {
-      "_routing": {
-        "required": false
-      },
-      "numeric_detection": false,
-      "dynamic_date_formats": [
-        "strict_date_optional_time",
-        "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
-      ],
-      "_meta": {},
       "_source": {
         "excludes": [],
         "includes": [],
         "enabled": true
       },
+      "_meta": {},
+      "_routing": {
+        "required": false
+      },
       "dynamic": true,
-      "dynamic_templates": [],
+      "numeric_detection": false,
       "date_detection": true,
+      "dynamic_date_formats": [
+        "strict_date_optional_time",
+        "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
+      ],
+      "dynamic_templates": [],
       "properties": {
-        "msg": {
-          "type": "text"
-        },
-        "k8s_namespace": {
+        "alert_def_id": {
           "type": "keyword"
         },
+        "alert_def_name": {
+          "type": "keyword"
+        },
+        "app": {
+          "type": "keyword"
+        },
+        "conf_id": {
+          "type": "keyword"
+        },
+        "docker_container_name": {
+          "type": "keyword"
+        },
+        "docker_image": {
+          "type": "keyword"
+        },
+        "ecs_cluster": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "index_options": "docs",
+          "split_queries_on_whitespace": false,
+          "doc_values": true
+        },
+        "ecs_container": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "index_options": "docs",
+          "split_queries_on_whitespace": false,
+          "doc_values": true
+        },
         "ecs_task_family": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "index_options": "docs",
+          "split_queries_on_whitespace": false,
+          "doc_values": true
+        },
+        "ecs_task_version": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "split_queries_on_whitespace": false,
+          "index_options": "docs",
+          "doc_values": true
+        },
+        "edac_id": {
+          "type": "keyword"
+        },
+        "environment": {
+          "type": "keyword"
+        },
+        "event_id": {
+          "type": "keyword"
+        },
+        "group_id": {
+          "type": "keyword"
+        },
+        "host": {
+          "type": "keyword"
+        },
+        "ip": {
+          "type": "ip"
+        },
+        "k8s_container_image": {
+          "type": "keyword"
+        },
+        "k8s_container_name": {
           "type": "keyword"
         },
         "k8s_controller_kind": {
           "type": "keyword"
+        },
+        "k8s_controller_logical_name": {
+          "type": "keyword"
+        },
+        "k8s_namespace": {
+          "type": "keyword"
+        },
+        "k8s_pod_name": {
+          "type": "keyword"
+        },
+        "logical_source": {
+          "type": "keyword"
+        },
+        "merge_level": {
+          "type": "keyword"
+        },
+        "msg": {
+          "type": "text"
+        },
+        "name": {
+          "type": "keyword"
+        },
+        "org_id": {
+          "type": "keyword"
+        },
+        "properties": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": false,
+          "store": false,
+          "type": "keyword",
+          "split_queries_on_whitespace": false,
+          "doc_values": false
+        },
+        "region": {
+          "type": "keyword"
+        },
+        "score": {
+          "type": "double"
+        },
+        "src_name": {
+          "type": "keyword"
+        },
+        "src_type": {
+          "type": "keyword"
+        },
+        "stat_type": {
+          "type": "keyword"
+        },
+        "sub_type": {
+          "type": "keyword"
+        },
+        "tag": {
+          "type": "keyword"
+        },
+        "timestamp": {
+          "index": true,
+          "ignore_malformed": false,
+          "store": false,
+          "type": "date",
+          "doc_values": true
+        },
+        "timestamp_end": {
+          "type": "date"
         },
         "title": {
           "eager_global_ordinals": false,
@@ -111,87 +247,8 @@ PUT _template/ed-agent-log?include_type_name
         "type": {
           "type": "keyword"
         },
-        "src_name": {
-          "type": "keyword"
-        },
-        "k8s_container_name": {
-          "type": "keyword"
-        },
-        "score": {
-          "type": "double"
-        },
-        "sub_type": {
-          "type": "keyword"
-        },
-        "host": {
-          "type": "keyword"
-        },
-        "tag": {
-          "type": "keyword"
-        },
-        "k8s_controller_logical_name": {
-          "type": "keyword"
-        },
         "value": {
           "type": "double"
-        },
-        "timestamp_end": {
-          "type": "date"
-        },
-        "timestamp": {
-          "index": true,
-          "ignore_malformed": false,
-          "store": false,
-          "type": "date",
-          "doc_values": true
-        },
-        "ecs_task_version": {
-          "type": "keyword"
-        },
-        "stat_type": {
-          "type": "keyword"
-        },
-        "docker_container_name": {
-          "type": "keyword"
-        },
-        "conf_id": {
-          "type": "keyword"
-        },
-        "edac_id": {
-          "type": "keyword"
-        },
-        "ip": {
-          "type": "ip"
-        },
-        "k8s_pod_name": {
-          "type": "keyword"
-        },
-        "logical_source": {
-          "type": "keyword"
-        },
-        "ecs_container": {
-          "type": "keyword"
-        },
-        "org_id": {
-          "type": "keyword"
-        },
-        "name": {
-          "type": "keyword"
-        },
-        "ecs_cluster": {
-          "type": "keyword"
-        },
-        "src_type": {
-          "type": "keyword"
-        },
-        "properties": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": false,
-          "store": false,
-          "type": "keyword",
-          "split_queries_on_whitespace": false,
-          "doc_values": false
         }
       }
     }
