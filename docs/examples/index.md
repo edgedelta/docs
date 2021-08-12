@@ -12,6 +12,3 @@ description: >-
 * [Windows Configuration](windows-configuration.md)
 * [Docker Configuration](docker-configuration.md)
 * [Kubernetes Configuration](kubernetes-example.md)
-
-
-

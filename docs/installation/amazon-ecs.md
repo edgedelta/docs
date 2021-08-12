@@ -31,7 +31,7 @@ To properly collect all logs from containers on all instances in your cluster yo
 In AWS Console UI navigate to ECS and find your cluster, then follow below steps:
 
 * Under Services click the Create
-* Select EC2 Launch Type 
+* Select EC2 Launch Type
 * Select the task definition created above in dropdown
 * Select DAEMON service type and set a service name, click Next Step
 * Select None for load balancer, click Next Step
@@ -42,7 +42,7 @@ Make sure your container definition for other tasks or services does not have`lo
 
 In agent configuration yaml on [https://admin.edgedelta.com](https://admin.edgedelta.com) make sure you have container input source is enabled as seen below to collect container logs:
 
-```text
+```yaml
 inputs:
   container_stats:
     enabled: true
@@ -56,7 +56,7 @@ inputs:
 
 Containers should be referred in your workflow:
 
-```text
+```yaml
 workflows:
   my-workflow:
     input_labels:
@@ -107,4 +107,3 @@ Below example change allows you to also monitor log files in `/var/log/ecs/` on 
 ```
 
 Do not forget to add file input in agent yaml config to monitor mounted path which is `/host/var/log/ecs/` in above sample. See [files](../configuration/inputs.md#files) for further details.
-

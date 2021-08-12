@@ -68,4 +68,3 @@ Make sure to run uninstallation process as root.
 ```text
 sudo bash -c "$(curl -L https://release.edgedelta.com/uninstall.sh)"
 ```
-

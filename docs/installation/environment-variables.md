@@ -147,4 +147,3 @@ edgedelta/agent:latest
 On Windows systems use the following command to define environment variables globally. Agent service needs to be restarted after setting the variable.
 
 `[System.Environment]::SetEnvironmentVariable('HTTP_PROXY', '<your proxy details>',[System.EnvironmentVariableTarget]::Machine)`
-

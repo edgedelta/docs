@@ -53,4 +53,3 @@ Once installation completed, the configuration file \(config.yml\) and the agent
 ### Troubleshooting
 
 After installation, the Windows Services UI \(services.msc\) and the &lt;installation\_directory&gt;\edgedelta.log file can be used to troubleshoot and to check the status of the agent.
-

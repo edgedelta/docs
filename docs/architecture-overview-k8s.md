@@ -74,4 +74,3 @@ The below \(Automated Pattern Detection\) is just one of many examples of the au
 **Native Streaming Destinations Include**
 
 ![Examples of Streaming Destinations Edge Delta natively integrates with](./assets/screen-shot-2021-01-26-at-4.59.24-pm.png)
-

@@ -30,7 +30,7 @@ _Note_: Analyzing patterns in high log volume environments can be compute intens
 
 **Example config:**
 
-```text
+```yaml
   cluster:
     name: clustering
     num_of_clusters: 100
@@ -56,10 +56,9 @@ The simple keyword match processor checks for basic regex match in the logs, cou
 |   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
 | filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
 
-
 **Example config:**
 
-```text
+```yaml
 regexes:
   - name: "error"
     pattern: "error|err|ERROR|ERR"
@@ -71,7 +70,6 @@ Metrics generated from example config:
 
 * _error.count_: Total count of matches within an interval
 * _error.anomaly1_: Anomaly score of current interval based on total count history. represents the how anomalous the current error count is compared to its history. Score is in the range of \[0,100\].
-
 
 ## Numeric Capture Processor
 
@@ -92,7 +90,7 @@ Numeric capture processor supports exact same configuration as **Simple Keyword 
 
 **Example config:**
 
-```text
+```yaml
 regexes:
   - name: "response_time"
     pattern: "completed in (?P<latency>\\d+)ms"
@@ -101,7 +99,6 @@ regexes:
 ```
 
 When such regular expression pattern is provided the following statistics are generated and emitted as metrics
-
 
 * _response\_time\_latency.count_: total count of matches in current interval
 * _response\_time\_latency.avg_: average of captured numeric values. e.g. average response time in above example.
@@ -131,7 +128,7 @@ Dimension counter supports exact same configuration as **Simple Keyword Match** 
 
 **Example config:** Count per log level
 
-```text
+```yaml
 regexes:
   - name: "log"
     pattern: "level=(?P<level>\\w+) "
@@ -173,7 +170,7 @@ It supports same configurations as **Dimension Counter Processor** with the diff
 
 **Example config:**
 
-```text
+```yaml
 regexes:
   - name: "http"
     pattern: "(?P<method>\\w+) took (?P<latency>\\d+) ms"
@@ -227,7 +224,7 @@ Trace processor configuration looks similar to **Simple Keyword Match Processor*
 
 **Example config:**
 
-```text
+```yaml
 traces:
   - name: render-trace
     start_pattern: "rendering job: (?P<ID>[0-9a-fA-F]{8}) started"
@@ -252,7 +249,7 @@ Top-K processor keeps track of top K records \(e.g. k=10\) where the records are
 
 **Example config:**
 
-```text
+```yaml
   top_ks:
     - name: top-api-requests
       pattern: (?P<ip>\d+\.\d+\.\d+\.\d+) - \w+ \[.*\] "(?P<method>\w+) (?P<path>.+) HTTP\/\d.0" (?P<code>.+) \d+
@@ -292,7 +289,7 @@ Ratio processor configuration looks similar to **Simple Keyword Match** processo
 
 **Example config:**
 
-```text
+```yaml
 ratios:
   - name: error-ratio
     success_pattern: "request succeeded"
@@ -303,7 +300,7 @@ ratios:
 
 ## Complete example
 
-```text
+```yaml
 version: v2
 agent_settings:
   tag: prod
@@ -322,25 +319,24 @@ outputs:
       api_key: {{Env "TEST_DD_APIKEY"}} # define datadog api key as environment variable (recommended way for secrets)
 
 processors:
-
   # Clustering processor
-  cluster:      
+  cluster:
     name: clustering
     num_of_clusters: 100
     samples_per_cluster: 20
     reporting_frequency: 1m
-    retention: 30m 
+    retention: 30m
 
   regexes:
 
     # Simple keyword match processor
-    - name: "error"     
+    - name: "error"
       pattern: "error|err|ERROR|ERR"
       trigger_thresholds:
         anomaly_probability_percentage: 90
 
     # Numeric capture processor
-    - name: "response_time"     
+    - name: "response_time"
       pattern: "completed in (\\d+)ms"
       trigger_thresholds:
         anomaly_probability_percentage: 90
@@ -357,7 +353,7 @@ processors:
       pattern: "(?P<method>\\w+) took (?P<latency>\\d+) ms"
       dimensions: ["method"]
       trigger_thresholds:
-        anomaly_probability_percentage: 90 
+        anomaly_probability_percentage: 90
 
   traces:
 
@@ -366,7 +362,7 @@ processors:
       start_pattern: "rendering job: (?P<ID>[0-9a-fA-F]{8}) started"
       finish_pattern: "rendering job: (?P<ID>[0-9a-fA-F]{8}) finished"
       trigger_thresholds:
-        max_duration: 50000 # 50 seconds        
+        max_duration: 50000 # 50 seconds
 
   top_ks:
     - name: top-api-requests
@@ -380,7 +376,7 @@ processors:
       success_pattern: "request succeeded"
       failure_pattern: "request failed"
       trigger_thresholds:
-        anomaly_probability_percentage: 90 
+        anomaly_probability_percentage: 90
 
 workflows:
     my-workflow:
@@ -398,4 +394,3 @@ workflows:
       destinations:
         - my-datadog-trial
 ```
-

@@ -78,4 +78,3 @@ Run the following command using the agent's CONTAINER ID
 ```text
 docker logs CONTAINERID
 ```
-

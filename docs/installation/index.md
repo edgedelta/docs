@@ -31,4 +31,3 @@ Linux Example:
 Kubernetes Example:
 
 ![](../assets/edge_delta_dk8s.jpg)
-

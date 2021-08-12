@@ -24,4 +24,3 @@ Below table lists the data types and their ingestion status to Edge Delta backen
 | Agent Health Data | Agent runs internal pipelines based on the workflow configuration given and has many critical internal components working independently of each other. In order to make sure everything is working as expected we collect health information from the critical components. This data includes success/failure count, last error, start time etc. | Yes |
 
 **Important note:** If you believe any of these data set types contain sensitive data and must NOT be sent to Edge Delta backend then please reach out to us for turning them off. Edge Delta agent supports completely offline mode where the agent can be run with local yaml file and never communicates with Edge Delta backend. If this is the desired mode \(super sensitive data processing use-cases\) then let us know so we can guide you on specifics of this type of deployment.
-

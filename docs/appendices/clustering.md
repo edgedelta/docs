@@ -30,4 +30,3 @@ Levenshtein distance is a string metric for measuring the difference between two
 ![Levenshtein algorithm visual overview](.././assets/levenshtein.png)
 
 When a new raw log message arrives we preprocess it with Ragel FSM Based Tokenization process. Then we use Levenshtein distance algorithm for calculating similarities between tokens, and if similarity is above certain threshold then we decide that these logs belongs to the same log group. The similarity calculation is based on minimum number of operations required for making two tokens same. If required operation number is below certain threshold, then they are more similar and grouped in same log group. Otherwise, a new log group will be created based on the log message.
-
