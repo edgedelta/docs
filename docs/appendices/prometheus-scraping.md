@@ -155,4 +155,3 @@ If you use [Prometheus Service Operator](https://github.com/prometheus-operator/
   ```
 
   After a short while metrics should be available on Prometheus.
-

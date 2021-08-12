@@ -79,4 +79,3 @@ See [Environment Variables](environment-variables.md) page for full list of vari
 ```text
 sudo bash -c "$(curl -L https://release.edgedelta.com/uninstall.sh)"
 ```
-

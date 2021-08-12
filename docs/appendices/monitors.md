@@ -64,4 +64,3 @@ Pattern Check monitor has the same options with Pattern Skyline.
 ### Custom Metrics
 
 Custom Metrics monitor processes the cumulative value of a specific metric in the provided scope. Instead of just signals, this monitor processes actual metric to define scope wide threshold with fine grained control. Custom metrics can be edited and deleted on [Monitors Page](https://admin.edgedelta.com/monitors) page but creation should be done on [Metrics Page](https://admin.edgedelta.com/metrics). For further information about how to create Custom Metrics Monitors see [Custom Metrics](custom-metric-alerts.md).
-

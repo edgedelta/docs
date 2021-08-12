@@ -6,20 +6,20 @@ description: >-
 
 # Docker Configuration
 
-The example configuration is a default, working configuration requiring no changes to be deployed. 
+The example configuration is a default, working configuration requiring no changes to be deployed.
 
-Examples of initial changes to customize to your environment would be adding specific [Inputs](../configuration/inputs.md), [Processors](../configuration/processors.md), or [Outputs](../configuration/outputs.md) to various [Streaming](../configuration/outputs.md#streaming-destinations) and [Trigger](../configuration/outputs.md#trigger-destinations) destinations. 
+Examples of initial changes to customize to your environment would be adding specific [Inputs](../configuration/inputs.md), [Processors](../configuration/processors.md), or [Outputs](../configuration/outputs.md) to various [Streaming](../configuration/outputs.md#streaming-destinations) and [Trigger](../configuration/outputs.md#trigger-destinations) destinations.
 
 Please comment/uncomment parameters as needed, as well as populate the appropriate values to create your desired configuration.
 
-```go
+```yaml
 #Configuration File Version (currently v1 and v2 supported)
 version: v2
 
 #Global settings to apply to the agent
 agent_settings:
   tag: docker_onboarding
-  log:    
+  log:
     level: info
   anomaly_capture_size: 1000
   anomaly_confidence_period: 30m
@@ -42,7 +42,6 @@ inputs:
 
 #Outputs define destinations to send both streaming data, and trigger data (alerts/automation/ticketing)
 outputs:
-
   #Streams define destinations to send "streaming data" such as statistics, anomaly captures, etc. (Splunk, Sumo Logic, New Relic, Datadog, InfluxDB, etc.)
   streams:
     ##Sumo Logic Example
@@ -72,7 +71,7 @@ outputs:
     #  endpoint: "<ADD INFLUXDB ENDPOINT>"
     #  port: <ADD PORT>
     #  features: all
-    #  tls: 
+    #  tls:
     #    disable_verify: true
     #  token: "<ADD JWT TOKEN>"
     #  db: "<ADD INFLUX DATABASE>"
@@ -93,38 +92,37 @@ processors:
     samples_per_cluster: 2       # keep last 2 messages of each cluster
     reporting_frequency: 30s     # report cluster samples every 30 seconds
 
-#Regexes define specific keywords and patterns for matching, aggregation, statistics, etc. 
+#Regexes define specific keywords and patterns for matching, aggregation, statistics, etc.
   regexes:
-    - name: "error_level" 
+    - name: "error_level"
       pattern: "ERROR|error|Error|Err|ERR"
       trigger_thresholds:
         anomaly_probability_percentage: 95
 
-    - name: "exception_check" 
+    - name: "exception_check"
       pattern: "Exception|exception|EXCEPTION"
       trigger_thresholds:
         anomaly_probability_percentage: 95
 
-    - name: "fail_level" 
+    - name: "fail_level"
       pattern: "FAIL|Fail|fail"
       trigger_thresholds:
         anomaly_probability_percentage: 95
 
-    - name: "info_level" 
+    - name: "info_level"
       pattern: "INFO|info|Info"
 
-    - name: "warn_level" 
+    - name: "warn_level"
       pattern: "WARN|warn|Warn"
 
-    - name: "debug_level" 
+    - name: "debug_level"
       pattern: "DEBUG|debug|Debug"
 
-    - name: "success_check" 
+    - name: "success_check"
       pattern: "Success|SUCCESS|success|Succeeded|succeeded|SUCCEEDED"
 
 #Workflows define the mapping between input sources, which processors to apply, and which destinations to send the streams/triggers to
 workflows:
-
   stats_workflow:
     input_labels:
       - container_stats
@@ -147,4 +145,3 @@ workflows:
       #- trigger_destination_a      #Replace with configured trigger destination
       #- trigger_destination_b      #Replace with configured trigger destination
 ```
-

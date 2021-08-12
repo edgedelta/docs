@@ -25,4 +25,3 @@ Vector already did benchmark tests for the performance of different APM tools in
 | TCP to TCP | 212.7 mib/s | 69.9mib/s | 5mib/s | 67.1mib/s | 3.9mib/s | 10mib/s | 70.4mib/s | 7.6mib/s |
 
 The results except Edge Delta [https://github.com/timberio/vector\#performance](https://github.com/timberio/vector#performance)
-

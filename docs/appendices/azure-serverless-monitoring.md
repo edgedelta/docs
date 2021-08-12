@@ -13,7 +13,7 @@ Create a new AKS cluster or use an existing one
 Add a new node pool on AKS with below spec. If you skip this step update the nodeSelector in [ed-appinsights-trace-processor.yaml](https://github.com/eddocs/doc/tree/51eff2ab7f42d72460f771c88a373ea5fee305e4/appendices/ed-appinsights-trace-processor.yaml).
 
 ```text
-  name: processors 
+  name: processors
     OS: linux
     size: 1
     SKU: Standard_D4s_v3
@@ -151,4 +151,3 @@ Set application insight connection string to point it to public endpoint created
 ## Next
 
 Run azure functions and simulate failure scenarios. Visit application insights to check failed traces are forwarded by edgedelta agent.
-

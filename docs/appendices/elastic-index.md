@@ -219,4 +219,3 @@ PUT /%3Ced-agent-log-%7Bnow%2Fd%7D-000001%3E
 Now visit the Index Management &gt; Indices and you should see a new index similar to this 'ed-agent-log-2020.10.22-000000'. \(the date should be today\)
 
 Congratulations! Your Elastic environment is ready for Edge Delta. Now you can deploy an agent with Elastic destination pointing to index 'ed-agent-log'.
-

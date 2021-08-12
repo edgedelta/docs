@@ -6,20 +6,20 @@ description: >-
 
 # Linux Configuration
 
-The example configuration is a default, working configuration requiring no changes to be deployed. 
+The example configuration is a default, working configuration requiring no changes to be deployed.
 
-Examples of initial changes to customize to your environment would be adding specific [Inputs](../configuration/inputs.md), [Processors](../configuration/processors.md), or [Outputs](../configuration/outputs.md) to various [Streaming](../configuration/outputs.md#streaming-destinations) and [Trigger](../configuration/outputs.md#trigger-destinations) destinations. 
+Examples of initial changes to customize to your environment would be adding specific [Inputs](../configuration/inputs.md), [Processors](../configuration/processors.md), or [Outputs](../configuration/outputs.md) to various [Streaming](../configuration/outputs.md#streaming-destinations) and [Trigger](../configuration/outputs.md#trigger-destinations) destinations.
 
 Please comment/uncomment parameters as needed, as well as populate the appropriate values to create your desired configuration.
 
-```go
+```yaml
 #This is a sample edgedelta agent config. See https://docs.edgedelta.com/configuration for more details.
 version: v2
 
 #Global settings to apply to the agent
 agent_settings:
   tag: linux_onboarding
-  log:    
+  log:
     level: info
   anomaly_capture_size: 1000
   anomaly_confidence_period: 30m
@@ -44,7 +44,6 @@ inputs:
 
 #Outputs define destinations to send both streaming data, and trigger data (alerts/automation/ticketing)
 outputs:
-
   #Streams define destinations to send "streaming data" such as statistics, anomaly captures, etc. (Splunk, Sumo Logic, New Relic, Datadog, InfluxDB, etc.)
   streams:
     ##Sumo Logic Example
@@ -74,7 +73,7 @@ outputs:
     #  endpoint: "<ADD INFLUXDB ENDPOINT>"
     #  port: <ADD PORT>
     #  features: all
-    #  tls: 
+    #  tls:
     #    disable_verify: true
     #  token: "<ADD JWT TOKEN>"
     #  db: "<ADD INFLUX DATABASE>"
@@ -156,4 +155,3 @@ workflows:
       #- trigger_destination_a      #Replace with configured trigger destination
       #- trigger_destination_b      #Replace with configured trigger destination
 ```
-

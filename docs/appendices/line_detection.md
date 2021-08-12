@@ -51,14 +51,12 @@ We use 2 methods to turn these multiple logs into a single log:
 
 If "line\_pattern" regex rule is specified in the agent config, then agent process lines not for New Line\("\n"\) but for this specific line separation rule. Accumulates the logs between these line patterns as multiline logs and further processing is made based on this accumulated multiline logs.
 
-```go
+```yaml
 ...
-
   files:
     - path: "/var/log/service_a.log"
       labels: "app,service_a"
       line_pattern: "^MMM dd, yyyy hh:mm:ss"
-
 ...
 ```
 
@@ -66,21 +64,19 @@ If "line\_pattern" regex rule is specified in the agent config, then agent proce
 
 Detects line patterns automatically based on the Ragel FSM Based Lexical Recognition process. No need to specify line\_pattern explicitly. Accumulates the logs between these patterns as multiline logs and further processing is made based on this accumulated multiline logs.
 
-```go
+```yaml
 ...
-
   kubernetes:
-    - labels: "kubernetes_logs"            
+    - labels: "kubernetes_logs"
       include:
-        - "namespace=.*"                        
+        - "namespace=.*"
       exclude:
-        - "namespace=kube-system"                    
-        - "namespace=kube-public"                    
-        - "namespace=kube-node-lease"                    
+        - "namespace=kube-system"
+        - "namespace=kube-public"
+        - "namespace=kube-node-lease"
         - "pod=edgedelta"
         - "kind=ReplicaSet"
       auto_detect_line_pattern: true
-
 ...
 ```
 

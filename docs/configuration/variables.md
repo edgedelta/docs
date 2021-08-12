@@ -50,4 +50,3 @@ Example Configuration Variables:
 | :--- | :--- |
 | AGENT\_LOG\_LEVEL | error |
 | API\_FILTER\_PATTERN | INFO |
-

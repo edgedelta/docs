@@ -96,4 +96,3 @@ Example: If you have an Elasticsearch service "elasticsearch-master" in "elastic
 ```
 
 Read more about [service DNS resolution](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records)
-

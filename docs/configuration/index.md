@@ -39,4 +39,3 @@ These pieces work together to tell the agent which datasets should be analyzed, 
 | [Processors](processors.md) | Processors are user-defined patterns, analytics, and processing tools to analyze the incoming data streams. Processors can be defined using regular expressions, keyword matching, ratio analytics, tracing logic, as well as clustering and statistical analysis. |
 | [Workflows](./workflows.md) | Workflows are the mapping of Inputs, Outputs and Processors, logically grouped together based on the underlying use-cases and analytics being performed. |
 | [Variables](./variables.md) | Variables are environment variables that can be referred in configuration. |
-
