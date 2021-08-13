@@ -104,44 +104,16 @@ PUT _template/ed-agent-log?include_type_name
           "type": "keyword"
         },
         "ecs_cluster": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "index_options": "docs",
-          "split_queries_on_whitespace": false,
-          "doc_values": true
+          "type": "keyword"
         },
         "ecs_container": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "index_options": "docs",
-          "split_queries_on_whitespace": false,
-          "doc_values": true
+          "type": "keyword"
         },
         "ecs_task_family": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "index_options": "docs",
-          "split_queries_on_whitespace": false,
-          "doc_values": true
+          "type": "keyword"
         },
         "ecs_task_version": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "split_queries_on_whitespace": false,
-          "index_options": "docs",
-          "doc_values": true
+          "type": "keyword"
         },
         "edac_id": {
           "type": "keyword"
