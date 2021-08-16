@@ -13,6 +13,9 @@
     height: unset !important;
     width: unset !important;
 }
+.md-clipboard {
+    color: var(--md-default-fg-color--light);
+}
 
 @media screen and (max-width: 76.1875em) {
     .md-nav .md-nav__title[for=__drawer] {

@@ -1,4 +1,4 @@
-site_name: Edge Delta Docs
+site_name: "" 
 theme:
   name: material
   logo: assets/logo.png
