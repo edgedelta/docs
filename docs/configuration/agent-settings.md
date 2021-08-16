@@ -13,7 +13,7 @@ description: >-
 | tag | User defined tag to describe the environment. e.g. _prod\_us\_west\_2\_cluster_.  Default value is _Edge_ but it's highly recommended to set this value. | Edge | No |
 | _**log**_ | The _log_ section contains subfields to configure agent's own log settings. Agent logs to standard output when run inside a container \(e.g. when run in kubernetes\). When installed as a linux/windows/macos service the agent logs to a file named edgedelta.log next to the installed service location. | N/A | No |
 |   level | Logging level for the edge delta agent's self logs. | info | No |
-| _**persisting_cursor_settings**_ | The _persisting_cursor_settings_ section contains subfields to configure agent's persisting cursor provider for tailers. This provider will store in-memory cursors into a file, that includes latest cursor positions for a given source, periodically. | N/A | No |
+| _**persisting_cursor_settings**_ | The _persisting_cursor_settings_ section contains subfields to configure agent's persisting cursor provider for tailers. This provider will store in-memory cursors into a file, that includes latest cursor positions for a given source, periodically. This helps agent to resume from where it left after restarts or upgrades. | N/A | No |
 |   path | Path of the folder that cursor file will be saved into. This folder should exist before agent start. | `/var/lib/edgedelta` (Unix) `C:\var\lib\edgedelta` (Windows) | No |
 |   file_name | File name of the cursor file that cursors will be saved into | `cursor.json` | No |
 |   flush_interval | Flush period of cursor tailer. | 3m | No |
@@ -40,7 +40,7 @@ agent_settings:
   persisting_cursor_settings:
     path: /var/lib/edgedelta/cursor_provider
     file_name: cursor_provider.json
-    flush_interval: 5m
+    flush_interval: 5s
   soft_cpu_limit: 0.5
   anomaly_tolerance: 0.1
   anomaly_confidence_period: 1m
@@ -52,4 +52,3 @@ agent_settings:
   anomaly_coefficient: 10.0
   grace_period: 30s
 ```
-
