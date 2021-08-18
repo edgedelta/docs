@@ -18,6 +18,8 @@ An Edge Delta configuration file contains five main components:
 
 * [Agent Settings](./agent-settings.md)
 * [Inputs](./inputs.md)
+* [Filters](./filters.md)
+* [Thresholds](./thresholds.md)
 * [Processors](./outputs.md)
 * [Outputs](./processors.md)
 * [Workflows](./workflows.md)
