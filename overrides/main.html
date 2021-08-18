@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block footer %}
-    <div style="height: 50px;">
-    </div>
+
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+        <div style="height: 50px;">
+        </div>
 {% endblock %}
