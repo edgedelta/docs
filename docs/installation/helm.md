@@ -92,8 +92,8 @@ helm ls -n edgedelta
 | edWorkflows | Colon (:) separated workflow names that will enable all matching workflows and disable the rest together with edWorkflowPrefixes | "billing-workflow:error-workflow" |
 | edWorkflowPrefixes | Colon (:) separated workflow prefixes that will enable all matching workflows according their prefixes and disable the rest together with edWorkflows | "billing:error" |
 | persistingCursorProps.enabled | Enable/disable persistent cursor feature | false |
-| persistingCursorProps.hostMountPath | Host mount path | /var/lib/edgedelta |
-| persistingCursorProps.containerMountPath | Container mount path | /var/lib/edgedelta |
+| persistingCursorProps.hostMountPath | Host mount path to keep persisting cursor file state | /var/lib/edgedelta |
+| persistingCursorProps.containerMountPath | Container mount path to keep persisting cursor state | /var/lib/edgedelta |
 | resources.limits.cpu | Maximum cpu usage limit for agent pod | 1000m |
 | resources.limits.memory | Maximum memory usage limit for agent pod | 512Mi |
 | resources.requests.cpu| Minimum requested cpu for agent pod | 200m |
