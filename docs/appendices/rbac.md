@@ -5,7 +5,7 @@ description: >-
 
 # Role Based Access Control
 
-Edge Delta SaaS offering provides isolation between customers via organizations. Any user must be be part of an organization within Edge Delta system to access the system in the first place. 
+Edge Delta SaaS offering provides isolation between customers via organizations. Any user must be part of an organization within Edge Delta system to access the system in the first place. 
 
 Within an organization, more granular access control to various resources is possible. 
 
@@ -16,7 +16,7 @@ Within an organization, more granular access control to various resources is pos
 **Users** are the individuals who signed up with their email address to admin.edgedelta.com. A user is part of an organization that they created or got invited to. 
 Users have a set of permissions attached directly to them and also inherit premissions from the groups they are member of.
 
-**Groups** provide a way to bulk manageme user permissions. A group has a set of permissions attached to it. Users can be assigned to one or more groups and the user inherits permissions from all the groups they are member of. By default every organization has 2 builtin groups: Admin and Analyst. Admin has permissions to do everything and Analyst has readonly permissions to most parts of the system. 
+**Groups** provide a way to bulk manage user permissions. A group has a set of permissions attached to it. Users can be assigned to one or more groups and the user inherits permissions from all the groups they are member of. By default every organization has 2 builtin groups: Admin and Analyst. Admin has permissions to do everything and Analyst has readonly permissions to most parts of the system. 
 
 ### Granular resource types
 
