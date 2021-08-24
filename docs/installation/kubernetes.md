@@ -27,8 +27,16 @@ kubectl create secret generic ed-api-key \
     --from-literal=ed-api-key="(log in to view API tokens)"
 ```
 
-Create daemonset
+Choose an agent manifest according to your use case:
 
+| Manifest | Description |
+| :---     | :---        |
+| [Default](https://edgedelta.github.io/k8s/edgedelta-agent.yml) | Default Agent DaemonSet. |
+| [Persisting cursor](https://edgedelta.github.io/k8s/edgedelta-agent-persisting-cursor.yml) | Agent DaemonSet with mounted host volumes to track file cursor positions persistently. |
+| [Metric exporter](https://edgedelta.github.io/k8s/edgedelta-prom-agent.yml) | Agent DaemonSet exposing port 6062 /metrics endpoint in Prometheus format. See [Prometheus Scraping](../appendices/prometheus-scraping.md) |
+| [On premise](https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml) | Agent DaemonSet for locally managed or offline deployments. |
+
+Create the DaemonSet using chosen manifest link
 ```text
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 ```
