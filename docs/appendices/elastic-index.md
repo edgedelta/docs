@@ -85,37 +85,130 @@ PUT _template/ed-agent-log?include_type_name
       ],
       "dynamic_templates": [],
       "properties": {
+        "msg": {
+          "type": "text"
+        },
         "alert_def_id": {
           "type": "keyword"
         },
-        "alert_def_name": {
+        "k8s_namespace": {
           "type": "keyword"
+        },
+        "merge_level": {
+          "type": "keyword"
+        },
+        "ecs_task_family": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "index_options": "docs",
+          "split_queries_on_whitespace": false,
+          "doc_values": true
+        },
+        "k8s_controller_kind": {
+          "type": "keyword"
+        },
+        "k8s_container_image": {
+          "type": "keyword"
+        },
+        "title": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "index_options": "docs",
+          "split_queries_on_whitespace": false,
+          "doc_values": false
+        },
+        "type": {
+          "type": "keyword"
+        },
+        "src_name": {
+          "type": "keyword"
+        },
+        "k8s_container_name": {
+          "type": "keyword"
+        },
+        "score": {
+          "type": "double"
+        },
+        "sub_type": {
+          "type": "keyword"
+        },
+        "host": {
+          "type": "keyword"
+        },
+        "capture_flush_mode": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": false,
+          "store": false,
+          "type": "keyword",
+          "split_queries_on_whitespace": false,
+          "doc_values": false
+        },
+        "tag": {
+          "type": "keyword"
+        },
+        "k8s_controller_logical_name": {
+          "type": "keyword"
+        },
+        "timestamp_end": {
+          "type": "date"
+        },
+        "value": {
+          "type": "double"
+        },
+        "timestamp": {
+          "index": true,
+          "ignore_malformed": false,
+          "store": false,
+          "type": "date",
+          "doc_values": true
         },
         "app": {
           "type": "keyword"
         },
-        "conf_id": {
+        "capture_size": {
+          "coerce": true,
+          "index": false,
+          "ignore_malformed": false,
+          "store": false,
+          "type": "long",
+          "doc_values": false
+        },
+        "ecs_task_version": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "split_queries_on_whitespace": false,
+          "index_options": "docs",
+          "doc_values": true
+        },
+        "stat_type": {
           "type": "keyword"
         },
         "docker_container_name": {
           "type": "keyword"
         },
-        "docker_image": {
-          "type": "keyword"
-        },
-        "ecs_cluster": {
-          "type": "keyword"
-        },
-        "ecs_container": {
-          "type": "keyword"
-        },
-        "ecs_task_family": {
-          "type": "keyword"
-        },
-        "ecs_task_version": {
+        "conf_id": {
           "type": "keyword"
         },
         "edac_id": {
+          "type": "keyword"
+        },
+        "ip": {
+          "type": "ip"
+        },
+        "k8s_pod_name": {
+          "type": "keyword"
+        },
+        "logical_source": {
           "type": "keyword"
         },
         "environment": {
@@ -124,46 +217,77 @@ PUT _template/ed-agent-log?include_type_name
         "event_id": {
           "type": "keyword"
         },
+        "capture_duration": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": false,
+          "store": false,
+          "type": "keyword",
+          "split_queries_on_whitespace": false,
+          "doc_values": false
+        },
+        "ecs_container": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "index_options": "docs",
+          "split_queries_on_whitespace": false,
+          "doc_values": true
+        },
+        "capture_bytesize": {
+          "coerce": true,
+          "index": false,
+          "ignore_malformed": false,
+          "store": false,
+          "type": "long",
+          "doc_values": false
+        },
         "group_id": {
           "type": "keyword"
         },
-        "host": {
+        "org_id": {
           "type": "keyword"
-        },
-        "ip": {
-          "type": "ip"
-        },
-        "k8s_container_image": {
-          "type": "keyword"
-        },
-        "k8s_container_name": {
-          "type": "keyword"
-        },
-        "k8s_controller_kind": {
-          "type": "keyword"
-        },
-        "k8s_controller_logical_name": {
-          "type": "keyword"
-        },
-        "k8s_namespace": {
-          "type": "keyword"
-        },
-        "k8s_pod_name": {
-          "type": "keyword"
-        },
-        "logical_source": {
-          "type": "keyword"
-        },
-        "merge_level": {
-          "type": "keyword"
-        },
-        "msg": {
-          "type": "text"
         },
         "name": {
           "type": "keyword"
         },
-        "org_id": {
+        "alert_def_name": {
+          "type": "keyword"
+        },
+        "ecs_cluster": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": true,
+          "store": false,
+          "type": "keyword",
+          "index_options": "docs",
+          "split_queries_on_whitespace": false,
+          "doc_values": true
+        },
+        "threshold_description": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": false,
+          "store": false,
+          "type": "keyword",
+          "split_queries_on_whitespace": false,
+          "doc_values": false
+        },
+        "threshold_type": {
+          "eager_global_ordinals": false,
+          "norms": false,
+          "index": false,
+          "store": false,
+          "type": "keyword",
+          "split_queries_on_whitespace": false,
+          "doc_values": false
+        },
+        "src_type": {
+          "type": "keyword"
+        },
+        "region": {
           "type": "keyword"
         },
         "properties": {
@@ -175,52 +299,8 @@ PUT _template/ed-agent-log?include_type_name
           "split_queries_on_whitespace": false,
           "doc_values": false
         },
-        "region": {
+        "docker_image": {
           "type": "keyword"
-        },
-        "score": {
-          "type": "double"
-        },
-        "src_name": {
-          "type": "keyword"
-        },
-        "src_type": {
-          "type": "keyword"
-        },
-        "stat_type": {
-          "type": "keyword"
-        },
-        "sub_type": {
-          "type": "keyword"
-        },
-        "tag": {
-          "type": "keyword"
-        },
-        "timestamp": {
-          "index": true,
-          "ignore_malformed": false,
-          "store": false,
-          "type": "date",
-          "doc_values": true
-        },
-        "timestamp_end": {
-          "type": "date"
-        },
-        "title": {
-          "eager_global_ordinals": false,
-          "norms": false,
-          "index": true,
-          "store": false,
-          "type": "keyword",
-          "split_queries_on_whitespace": false,
-          "index_options": "docs",
-          "doc_values": false
-        },
-        "type": {
-          "type": "keyword"
-        },
-        "value": {
-          "type": "double"
         }
       }
     }
