@@ -146,7 +146,7 @@ Let's assume our logs have 3 levels: DEBUG, INFO, ERROR. In this case the follow
 * _log\_level\_error.count_
 * _log\_level\_error.anomaly1_
 
-Format: _{processor name}{dimension name}{dimension value}.{stat type}_
+Format: _{processor name}\_{dimension name}\_{dimension value}.{stat type}_
 
 ## Dimension Numeric Capture Processor
 
@@ -187,17 +187,17 @@ Let's say we have following logs feeding into the **Dimension Numeric Capture Pr
 When agent sees these logs, it will start generating the metrics below:
 
 * _http\_method\_getalbums\_latency.count_
-* _http\_getalbums\_latency.avg_
-* _http\_getalbums\_latency.min_
-* _http\_getalbums\_latency.max_
-* _http\_getalbums\_latency.anomaly1_
-* _http\_getrecords\_latency.count_
-* _http\_getrecords\_latency.avg_
-* _http\_getrecords\_latency.min_
-* _http\_getrecords\_latency.max_
-* _http\_getrecords\_latency.anomaly1_
+* _http\_method\_getalbums\_latency.avg_
+* _http\_method\_getalbums\_latency.min_
+* _http\_method\_getalbums\_latency.max_
+* _http\_method\_getalbums\_latency.anomaly1_
+* _http\_method\_getrecords\_latency.count_
+* _http\_method\_getrecords\_latency.avg_
+* _http\_method\_getrecords\_latency.min_
+* _http\_method\_getrecords\_latency.max_
+* _http\_method\_getrecords\_latency.anomaly1_
 
-Format: _{processor name}{dimension name}{dimension value}\_{numeric capture group name}.{stat type}_
+Format: _{processor name}\_{dimension name}\_{dimension value}\_{numeric capture group name}.{stat type}_
 
 For each distinct dimension \(_getalbums_ and _getrecords_\) numeric statistics are calculated and reported with a metric name containing the dimension in it. **Dimension Numeric Capture Processor** processor basically does what **Numeric Capture Processor** does for each distinct dimension value.
 
