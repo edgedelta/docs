@@ -35,7 +35,7 @@ Policy example:
 }
 ```
 
-2. Configure the s3 bucket to send notifications to the SQS queue. This is documented here: https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html
+2. Configure the s3 bucket to send notifications to the SQS queue. This is documented [here](https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html).
 
 3. Create a new IAM user with programmatic access type. It will be used by agents to access sqs and s3. It should have a policy like this:
 ```
