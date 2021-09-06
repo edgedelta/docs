@@ -19,3 +19,4 @@ description: >-
 * [Prometheus Scraping](prometheus-scraping.md)
 * [Trigger Payload Template Values](template-values.md)
 * [Role Based Access Control](rbac.md)
+* [S3 monitoring via SQS](s3-sqs.md)

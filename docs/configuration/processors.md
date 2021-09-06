@@ -117,6 +117,7 @@ Dimension counter supports exact same configuration as **Simple Keyword Match** 
 | name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
 | pattern | Regular expression pattern containing a named capture group representing the dimension. _Note:_ named capture groups must follow Golang regex protocol, e.g.  "level=\(?P&lt;level&gt;\\\w+\)" | Yes |
 | dimensions | List of named capture group fields to use as dynamic dimensions \(group by\). Each dimension specified here must have a corresponding named capture group in the pattern field for this processor. | Yes |
+| dimensions_as_attributes | When this is set to true, the metrics generated will have the same name but different attribute values. The dimension key/value will be sent as an attribute. See below examples for details. | No |
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger\_thresholds** | The trigger\_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
@@ -146,7 +147,15 @@ Let's assume our logs have 3 levels: DEBUG, INFO, ERROR. In this case the follow
 * _log\_level\_error.count_
 * _log\_level\_error.anomaly1_
 
-Format: _{processor name}\_{dimension name}\_{dimension value}.{stat type}_
+Metric name format: _{processor name}\_{dimension name}\_{dimension value}.{stat type}_
+
+If the above example had `dimensions_as_attributes: true` then the metric name is not altered for each dimension value but instead the dimension value is added as an attribute. So in this case the following metrics would be generated:
+* name: _log.count_,    attributes:  _{level="debug"}_
+* name: _log.anomaly1_, attributes:  _{level="debug"}_
+* name: _log.count_,    attributes:  _{level="_info"}_
+* name: _log.anomaly1_, attributes:  _{level="_info"}_
+* name: _log.count_,    attributes:  _{level="_error"}_
+* name: _log.anomaly1_, attributes:  _{level="_error"}_
 
 ## Dimension Numeric Capture Processor
 
@@ -159,6 +168,7 @@ It supports same configurations as **Dimension Counter Processor** with the diff
 | name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
 | pattern | Regular expression pattern containing one named capture group representing dimension and one or more numeric named captured groups. _Note:_ named capture groups must follow Golang regex protocol, e.g. "\(?P&lt;method&gt;\\\w+\) took \(?P&lt;latency&gt;\\\d+\) ms"\ | Yes |
 | dimensions | List of named capture group fields to use as dynamic dimensions \(group by\). Each dimension specified here must have a corresponding named capture group in the pattern field for this processor. | Yes |
+| dimensions_as_attributes | When this is set to true, the metrics generated will have the same name but different attribute values. The dimension key/value will be sent as an attribute. See below examples for details. | No |
 | interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
 | retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
 | **trigger\_thresholds** | The trigger\_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
@@ -197,9 +207,22 @@ When agent sees these logs, it will start generating the metrics below:
 * _http\_method\_getrecords\_latency.max_
 * _http\_method\_getrecords\_latency.anomaly1_
 
-Format: _{processor name}\_{dimension name}\_{dimension value}\_{numeric capture group name}.{stat type}_
+Metric name format: _{processor name}\_{dimension name}\_{dimension value}\_{numeric capture group name}.{stat type}_
 
 For each distinct dimension \(_getalbums_ and _getrecords_\) numeric statistics are calculated and reported with a metric name containing the dimension in it. **Dimension Numeric Capture Processor** processor basically does what **Numeric Capture Processor** does for each distinct dimension value.
+
+
+If the above example had `dimensions_as_attributes: true` then the metric name is not altered for each dimension value but instead the dimension value is added as an attribute. So in this case the following metrics would be generated:
+* name: _http\_latency.count_,    attributes:  _{method="GetAlbums"}_
+* name: _http\_latency.avg_,      attributes:  _{method="GetAlbums"}_
+* name: _http\_latency.min_,      attributes:  _{method="GetAlbums"}_
+* name: _http\_latency.max_,      attributes:  _{method="GetAlbums"}_
+* name: _http\_latency.anomaly1_, attributes:  _{method="GetAlbums"}_
+* name: _http\_latency.count_,    attributes:  _{method="GetRecords"}_
+* name: _http\_latency.avg_,      attributes:  _{method="GetRecords"}_
+* name: _http\_latency.min_,      attributes:  _{method="GetRecords"}_
+* name: _http\_latency.max_,      attributes:  _{method="GetRecords"}_
+* name: _http\_latency.anomaly1_, attributes:  _{method="GetRecords"}_
 
 ## Trace Processor
 
