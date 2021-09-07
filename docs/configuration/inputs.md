@@ -277,7 +277,7 @@ A saved script can also be referenced directly via the command parameter \(see s
 
 If enabled, Kubernetes events will be collected (namespace independent) and sent to Edge Delta backend. These events can be visualized on the [Insights](https://admin.edgedelta.com/insights) page.
 
-_Note:_ Kubernetes event collection requires agent leader election mechanism to be enabled because only one agent collects the events from cluster. This mechanusm is already enabled by default in example agent deployment scripts provided with `ED_LEADER_ELECTION_ENABLED=1`
+_Note:_ Kubernetes event collection requires agent leader election mechanism to be enabled because only one agent collects the events from cluster. This mechanism is already enabled in the default agent deployment commands via `ED_LEADER_ELECTION_ENABLED=1`.
 
 ```yaml
   k8s_events:
@@ -291,7 +291,7 @@ If enabled, pod metrics such as cpu/memory usage are collected and sent to confi
 
 _Note:_ This input type depends on the Kubernetes metrics API to be enabled on the cluster which can be configured by installing [metrics-server](https://github.com/kubernetes-sigs/metrics-server).
 
-_Note:_ Kubernetes event collection requires agent leader election mechanism to be enabled because only one agent collects the events from cluster. This mechanusm is already enabled by default in example agent deployment scripts provided with `ED_LEADER_ELECTION_ENABLED=1`
+_Note:_ Kubernetes pod metric collection requires agent leader election mechanism to be enabled because only one agent collects the metrics from cluster. This mechanism is already enabled in the default agent deployment commands via `ED_LEADER_ELECTION_ENABLED=1`.
 
 ```yaml
   kubernetes_stats:
