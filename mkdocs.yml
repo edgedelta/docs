@@ -51,3 +51,4 @@ nav:
     - Prometheus Scraping: appendices/prometheus-scraping.md
     - Trigger Payload Template Values: appendices/template-values.md
     - Role Based Access Control: appendices/rbac.md
+    - S3 monitoring via SQS: appendices/s3-sqs.md
