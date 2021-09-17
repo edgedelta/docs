@@ -28,10 +28,19 @@ There are a number of different input types supported by the Edge Delta service.
 * [Execs \(Scripted Input\)](./inputs.md#execs-scripted-input)
 * [Kubernetes Events](./inputs.md#kubernetes-events)
 * [Kubernetes Stats](./inputs.md#kubernetes-stats)
+* [Agent Components Health Stats](./inputs.md#agent-components-health-stats)
 
 You can specify the filters to monitor sources of containers, Kubernetes and AWS ECS.
 
 * [Input filters](./inputs.md#filters-for-containers-kubernetes-and-aws-ecs)
+
+There are some global options for all input types:
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| enable_incoming_line_anomalies | If enabled then anomaly scores are also generated | No |
+| boost_stacktrace_detection | If enabled, gets stack trace that accumulates over date patterns. | No |
+
 
 _Note:_ The example input configurations in this document demonstrate how to define an input. You must put the input in a [workflow](./workflows.md) for it to be active
 
@@ -296,4 +305,13 @@ _Note:_ Kubernetes pod metric collection requires agent leader election mechanis
 ```yaml
   kubernetes_stats:
     labels: "k8s-stats"
+```
+
+## Agent Components Health Stats
+
+If enabled, Agent Components Health Stats will report agent components health to configured streaming destinations as well as Edge Delta backend. 
+
+```yaml
+  agent_components_health:
+    labels: "agent-components-health"
 ```

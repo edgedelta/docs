@@ -161,17 +161,31 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
 | type | Must be set to "datadog" to stream data to Datadog | Yes |
+| log_host | If provided, custom installation of Datadog log host can be reached. | No |
+| metric_host | If provided, custom installation of Datadog metric host can be reached. | No |
 | api\_key | Datadog API Key | Yes |
 | custom\_tags | Key-values defined in custom tags by the user are streamed to datadog for every request. | No |
 | features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
 
 ```yaml
-      - name: datadog-integration
+      - name: datadog-integration-default
         type: datadog
         api_key: "<add datadog api key>"
         custom_tags:
           "app": "transaction_manager"
           "env": "pre_prod"
+          "region": "us-west-2"
+
+      - name: datadog-integration-custom
+        type: datadog
+        # If provided, custom installation of datadog log host can be reached.
+        log_host: "<ADD DATADOG LOG_HOST>"
+        # If provided, custom installation of datadog metric host can be reached.
+        metric_host: "<ADD DATADOG METRIC_HOST>"
+        api_key: "<add datadog api key>"
+        features: metric
+        custom_tags:
+          "app": "transaction_manager"
           "region": "us-west-2"
 ```
 
@@ -798,6 +812,7 @@ If enabled, the Azure Blob Storage integration will stream logs to an Azure Blob
 | account\_name | Account Name for the azure account. | Yes |
 | account\_key | Account Key for azure account. You can visit [https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) | Yes |
 | container | Container to upload. | Yes |
+| auto_create_container | Create the container on the service (with no metadata and no public access). | No |
 
 ```yaml
       - name: my-blob
@@ -837,6 +852,7 @@ If enabled, the DigitalOcean Spaces integration will stream logs to an DigitalOc
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
 | type | Must be set to "dos" to send archived logs to DigitalOcean Spaces | Yes |
+| endpoint | DigitalOcean Spaces Endpoint | Yes |
 | bucket | Target DOS bucket to send archived logs. | Yes |
 | access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
 | secret\_key | Secret Key associated with the access key specified. | Yes |
@@ -859,6 +875,7 @@ If enabled, the IBM Object Storage integration will stream logs to an IBM Object
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
 | type | Must be set to "ibmos" to send archived logs to IBM Object Storage | Yes |
+| endpoint | IBM Object Storage Endpoint | Yes |
 | bucket | Target IBM OS bucket to send archived logs. | Yes |
 | access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
 | secret\_key | Secret Key associated with the access key specified. | Yes |
@@ -881,6 +898,7 @@ If enabled, the Minio integration will stream logs to an Minio endpoint.
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
 | type | Must be set to "minio" to send archived logs to Minio | Yes |
+| endpoint | Minio Endpoint | Yes |
 | bucket | Target Minio bucket to send archived logs. | Yes |
 | access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
 | secret\_key | Secret Key associated with the access key specified. | Yes |
@@ -906,15 +924,16 @@ If enabled, the Zenko CloudServer integration will stream logs to an CloudServer
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
-| type | Must be set to "minio" to send archived logs to Minio | Yes |
-| bucket | Target Minio bucket to send archived logs. | Yes |
+| type | Must be set to "zenko" to send archived logs to Zenko | Yes |
+| endpoint | Zenko Endpoint | Yes |
+| bucket | Target Zenko bucket to send archived logs. | Yes |
 | access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
 | secret\_key | Secret Key associated with the access key specified. | Yes |
 
 ```yaml
       - name: my-zenko-cloudserver
-        type: minio
-        endpoint: s3-api.us-geo.objectstorage.softlayer.net
+        type: zenko
+        endpoint: https://XXXXXXXXXX.sandbox.zenko.io
         bucket: ed-test-bucket
         access_key: my_access_key_123
         secret_key: my_secret_key_123
