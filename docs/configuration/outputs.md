@@ -220,10 +220,13 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
 | type | Must be set to "influxdb" to stream data to Influx DB | Yes |
+| version | Version of the InfluxDB deployment. Supports version "1.x" and "2.x". Empty version defaults to "2.x" | No |
+| bucket | Target InfluxDB bucket to send archived logs. Required only for version "2.x" | Yes |
+| organization | InfluxDB buckets for customer organization. Required only for version "2.x" | Yes |
 | endpoint | InfluxDB endpoint | Yes |
-| http\_user | InfluxDB user credentials | Yes |
-| http\_password | InfluxDB password for connecting user | Yes |
-| db | Specific InfluxDB database to stream data to | Yes |
+| http\_user | InfluxDB user credentials. Required only for version "1.x". | Yes |
+| http\_password | InfluxDB password for connecting user. Required only for version "1.x". | Yes |
+| db | Specific InfluxDB database to stream data to. Required only for version "1.x" | Yes |
 | features | Features defines which data types stream to backend, it can be "metric", "edac". If you don't provide any value then it is all. | No |
 
 ```yaml
@@ -234,6 +237,15 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
         http_user: admin
         http_password: your_http_password
         db: "specific_influxdb_database"
+      
+      - name: influxdb-integration-2.x
+        type: influxdb
+        endpoint: "https://influxdb.<your-domain>.com/"
+        token: YOUR_API_TOKEN
+        # empty version or version 2.x requires bucket and organization info
+        bucket: testbucket
+        organization: yourorganization
+        port: 443
 ```
 
 ### **Wavefront**
