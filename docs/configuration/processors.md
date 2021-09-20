@@ -321,6 +321,34 @@ ratios:
       anomaly_probability_percentage: 90
 ```
 
+## Anomaly
+
+Anomaly processor combines multiple collocated agent metrics such as agents running on containers or servers in same data center. It is used in aggregator agent mode to follow trends and detect anomalies that are happening on local clusters. This is a beta feature.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |
+| metric_name | Metric name to monitor for anomalies. | Yes |
+| interval | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents reporting/rollup interval for the generated statistics. Default value is 1m. | No |
+| retention | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents how far back the agent should look when generating anomaly scores. Default value is 3h. | No |
+| **trigger\_thresholds** | The trigger\_thresholds section has sub-fields that define thresholds based on calculated metrics. When a threshold hits the agent notifies the trigger destinations that are specified in the same workflow. | No |
+|   anomaly\_probability\_percentage | The percent confidence level \(0 - 100\) that needs to be reached in order to generate a trigger. No default value. | No |
+|   upper\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is greater than the limit, a trigger will be generated. No default value. | No |
+|   lower\_limit\_per\_interval | Static threshold for generating a trigger. If the number of events that match the given pattern for the most recent reporting interval is less than the limit, a trigger will be generated. No default value. | No |
+|   consecutive | Consecutive indicates how many times in a row a threshold must be exceeded before actually generating a trigger. Useful for static thresholds because anomaly scores are usually low in the next interval after seeing a sudden spike due to widened baselines. Default is 0. | No |
+| filters | List of filter names to be applied before running this processor. See [Filters](./filters.md) documentation for details about filters. | No |
+
+**Example config:**
+
+```yaml
+anomaly_detectors:
+  - name: container-cpu-anomalies
+    retention: 1h
+    metric_name: cpu_host_perc.value
+    trigger_thresholds:
+      anomaly_probability_percentage: 90
+```
+
 ## Complete example
 
 ```yaml
@@ -400,6 +428,13 @@ processors:
       failure_pattern: "request failed"
       trigger_thresholds:
         anomaly_probability_percentage: 90
+  
+  anomaly_detectors:
+  - name: container-cpu-anomalies
+    retention: 1h
+    metric_name: cpu_host_perc.value
+    trigger_thresholds:
+      anomaly_probability_percentage: 90
 
 workflows:
     my-workflow:
@@ -414,6 +449,7 @@ workflows:
         - render-trace
         - top-api-requests
         - error-ratio
+        - container-cpu-anomalies
       destinations:
         - my-datadog-trial
 ```

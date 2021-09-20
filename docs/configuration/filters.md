@@ -63,6 +63,7 @@ Mask filters transform the log lines to hide the matched part of the content for
 | pattern | Regular expression pattern to define which strings to match on. Either _pattern_ or _predefined\_pattern_ must be set. | No |
 | predefined\_pattern | There are some commonly used patterns predefined which can be used instead of custom pattern. Available predefined patterns are _credit\_card_ and _us\_phone\_dash_ | No |
 | mask | String to be used as replacement for the matched part of the log. Default mask is "\*\*\*\*\*\*". Specifying empty mask "" will simply remove matched the pattern from the log line | No |
+| mask_captured | Support capture groups for regex masks and user can replace any match of capture group with given map. To replace all match (not submatch), user can use `all` keyword | No |
 
 Below example filter replaces "password: SOME\_PASSWORD" with "password: \*\*\*\*\*\*":
 
@@ -71,6 +72,12 @@ Below example filter replaces "password: SOME\_PASSWORD" with "password: \*\*\*\
     type: mask
     pattern: "password:\s*\w+"
     mask: "password: ******"
+
+  - name: mask_email
+    type: mask
+    pattern: "email:\s*(?P<email>\w+"
+    mask_captured:
+      email: '******'
 ```
 
 Instead of defining a regex pattern, it is also possible to use one of the predefined patterns.
