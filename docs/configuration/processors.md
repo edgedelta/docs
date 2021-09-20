@@ -323,6 +323,8 @@ ratios:
 
 ## Anomaly
 
+Anomaly processor combines multiple collocated agent metrics such as agents running on containers or servers in same data center. It is used in aggregator agent mode to follow trends and detect anomalies that are happening on local clusters. This is a beta feature.
+
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | User defined name of this specific processor, used for mapping this processor to a workflow. | Yes |

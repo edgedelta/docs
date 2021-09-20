@@ -161,8 +161,8 @@ If enabled, the Datadog integration will stream analytics and insights to your D
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the config via _integration\_name_ in which case rest of the fields are not required to be set. The destination's config will be pulled from backend by the agent. When _integration\_name_ is set the _name_ is ignored and _integration\_name_'s value should be used when adding this destination to a workflow. | No |
 | type | Must be set to "datadog" to stream data to Datadog | Yes |
-| log_host | If provided, custom installation of Datadog log host can be reached. | No |
-| metric_host | If provided, custom installation of Datadog metric host can be reached. | No |
+| log_host | If provided, custom installation of Datadog log host to send log data. | No |
+| metric_host | If provided, custom installation of Datadog metric host to send metric data. | No |
 | api\_key | Datadog API Key | Yes |
 | custom\_tags | Key-values defined in custom tags by the user are streamed to datadog for every request. | No |
 | features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |

@@ -72,6 +72,12 @@ Below example filter replaces "password: SOME\_PASSWORD" with "password: \*\*\*\
     type: mask
     pattern: "password:\s*\w+"
     mask: "password: ******"
+
+  - name: mask_email
+    type: mask
+    pattern: "email:\s*(?P<email>\w+"
+    mask_captured:
+      email: '******'
 ```
 
 Instead of defining a regex pattern, it is also possible to use one of the predefined patterns.

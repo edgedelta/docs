@@ -34,7 +34,7 @@ You can specify the filters to monitor sources of containers, Kubernetes and AWS
 
 * [Input filters](./inputs.md#filters-for-containers-kubernetes-and-aws-ecs)
 
-There are some global options for all input types:
+There are some common options for all input types:
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
@@ -309,7 +309,7 @@ _Note:_ Kubernetes pod metric collection requires agent leader election mechanis
 
 ## Agent Components Health Stats
 
-If enabled, Agent Components Health Stats will report agent components health to configured streaming destinations as well as Edge Delta backend. 
+Agent component health data contains information about agent's internal state and can be useful for debugging. If enabled, Agent Components Health Stats will report to Edge Delta backend by default to help our support team for troubleshooting agent related issues. It can also report to a 3rd party streaming destination if needed by adding agent_components_health to a workflow.
 
 ```yaml
   agent_components_health:

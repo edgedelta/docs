@@ -81,4 +81,4 @@ In the above example config, the response_time processor generates following met
 | metric_name_pattern | Regular expression to match with metric names to be evaluated. Either metric_name or metric_name_pattern must be provided but not both. | No |
 | operator | Valid operators are "==", ">", ">=", "<", "<=". | Yes |
 | value | Numeric value to compare with metric value with given operator. | Yes |
-| consecutive | The threshold value condition must be met this many times in a row to trigger an alert. Default is 0 so the any condition hit would cause alert | No |
+| consecutive | The threshold condition must be met this many times in a row to trigger an alert. Default is 0 so the any condition hit would cause alert | No |
