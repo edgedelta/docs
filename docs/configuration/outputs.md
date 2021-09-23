@@ -43,7 +43,7 @@ If enabled, the Splunk integration will stream analytics and insights to a Splun
 | type | Must be set to "splunk" to stream data to splunk | Yes |
 | endpoint | Full Splunk HEC URI for this integration | Yes |
 | token | Splunk HEC Token for this integration | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it will be set as "metric,edac,cluster". | No |
 
 ```yaml
       - name: splunk-integration
