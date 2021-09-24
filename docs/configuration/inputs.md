@@ -29,6 +29,7 @@ There are a number of different input types supported by the Edge Delta service.
 * [Kubernetes Events](./inputs.md#kubernetes-events)
 * [Kubernetes Stats](./inputs.md#kubernetes-stats)
 * [Agent Components Health Stats](./inputs.md#agent-components-health-stats)
+* [Elastic Beats](./inputs.md#elastic-beats)
 
 You can specify the filters to monitor sources of containers, Kubernetes and AWS ECS.
 
@@ -314,4 +315,23 @@ Agent component health data contains information about agent's internal state an
 ```yaml
   agent_components_health:
     labels: "agent-components-health"
+```
+
+## Elastic Beats
+
+If enabled, Elastic Beats allows you to specify an endpoint to have the agent listen on for incoming traffic from filebeats. This functionality is used in conjunction with the Logstash output configuration of filebeats.
+
+Sample filebeats.yml Logstash Config:
+
+```yaml
+output.logstash:
+  hosts: ["127.0.0.1:5044"]
+```
+Edge Delta Agent Input Config:
+
+```yaml
+  ports:
+    - protocol: tcp
+      port: 5044
+      labels: "filebeats"
 ```
