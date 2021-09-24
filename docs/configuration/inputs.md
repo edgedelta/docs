@@ -321,6 +321,13 @@ Agent component health data contains information about agent's internal state an
 
 If enabled, Elastic Beats allows you to specify an endpoint to have the agent listen on for incoming traffic from filebeats. This functionality is used in conjunction with the Logstash output configuration of filebeats.
 
+Sample Logstash Config:
+
+```yaml
+output.logstash:
+  hosts: ["127.0.0.1:5044"]
+```
+
 ```yaml
   ports:
     - protocol: tcp
