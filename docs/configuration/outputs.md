@@ -511,6 +511,32 @@ If enabled, the SolarWinds Loggly integration will stream analytics and insights
         features: "metric,log"
 ```
 
+### Logz.io
+
+If enabled, the Logz.io integration will stream analytics and insights to an Logz.io endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
+| type | Must be set to "logzio" to stream data to Logz.io | Yes |
+| endpoint | Logz.io endpoint. One can use cloud one as well as self-hosted one. | Yes |
+| token | Logz.io log token. Required if want to support log stream. | No |
+| metric_token | Logz.io metric token. Required if want to support metric stream. | No |
+| custom\_tags | Key-values defined in custom tags by the user are streamed to Logz.io for every request. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```yaml
+      - name: logzio
+        type: logzio
+        endpoint: "https://app-eu.logz.io:8071"
+        token: "<add logz.io log shipping token>"
+        metric_token: "<add logz.io metric shipping token>"
+        custom_tags:
+          "app": "starbucks_pos_transaction_manager"
+          "region": "us-west-2"
+```
+
 ## Trigger Destinations
 
 ### **Slack**
@@ -748,11 +774,39 @@ If enabled, the Service Now integration will stream notifications and alerts to 
 | :--- | :--- | :--- |
 | name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
 | integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "servicenow" to send alerts to Webhook | Yes |
-| endpoint | Webhook URL | Yes |
+| type | Must be set to "servicenow" to send alerts to Service Now | Yes |
+| endpoint | Service Now URL | Yes |
 | username | Username for Service Now basic authentication | No |
 | password | Password for Service Now basic authentication | No |
 | custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
+| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+
+```yaml
+      - name: service-now-integration
+        type: servicenow
+        endpoint: "https://instance.service-now.com/api/now/table/incident"
+        notify_content:
+          advanced_content: |
+            {
+              'short_description': 'Raw POST Anomaly Detected: {{.ProcessorDescription}}',
+              'assignment_group':'287ebd7da9fe198100f92cc8d1d2154e',
+              'urgency':'2',
+              'impact':'2'
+            }
+```
+
+### **Webhook**
+
+If enabled, the Webhook integration will stream notifications and alerts to the specified Webhook URL
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
+| type | Must be set to "webhook" to send alerts to custom Webhook | Yes |
+| endpoint | Webhook API endpoint | Yes |
+| username | Username for Webhook basic authentication | No |
+| password | Password for Webhook basic authentication | No |
 | notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
 
 ```yaml
@@ -777,34 +831,6 @@ If enabled, the Service Now integration will stream notifications and alerts to 
                 "message": "{{ .Message }}",
                 "foo2": "bar2"
               }
-            }
-```
-
-### **Webhook**
-
-If enabled, the Webhook integration will stream notifications and alerts to the specified Webhook URL
-
-| Key | Description | Required |
-| :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "servicenow" to send alerts to Service Now | Yes |
-| endpoint | Service Now API endpoint | Yes |
-| username | Username for Service Now basic authentication | No |
-| password | Password for Service Now basic authentication | No |
-| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
-
-```yaml
-      - name: service-now-integration
-        type: servicenow
-        endpoint: "https://instance.service-now.com/api/now/table/incident"
-        notify_content:
-          advanced_content: |
-            {
-              'short_description': 'Raw POST Anomaly Detected: {{.ProcessorDescription}}',
-              'assignment_group':'287ebd7da9fe198100f92cc8d1d2154e',
-              'urgency':'2',
-              'impact':'2'
             }
 ```
 
@@ -1034,4 +1060,56 @@ If enabled, the Zenko CloudServer integration will stream logs to an CloudServer
         bucket: ed-test-bucket
         access_key: my_access_key_123
         secret_key: my_secret_key_123
+```
+
+### **Moogsoft**
+
+If enabled, the Moogsoft integration will stream notifications and alerts to the specified Moogsoft URL
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
+| type | Must be set to "moogsoft" to send alerts to Moogsoft | Yes |
+| endpoint | Moogsoft API endpoint | Yes |
+| api_key | Moogsoft API Key. One of the fields API Key or username/password is required. | No |
+| username | Username for Moogsoft basic authentication. One of the fields username/password or API Key is required. | No |
+| password | Password for Moogsoft basic authentication. One of the fields username/password or API Key is required. | No |
+| notify\_content | Used to customize the notification content. It supports templating. Moogsoft only supports `custom_fields` subfield. | No |
+
+```yaml
+      - name: moogsoft-default
+        type: moogsoft
+        endpoint: "https://example.moogsoftaiops.com/events/webhook_webhook1"
+        api_key: "moogsoft-apikey"
+        notify_content:
+          custom_fields:
+            "jira-ticket": "ticket"
+```
+
+### **Remedy**
+
+If enabled, the Remedy integration will stream notifications and alerts to the specified Remedy URL
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
+| type | Must be set to "remedy" to send alerts to Remedy | Yes |
+| endpoint | Remedy API endpoint | Yes |
+| token | Remedy token. One of the fields token or username/password is required. | No |
+| username | Username for Remedy basic authentication. One of the fields username/password or token is required. | No |
+| password | Password for Remedy basic authentication. One of the fields username/password or token is required. | No |
+| notify\_content | Used to customize the notification content. It supports templating. Moogsoft only supports `custom_fields` subfield. | No |
+
+```yaml
+      - name: remedy-default
+        type: remedy
+        endpoint: "localhost"
+        token: remedy-token
+        notify_content:
+          custom_fields:
+            "test-field": "test"
+        custom_headers: 
+          X-header1: "test-header"
 ```
