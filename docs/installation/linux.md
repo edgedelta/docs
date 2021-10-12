@@ -6,7 +6,7 @@ description: >-
 
 # Linux
 
-Edge Delta provides a convenient self extracting installation package supporting common Linux distributions such as Ubuntu, Debian, CentOS, RHEL.
+Edge Delta provides a convenient, self-extracting installation package that supports common Linux distributions, such as Ubuntu, Debian, CentOS, RHEL.
 
 ## Download
 
