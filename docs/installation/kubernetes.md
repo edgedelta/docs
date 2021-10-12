@@ -41,7 +41,7 @@ Create the DaemonSet using chosen manifest link
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 ```
 
-To provide additional environment variables download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml) as described in [Environment Variables](https://github.com/eddocs/doc/tree/84cffae72c67a865ae8b16be19c2b0bb23c6f7f3/installation/environment-variables/README.md) in Kubernetes with yaml section.
+To provide additional environment variables download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml) as described in [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) in Kubernetes with yaml section.
 
 Checking status of Edge Delta container
 
