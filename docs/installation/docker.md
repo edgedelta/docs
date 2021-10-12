@@ -6,7 +6,7 @@ description: >-
 
 # Docker
 
-Edge Delta has a Docker container image that can be deployed as a Sidecar or DaemonSet architecture to analyze telemetry from other Docker containers running on the host, while providing isolation and encapsulation.
+Edge Delta has a Docker container image that can be deployed as a Sidecar or DaemonSet architecture to analyze telemetry from other Docker containers running on the host, while also providing isolation and encapsulation.
 
 ## Running the Container
 
