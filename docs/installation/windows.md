@@ -8,7 +8,7 @@ description: >-
 
 ## Windows
 
-Edge Delta has a very simple 64 or 32 bit MSI installation process.
+Edge Delta has a simple 64 or 32 bit MSI installation process.
 
 Once complete, the agent will run as a background service for Windows-based operating systems.
 
