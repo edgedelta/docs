@@ -53,8 +53,8 @@ Additionally, outputs to 3rd party or on-premise systems also require outbound n
 10. After a successful deployment, click **Go To Status Page**.
 11. In the window that appears, you can click **Go To Demo Environment** to see a pre-populated account where you can view and test data.
 <ul>
-<li>To view your own account, click _X_ to close the window.</li>
-<li>If you access the demo environment, but you want to access your own account, in the top, click _Return To Your Own Account_.</li>
+<li>To view your own account, click X to close the window.</li>
+<li>If you access the demo environment, but you want to access your own account, in the top, click Return To Your Own Account.</li>
 </ul>
 
 ***
