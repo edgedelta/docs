@@ -28,7 +28,7 @@ Please contact [support@edgedelta.com](mailto:support@edgedelta.com) to obtain t
 
 Additionally, outputs to 3rd party or on-premise systems also require outbound network access. When you configure the agent, verify that the **endpoint** of the configured output is also accessible by the agent through the network. Outputs instruct the agent where to send collected and generated data, such as metrics, patterns, and alerts.
 
-  * To learn more, see [Outputs](../configuration/outputs.md).
+  * To learn more, see [Outputs](./configuration/outputs.md).
 
 ***
 
@@ -92,7 +92,7 @@ There are 2 ways to verify agent deployment:
 
 After you create an account and install the agent, you can configure your account.
 
-To learn more, see [Configuration](,,configuration/index.md).
+To learn more, see [Configuration](configuration/index.md).
 
 ***
 
@@ -106,6 +106,6 @@ If you experience any of the following issues:
 * No background service is running on target host
 * No data is being reported to streaming destination
 
-Then review the appropriate [Installation](./installation/README.md) document, specifically the **Troubleshooting**  section.
+Then review the appropriate [Installation](installation/index.md) document, specifically the **Troubleshooting**  section.
 
 ***
