@@ -92,7 +92,7 @@ There are 2 ways to verify agent deployment:
 
 After you create an account and install the agent, you can configure your account.
 
-To learn more, see [Configuration](.configuration/index.md).
+To learn more, see [Configuration](..configuration/index.md).
 
 ***
 
@@ -106,6 +106,6 @@ If you experience any of the following issues:
 * No background service is running on target host
 * No data is being reported to streaming destination
 
-Then review the appropriate [Installation](./installation/README.md) document, specifically the **Troubleshooting**  section.
+Then review the appropriate [Installation](../installation/README.md) document, specifically the **Troubleshooting**  section.
 
 ***
