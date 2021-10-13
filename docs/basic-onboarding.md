@@ -4,69 +4,108 @@ description: >-
   and deployment of the Edge Delta service.
 ---
 
-# Basic Onboarding
+# Overview
 
-## Create An Edge Delta Account
+You can use this document to learn how to:
 
-1. Navigate to [admin.edgedelta.com](https://admin.edgedelta.com/)
-2. At the bottom of the Sign-In dialog, hit the _**Sign up**_ button to start the process
-3. Once you have completed all of the steps for signing up, your account will automatically be created
+  * Create an Edge Delta account
+  * Download the agent
+  * Create an integration for an existing streaming data service
 
-## Follow The Onboarding Setup Wizard
 
-After initial deployment, the onboarding wizard can be accessed via [admin.edgedelta.com/onboarding](https://admin.edgedelta.com/onboarding)
+>  **Before you begin:**
+> To use this document, you must have relevant account information for your existing streaming data service. For example, to create an integration with AWS S3, you must have the AWS Key and AWS Secret Key.
 
-**1.\) Select an Operating System or Architecture Type for Deployment**
+***
 
-![](./assets/screen-shot-2021-01-26-at-2.13.18-pm.png)
+## Step 1: Obtain Network Requirements
 
-**2.\) Copy Pre-configured Deploy Command\(s\) and Run In Appropriate Terminal**
+To successfully integrate with Edge Delta, you must update network policies for outgoing access.
 
-![](./assets/screen_shot_2021-01-26_at_2_14_48_pm%20%281%29.jpg)
+While the Edge Delta Agent can be deployed in restricted network environments where outgoing network traffic to the internet is strictly moderated, you must update network policies to enable outgoing access to these destinations and to bypass HTTP/HTTPS proxies.
 
-**3.\) Wait a few seconds for agent\(s\) to deploy and authenticate with the Edge Delta Backend, and navigate to the Status Page to get started!**
+Please contact [support@edgedelta.com](mailto:support@edgedelta.com) to obtain the list of destination addresses for your account for outbound network access.
 
-![](./assets/screen-shot-2021-01-26-at-2.22.57-pm.png)
+Additionally, outputs to 3rd party or on-premise systems also require outbound network access. When you configure the agent, verify that the **endpoint** of the configured output is also accessible by the agent through the network. Outputs instruct the agent where to send collected and generated data, such as metrics, patterns, and alerts.
 
-## Deploy From Existing Configuration
+  * To learn more, see [Outputs](../configuration/outputs.md).
 
-1. Navigate to the [Configurations](https://admin.edgedelta.com/configurations) view of the Edge Delta service
-2. Identify the appropriate configuration you would like to use for deployment, or create a new configuration
-3. Hit the **Deploy** button on the right-hand side of the configuration
+***
 
-![](./assets/screen_shot_2021-01-26_at_2_24_55_pm.jpg)
+## Step 2: Access Edge Delta
 
-1. **Copy** the appropriate deployment command \(based on the OS of the server Edge Delta will be deployed\)
+1. Navigate to [admin.edgedelta.com](https://admin.edgedelta.com/), and then click **Sign up**.
+2. Complete the missing fields, and then click **Register**. You will be redirected to the **Welcome to Edge Delta** screen in the Edge Delta app.
 
-![](./assets/screen_shot_2021-01-26_at_2_27_36_pm%20%281%29.jpg)
+***
 
-1. Run the deployment command on the target server or cluster to deploy Edge Delta
-   1. Docker, Linux, and MacOS: paste and run the command in the terminal 
-   2. Windows: Open Powershell, paste and run the command
-2. Congrats! You have now deployed your first Edge Delta agent\(s\)
+## Step 3: Deploy the agent to an existing integration
 
-## Verify Successful Deployment
+1. In the Edge Delta app, select your operating platform.
+2. In **Enter Environment Tag**, enter a descriptive tag to explain where the agent will be deployed.
+3. Click **Continue**.
+4. Select an integration type to flow data into Edge Delta.
+5. Complete the missing fields, and then click **Continue**.
+6. Copy the pre-populated agent command.
+7. Open a terminal or command line prompt, then paste and run the command.  
+8. In the Edge Delta app, click **I Ran Deploy Commands**.
+9. The agent will take a few minutes to deploy and authenticate with Edge Delta.
+10. After a successful deployment, click **Go To Status Page**.
+11. In the window that appears, you can click **Go To Demo Environment** to see a pre-populated account where you can view and test data.
+<ul>
+<li>To view your own account, click X to close the window.</li>
+<li>If you access the demo environment, but you want to access your own account, in the top, click Return To Your Own Account.</li>
+</ul>
 
-**Within Edge Delta**
+***
 
-1. Navigate to [admin.edgedelta.com](https://admin.edgedelta.com/), and log back in if needed
-2. Click the Home tab at the top of the UI
-3. After a successful deployment, the Agents Deployed panel should display a value of one, and the Host Name of the deployment server, as well as other statistics should be displayed in the Agents section of the dashboard. The Bytes analyzed and Events analyzed values will most likely read non-zero values as well, however these could continue to remain empty depending on your configuration settings. 
+## Step 4: Verify Agent Deployment
 
-**Within Configured Streaming Destination**
+There are 2 ways to verify agent deployment:
 
-1. Log in to the configured Streaming Destination \(Output\) platform \(i.e. Splunk, Sumo Logic, Datadog, New Relic, etc.\)
-2. Once logged into the appropriate platform, identify the appropriate source metadata to query for incoming Edge Delta data \(this source should match the source configuration details provided in the configuration file \(i.e. HTTPs Endpoint, HEC endpoint, API URL, etc.\)
-3. Query the source that is configured to receive incoming Edge Delta data
+  * In the Edge Delta app
+  * In the existing streaming data service
+
+***
+
+### Option 1: Verify Agent Deployment in the Edge Delta app  
+
+1. In the Edge Delta app, on the left-side navigation, under **Data Pipeline**, click **Pipeline Status**.
+2. Review the **Active Nodes** section.
+3. If the agent was successfully installed, then there will be at least 1 active node.
+
+>  **Note:**
+> After an initial agent deployment, the app may only display non-zero values.
+
+***
+
+### Option 2: Verify Agent Deployment in the Streaming Data Service  
+
+1. Log in to the configured streaming destination \(Output\) platform, such as Splunk, Sumo Logic, Datadog, New Relic, etc.
+2. Identify the appropriate source metadata to query for incoming Edge Delta data. This source should match the source configuration details provided in the configuration file, such as HTTPs Endpoint, HEC endpoint, API URL, etc.
+3. Query the source that is configured to receive incoming Edge Delta data.
 4. Review query results. Incoming data should contain metadata tags that match the labels and tags defined in the configuration file
 
-## Troubleshooting
+***
 
-**Detecting An Issue Occurred With Deployment**
+## Next Steps
+
+After you create an account and install the agent, you can configure your account.
+
+To learn more, see [Configuration](,,configuration/index.md).
+
+***
+
+
+## Troubleshoot Agent Deployment
+
+If you experience any of the following issues:
 
 * Run command in terminal failed with output message
 * No agent appeared in the Edge Delta UI
 * No background service is running on target host
 * No data is being reported to streaming destination
 
-If any issues appear after deploying the agent, view troubleshooting section for given OS of agent deployment \(see [Installation](./installation/README.md) documentation, select appropriate OS, and navigate to _**Troubleshooting**_ section of documentation\)
+Then review the appropriate [Installation](./installation/README.md) document, specifically the **Troubleshooting**  section.
+
+***
