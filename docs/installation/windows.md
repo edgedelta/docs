@@ -73,7 +73,7 @@ start /wait msiexec /qn /i edgedelta-version_64bit.msi APIKEY="<YOUR_API_KEY>"
 
 > 3. In the window that appears, select **Windows**, and then copy the command.
 
-> 4. In a command prompt, run the command on the host where you want to deploy Edge Delta, and then download and installation process will begin.
+> 4. In a command prompt, run the command on the host where you want to deploy Edge Delta, and then the download and installation process will begin.
 
 ***
 
