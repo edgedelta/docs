@@ -13,12 +13,15 @@ You can use this document to learn how to:
   * Create an integration for an existing streaming data service
 
 
->  **Before you begin:**
+>  **Before you begin**
 > To use this document, you must have relevant account information for your existing streaming data service. For example, to create an integration with AWS S3, you must have the AWS Key and AWS Secret Key.
 
 ***
 
 ## Step 1: Obtain Network Requirements
+
+>  **Note**
+> This step only applies to users with outbound network restrictions on their firewall. If your firewall does not have any outbound network restrictions, then you can skip to Step 2.
 
 To successfully integrate with Edge Delta, you must update network policies for outgoing access.
 
@@ -35,20 +38,20 @@ Additionally, outputs to 3rd party or on-premise systems also require outbound n
 ## Step 2: Access Edge Delta
 
 1. Navigate to [admin.edgedelta.com](https://admin.edgedelta.com/), and then click **Sign up**.
-2. Complete the missing fields, and then click **Register**. You will be redirected to the **Welcome to Edge Delta** screen in the Edge Delta app.
+2. Complete the missing fields, and then click **Register**. You will be redirected to the **Welcome to Edge Delta** screen in the Edge Delta App.
 
 ***
 
 ## Step 3: Deploy the agent to an existing integration
 
-1. In the Edge Delta app, select your operating platform.
+1. In the Edge Delta App, select your operating platform.
 2. In **Enter Environment Tag**, enter a descriptive tag to explain where the agent will be deployed.
 3. Click **Continue**.
 4. Select an integration type to flow data into Edge Delta.
 5. Complete the missing fields, and then click **Continue**.
 6. Copy the pre-populated agent command.
 7. Open a terminal or command line prompt, then paste and run the command.  
-8. In the Edge Delta app, click **I Ran Deploy Commands**.
+8. In the Edge Delta App, click **I Ran Deploy Commands**.
 9. The agent will take a few minutes to deploy and authenticate with Edge Delta.
 10. After a successful deployment, click **Go To Status Page**.
 11. In the window that appears, you can click **Go To Demo Environment** to see a pre-populated account where you can view and test data.
@@ -63,14 +66,14 @@ Additionally, outputs to 3rd party or on-premise systems also require outbound n
 
 There are 2 ways to verify agent deployment:
 
-  * In the Edge Delta app
+  * In the Edge Delta App
   * In the existing streaming data service
 
 ***
 
-### Option 1: Verify Agent Deployment in the Edge Delta app  
+### Option 1: Verify Agent Deployment in the Edge Delta App  
 
-1. In the Edge Delta app, on the left-side navigation, under **Data Pipeline**, click **Pipeline Status**.
+1. In the Edge Delta App, on the left-side navigation, under **Data Pipeline**, click **Pipeline Status**.
 2. Review the **Active Nodes** section.
 3. If the agent was successfully installed, then there will be at least 1 active node.
 
