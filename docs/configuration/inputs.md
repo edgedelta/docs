@@ -24,6 +24,7 @@ There are a number of different input types supported by the Edge Delta service.
 * [Kubernetes](./inputs.md#kubernetes)
 * [AWS ECS](./inputs.md#aws-ecs)
 * [AWS S3](./inputs.md#aws-s3)
+* [AWS Cloudwatch Log Events](./inputs.md#aws-cloudwatch-log-events)
 * [Kafka](./inputs.md#kafka)
 * [Execs \(Scripted Input\)](./inputs.md#execs-scripted-input)
 * [Kubernetes Events](./inputs.md#kubernetes-events)
@@ -236,6 +237,42 @@ Details around how to configure S3, SQS and IAM user for this input type can be 
       access_key_id: ""
       access_secret: ""
       region: "us-west-2" # region where the bucket and sqs queue located
+```
+
+## AWS Cloudwatch Log Events
+
+If enabled, the Cloudwatch Input allows you to specify a set of AWS cloudwatch log events to be monitored by the Edge Delta service.
+
+Cloudwatch input component is very flexible for configuration. You can monitor many regions and many log streams at a time.
+
+- Region: You can define region pattern via regex expression. e.g: all regions in US just use ```region: "^us.*$"```
+  If you want to monitor log events for all regions you don't need to provide or giving all matches pattern ".*"..
+- Log Group: Log Group Name that is defined on cloudwatch.
+- Log Stream: You can define log streams pattern via regex expression. e.g: streams start with log ```log_stream: ^log.*$""```
+  If you want to monitor all log events for all regions you don't need to provide or giving all matches pattern ".*".
+
+**Note:** If you want to monitor cloudwatch event logs for all regions then ED Agent tries to retrieve all enabled regions from AWS.
+For this operation you need to give "ec2:DescribeRegions" to the account which you are using. Please see DescribeRegions [doc](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html) in AWS API doc.
+
+```yaml
+ cloudwatches:
+    - labels: "us-west-2_ed-log-group_admin-api"
+      # region supports regex, below is for all regions in us.
+      # if not defined then it means look all regions.
+      region: "^us.*$"
+      # you should provide log group name literally, it does not support regex.
+      log_group: /ed-log-group
+      # log_stream supports regex expression and if it is not provided means get all log streams.
+      log_stream: "^log.*$"
+      # lookback is used for how long ago to monitor log events. Default is 1 hour.
+      lookback: 1h
+      # interval is used for polling frequency to look new coming log events. Default is 1 minute.
+      interval: 1m
+      # prepend_timestamp is used to add event timestamp as a prefix of event message with a tab("\t") delimiter.
+      prepend_timestamp: true
+      # The maximum number of log events returned.
+      # Default the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.
+      result_limit: 5000
 ```
 
 ## Kafka
