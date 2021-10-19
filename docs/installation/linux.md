@@ -6,31 +6,50 @@ description: >-
 
 # Linux
 
-Edge Delta provides a convenient, self-extracting installation package that supports common Linux distributions, such as Ubuntu, Debian, CentOS, RHEL.
+## Overview
 
-## Download
+You can use this document to learn how to install the Edge Delta Agent for your Linux-based operating system.
 
-Go to [admin.edgedelta.com](https://admin.edgedelta.com) \(or contact the Edge Delta team at [info@edgedelta.com](mailto:info@edgedelta.com)\) to create an account and get access to the agent deployment portal.
+> **Note**
+>
+> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
 
-## Installation
+***
 
-_**Note**: The following steps below can be automated by selecting the 'Deploy' button on the right-hand side of a given configuration in the Edge Delta Admin Portal. After hitting the 'Deploy' button, a dialog box will appear with a pre-configured Linux command containing the appropriate API Key for deployment. Simply run that command on the host you want to deploy Edge Delta on, and the installation / deployment process will begin._
+## Step 1: Obtain Your Endpoint URL
 
-Replace the &lt;YOUR\_API\_KEY&gt; field from the command below with your configuration API Key from the administration portal:
+1. Contact [info@edgedelta.com](mailto:info@edgedelta.com) to obtain your installation endpoint URL. You will need this URL in a later step.
 
-![](../assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
+***
 
-Replace the &lt;DOWNLOAD\_URL&gt; field from the command below with the installation endpoint URL you received from the Edge Delta team.
+## Step 2: Obtain Your API Key
+
+1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+2. In **Configurations**, locate the **Linux** tag, and then copy the corresponding key. You will need this key in a later step.
+
+***
+
+## Step 3: Download the Agent 
+
+1. Visit [release.edgedelta.com](https://release.edgedelta.com/), and then select the appropriate package.
+
+***
+
+## Step 4: Install the Agent 
+
+1. In the following command, replace &lt;YOUR\_API\_KEY&gt; with the key you copied earlier. Additionally, replace &lt;DOWNLOAD\_URL&gt; with the installation endpoint URL you received from Edge Delta. 
 
 ```text
 sudo ED_API_KEY=<YOUR_API_KEY> bash -c "$(curl -L <DOWNLOAD_URL>/install.sh)"
 ```
 
-The installation process may prompt for the sudo password if you are not running as root.
+2. If you are not running as **root**, then you may be asked to enter the sudo password. 
 
-The installation process deploys Edge Delta into the path`/opt/edgedelta/agent/` and system service `edgedelta` starts automatically with default configuration.
+3. The installation process will deploy Edge Delta into the `/opt/edgedelta/agent/` path. Additionally, the `edgedelta` system service will start automatically with default configurations.
 
-ED\_ENV\_VARS special variable is used as part of the installation command to pass one or more persistent environment variables to the agent which will run as the system service.
+> **Note**
+> 
+> The ED\_ENV\_VARS special variable is used in the installation command to pass one or more persistent environment variables to the agent, which will run as the system service.
 
 ```bash
 sudo ED_API_KEY=<your api key> \
@@ -38,44 +57,68 @@ ED_ENV_VARS="MY_VAR1=MY_VALUE_1,MY_VAR2=MY_VALUE_2" \
 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 ```
 
-See [Environment Variables](environment-variables.md) page for full list of variables supported by agent.
+> **Note**
+>
+> To view a full list of varaibles supported the agent, see [Environment Variables](environment-variables.md). 
 
-## Troubleshooting
 
-* Check the agent's service status using one of the following commands depending on your Linux.
 
-  Systems with systemd\(most distributions\):
+> **Note**
+>
+> As another option, you can automate the installation process.
+>
+> To automate:
+>
+> 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+>
+> 2. In the list of configurations, locate the **Windows** tag, and then click the corresponding deploy icon (green rocket).
+>
+> 3. In the window that appears, select **Windows**, and then copy the command.
+>
+> 4. In a command prompt, run the command on the host where you want to deploy Edge Delta, and then the download and installation process will begin.
+
+***
+
+## Troubleshoot the Agent
+
+To check the status of the agent, run one of the following commands: 
+
+  * For systems with systemd\(most distributions\), run:
 
   ```text
   sudo systemctl status edgedelta
   ```
 
-  Older systems with init:
+  * For older systems with init, run:
 
   ```text
   sudo /etc/init.d/edgedelta status
   ```
 
-  Some older versions of Ubuntu:
+  * For certain older versions of Ubuntu, run:
 
   ```text
   sudo service edgedelta status
   ```
 
-* Check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings.
+To check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings, run the following command:
 
   ```text
   cat /opt/edgedelta/agent/edgedelta.log
   ```
 
-* Check the agent's configuration file to ensure the configuration doesn't contain issues.
+To check the agent's configuration file to ensure that the configuration does not contain any issues, run the following command:
 
   ```text
   cat /opt/edgedelta/agent/config.yml
   ```
 
-## Uninstallation
+## Uninstall the Agent
+
+To uninstall the agent, run the following command: 
 
 ```text
 sudo bash -c "$(curl -L https://release.edgedelta.com/uninstall.sh)"
 ```
+
+***
