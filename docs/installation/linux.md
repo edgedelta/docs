@@ -11,7 +11,7 @@ description: >-
 You can use this document to learn how to install the Edge Delta Agent for your Linux-based operating system.
 
 > **Note**
-
+>
 > This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
 
 ***
@@ -19,6 +19,8 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 ## Step 1: Obtain Your Endpoint URL
 
 1. Contact [info@edgedelta.com](mailto:info@edgedelta.com) to obtain your installation endpoint URL. You will need this URL in a later step.
+
+***
 
 ## Step 2: Obtain Your API Key
 
