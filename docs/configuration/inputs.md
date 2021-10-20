@@ -239,9 +239,9 @@ Details around how to configure S3, SQS and IAM user for this input type can be 
       region: "us-west-2" # region where the bucket and sqs queue located
 ```
 
-## AWS CloudWatch Events Logs
+## AWS CloudWatch Log Events 
 
-You can use the AWS CloudWatch input to specify a set of AWS CloudWatch Events logs that Edge Delta will monitor.  
+You can use the AWS CloudWatch input to specify a set of AWS CloudWatch Log Events that Edge Delta will monitor.  
 
 With the AWS CloudWatch input, you can monitor multiple regions and log streams. 
 
@@ -258,7 +258,7 @@ Review the following parameters that you can use to define your input:
 
 > **Note**
 > 
-> By default, an AWS account is not enabled with all regions. As a result, you can monitor AWS CloudWatch Events logs for all regions without defining a region in the config file; the Edge Delta Agent will obtain and monitor logs from all enabled regions in your account. To accomplish this, you must add "ec2:DescribeRegions" to your account. 
+> By default, an AWS account is not enabled with all regions. As a result, you can monitor AWS CloudWatch Log Events for all regions without defining a region in the config file; the Edge Delta Agent will obtain and monitor logs from all enabled regions in your account. To accomplish this, you must add "ec2:DescribeRegions" to your account. 
 > 
 > To learn more, please review the AWS document about [DescribeRegions](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html).
 
