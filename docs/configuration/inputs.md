@@ -24,6 +24,7 @@ There are a number of different input types supported by the Edge Delta service.
 * [Kubernetes](./inputs.md#kubernetes)
 * [AWS ECS](./inputs.md#aws-ecs)
 * [AWS S3](./inputs.md#aws-s3)
+* [AWS Cloudwatch Log Events](./inputs.md#aws-cloudwatch-log-events)
 * [Kafka](./inputs.md#kafka)
 * [Execs \(Scripted Input\)](./inputs.md#execs-scripted-input)
 * [Kubernetes Events](./inputs.md#kubernetes-events)
@@ -236,6 +237,52 @@ Details around how to configure S3, SQS and IAM user for this input type can be 
       access_key_id: ""
       access_secret: ""
       region: "us-west-2" # region where the bucket and sqs queue located
+```
+
+## AWS CloudWatch Log Events 
+
+You can use the AWS CloudWatch input to specify a set of AWS CloudWatch Log Events that Edge Delta will monitor.  
+
+With the AWS CloudWatch input, you can monitor multiple regions and log streams. 
+
+Review the following parameters that you can use to define your input:  
+
+- Region (Optional)
+    - You can define a region pattern via regex expression. For example, for all regions in United States, use: ```region: "^us.*$"```
+    - To monitor log events for all regions, you do not need to provide or give an all-matches pattern ".*".
+- Log Group
+    - You must enter the Log Group name that is associated with the CloudWatch Logs agent.
+- Log Stream (Optional)
+    - You can define log streams pattern via regex expression. For example, for streams that start with log, use ```log_stream: ^log.*$""```
+    - To monitor all log events for all regions, you do not need provide or give an all-matches pattern ".*".
+
+> **Note**
+> 
+> By default, an AWS account is not enabled with all regions. As a result, you can monitor AWS CloudWatch Log Events for all regions without defining a region in the config file; the Edge Delta Agent will obtain and monitor logs from all enabled regions in your account. To accomplish this, you must add "ec2:DescribeRegions" to your account. 
+> 
+> To learn more, please review the AWS document about [DescribeRegions](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html).
+
+Review the following sample script to better understand how to define your input:
+
+```yaml
+ cloudwatches:
+    - labels: "us-west-2_ed-log-group_admin-api"
+      # region supports regex, below is for all regions in us.
+      # if not defined then it means look all regions.
+      region: "^us.*$"
+      # you should provide log group name literally, it does not support regex.
+      log_group: /ed-log-group
+      # log_stream supports regex expression and if it is not provided means get all log streams.
+      log_stream: "^log.*$"
+      # lookback is used for how long ago to monitor log events. Default is 1 hour.
+      lookback: 1h
+      # interval is used for polling frequency to look new coming log events. Default is 1 minute.
+      interval: 1m
+      # prepend_timestamp is used to add event timestamp as a prefix of event message with a tab("\t") delimiter.
+      prepend_timestamp: true
+      # The maximum number of log events returned.
+      # Default the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.
+      result_limit: 5000
 ```
 
 ## Kafka
