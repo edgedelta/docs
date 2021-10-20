@@ -6,29 +6,52 @@ description: >-
 
 # MacOS
 
-Edge Delta provides a convenient self extracting installer package for MacOS.
+## Overview
 
-## Download
+You can use this document to learn how to install the Edge Delta Agent for your Mac-based operating system.
 
-Go to [admin.edgedelta.com](https://admin.edgedelta.com) \(or contact the Edge Delta team at [info@edgedelta.com](mailto:info@edgedelta.com)\) to create an account and get access to the agent deployment portal.
+> **Note**
+>
+> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
 
-## Installation
+***
 
-Replace the &lt;YOUR\_API\_KEY&gt; field from the command below with your configuration API Key from the administration portal:
+## Step 1: Obtain Your Endpoint URL
 
-![](../assets/screen-shot-2020-03-31-at-1.16.15-pm.png)
+1. Contact [info@edgedelta.com](mailto:info@edgedelta.com) to obtain your installation endpoint URL. You will need this URL in a later step.
 
-Replace the &lt;DOWNLOAD\_URL&gt; field from the command below with the installation endpoint URL you received from the Edge Delta team.
+***
+
+## Step 2: Obtain Your API Key
+
+1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+2. In **Configurations**, locate the **Linux** tag, and then copy the corresponding key. You will need this key in a later step.
+
+***
+
+## Step 3: Download the Agent 
+
+1. Visit [release.edgedelta.com](https://release.edgedelta.com/), and then select the appropriate package.
+
+***
+
+
+## Step 4: Install the Agent 
+
+1. In the following command, replace &lt;YOUR\_API\_KEY&gt; with the key you copied earlier. Additionally, replace &lt;DOWNLOAD\_URL&gt; with the installation endpoint URL you received from Edge Delta. 
 
 ```text
 sudo ED_API_KEY=<YOUR_API_KEY> bash -c "$(curl -L <DOWNLOAD_URL>/install.sh)"
 ```
 
-The installation process may prompt for the sudo password if you are not running as root.
+2. If you are not running as **root**, then you may be asked to enter the sudo password. 
 
-The installation process deploys Edge Delta into the path`/opt/edgedelta/agent/` and system service `edgedelta` starts automatically with default configuration.
+3. The installation process will deploy Edge Delta into the `/opt/edgedelta/agent/` path. Additionally, the `edgedelta` system service will start automatically with default configurations.
 
-ED\_ENV\_VARS special variable is used as part of the installation command to pass one or more persistent environment variables to the agent which will run as the system service.
+> **Note**
+> 
+> The ED\_ENV\_VARS special variable is used in the installation command to pass one or more persistent environment variables to the agent, which will run as the system service.
+
 
 ```bash
 sudo ED_API_KEY=<your api key> \
@@ -36,35 +59,33 @@ ED_ENV_VARS="MY_VAR1=MY_VALUE_1,MY_VAR2=MY_VALUE_2" \
 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 ```
 
-## Troubleshooting
+## Troubleshoot the Agent
 
-Check the service status using the following command
+To check the status of the agent, run the following command: 
 
 ```text
 sudo su
 launchctl list edgedelta
 ```
 
-Check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings.
-
-Edge Delta's Service Log file path: `/opt/edgedelta/agent/edgedelta.log`
+To check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings, run the following command on the Edge Delta service log file path:
 
 ```text
 cat /opt/edgedelta/agent/edgedelta.log
 ```
 
-Check the agent's configuration file to ensure the configuration doesn't contain issues.
-
-Configuration File path: `/opt/edgedelta/agent/config.yml`
+To check the agent's configuration file to ensure the configuration does not contain any issue, run the following command on the configuration file path: 
 
 ```text
 cat /opt/edgedelta/agent/config.yml
 ```
 
-## Uninstallation
+## Uninstall the Agent
 
-Make sure to run uninstallation process as root.
+To uninstall the agent, run the following command as the **root** user:
 
 ```text
 sudo bash -c "$(curl -L https://release.edgedelta.com/uninstall.sh)"
 ```
+
+***
