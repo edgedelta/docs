@@ -41,12 +41,12 @@ kubectl create secret generic ed-api-key \
 
 3. Based on your needs, choose an agent manifest:
 
-| Manifest | Description |
+| Manifest | Description | URL to use in command |
 | :---     | :---        |
-| [Default](https://edgedelta.github.io/k8s/edgedelta-agent.yml) | Default Agent DaemonSet. |
-| [Persisting cursor](https://edgedelta.github.io/k8s/edgedelta-agent-persisting-cursor.yml) | Agent DaemonSet with mounted host volumes to track file cursor positions persistently. |
-| [Metric exporter](https://edgedelta.github.io/k8s/edgedelta-prom-agent.yml) | Agent DaemonSet exposing port 6062 /metrics endpoint in Prometheus format. See [Prometheus Scraping](../appendices/prometheus-scraping.md) |
-| [On premise](https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml) | Agent DaemonSet for locally managed or offline deployments. |
+| [Default](https://edgedelta.github.io/k8s/edgedelta-agent.yml) | Default Agent DaemonSet. | https://edgedelta.github.io/k8s/edgedelta-agent.yml |
+| [Persisting cursor](https://edgedelta.github.io/k8s/edgedelta-agent-persisting-cursor.yml) | Agent DaemonSet with mounted host volumes to track file cursor positions persistently. | https://edgedelta.github.io/k8s/edgedelta-agent-persisting-cursor.yml |
+| [Metric exporter](https://edgedelta.github.io/k8s/edgedelta-prom-agent.yml) | Agent DaemonSet exposing port 6062 /metrics endpoint in Prometheus format. See [Prometheus Scraping](../appendices/prometheus-scraping.md) | https://edgedelta.github.io/k8s/edgedelta-prom-agent.yml |
+| [On premise](https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml) | Agent DaemonSet for locally managed or offline deployments. | https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml |
 
 
 4. Based on the selected manifest, create the DaemonSet with the manifest link:
@@ -71,6 +71,10 @@ kubectl get pods --namespace=edgedelta
 ```text
 kubectl logs <pod_name> -n edgedelta
 ```
+
+> **Note**
+>
+> For SELinux and Openshift users, please review the section.
 
 ***
 
@@ -101,7 +105,7 @@ spec:
 
 ***
 
-### Special Considerations for SELinux and Openshift Users
+## Special Considerations for SELinux and Openshift Users
 
 If you are running a SELinux-enforced Kubernetes cluster, then you need to add the following securityContext configuration into edgedelta-agent.yml manifest DaemonSet spec. This update will run agent pods in privileged mode to allow the collection of logs of other pods.
 
@@ -120,7 +124,7 @@ oc patch namespace edgedelta -p \
 
 ***
 
-### Output to cluster services in other namespaces
+## Output to cluster services in other namespaces
 
 Edge Delta pods run in dedicated edgedelta namespace. 
 
