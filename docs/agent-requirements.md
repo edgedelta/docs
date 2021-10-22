@@ -5,7 +5,7 @@ description: >-
 
 ## Overview
 
-Before you install the Edge Delta Agent, review the following software and hardware requirements.
+You can use this document to review software and hardware requirements before you install the Edge Delta Agent. 
 
 ***
 
@@ -14,7 +14,7 @@ Before you install the Edge Delta Agent, review the following software and hardw
 | Operating system | Architecture    | Distributions                                                                                                        |
 |------------------|-----------------|----------------------------------------------------------------------------------------------------------------------|
 | Windows          | x86_64 <p>x86   | Windows Server 2019 <p>Windows 10                                                                                    |
-| Linux            | arm64 <p>x86_64 | Amazon Linux 2<p>Centos 8<p>Centos 7<p>Debian 10 (Buster)<p>Debian 9 (Stretch)<p>Nixos<p>Ubuntu<p>Raspbian    |
+| Linux            | arm64 <p>x86_64 | Amazon Linux 2<p>Centos 8<p>Centos 7<p>Debian 10 (Buster)<p>Debian 9 (Stretch)<p>Nixos<p>Ubuntu<p>Raspbian           |
 | Darwin           | arm64 <p>x86_64 | Not applicable                                                                                                       |
 
 ***
@@ -39,6 +39,7 @@ The Edge Delta Admin portal supports the current version of the following browse
 > 
 > There are reported compatibility issues with Safari. 
 
+  
 > **Note**
 > 
 > Edge Delta does not recommend that you use a mobile device to access the Edge Delta Admin portal.
