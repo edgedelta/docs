@@ -8,6 +8,7 @@ extra_css:
   - stylesheets/style.css
 nav:
   - Edge Delta Overview: index.md
+  - Pre-Installation Agent Requirements: agent-requirements.md
   - Basic Onboarding: basic-onboarding.md
   - Architecture Overview - K8s: architecture-overview-k8s.md
   - Installation:
