@@ -74,7 +74,7 @@ kubectl logs <pod_name> -n edgedelta
 
 > **Note**
 >
-> For SELinux and Openshift users, see .
+> For SELinux and Openshift users, see (Special Considerations for SELinux and Openshift Users)[special-considerations-for-selinux-and-openshift-users].
 
 ***
 
@@ -105,7 +105,7 @@ spec:
 
 ***
 
-## <a name="openshift"></a>Special Considerations for SELinux and Openshift Users
+## Special Considerations for SELinux and Openshift Users
 
 If you are running a SELinux-enforced Kubernetes cluster, then you need to add the following securityContext configuration into edgedelta-agent.yml manifest DaemonSet spec. This update will run agent pods in privileged mode to allow the collection of logs of other pods.
 
