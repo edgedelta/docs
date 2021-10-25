@@ -30,7 +30,7 @@ You can use this document to learn how to set up an Okta SAML integration with E
   - For **Name ID format**, select **EmailAddress**.
   - For **Application username**, select **Email**. 
   - For **Update application username on**, select **Create and update**.
-  - For **Encryption Certificate**, navigate to **https://api.edgedelta.com/saml/metadata**, and then in the downloaded file, copy and paste the text within <X509Certificate></X509Certificate>
+  - For **Encryption Certificate**, navigate to **https://api.edgedelta.com/saml/metadata**, and then in the downloaded file, copy and paste the text within the **X509Certificate** and **/X509Certificate** brackets. 
 7. Click **Next**. 
 8. Select **I'm an Okta customer adding an internal app**.
 9. Mark **This is an internal app that we have created**.
