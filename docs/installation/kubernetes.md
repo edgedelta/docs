@@ -39,7 +39,7 @@ kubectl create secret generic ed-api-key \
     --from-literal=ed-api-key="(log in to view API tokens)"
 ```
 
-3. Based on your needs, choose an agent manifest:
+3. Based on your needs, select the appropriate agent manifest:
 
 | Manifest          | Description                                                                                                                                                | URL to use in command                                                 |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
