@@ -74,7 +74,7 @@ kubectl logs <pod_name> -n edgedelta
 
 > **Note**
 >
-> For SELinux and Openshift users, see (Special Considerations for SELinux and Openshift Users)[special-considerations-for-selinux-and-openshift-users].
+> For SELinux and Openshift users, see [Special Considerations for SELinux and Openshift Users](special-considerations-for-selinux-and-openshift-users).
 
 ***
 
