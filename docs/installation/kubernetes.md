@@ -7,19 +7,31 @@ description: >-
 
 # Kubernetes
 
-Edge Delta agent is a daemon that analyzes logs and container metrics from a Kubernetes cluster and stream analytics to configured streaming destinations. This page streamlined instructions to get you up and running in the Kubernetes environment.
+## Overview
 
-Edge Delta uses Kubernetes recommended node level logging architecture, in other words DaemonSet architecture. The DaemonSet runs Edge Delta agent pod on each node. Each Agent pod analyzes logs from all other pods running on the same node.
+You can use this document to learn how to install the Edge Delta Agent as a DaemonSet on your Kubernetes cluster.
 
-## Installation
+The agent is a daemon that analyzes logs and container metrics from a Kubernetes cluster, and then streams analytics to configured streaming destinations.
 
-Create kubernetes namespace
+Edge Delta uses a Kubernetes-recommended, node-level logging architecture, also known as a DaemonSet architecture. The DaemonSet runs the agent pod on each node. Each agent pod analyzes logs from all other pods running on the same node.
+
+
+> **Note**
+>
+> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
+
+***
+
+
+## Step 1: Install the Agent 
+
+1. Create a Kubernetes namespace:
 
 ```text
 kubectl create namespace edgedelta
 ```
 
-Create a kube secret that contains your api token.
+2. Create a kube secret that contains your API token.
 
 ```text
 kubectl create secret generic ed-api-key \
@@ -27,45 +39,58 @@ kubectl create secret generic ed-api-key \
     --from-literal=ed-api-key="(log in to view API tokens)"
 ```
 
-Choose an agent manifest according to your use case:
+3. Review the available agent manifest:
 
-| Manifest | Description |
-| :---     | :---        |
-| [Default](https://edgedelta.github.io/k8s/edgedelta-agent.yml) | Default Agent DaemonSet. |
-| [Persisting cursor](https://edgedelta.github.io/k8s/edgedelta-agent-persisting-cursor.yml) | Agent DaemonSet with mounted host volumes to track file cursor positions persistently. |
-| [Metric exporter](https://edgedelta.github.io/k8s/edgedelta-prom-agent.yml) | Agent DaemonSet exposing port 6062 /metrics endpoint in Prometheus format. See [Prometheus Scraping](../appendices/prometheus-scraping.md) |
-| [On premise](https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml) | Agent DaemonSet for locally managed or offline deployments. |
+| Manifest          | Description                                                                                                                                                                          | URL to use in command                                                 |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| Default           | This manifest is the default agent DaemonSet.                                                                                                                                        | https://edgedelta.github.io/k8s/edgedelta-agent.yml                   |
+| Persisting cursor | This manifest is the agent DaemonSet with mounted host volumes to track file cursor positions persistently.                                                                          | https://edgedelta.github.io/k8s/edgedelta-agent-persisting-cursor.yml |
+| Metric exporter   | This manifest is the agent DaemonSet that exposes port 6062 (metrics endpoint) in Prometheus format. To learn more, see [Prometheus Scraping](../appendices/prometheus-scraping.md). | https://edgedelta.github.io/k8s/edgedelta-prom-agent.yml              |
+| On premise        | This manifest is the agent DaemonSet for locally managed or offline deployments.                                                                                                     | https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml            |
 
-Create the DaemonSet using chosen manifest link
+
+4. Based on the desired manifest, create the DaemonSet with the corresponding manifest URL:
+
 ```text
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 ```
 
-To provide additional environment variables download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml) as described in [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) in Kubernetes with yaml section.
+> **Note**
+>
+> For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**. 
 
-Checking status of Edge Delta container
+
+5. Review the status of the Edge Delta container:
 
 ```text
 kubectl get pods --namespace=edgedelta
 ```
 
-Once you have the name of the pod running the Edge Delta Agent, run below command to see Edge Delta agent logs;
+6. When the name of the pod is running the agent, run the following command to see the agent logs:
 
 ```text
 kubectl logs <pod_name> -n edgedelta
 ```
 
-## Useful Tips
+> **Note**
+>
+> For SELinux and Openshift users, see [Special Considerations for SELinux and Openshift Users](#special-considerations-for-selinux-and-openshift-users).
 
-### Uninstall Edge Delta DaemonSet
+***
+
+## Uninstall Edge Delta DaemonSet
+
+To uninstall the Edge Delta DaemonSet:
 
 ```text
 kubectl delete daemonset edgedelta --namespace edgedelta
 ```
 
-### Running Edge Delta agent on select nodes
+***
 
-To run Edge Delta Agent on specific nodes of your cluster, add a node selector or nodeAffinity section to your pod config file. If your desired nodes are labeled logging=edgedelta then adding the following nodeSelector will restrict Edge Delta agent pods to Nodes that have logging=edgedelta label.
+## Run the Agent on Specific Nodes
+
+To run the agent on specific nodes in your cluster, add a node selector or nodeAffinity section to your pod config file. For example, if the desired nodes are labeled as **logging=edgedelta**, then adding the following nodeSelector will restrict the agent pods to nodes that have the **logging=edgedelta** label.
 
 ```text
 spec:
@@ -73,18 +98,23 @@ spec:
     logging: edgedelta
 ```
 
-Read more about specifying [node selectors and affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
+> **Note**
+>
+> To learn more about node selectors and affinity, please review this [article from Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
 
-### SELinux & Openshift
 
-If you are running a SELinux enforcing Kubernetes cluster you need to add the following securityContext configuration into edgedelta-agent.yml manifest DaemonSet spec. This change will run agent pods in privileged mode to allow collecting logs of other pods.
+***
+
+## Special Considerations for SELinux and Openshift Users
+
+If you are running a SELinux-enforced Kubernetes cluster, then you need to add the following securityContext configuration into edgedelta-agent.yml manifest DaemonSet spec. This update will run agent pods in privileged mode to allow the collection of logs of other pods.
 
 ```text
      runAsUser: 0
      privileged: true
 ```
 
-In an OpenShift cluster you need to also run below commands to allow agent pods to run in privileged mode.
+In an OpenShift cluster, you need to also run the following commands to allow agent pods to run in privileged mode:
 
 ```text
 oc adm policy add-scc-to-user privileged system:serviceaccount:edgedelta:edgedelta
@@ -92,15 +122,22 @@ oc patch namespace edgedelta -p \
 '{"metadata": {"annotations": {"openshift.io/node-selector": ""}}}'
 ```
 
-### Output to cluster services in other namespaces
+***
 
-Edge Delta pods run in dedicated edgedelta namespace. If you desire to configure an output destination within your Kubernetes cluster make sure to set a resolvable service endpoint in your agent configuration.
+## Output to cluster services in other namespaces
 
-Example: If you have an Elasticsearch service "elasticsearch-master" in "elasticsearch" namespace with port 9200 in your cluster "cluster-domain.example" you need to specify elastic output address as below in agent configuration:
+Edge Delta pods run in a dedicated edgedelta namespace. 
+
+If you want to configure an output destination within your Kubernetes cluster, then you must set a resolvable service endpoint in your agent configuration.
+
+For example, if you have an **elasticsearch-master** Elasticsearch service in the **elasticsearch** namespace with port 9200 in your **cluster-domain.example** cluster, then you need to specify the elastic output address in the agent configuration:
+
 
 ```text
   address:
        - http://elasticsearch-master.elasticsearch.svc.cluster-domain.example:9200
 ```
 
-Read more about [service DNS resolution](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records)
+To learn more, please review this [article from Kubernetes](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records).
+
+***
