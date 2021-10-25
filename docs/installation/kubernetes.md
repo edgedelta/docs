@@ -39,17 +39,17 @@ kubectl create secret generic ed-api-key \
     --from-literal=ed-api-key="(log in to view API tokens)"
 ```
 
-3. Based on your needs, select the appropriate agent manifest:
+3. Review the available agent manifest:
 
-| Manifest          | Description                                                                                                                                                | URL to use in command                                                 |
-|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| Default           | Default Agent DaemonSet.                                                                                                                                   | https://edgedelta.github.io/k8s/edgedelta-agent.yml                   |
-| Persisting cursor | Agent DaemonSet with mounted host volumes to track file cursor positions persistently.                                                                     | https://edgedelta.github.io/k8s/edgedelta-agent-persisting-cursor.yml |
-| Metric exporter   | Agent DaemonSet exposing port 6062 /metrics endpoint in Prometheus format. To learn more, see [Prometheus Scraping](../appendices/prometheus-scraping.md). | https://edgedelta.github.io/k8s/edgedelta-prom-agent.yml              |
-| On premise        | Agent DaemonSet for locally managed or offline deployments.                                                                                                | https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml            |
+| Manifest          | Description                                                                                                                                                                          | URL to use in command                                                 |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| Default           | This manifest is the default agent DaemonSet.                                                                                                                                        | https://edgedelta.github.io/k8s/edgedelta-agent.yml                   |
+| Persisting cursor | This manifest is the agent DaemonSet with mounted host volumes to track file cursor positions persistently.                                                                          | https://edgedelta.github.io/k8s/edgedelta-agent-persisting-cursor.yml |
+| Metric exporter   | This manifest is the agent DaemonSet that exposes port 6062 (metrics endpoint) in Prometheus format. To learn more, see [Prometheus Scraping](../appendices/prometheus-scraping.md). | https://edgedelta.github.io/k8s/edgedelta-prom-agent.yml              |
+| On premise        | This manifest is the agent DaemonSet for locally managed or offline deployments.                                                                                                     | https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml            |
 
 
-4. Based on the selected manifest, create the DaemonSet with the manifest link:
+4. Based on the desired manifest, create the DaemonSet with the corresponding manifest URL:
 
 ```text
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
@@ -57,10 +57,10 @@ kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 
 > **Note**
 >
-> To provide additional environment variables, download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml), as described in [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) in Kubernetes with yaml section.
+> For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**. 
 
 
-5. Check the status of the Edge Delta container:
+5. Review the status of the Edge Delta container:
 
 ```text
 kubectl get pods --namespace=edgedelta
@@ -90,7 +90,7 @@ kubectl delete daemonset edgedelta --namespace edgedelta
 
 ## Run the Agent on Specific Nodes
 
-To run the agent on specific nodes in your cluster, add a node selector or nodeAffinity section to your pod config file. If your desired nodes are labeled logging=edgedelta, then adding the following nodeSelector will restrict the agent pods to Nodes that have the logging=edgedelta label.
+To run the agent on specific nodes in your cluster, add a node selector or nodeAffinity section to your pod config file. For example, if the desired nodes are labeled as **logging=edgedelta**, then adding the following nodeSelector will restrict the agent pods to nodes that have the **logging=edgedelta** label.
 
 ```text
 spec:
@@ -126,11 +126,11 @@ oc patch namespace edgedelta -p \
 
 ## Output to cluster services in other namespaces
 
-Edge Delta pods run in dedicated edgedelta namespace. 
+Edge Delta pods run in a dedicated edgedelta namespace. 
 
 If you want to configure an output destination within your Kubernetes cluster, then you must set a resolvable service endpoint in your agent configuration.
 
-For example, if you have an "elasticsearch-master" Elasticsearch service in the "elasticsearch" namespace with port 9200 in your "cluster-domain.example" cluster, then you need to specify the elastic output address in the agent configuration:
+For example, if you have an **elasticsearch-master** Elasticsearch service in the **elasticsearch** namespace with port 9200 in your **cluster-domain.example** cluster, then you need to specify the elastic output address in the agent configuration:
 
 
 ```text
@@ -138,6 +138,6 @@ For example, if you have an "elasticsearch-master" Elasticsearch service in the 
        - http://elasticsearch-master.elasticsearch.svc.cluster-domain.example:9200
 ```
 
-Read more about [service DNS resolution](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records)
+To learn more, please review this [article from Kubernetes](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records).
 
 ***
