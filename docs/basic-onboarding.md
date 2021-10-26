@@ -12,37 +12,25 @@ You can use this document to learn how to:
   * Download the agent
   * Create an integration for an existing streaming data service
 
+>  **Before you begin**
+>  
+> To ensure an easy installation process, please review the [Pre-Installation Agent Requirements](agent-requirements.md) document.
+
 
 >  **Before you begin**
+>  
 > To use this document, you must have relevant account information for your existing streaming data service. For example, to create an integration with AWS S3, you must have the AWS Key and AWS Secret Key.
 
 ***
 
-## Step 1: Obtain Network Requirements
-
->  **Note**
-> This step only applies to users with outbound network restrictions on their firewall. If your firewall does not have any outbound network restrictions, then you can skip to Step 2.
-
-To successfully integrate with Edge Delta, you must update network policies for outgoing access.
-
-While the Edge Delta Agent can be deployed in restricted network environments where outgoing network traffic to the internet is strictly moderated, you must update network policies to enable outgoing access to these destinations and to bypass HTTP/HTTPS proxies.
-
-Please contact [support@edgedelta.com](mailto:support@edgedelta.com) to obtain the list of destination addresses for your account for outbound network access.
-
-Additionally, outputs to 3rd party or on-premise systems also require outbound network access. When you configure the agent, verify that the **endpoint** of the configured output is also accessible by the agent through the network. Outputs instruct the agent where to send collected and generated data, such as metrics, patterns, and alerts.
-
-  * To learn more, see [Outputs](./configuration/outputs.md).
-
-***
-
-## Step 2: Access Edge Delta
+## Step 1: Access Edge Delta
 
 1. Navigate to [admin.edgedelta.com](https://admin.edgedelta.com/), and then click **Sign up**.
 2. Complete the missing fields, and then click **Register**. You will be redirected to the **Welcome to Edge Delta** screen in the Edge Delta App.
 
 ***
 
-## Step 3: Deploy the agent to an existing integration
+## Step 2: Deploy the agent to an existing integration
 
 1. In the Edge Delta App, select your operating platform.
 2. In **Enter Environment Tag**, enter a descriptive tag to explain where the agent will be deployed.
@@ -62,7 +50,7 @@ Additionally, outputs to 3rd party or on-premise systems also require outbound n
 
 ***
 
-## Step 4: Verify Agent Deployment
+## Step 3: Verify Agent Deployment
 
 There are 2 ways to verify agent deployment:
 
