@@ -18,9 +18,7 @@ During runtime, the agent's local operating system environment obtains the value
 
 ## Learn About Variables in Agent Configuration Files
 
-Based on the agent deployment method and target environment, the environment variables' values are passed in different ways.
-
-There are 2 ways to reference varaibles in the agent configuration file:
+There are 2 ways to reference variables in the agent configuration file:
 
 ```text
 '{{ Env "MY_VARIABLE_NAME" }}'
@@ -29,11 +27,11 @@ There are 2 ways to reference varaibles in the agent configuration file:
 
 If the default value is **not** provided, then the variable in the agent execution environment must exist. If not, the agent will stop with an error.  
 
-If the default value is provided, but the variable does not exist on the agent execution environment, then the default value will be used.
+If the default value is provided, but the variable does not exist in the agent execution environment, then the default value will be used.
 
 > **Note**
 > 
-> Environment variables can only be used for string-typed inputs. In other words, if a configuration parameter expects anything besides a string, then the environment variable substitution cannot be used.
+> Environment variables can only be used with string-typed inputs. In other words, if a configuration parameter expects anything besides a string, then the environment variable substitution cannot be used.
 
 ***
 
@@ -41,7 +39,7 @@ If the default value is provided, but the variable does not exist on the agent e
 
 In the following example, the Slack endpoint is a secret that allows posts to be directly made into a Slack channel.
 
-Instead of explicitly putting the variable into configuration, the variable can be referred from the agent execution environment. 
+Instead of explicitly putting the variable into the configuration file, the variable can be referred from the agent execution environment. 
 
 Review the following example: 
 
@@ -58,11 +56,11 @@ Review the following example:
 
 In certain cases, it is useful to set a variable in a simple way. For example, on a production environment with a large number of agents, it is not practical to update opearting system variables to toggle certain features, change destinations, or update parts of the processing rules.
 
-> Note
+> **Note**
 > 
 > To learn how to set or override variables, review the **Configuration Variables** table in the [Global Settings](https://admin.edgedelta.com/global-settings) page in the Edge Delta Admin portal. The agent will automatically detect variable updates.
 
-Review the following example of configuration variables:
+Review the following examples of configuration variables:
 
 | Name | Value |
 | :--- | :--- |
