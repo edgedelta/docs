@@ -39,13 +39,17 @@ helm install edgedelta edgedelta/edgedelta --set apiKey=<API-KEY> -n edgedelta -
 
 3. To set your **API-KEY**, you can use either **apiKey** or **secretApiKey** in the values.yml file.
 
-  - If you use **apiKey**, then **apiKey** will be kept in clear text as part of your pod property. Change the values.yml file. Review the following example:  
+  - To use **apiKey** as a Kubernetes secret, change the values.yml file: 
 
 ```yaml
 apiKey: "API-KEY"
 ```
 
-  - If you want to use **secretApiKey** as a Kubernetes secret, then you must change the values.yml file. Review the following example:  
+> **Note**
+> 
+> **apiKey** will be kept in clear text as part of your pod property.
+
+  - To use **secretApiKey** as a Kubernetes secret, change the values.yml file: 
 
 ```yaml
 # apiKey: ""
@@ -55,7 +59,7 @@ secretApiKey:
   key: "ed-api-key"
 ```
 
-4. Create **API-KEY** as a Kubernetes secret. Review the following example:  
+4. Create **API-KEY** as a Kubernetes secret:
 
 ```text
 kubectl create namespace edgedelta
@@ -67,7 +71,7 @@ kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed
 > You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file. For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**. 
 
 
-5. Use the following command to install helm chart using values.yml in the same folder:
+5. Install helm chart using values.yml in the same folder:
 
 ```text
 helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f values.yaml
@@ -87,14 +91,15 @@ NOTES:
 2. Find the configuration with <API-KEY> to check if agents are active
 ```
 
-7. To show helm installed packages in "edgedelta" namespace, review the following command:
+7. View helm-installed packages in the "edgedelta" namespace:
 
 ```text
 helm ls -n edgedelta
 ```
+
 ***
 
-## Review Value.yml Paramaters
+## Review Value.yml Parameters
 
 | Name | Description | Example Value |
 | :--- | :--- | :--- |
