@@ -39,13 +39,13 @@ helm install edgedelta edgedelta/edgedelta --set apiKey=<API-KEY> -n edgedelta -
 
 3. To set your **API-KEY**, you can use either **apiKey** or **secretApiKey** in the values.yml file.
 
-If you use **apiKey**, then **apiKey** will be kept in clear text as part of your pod property. Change the values.yml file. Review the following example:  
+  - If you use **apiKey**, then **apiKey** will be kept in clear text as part of your pod property. Change the values.yml file. Review the following example:  
 
 ```yaml
 apiKey: "API-KEY"
 ```
 
-If you want to use **secretApiKey** as a Kubernetes secret, then you must change the values.yml file. Review the following example:  
+  - If you want to use **secretApiKey** as a Kubernetes secret, then you must change the values.yml file. Review the following example:  
 
 ```yaml
 # apiKey: ""
@@ -55,7 +55,7 @@ secretApiKey:
   key: "ed-api-key"
 ```
 
-You need to create **API-KEY** as a Kubernetes secret. Review the following example:  
+4. Create **API-KEY** as a Kubernetes secret. Review the following example:  
 
 ```text
 kubectl create namespace edgedelta
