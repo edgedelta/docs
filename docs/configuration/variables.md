@@ -17,13 +17,15 @@ Environment variables values are acquired from the local operating system enviro
 Variables can be referred in one of the following formats in the agent configuration:
 
 ```text
-{{ Env "MY_VARIABLE_NAME" }}
-{{ Env "MY_VARIABLE_NAME" "my default value" }}
+'{{ Env "MY_VARIABLE_NAME" }}'
+'{{ Env "MY_VARIABLE_NAME" "my default value" }}'
 ```
 
 If no default value is provided existence of the variable in agent execution environment is expected. Otherwise agent will stop with error.
 
 If default value is provided and variable does not exists on agent execution environment default value will be used.
+
+Environment variables can only be used for string typed inputs, in other words if a configuration parameter expects anything other than string, environment variable substitution cannot be used.
 
 ### Example
 
@@ -35,7 +37,7 @@ Instead of explicitly putting it into configuration it can be referred from agen
   triggers:
       - name: slack-integration
         type: slack
-        endpoint: {{ Env "MY_SLACK_ENDPOINT" }}
+        endpoint: '{{ Env "MY_SLACK_ENDPOINT" }}'
 ```
 
 ## Global Configuration Variables
