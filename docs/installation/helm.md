@@ -5,37 +5,47 @@ description: >-
   have conceptual understanding of helm charts
 ---
 
-# Kubernetes via Helm
+## Overview
 
-Edge Delta agent is a daemon that analyzes logs and container metrics from a Kubernetes cluster and stream analytics to configured streaming destinations. This page streamlined instructions to get you up and running in the Kubernetes environment.
+You can use this document to learn how to install the Edge Delta Agent as a DaemonSet on your Kubernetes cluster with Helm.
 
-Edge Delta uses Kubernetes recommended node level logging architecture, in other words DaemonSet architecture. The DaemonSet runs Edge Delta agent pod on each node. Each Agent pod analyzes logs from all other pods running on the same node.
+The agent is a daemon that analyzes logs and container metrics from a Kubernetes cluster, and then streams analytics to configured streaming destinations.
 
-## Installation
+Edge Delta uses a Kubernetes-recommended, node-level logging architecture, also known as a DaemonSet architecture. The DaemonSet runs the agent pod on each node. Each agent pod analyzes logs from all other pods running on the same node.
 
-Add Edge Delta helm repository
+> **Note**
+>
+> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
+
+> **Note**
+>
+> If you do **not** want to install the agent on your Kubernetes with Helm, then see [Kubernetes](kubernetes.md).
+
+***
+
+## Add and Configure Helm
+
+1. Add the Edge Delta Helm repository:
 
 ```text
 helm repo add edgedelta https://edgedelta.github.io/charts
 ```
 
-Run helm installation command and create "edgedelta" namespace to use agent with default parameters:
+2. Run the helm installation command, and then create the **edgedelta** namespace to use the Edge Delta Agent with default parameters:
 
 ```text
 helm install edgedelta edgedelta/edgedelta --set apiKey=<API-KEY> -n edgedelta --create-namespace
 ```
 
-If you need to configure [Environment Variables](environment-variables.md) and other advanced options download the default [values.yml](https://edgedelta.github.io/charts/edgedelta/values.yaml) file.
+3. To set your **API-KEY**, you can use either **apiKey** or **secretApiKey** in the values.yml file.
 
-You can use either apiKey or secretApiKey in values.yml file to set your API-KEY.
-
-If you use apiKey it will be kept in clear text as part of your pod property. Change values.yml file as below:
+If you use **apiKey**, then **apiKey** will be kept in clear text as part of your pod property. Change the values.yml file. Review the following example:  
 
 ```yaml
 apiKey: "API-KEY"
 ```
 
-If you want to use secretApiKey as a Kubernetes secret, change values.yml as below:
+If you want to use **secretApiKey** as a Kubernetes secret, then you must change the values.yml file. Review the following example:  
 
 ```yaml
 # apiKey: ""
@@ -45,22 +55,25 @@ secretApiKey:
   key: "ed-api-key"
 ```
 
-You need to create API-KEY as a Kubernetes secret using command below:
+You need to create **API-KEY** as a Kubernetes secret. Review the following example:  
 
 ```text
 kubectl create namespace edgedelta
 kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="API-KEY"
 ```
 
-You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file.
+> **Note**
+>
+> You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file. For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**. 
 
-Use below command to install helm chart using values.yml in the same folder:
+
+5. Use the following command to install helm chart using values.yml in the same folder:
 
 ```text
 helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f values.yaml
 ```
 
-Output
+6. Review the following output: 
 
 ```text
 NAME: edgedelta
@@ -74,12 +87,14 @@ NOTES:
 2. Find the configuration with <API-KEY> to check if agents are active
 ```
 
-Show helm installed packages in "edgedelta" namespace
+7. To show helm installed packages in "edgedelta" namespace, review the following command:
 
 ```text
 helm ls -n edgedelta
 ```
-## Value.yml Paramaters
+***
+
+## Review Value.yml Paramaters
 
 | Name | Description | Example Value |
 | :--- | :--- | :--- |
@@ -100,11 +115,14 @@ helm ls -n edgedelta
 | resources.requests.memory | Minimum requested memory for agent pod |256Mi |
 | image | Agent docker image | edgedelta/agent |
 
+***
 
-## Useful Tips
+## Uninstall helm chart
 
-### Uninstall helm chart
+To uninstall the helm chart:
 
 ```text
 helm delete edgedelta -n edgedelta
 ```
+
+***
