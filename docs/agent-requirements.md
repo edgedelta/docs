@@ -55,3 +55,13 @@ Review the following network access requirements to ensure a successful connecti
 
 
 ***
+  
+## Additional Documentation
+  
+Outputs to 3rd party or on-premise systems also require outbound network access. When you configure the agent, verify that the **endpoint** of the configured output is also accessible by the agent through the network. Outputs instruct the agent where to send collected and generated data, such as metrics, patterns, and alerts.
+
+  * To learn more, see [Outputs](./configuration/outputs.md).  
+  
+  
+***  
+  
