@@ -30,7 +30,13 @@ You can use this document to review software and hardware requirements before yo
 
 ## Browser Support
   
-For the Edge Delta Admin portal, there are reported compatibility issues with Safari.  
+The Edge Delta Admin portal supports the current version of the following browsers:
+  - Chrome
+  - Firefox
+  
+> **Note**
+>
+> There are reported compatibility issues with Safari.   
   
 > **Note**
 > 
