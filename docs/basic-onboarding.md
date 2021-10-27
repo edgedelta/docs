@@ -39,7 +39,7 @@ You can use this document to learn how to:
 5. Complete the missing fields, and then click **Continue**.
 6. Copy the pre-populated agent command.
 7. Open a terminal or command line prompt, then paste and run the command.  
-8. In the Edge Delta App, click **I Ran Deploy Commands**.
+8. In the portal, click **I Ran Deploy Commands**.
 9. The agent will take a few minutes to deploy and authenticate with Edge Delta.
 10. After a successful deployment, click **Go To Status Page**.
 11. In the window that appears, you can click **Go To Demo Environment** to see a pre-populated account where you can view and test data.
