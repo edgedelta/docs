@@ -22,11 +22,11 @@ When you create a token, you can add the following permissions for read / write 
 
 | Permissions          | Description                                                                                                         |
 |----------------------|---------------------------------------------------------------------------------------------------------------------|
-| Accesses             | This permission gives you read / write access to manage the users in your account.                                  |
+| Accesses             | This permission gives you read / write access to manage the user permissions in your account.                       |
 | Rehydrations         | This permission gives you read / write access to manage rehydrations.                                               |
 | Integrations         | This permission gives you read / write access to manage integrations with third-party services.                     |
-| Monitors             | This permission gives you read / write access to manage monitors and custom alert definitions.                      |
-| Agent Configurations | This permission gives you read / write access to manage the configurations for the agents that run locally.         |
+| Monitors             | This permission gives you read / write access to manage monitors (alert definitions).                               |
+| Agent Configurations | This permission gives you read / write access to manage agent configurations                                        |
 | Hosted Agents        | This permission gives you read / write access to manage the agents hosted by Edge Delta.                            |
 | Tokens               | This permission gives you read / write access to manage tokens.                                                     |
 
@@ -54,6 +54,7 @@ After you create the token, the unique token key will only display once. Afterwa
   - Remember, Edge Delta does not store tokens. As a result, a lost or missplaced token cannot be retrieved. 
 13. Click **Close**. 
 14. The newly created token will be listed in the **Tokens** table. 
+15. You can use the newly created token to make API calls to the Edge Delta backend system. Tokens should be sent in the **X-ED-API-Token** request header.
 
 ***
 
