@@ -54,3 +54,4 @@ nav:
     - Role Based Access Control: appendices/rbac.md
     - S3 monitoring via SQS: appendices/s3-sqs.md
     - Create an Okta SAML Integration: appendices/okta-saml.md
+    - Tokens: appendices/tokens.md
