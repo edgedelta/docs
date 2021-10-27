@@ -23,17 +23,33 @@ Edge Delta uses a Kubernetes-recommended, node-level log collecting architecture
 
 ***
 
+
+## Step 1: Create, Download, and Install the Agent 
+
+1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+2. Click **Create Configuration**. 
+3. Select **Helm**.
+4. Click **Save**.  
+5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
+6. Click **Helm**. 
+7. In the window that appears, follow the on-screen instructions. 
+  - This window also displays your API key.  
+
+<!--
+
+
+
 ## Add and Configure Helm
 
 1. Add the Edge Delta Helm repository:
 
-```text
+```
 helm repo add edgedelta https://edgedelta.github.io/charts
 ```
 
 2. Run the helm installation command, and then create the **edgedelta** namespace to use the Edge Delta Agent with default parameters:
 
-```text
+```
 helm install edgedelta edgedelta/edgedelta --set apiKey=<API-KEY> -n edgedelta --create-namespace
 ```
 
@@ -61,7 +77,7 @@ secretApiKey:
 
 4. Create **API-KEY** as a Kubernetes secret:
 
-```text
+```
 kubectl create namespace edgedelta
 kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="API-KEY"
 ```
@@ -70,16 +86,9 @@ kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed
 >
 > You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file. For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**. 
 
+9. Review the following output: 
 
-5. Install helm chart using values.yml in the same folder:
-
-```text
-helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f values.yaml
 ```
-
-6. Review the following output: 
-
-```text
 NAME: edgedelta
 LAST DEPLOYED: Fri Jul 17 17:49:42 2020
 NAMESPACE: edgedelta
@@ -91,9 +100,18 @@ NOTES:
 2. Find the configuration with <API-KEY> to check if agents are active
 ```
 
-7. View helm-installed packages in the "edgedelta" namespace:
+-->
 
-```text
+
+8. In the same folder, install the helm chart using values.yml:
+
+```
+helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f values.yaml
+```
+
+9. View helm-installed packages in the **edgedelta** namespace:
+
+```
 helm ls -n edgedelta
 ```
 
@@ -122,11 +140,11 @@ helm ls -n edgedelta
 
 ***
 
-## Uninstall helm chart
+## Uninstall Helm Chart
 
 To uninstall the helm chart:
 
-```text
+```
 helm delete edgedelta -n edgedelta
 ```
 
