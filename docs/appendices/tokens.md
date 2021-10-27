@@ -37,6 +37,10 @@ When you create a token, you can add the following permissions for read / write 
 
 After you create the token, the unique token key will only display once. Afterwards, you will not be able to retrieve the token. As a result, copy and store the key in a secure location.   
 
+> **Note**
+> 
+> You can only create a token based on the permisssions that you already have. For example, if you have read-only access for **Integrations**, then you can create a token with read-only access for **Integrations**; however, you cannot create a token with write-only access for **Integrations** because you do not currently have that permission. 
+
 1. In the Edge Delta Admin portal, on the left-side navigation, click **Global Settings**. 
 2. In the Tokens sections, click  **Create Token**. 
 3. Under **Name**, enter a descriptive name for the token, such as **john-smith-integrations-token**. 
