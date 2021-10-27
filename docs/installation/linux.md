@@ -14,44 +14,33 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 >
 > This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
 
-***
-
-## Step 1: Obtain Your Endpoint URL
-
-1. Contact [info@edgedelta.com](mailto:info@edgedelta.com) to obtain your installation endpoint URL. You will need this URL in a later step.
 
 ***
 
-## Step 2: Obtain Your API Key
+## Step 1: Create and Download the Agent 
 
 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
-2. In **Configurations**, locate the **Linux** tag, and then copy the corresponding key. You will need this key in a later step.
+2. Click **Create Configuration**. 
+3. Select **Linux**.
+4. Click **Save**.  
+5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
+6. Click **Linux**. 
+7. In the window that appears, copy the command. 
+  - This window also displays your API key.
 
 ***
 
-## Step 3: Download the Agent 
+## Step 2: Install the Agent
 
-1. Visit [release.edgedelta.com](https://release.edgedelta.com/), and then select the appropriate package.
-
-***
-
-## Step 4: Install the Agent 
-
-1. In the following command, replace &lt;YOUR\_API\_KEY&gt; with the key you copied earlier. Additionally, replace &lt;DOWNLOAD\_URL&gt; with the installation endpoint URL you received from Edge Delta. 
-
-```text
-sudo ED_API_KEY=<YOUR_API_KEY> bash -c "$(curl -L <DOWNLOAD_URL>/install.sh)"
-```
-
-2. If you are not running as **root**, then you may be asked to enter the sudo password. 
-
-3. The installation process will deploy Edge Delta into the `/opt/edgedelta/agent/` path. Additionally, the `edgedelta` system service will start automatically with default configurations.
+1. Open a terminal, and paste the copied command.
+  - If you are not running as **root**, then you may be asked to enter the sudo password. 
+2. The installation process will deploy Edge Delta into the `/opt/edgedelta/agent/` path. Additionally, the `edgedelta` system service will start automatically with default configurations.
 
 > **Note**
 > 
 > The ED\_ENV\_VARS special variable is used in the installation command to pass one or more persistent environment variables to the agent, which will run as the system service.
 
-```bash
+```
 sudo ED_API_KEY=<your api key> \
 ED_ENV_VARS="MY_VAR1=MY_VALUE_1,MY_VAR2=MY_VALUE_2" \
 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
@@ -62,54 +51,39 @@ bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 > To view a full list of varaibles supported the agent, see [Environment Variables](environment-variables.md). 
 
 
-
-> **Note**
->
-> As another option, you can automate the installation process.
->
-> To automate:
->
-> 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
->
-> 2. In the list of configurations, locate the **Windows** tag, and then click the corresponding deploy icon (green rocket).
->
-> 3. In the window that appears, select **Windows**, and then copy the command.
->
-> 4. In a command prompt, run the command on the host where you want to deploy Edge Delta, and then the download and installation process will begin.
-
 ***
 
 ## Troubleshoot the Agent
 
 To check the status of the agent, run one of the following commands: 
 
-  * For systems with systemd\(most distributions\), run:
+  * For systems with systemd, run:
 
-  ```text
+  ```
   sudo systemctl status edgedelta
   ```
 
   * For older systems with init, run:
 
-  ```text
+  ```
   sudo /etc/init.d/edgedelta status
   ```
 
   * For certain older versions of Ubuntu, run:
 
-  ```text
+  ```
   sudo service edgedelta status
   ```
 
 To check the agent's log file for any errors that may indicate an issue with the agent, configuration, or deployment settings, run the following command:
 
-  ```text
+  ```
   cat /opt/edgedelta/agent/edgedelta.log
   ```
 
 To check the agent's configuration file to ensure that the configuration does not contain any issues, run the following command:
 
-  ```text
+  ```
   cat /opt/edgedelta/agent/config.yml
   ```
 
@@ -117,7 +91,7 @@ To check the agent's configuration file to ensure that the configuration does no
 
 To uninstall the agent, run the following command: 
 
-```text
+```
 sudo bash -c "$(curl -L https://release.edgedelta.com/uninstall.sh)"
 ```
 
