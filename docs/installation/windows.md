@@ -18,31 +18,27 @@ Edge Delta uses 64-bit or 32-bit MSI installation process.
 
 ***
 
-## Step 1: Obtain Your API Key
+## Step 1: Create and Download the Agent 
 
 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
-2. In **Configurations**, locate the **Windows** tag, and then copy the corresponding key. You will need this key in a later step.
+2. Click **Create Configuration**. 
+3. Select **Windows**.
+4. Click **Save**.  
+5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
+6. Click **Windows**. 
+7. In the window that appears, copy and paste the HTTPS URL into a web browser to download the package. 
+  - This window also displays your API key. Copy this key. You will need this key in a later step. 
 
 ***
 
-## Step 2: Download the Agent
-
-1. Visit [release.edgedelta.com](https://release.edgedelta.com/), and then select the appropriate package.
-
-***
-
-## Step 3: Install the Agent
-
-There are 2 ways to install the agent:
-
-  * Via the wizard
-  * Via the command line (silent mode)
-
-### Option 1: Via the Wizard
+## Step 2: Install the Agent
 
 1. Double-click the downloaded package, and then follow the on-screen instructions.
 2. During the installation process, you can change the installation directory where the agent will install. Based on your selected platform, the default path is **Program Files** or **Program Files \(x86\)**.
 3. Enter the API key you copied earlier, and then follow the on-screen instructions to complete the installation.
+
+
+<!-- 
 
 
 ### Option 2: Via the Command Line (Silent Mode)
@@ -50,7 +46,7 @@ There are 2 ways to install the agent:
 
 1. For the downloaded package, start **cmd.exe** as the administrator.
 2. Navigate to the appropriate download directory.
-3. In the following command, replace &lt;YOUR API KEY&gt; with the key you copied earlier, and then run command:
+3. In the following command, replace &lt;YOUR API KEY&gt; with the key you copied earlier, and then run the following command:
 
 ```text
 start /wait msiexec /qn /i edgedelta-version_64bit.msi APIKEY="<YOUR_API_KEY>"
@@ -75,9 +71,11 @@ start /wait msiexec /qn /i edgedelta-version_64bit.msi APIKEY="<YOUR_API_KEY>"
 
 > 4. In a command prompt, run the command on the host where you want to deploy Edge Delta, and then the download and installation process will begin.
 
+-->
+
 ***
 
-## Step 4: Configure the Agent
+## Step 3: Configure the Agent
 
 To configure the agent, you must access the installation directory and locate the following files:
 
