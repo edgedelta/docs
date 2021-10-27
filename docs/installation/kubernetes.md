@@ -22,24 +22,46 @@ Edge Delta uses a Kubernetes-recommended, node-level logging architecture, also 
 
 ***
 
+## Step 1: Create, Download, and Install the Agent 
+
+1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+2. Click **Create Configuration**. 
+3. Select **Kubernetes**.
+4. Click **Save**.  
+5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
+6. Click **Kubernetes**. 
+7. In the window that appears, follow the on-screen instructions. 
+  - This window also displays your API key. 
+  - For advanced users, there are additional installation steps that you can consider. 
+
+***
+
+## Step 2: Advanced Installation Instructions
+
+For advanced users, review the following options to customize the installation process: 
+
+
+<!-- 
 
 ## Step 1: Install the Agent 
 
 1. Create a Kubernetes namespace:
 
-```text
+```
 kubectl create namespace edgedelta
 ```
 
 2. Create a kube secret that contains your API token.
 
-```text
+```
 kubectl create secret generic ed-api-key \
     --namespace=edgedelta \
     --from-literal=ed-api-key="(log in to view API tokens)"
 ```
 
-3. Review the available agent manifest:
+-->
+
+1. Review the available agent manifest:
 
 | Manifest          | Description                                                                                                                                                                          | URL to use in command                                                 |
 |-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
@@ -49,9 +71,9 @@ kubectl create secret generic ed-api-key \
 | On premise        | This manifest is the agent DaemonSet for locally managed or offline deployments.                                                                                                     | https://edgedelta.github.io/k8s/edgedelta-agent-onprem.yml            |
 
 
-4. Based on the desired manifest, create the DaemonSet with the corresponding manifest URL:
+2. Based on the desired manifest, create the DaemonSet with the corresponding manifest URL:
 
-```text
+```
 kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 ```
 
@@ -59,18 +81,22 @@ kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 >
 > For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**. 
 
+<!-- 
+
 
 5. Review the status of the Edge Delta container:
 
-```text
+```
 kubectl get pods --namespace=edgedelta
 ```
 
 6. When the name of the pod is running the agent, run the following command to see the agent logs:
 
-```text
+```
 kubectl logs <pod_name> -n edgedelta
 ```
+
+-->
 
 > **Note**
 >
@@ -78,21 +104,11 @@ kubectl logs <pod_name> -n edgedelta
 
 ***
 
-## Uninstall Edge Delta DaemonSet
-
-To uninstall the Edge Delta DaemonSet:
-
-```text
-kubectl delete daemonset edgedelta --namespace edgedelta
-```
-
-***
-
 ## Run the Agent on Specific Nodes
 
 To run the agent on specific nodes in your cluster, add a node selector or nodeAffinity section to your pod config file. For example, if the desired nodes are labeled as **logging=edgedelta**, then adding the following nodeSelector will restrict the agent pods to nodes that have the **logging=edgedelta** label.
 
-```text
+```
 spec:
   nodeSelector:
     logging: edgedelta
@@ -109,14 +125,14 @@ spec:
 
 If you are running a SELinux-enforced Kubernetes cluster, then you need to add the following securityContext configuration into edgedelta-agent.yml manifest DaemonSet spec. This update will run agent pods in privileged mode to allow the collection of logs of other pods.
 
-```text
+```
      runAsUser: 0
      privileged: true
 ```
 
 In an OpenShift cluster, you need to also run the following commands to allow agent pods to run in privileged mode:
 
-```text
+```
 oc adm policy add-scc-to-user privileged system:serviceaccount:edgedelta:edgedelta
 oc patch namespace edgedelta -p \
 '{"metadata": {"annotations": {"openshift.io/node-selector": ""}}}'
@@ -124,7 +140,7 @@ oc patch namespace edgedelta -p \
 
 ***
 
-## Output to cluster services in other namespaces
+## Output to Cluster Services in Other Namespaces
 
 Edge Delta pods run in a dedicated edgedelta namespace. 
 
@@ -139,5 +155,15 @@ For example, if you have an **elasticsearch-master** Elasticsearch service in th
 ```
 
 To learn more, please review this [article from Kubernetes](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#a-aaaa-records).
+
+***
+
+## Uninstall Edge Delta DaemonSet
+
+To uninstall the Edge Delta DaemonSet:
+
+```
+kubectl delete daemonset edgedelta --namespace edgedelta
+```
 
 ***
