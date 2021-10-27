@@ -9,33 +9,33 @@ description: >-
 You can use this document to learn how to:
 
   * Create an Edge Delta account
-  * Download the agent
+  * Download the Edge Delta Agent
   * Create an integration for an existing streaming data service
 
 >  **Before you begin**
 >  
-> To ensure an easy installation process, please review the [Pre-Installation Agent Requirements](agent-requirements.md) document.
+> To ensure an easy installation process, review the [Pre-Installation Agent Requirements](agent-requirements.md) document.
 
 
 >  **Before you begin**
 >  
-> To use this document, you must have relevant account information for your existing streaming data service. For example, to create an integration with AWS S3, you must have the AWS Key and AWS Secret Key.
+> To use this document, you must have relevant account information for your existing streaming data service, such as endpoints, tokens, keys, containers, buckets, etc. For example, to create an integration with AWS S3, you must have the Name, Bucket, Region, AWS Key, and AWS Secret Key.
 
 ***
 
 ## Step 1: Access Edge Delta
 
 1. Navigate to [admin.edgedelta.com](https://admin.edgedelta.com/), and then click **Sign up**.
-2. Complete the missing fields, and then click **Register**. You will be redirected to the **Welcome to Edge Delta** screen in the Edge Delta App.
+2. Complete the missing fields, and then click **Register**. You will be redirected to the **Welcome to Edge Delta** screen in the Edge Delta Admin portal.
 
 ***
 
-## Step 2: Deploy the agent to an existing integration
+## Step 2: Deploy the Agent 
 
-1. In the Edge Delta App, select your operating platform.
+1. In the Edge Delta Admin portal, select your operating platform.
 2. In **Enter Environment Tag**, enter a descriptive tag to explain where the agent will be deployed.
 3. Click **Continue**.
-4. Select an integration type to flow data into Edge Delta.
+4. Select an integration type to send data from Edge Delta.
 5. Complete the missing fields, and then click **Continue**.
 6. Copy the pre-populated agent command.
 7. Open a terminal or command line prompt, then paste and run the command.  
@@ -54,19 +54,19 @@ You can use this document to learn how to:
 
 There are 2 ways to verify agent deployment:
 
-  * In the Edge Delta App
+  * In the portal
   * In the existing streaming data service
 
 ***
 
-### Option 1: Verify Agent Deployment in the Edge Delta App  
+### Option 1: Verify Agent Deployment in the Portal 
 
-1. In the Edge Delta App, on the left-side navigation, under **Data Pipeline**, click **Pipeline Status**.
+1. In the Edge Delta Admin Portal, on the left-side navigation, under **Data Pipeline**, click **Pipeline Status**.
 2. Review the **Active Nodes** section.
 3. If the agent was successfully installed, then there will be at least 1 active node.
 
 >  **Note:**
-> After an initial agent deployment, the app may only display non-zero values.
+> After an initial agent deployment, the portal may only display non-zero values.
 
 ***
 
