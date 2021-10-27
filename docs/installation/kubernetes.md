@@ -30,9 +30,8 @@ Edge Delta uses a Kubernetes-recommended, node-level logging architecture, also 
 4. Click **Save**.  
 5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
 6. Click **Kubernetes**. 
-7. In the window that appears, copy the command. 
-  - This window also displays your API key. Copy this key for a later step. 
-8. Follow the on-screen instructions. 
+7. In the window that appears, follow the on-screen instructions. 
+  - This window also displays your API key. 
   - For advanced users, there are additional installation steps that you can consider. 
 
 ***
