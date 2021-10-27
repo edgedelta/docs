@@ -12,7 +12,7 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 
 > **Note**
 >
-> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
+> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](../basic-onboarding.md).
 
 ***
 
@@ -29,27 +29,27 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 
 ***
 
-## Step 3: Download the Agent 
+## Step 3: Download the Agent
 
 1. Visit [release.edgedelta.com](https://release.edgedelta.com/), and then select the appropriate package.
 
 ***
 
 
-## Step 4: Install the Agent 
+## Step 4: Install the Agent
 
-1. In the following command, replace &lt;YOUR\_API\_KEY&gt; with the key you copied earlier. Additionally, replace &lt;DOWNLOAD\_URL&gt; with the installation endpoint URL you received from Edge Delta. 
+1. In the following command, replace &lt;YOUR\_API\_KEY&gt; with the key you copied earlier. Additionally, replace &lt;DOWNLOAD\_URL&gt; with the installation endpoint URL you received from Edge Delta.
 
 ```text
 sudo ED_API_KEY=<YOUR_API_KEY> bash -c "$(curl -L <DOWNLOAD_URL>/install.sh)"
 ```
 
-2. If you are not running as **root**, then you may be asked to enter the sudo password. 
+2. If you are not running as **root**, then you may be asked to enter the sudo password.
 
 3. The installation process will deploy Edge Delta into the `/opt/edgedelta/agent/` path. Additionally, the `edgedelta` system service will start automatically with default configurations.
 
 > **Note**
-> 
+>
 > The ED\_ENV\_VARS special variable is used in the installation command to pass one or more persistent environment variables to the agent, which will run as the system service.
 
 
@@ -61,7 +61,7 @@ bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 
 ## Troubleshoot the Agent
 
-To check the status of the agent, run the following command: 
+To check the status of the agent, run the following command:
 
 ```text
 sudo su
@@ -74,7 +74,7 @@ To check the agent's log file for any errors that may indicate an issue with the
 cat /opt/edgedelta/agent/edgedelta.log
 ```
 
-To check the agent's configuration file to ensure the configuration does not contain any issue, run the following command on the configuration file path: 
+To check the agent's configuration file to ensure the configuration does not contain any issue, run the following command on the configuration file path:
 
 ```text
 cat /opt/edgedelta/agent/config.yml

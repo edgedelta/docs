@@ -18,12 +18,12 @@ Edge Delta uses a Kubernetes-recommended, node-level logging architecture, also 
 
 > **Note**
 >
-> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
+> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](../basic-onboarding.md).
 
 ***
 
 
-## Step 1: Install the Agent 
+## Step 1: Install the Agent
 
 1. Create a Kubernetes namespace:
 
@@ -57,7 +57,7 @@ kubectl apply -f https://edgedelta.github.io/k8s/edgedelta-agent.yml
 
 > **Note**
 >
-> For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**. 
+> For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**.
 
 
 5. Review the status of the Edge Delta container:
@@ -126,7 +126,7 @@ oc patch namespace edgedelta -p \
 
 ## Output to cluster services in other namespaces
 
-Edge Delta pods run in a dedicated edgedelta namespace. 
+Edge Delta pods run in a dedicated edgedelta namespace.
 
 If you want to configure an output destination within your Kubernetes cluster, then you must set a resolvable service endpoint in your agent configuration.
 
