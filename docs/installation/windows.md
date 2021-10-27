@@ -48,7 +48,7 @@ Edge Delta uses 64-bit or 32-bit MSI installation process.
 2. Navigate to the appropriate download directory.
 3. In the following command, replace &lt;YOUR API KEY&gt; with the key you copied earlier, and then run the following command:
 
-```text
+```
 start /wait msiexec /qn /i edgedelta-version_64bit.msi APIKEY="<YOUR_API_KEY>"
 ```
 > **Note**
@@ -95,7 +95,7 @@ To troubleshoot and check the status of the agent, use the **Windows Services UI
 
 To uninstall the agent via the command line (silent uninstall), run the following command in Powershell:
 
-```text
+```
 (Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name like 'Edge Delta%'").uninstall()
 ```
 
