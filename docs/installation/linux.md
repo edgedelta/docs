@@ -26,7 +26,7 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
 6. Click **Linux**. 
 7. In the window that appears, copy the command. 
-  - This window also displays your API key.
+  - This window also displays your API key. Copy this key for a later step. 
 
 ***
 
