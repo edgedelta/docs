@@ -15,7 +15,7 @@ Edge Delta uses a Kubernetes-recommended, node-level log collecting architecture
 
 > **Note**
 >
-> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
+> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](../basic-onboarding.md).
 
 > **Note**
 >
