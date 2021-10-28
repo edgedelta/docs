@@ -22,7 +22,7 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 2. Click **Create Configuration**. 
 3. Select **MacOS**.
 4. Click **Save**.  
-5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
+5. In the table, locate the newly created agent configuration, and then click the corresponding green rocket to deploy additional instructions. 
 6. Click **MacOS**. 
 7. In the window that appears, copy the command. 
   - This window also displays your API key. Copy this key for a later step. 
@@ -47,6 +47,8 @@ ED_ENV_VARS="MY_VAR1=MY_VALUE_1,MY_VAR2=MY_VALUE_2" \
 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"
 ```
 
+***
+
 ## Troubleshoot the Agent
 
 To check the status of the agent, run the following command: 
@@ -67,6 +69,8 @@ To check the agent's configuration file to ensure the configuration does not con
 ```
 cat /opt/edgedelta/agent/config.yml
 ```
+
+***
 
 ## Uninstall the Agent
 
