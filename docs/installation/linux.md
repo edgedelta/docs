@@ -23,7 +23,7 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 2. Click **Create Configuration**. 
 3. Select **Linux**.
 4. Click **Save**.  
-5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
+5. In the table, locate the newly created agent configuration, and then click the corresponding green rocket to deploy additional instructions. 
 6. Click **Linux**. 
 7. In the window that appears, copy the command. 
   - This window also displays your API key. Copy this key for a later step. 
@@ -86,6 +86,8 @@ To check the agent's configuration file to ensure that the configuration does no
   ```
   cat /opt/edgedelta/agent/config.yml
   ```
+
+***
 
 ## Uninstall the Agent
 
