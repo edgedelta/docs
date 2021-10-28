@@ -24,7 +24,7 @@ Edge Delta uses 64-bit or 32-bit MSI installation process.
 2. Click **Create Configuration**. 
 3. Select **Windows**.
 4. Click **Save**.  
-5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
+5. In the table, locate the newly created agent configuration, and then click the corresponding green rocket to deploy additional instructions. 
 6. Click **Windows**. 
 7. In the window that appears, copy and paste the HTTPS URL into a web browser to download the package. 
   - This window also displays your API key. Copy this key. You will need this key in a later step. 
