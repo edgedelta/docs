@@ -6,41 +6,64 @@ description: >-
 
 # Amazon ECS
 
-## Create ECS Task Definition
+## Overview
 
-Download [https://release.edgedelta.com/edgedelta-ecs.json](https://release.edgedelta.com/edgedelta-ecs.json) task definition
+You can use this document to learn how to deploy the Edge Delta Agent as a Daemon service on your Amazon ECS cluster.
 
-Change &lt;YOUR\_ED\_API\_KEY&gt; in task definition with your Edge Delta config API key.
+***
 
-Create agent task definition using AWS CLI:
+## Step 1: Create an Agent Configuration 
 
-```text
+1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+2. Click **Create Configuration**.
+3. Select the desired platform.
+4. Click **Save**.  
+5. In the table, locate the newly created agent configuration, and then click the corresponding green rocket to deploy additional instructions.
+6. Click the desired platform. 
+7. In the window that appears, copy the API key. 
+
+***
+
+## Step 2: Create an ECS Task Definition
+
+1. Download the [https://release.edgedelta.com/edgedelta-ecs.json](https://release.edgedelta.com/edgedelta-ecs.json) task definition.
+2. In the task definition, replace &lt;YOUR\_ED\_API\_KEY&gt; with your copied API key.
+3. Create the agent task definition via the AWS CLI or via the AWS console. 
+  - Via the AWS CLI:
+
+```
 aws ecs register-task-definition --cli-input-json file://path_to_edgedelta-ecs.json
 ```
 
-Or Create agent task definition using AWS Console UI:
+  - Via the AWS Console: 
+    - Navigate to the Elastic Container Service (ECS) section. 
+    - On the left-side navigation, click **Task Definitions**.
+    - Click **Create new Task Definition**.
+    - Select a launch type compatibility, and then click Next step. 
+    - Navigate to the bottom of the page, and then click **Configure via JSON**.
+    - Paste the paste task definition JSON, and then click **Save**. 
+    - Click **Create**. 
 
-Navigate to ECS/Task Definitions/Create new Task Definition, scroll bottom select Configure via JSON and paste task definition JSON.
+***
 
-## Run agent as an ECS Daemon Service
+## Step 3: Run the Agent as an ECS Daemon Service
 
-You may run agent as an ordinary ECS task which will only collect logs from the containers running on the EC2 instance the task is running.
+While you can use the agent as an ordinary ECS task, you will only collect logs from the containers running on the EC2 instance the task is running. As a result, to properly collect all logs from containers on all instances in your cluster, you need to run the agent as a Daemon Service.
 
-To properly collect all logs from containers on all instances in your cluster you need to run agent as a Daemon Service.
+1. In the AWS Console, navigate to the Elastic Container Service (ECS) section, and then find your cluster.
+2. Under **Services**, click the **Create**.
+3. Select **EC2 Launch Type**.
+4. In the drop-down menu, select the task definition you created.  
+5. Select **DAEMON service type**, set a service name, and then click **Next step**.
+6. Select **None for load balance**r, click **Next step**.
+7. By default, auto scaling is disabled. click **Next step**.
+8. Review the summary, and then click **Create Service**.
 
-In AWS Console UI navigate to ECS and find your cluster, then follow below steps:
+## Step 4: Verify Defintions and Configurations
 
-* Under Services click the Create
-* Select EC2 Launch Type
-* Select the task definition created above in dropdown
-* Select DAEMON service type and set a service name, click Next Step
-* Select None for load balancer, click Next Step
-* Auto Scaling is already disabled, click Next Step
-* Review summary and finish by clicking Create Service
-
-Make sure your container definition for other tasks or services does not have`logConfiguration.logDriver` parameter. With no logging driver logs are written to standard output and collected by the agent service.
-
-In agent configuration yaml on [https://admin.edgedelta.com](https://admin.edgedelta.com) make sure you have container input source is enabled as seen below to collect container logs:
+1. Verify that the container definition for other tasks or services does not have the`logConfiguration.logDriver` parameter. Without a logging driver, logs are written to standard output and collected by the agent service.
+2. In the Edge Delta Admin portal, in the left-side navigation, click **Agent Settings**. Locate the agent configuration, and then click the edit icon. 
+3. In the agent YAML configuration file, verify that you have the container input source is enabled. Review the following example to view how to collect container logs:
 
 ```yaml
 inputs:
@@ -64,17 +87,20 @@ workflows:
     ...
 ```
 
-## Useful Tips
+***
 
-### File Monitoring
+## File Monitoring
 
-You may want to monitor additional log files on EC2 instances in your ECS cluster.
+As an optional step, you can monitor for additional log files on your EC2 instances in your ECS cluster.
 
-Update `mountpoints` and `volumes` section in [edgedeleta-ecs.json](https://release.edgedelta.com/edgedelta-ecs.json).
+To do so, update the `mountpoints` and `volumes` section in the [edgedeleta-ecs.json](https://release.edgedelta.com/edgedelta-ecs.json).
 
-Below example change allows you to also monitor log files in `/var/log/ecs/` on EC2 instance which are about ECS system events.
+Review the following example to understand how to monitor log files in `/var/log/ecs/` on an EC2 instance.
 
-```text
+Additionally, you must add a file input in the agent YAML configuration file to monitor the mounted path. In the example below, the path is /host/var/log/ecs/. 
+
+
+```
    "mountPoints": [
         {
           "containerPath": "/var/run/docker.sock",
@@ -106,4 +132,5 @@ Below example change allows you to also monitor log files in `/var/log/ecs/` on 
 ...
 ```
 
-Do not forget to add file input in agent yaml config to monitor mounted path which is `/host/var/log/ecs/` in above sample. See [files](../configuration/inputs.md#files) for further details.
+
+***
