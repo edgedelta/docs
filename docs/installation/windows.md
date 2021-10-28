@@ -13,7 +13,7 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 Edge Delta uses 64-bit or 32-bit MSI installation process.
 
 > **Note**
-
+>
 > This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
 
 ***
