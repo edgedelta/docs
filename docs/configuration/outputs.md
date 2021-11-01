@@ -513,7 +513,7 @@ If enabled, the SolarWinds Loggly integration will stream analytics and insights
 
 ### Logz.io
 
-If enabled, the Logz.io integration will stream analytics and insights to an Logz.io endpoint.
+If enabled, the Logz.io integration will stream analytics and insights to a Logz.io endpoint.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
@@ -535,6 +535,119 @@ If enabled, the Logz.io integration will stream analytics and insights to an Log
         custom_tags:
           "app": "starbucks_pos_transaction_manager"
           "region": "us-west-2"
+```
+
+### Loki
+
+If enabled, the Loki integration will stream analytics and insights to a Loki endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
+| type | Must be set to "loki" to stream data to Loki. | Yes |
+| endpoint | Loki endpoint. | Yes |
+| api\_key | Loki api key. | Yes |
+| user | Username for Loki credentials. | Yes |
+| custom\_tags | Key-values defined in custom tags by the user are streamed to Loki for every request. | No |
+| message\_template | Used to customize the message content. It supports templating. | No |
+| features | Features defines which data types stream to backend, it can be "log", "edac" or "cluster". | No |
+
+#### **Message Template**
+
+Message Template is an optional way to customize the message payload sent Loki destinations. It supports templating.
+ **Available template fields**:
+
+* **Tag**: User defined tag to describe the environment. e.g. prod\_us\_west\_2\_cluster.
+* **Host**: Hostname of the environment where agent running on.
+* **ConfigID**: Configuration ID which agent is using.
+* **Source**: Source name is the identifier of the source such as docker container id or file name.
+* **SourceType**: Source type. e.g. "Docker", "system"
+* **FileGlobPath**: File global path.
+* **K8sPodName**: Kubernetes pod name.
+* **K8sNamespace**: Kubernetes namespace.
+* **K8sControllerKind**: Kubernetes controller kind.
+* **K8sContainerName**: Kubernetes container name.
+* **K8sContainerImage** Kubernetes container image.
+* **K8sControllerLogicalName**: Kubernetes controller logical name.
+* **ECSCluster**: ECS cluster name.
+* **ECSContainerName**: ECS container name.
+* **ECSTaskVersion**: ECS task version/
+* **ECSTaskFamily**: ECS task family.
+* **DockerContainerName**: Docker container name.
+
+```yaml
+      - name: loki-integration
+        type: loki
+        endpoint: "https://localhost:3000/loki/api/v1/push"
+        api_key: "api_key"
+        user: "user"
+        custom_tags:
+          "app": "test"
+          "region": "us-west-2"
+        message_template:
+          "File Path": "{{.FileGlobPath}}"
+          "K8s PodName": "{{.K8sPodName}}"
+          "K8s Namespace": "{{.K8sNamespace}}"
+          "K8s ControllerKind": "{{.K8sControllerKind}}"
+          "K8s ContainerName": "{{.K8sContainerName}}"
+          "K8s ContainerImage": "{{.K8sContainerImage}}"
+          "K8s ControllerLogicalName": "{{.K8sControllerLogicalName}}"
+          "ECSCluster": "{{.ECSCluster}}"
+          "ECSContainerName": "{{.ECSContainerName}}"
+          "ECSTaskVersion": "{{.ECSTaskVersion}}"
+          "ECSTaskFamily": "{{.ECSTaskFamily}}"
+          "DockerContainerName": "{{.DockerContainerName}}"
+          "ConfigID": "{{.ConfigID}}"
+          "Host": "{{.Host}}"
+          "Source": "{{.Source}}"
+          "SourceType": "{{.SourceType}}"
+          "Tag": "{{.Tag}}"
+```
+
+### FluentD
+
+If enabled, the FluentD integration will stream analytics and insights to a FluentD endpoint.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
+| type | Must be set to "fluentd" to stream data to FluentD | Yes |
+| host | FluentD host. Required if want to support tcp stream. | Yes |
+| port | FluentD port. Required if want to support tcp stream. | Yes |
+| encoder | Encoder type while streaming data to FluentD. Raw or 'msgpack' supported. | No |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+
+```yaml
+      - name: fluentd-log-fwd
+        type: fluentd
+        host: log-repo-host
+        port: 23131
+        encoder: msgpack
+        pool_size: 10
+        features: log
+```
+
+### Azure Event Hub
+
+If enabled, the Event Hub integration will stream analytics and insights to a Azure Event Hub endpoint. Can follow this [link](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token) to create an Azure AD Token.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
+| type | Must be set to "eventhubstream" to stream data to Event Hub | Yes |
+| endpoint | Event Hub endpoint. | Yes |
+| token | Azure AD token. | Yes |
+| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk", "alert" or "all". If you don't provide any value then it is all. | No |
+
+```yaml
+      - name: eventhub-stream
+        type: eventhubstream
+        endpoint: "https://namespace.servicebus.windows.net/hub/messages"
+        token: "azure-ad-token"
+        features: log,metric
 ```
 
 ## Trigger Destinations
@@ -1089,7 +1202,7 @@ If enabled, the Moogsoft integration will stream notifications and alerts to the
 
 ### **Remedy**
 
-If enabled, the Remedy integration will stream notifications and alerts to the specified Remedy URL
+If enabled, the Remedy integration will stream notifications and alerts to the specified Remedy URL.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
@@ -1100,6 +1213,7 @@ If enabled, the Remedy integration will stream notifications and alerts to the s
 | token | Remedy token. One of the fields token or username/password is required. | No |
 | username | Username for Remedy basic authentication. One of the fields username/password or token is required. | No |
 | password | Password for Remedy basic authentication. One of the fields username/password or token is required. | No |
+| custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
 | notify\_content | Used to customize the notification content. It supports templating. Moogsoft only supports `custom_fields` subfield. | No |
 
 ```yaml
@@ -1107,6 +1221,32 @@ If enabled, the Remedy integration will stream notifications and alerts to the s
         type: remedy
         endpoint: "localhost"
         token: remedy-token
+        notify_content:
+          custom_fields:
+            "test-field": "test"
+        custom_headers: 
+          X-header1: "test-header"
+```
+
+### **Azure Event Hub**
+
+If enabled, the Event Hub trigger integration will stream notifications and alerts to the specified Event Hub URL. Can follow this [link](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token) to create an Azure AD Token.
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
+| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
+| type | Must be set to "eventhub" to send alerts to Event Hub | Yes |
+| endpoint | Event Hub endpoint. | Yes |
+| token | Azure AD token. | Yes |
+| custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
+| notify\_content | Used to customize the notification content. It supports templating. Event Hub only supports `custom_fields` subfield. | No |
+
+```yaml
+       - name: eventhub-test
+        type: eventhub
+        endpoint: https://eventshub-test.servicebus.windows.net/test/messages
+        token: "test-token"
         notify_content:
           custom_fields:
             "test-field": "test"
