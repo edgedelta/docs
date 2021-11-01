@@ -539,24 +539,46 @@ If enabled, the Logz.io integration will stream analytics and insights to a Logz
 
 ### Loki
 
-If enabled, the Loki integration will stream analytics and insights to a Loki endpoint.
+You can enable this integration to stream analytics and insights to a Loki endpoint.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "loki" to stream data to Loki. | Yes |
-| endpoint | Loki endpoint. | Yes |
-| api\_key | Loki api key. | Yes |
-| user | Username for Loki credentials. | Yes |
+| name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
+| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custome name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
+| type | This key must be set to "loki" to stream data to Loki. | Yes |
+| endpoint | This key is the Loki endpoint. | Yes |
+| api\_key | This key is the Loki API key. | Yes |
+| user | This key is the username for Loki. | Yes |
 | custom\_tags | Key-values defined in custom tags by the user are streamed to Loki for every request. | No |
-| message\_template | Used to customize the message content. It supports templating. | No |
-| features | Features defines which data types stream to backend, it can be "log", "edac" or "cluster". | No |
+| message\_template | This key customizes the message content. This key supports templating. | No |
+| features | This key defines which data types to stream to the Loki backend, You can set this key to "log," "edac," or "cluster." | No |
 
 #### **Message Template**
 
-Message Template is an optional way to customize the message payload sent Loki destinations. It supports templating.
- **Available template fields**:
+As an optional step, you can customize the message payload that is sent to Loki destinations. 
+
+Review the following avaialble template fields: 
+
+| Field | Description |
+| :--- | :--- | 
+| Tag | This field is the user-defined tag that describes the environment, such as . prod\_us\_west\_2\_cluster. | 
+| Host | This field is the hostname of the environment where the agent is running on. | 
+| ConfigID | This field is the configuration ID of the corresponding agent. | 
+| Source | This field is the source name, specifically the identifier of the source, such as docker container id or file name. | 
+| SourceType | This field is the source type, such as "Docker" or "system." | 
+| FileGlobPath | This field is the file global path. | 
+| K8sPodName | This field is the Kubernetes pod name. | 
+| K8sNamespace | This field is the Kubernetes namespace. | 
+| K8sControllerKind | This field is the Kubernetes controller kind. | 
+| K8sContainerName | This field is the Kubernetes container name. | 
+| K8sContainerImage | This field is the Kubernetes container image. | 
+| K8sControllerLogicalName | This field is the Kubernetes controller logical name. | 
+| ECSCluster | This field is the ECS cluster name. | 
+| ECSContainerName | This field is the ECS container name. | 
+| ECSTaskVersion | This field is the ECS task version. | 
+| ECSTaskFamily | This field is the ECS task family. | 
+| DockerContainerName | This field is the Docker container name. | 
+
 
 * **Tag**: User defined tag to describe the environment. e.g. prod\_us\_west\_2\_cluster.
 * **Host**: Hostname of the environment where agent running on.
