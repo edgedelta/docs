@@ -580,24 +580,6 @@ Review the following avaialble template fields:
 | DockerContainerName | This field is the Docker container name. | 
 
 
-* **Tag**: User defined tag to describe the environment. e.g. prod\_us\_west\_2\_cluster.
-* **Host**: Hostname of the environment where agent running on.
-* **ConfigID**: Configuration ID which agent is using.
-* **Source**: Source name is the identifier of the source such as docker container id or file name.
-* **SourceType**: Source type. e.g. "Docker", "system"
-* **FileGlobPath**: File global path.
-* **K8sPodName**: Kubernetes pod name.
-* **K8sNamespace**: Kubernetes namespace.
-* **K8sControllerKind**: Kubernetes controller kind.
-* **K8sContainerName**: Kubernetes container name.
-* **K8sContainerImage** Kubernetes container image.
-* **K8sControllerLogicalName**: Kubernetes controller logical name.
-* **ECSCluster**: ECS cluster name.
-* **ECSContainerName**: ECS container name.
-* **ECSTaskVersion**: ECS task version/
-* **ECSTaskFamily**: ECS task family.
-* **DockerContainerName**: Docker container name.
-
 ```yaml
       - name: loki-integration
         type: loki
