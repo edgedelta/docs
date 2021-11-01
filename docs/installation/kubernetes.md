@@ -15,10 +15,13 @@ The agent is a daemon that analyzes logs and container metrics from a Kubernetes
 
 Edge Delta uses a Kubernetes-recommended, node-level logging architecture, also known as a DaemonSet architecture. The DaemonSet runs the agent pod on each node. Each agent pod analyzes logs from all other pods running on the same node.
 
-
 > **Note**
 >
 > This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
+
+> **Note**
+>
+> If you want to install the agent on your Kubernetes via Helm, then see [Kubernetes via Helm](helm.md).
 
 ***
 
