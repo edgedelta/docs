@@ -551,7 +551,7 @@ You can enable this integration to stream analytics and insights to a Loki endpo
 | user | This key is the username for Loki. | Yes |
 | custom\_tags | This key is the user-defined key-values that are streamed to Loki for every request. | No |
 | message\_template | This key customizes the message content. This key supports templating. | No |
-| features | This key defines which data types to stream to the Loki backend, You can set this key to "log," "edac," or "cluster." | No |
+| features | This key defines which data types to stream to the Loki backend. You can set this key to "log," "edac," or "cluster." | No |
 
 #### **Message Template**
 
@@ -611,17 +611,17 @@ Review the following avaialble template fields:
 
 ### FluentD
 
-If enabled, the FluentD integration will stream analytics and insights to a FluentD endpoint.
+You can enable this integration to stream analytics and insights to a FluentD endpoint.
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "fluentd" to stream data to FluentD | Yes |
-| host | FluentD host. Required if want to support tcp stream. | Yes |
-| port | FluentD port. Required if want to support tcp stream. | Yes |
-| encoder | Encoder type while streaming data to FluentD. Raw or 'msgpack' supported. | No |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
+| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custome name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
+| type | This key must be set to "fluentd" to stream data to FluentD. | Yes |
+| host | This key is the FluentD host. This key is required if you want to support tcp stream. | Yes |
+| port | This key is the FluentD port. This key is required if want to support tcp stream. | Yes |
+| encoder | This key is the encoder type to use while streaming data to FluentD. Raw and 'msgpack' are supported. | No |
+| features | This key defines which data types to stream to the backend. You can set this key to "log", "metric," "edac," "cluster," "topk," or "all". If you do not provide a value, then "all" is used. | No |
 
 ```yaml
       - name: fluentd-log-fwd
@@ -635,16 +635,20 @@ If enabled, the FluentD integration will stream analytics and insights to a Flue
 
 ### Azure Event Hub
 
-If enabled, the Event Hub integration will stream analytics and insights to a Azure Event Hub endpoint. Can follow this [link](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token) to create an Azure AD Token.
+You can enable this integration to stream analytics and insights to an Azure Event Hub endpoint.
+
+> **Note**
+> 
+> To create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token). 
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "eventhubstream" to stream data to Event Hub | Yes |
-| endpoint | Event Hub endpoint. | Yes |
-| token | Azure AD token. | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk", "alert" or "all". If you don't provide any value then it is all. | No |
+| name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
+| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custome name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
+| type | This key must be set to "eventhubstream" to stream data to Azure Event Hub. | Yes |
+| endpoint | This key is the Event Hub endpoint. | Yes |
+| token | This key is the Azure AD token. | Yes |
+| features | This key defines which data types to stream to the  backend, You can set this key to "log," "metric," "edac," "cluster," "topk," "alert," or "all". If you do not provide a value, then "all" is used. | No |
 
 ```yaml
       - name: eventhub-stream
