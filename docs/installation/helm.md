@@ -100,8 +100,6 @@ NOTES:
 2. Find the configuration with <API-KEY> to check if agents are active
 ```
 
--->
-
 
 8. In the same folder, install the helm chart using values.yml:
 
@@ -109,7 +107,9 @@ NOTES:
 helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f values.yaml
 ```
 
-9. View helm-installed packages in the **edgedelta** namespace:
+-->
+
+8. View helm-installed packages in the **edgedelta** namespace:
 
 ```
 helm ls -n edgedelta
