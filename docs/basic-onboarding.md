@@ -15,7 +15,7 @@ You can use this document to learn how to:
 >  **Before you begin**
 >  
 > To ensure an easy installation process, review the [Pre-Installation Agent Requirements](agent-requirements.md) document.
-<p>
+
 
 >  **Before you begin**
 >  
@@ -30,7 +30,7 @@ You can use this document to learn how to:
 
 ***
 
-## Step 2: Deploy the Agent 
+## Step 2: Deploy the Agent
 
 1. In the Edge Delta Admin portal, select your operating platform.
 2. In **Enter Environment Tag**, enter a descriptive tag to explain where the agent will be deployed.
@@ -43,10 +43,9 @@ You can use this document to learn how to:
 9. The agent will take a few minutes to deploy and authenticate with Edge Delta.
 10. After a successful deployment, click **Go To Status Page**.
 11. In the window that appears, you can click **Go To Demo Environment** to see a pre-populated account where you can view and test data.
-<ul>
-<li>To view your own account, click X to close the window.</li>
-<li>If you access the demo environment, but you want to access your own account, in the top, click Return To Your Own Account.</li>
-</ul>
+12. To view your own account, click **X** to close the window.
+13. If you access the demo environment, but you want to access your own account, in the top, click **Return To Your Own Account**.
+
 
 ***
 
@@ -59,7 +58,7 @@ There are 2 ways to verify agent deployment:
 
 ***
 
-### Option 1: Verify Agent Deployment in the Portal 
+### Option 1: Verify Agent Deployment in the Portal
 
 1. In the Edge Delta Admin Portal, on the left-side navigation, under **Data Pipeline**, click **Pipeline Status**.
 2. Review the **Active Nodes** section.
