@@ -64,7 +64,8 @@ There are 2 ways to verify agent deployment:
 2. Review the **Active Nodes** section.
 3. If the agent was successfully installed, then there will be at least 1 active node.
 
->  **Note:**
+>  **Note**
+>
 > After an initial agent deployment, the portal may only display non-zero values.
 
 ***
