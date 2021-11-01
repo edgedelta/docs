@@ -544,7 +544,7 @@ You can enable this integration to stream analytics and insights to a Loki endpo
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
-| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custome name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
+| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custom name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
 | type | This key must be set to "loki" to stream data to Loki. | Yes |
 | endpoint | This key is the Loki endpoint. | Yes |
 | api\_key | This key is the Loki API key. | Yes |
@@ -616,7 +616,7 @@ You can enable this integration to stream analytics and insights to a FluentD en
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
-| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custome name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
+| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custom name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
 | type | This key must be set to "fluentd" to stream data to FluentD. | Yes |
 | host | This key is the FluentD host. This key is required if you want to support tcp stream. | Yes |
 | port | This key is the FluentD port. This key is required if want to support tcp stream. | Yes |
@@ -639,12 +639,12 @@ You can enable this integration to stream analytics and insights to an Azure Eve
 
 > **Note**
 > 
-> To create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token). 
+> To enable this integration, you must have an Azure AD token. To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
 | name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
-| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custome name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
+| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custom name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
 | type | This key must be set to "eventhubstream" to stream data to Azure Event Hub. | Yes |
 | endpoint | This key is the Event Hub endpoint. | Yes |
 | token | This key is the Azure AD token. | Yes |
@@ -1238,17 +1238,22 @@ If enabled, the Remedy integration will stream notifications and alerts to the s
 
 ### **Azure Event Hub**
 
-If enabled, the Event Hub trigger integration will stream notifications and alerts to the specified Event Hub URL. Can follow this [link](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token) to create an Azure AD Token.
+You can enable this integration to stream notifications and alerts to a specified Event Hub URL. 
+
+> **Note**
+> 
+> To enable this integration, you must have an Azure AD token. To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
+
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "eventhub" to send alerts to Event Hub | Yes |
-| endpoint | Event Hub endpoint. | Yes |
-| token | Azure AD token. | Yes |
-| custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
-| notify\_content | Used to customize the notification content. It supports templating. Event Hub only supports `custom_fields` subfield. | No |
+| name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
+| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custom name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
+| type | This key must be set to "eventhub" to send alerts to Event Hub. | Yes |
+| endpoint | This key is the Event Hub endpoint. | Yes |
+| token | This key is the Azure AD token. | Yes |
+| custom\_headers | This key appends custom headers, such as Authorization, to requests performed by the integration. | No |
+| notify\_content | This key customizes the notification content. This key supports templating. Event Hub only supports the `custom_fields` subfield. | No |
 
 ```yaml
        - name: eventhub-test
