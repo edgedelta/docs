@@ -13,21 +13,21 @@ You can use this document to learn how to install the Edge Delta Agent for your 
 Edge Delta uses 64-bit or 32-bit MSI installation process.
 
 > **Note**
-
-> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](/docs/basic-onboarding.md).
+>
+> This document is designed for existing users. If you have not created an account with Edge Delta, then see [Basic Onboarding](../basic-onboarding.md).
 
 ***
 
-## Step 1: Create and Download the Agent 
+## Step 1: Create and Download the Agent
 
 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
-2. Click **Create Configuration**. 
+2. Click **Create Configuration**.
 3. Select **Windows**.
 4. Click **Save**.  
-5. In the table, locate the newly created agent, and then click the corresponding green rocket to deploy additional instructions. 
-6. Click **Windows**. 
-7. In the window that appears, copy and paste the HTTPS URL into a web browser to download the package. 
-  - This window also displays your API key. Copy this key. You will need this key in a later step. 
+5. In the table, locate the newly created agent configuration, and then click the corresponding green rocket to deploy additional instructions.
+6. Click **Windows**.
+7. In the window that appears, copy and paste the HTTPS URL into a web browser to download the package.
+  - This window also displays your API key. Copy this key. You will need this key in a later step.
 
 ***
 
@@ -38,7 +38,7 @@ Edge Delta uses 64-bit or 32-bit MSI installation process.
 3. Enter the API key you copied earlier, and then follow the on-screen instructions to complete the installation.
 
 
-<!-- 
+<!--
 
 
 ### Option 2: Via the Command Line (Silent Mode)
