@@ -549,7 +549,7 @@ You can enable this integration to stream analytics and insights to a Loki endpo
 | endpoint | This key is the Loki endpoint. | Yes |
 | api\_key | This key is the Loki API key. | Yes |
 | user | This key is the username for Loki. | Yes |
-| custom\_tags | Key-values defined in custom tags by the user are streamed to Loki for every request. | No |
+| custom\_tags | This key is the user-defined key-values that are streamed to Loki for every request. | No |
 | message\_template | This key customizes the message content. This key supports templating. | No |
 | features | This key defines which data types to stream to the Loki backend, You can set this key to "log," "edac," or "cluster." | No |
 
