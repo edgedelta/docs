@@ -551,7 +551,7 @@ You can enable this integration to stream analytics and insights to a Loki endpo
 | user | This key is the username for Loki. | Yes |
 | custom\_tags | This key is the user-defined key-values that are streamed to Loki for every request. | No |
 | message\_template | This key customizes the message content. This key supports templating. | No |
-| features | This key defines which data types to stream to the Loki backend. You can set this key to "log," "edac," or "cluster." | No |
+| features | This key defines which data types to stream to the Loki backend. You can set this key to "log," "edac," and / or "cluster." | No |
 
 #### **Message Template**
 
@@ -621,7 +621,7 @@ You can enable this integration to stream analytics and insights to a FluentD en
 | host | This key is the FluentD host. This key is required if you want to support tcp stream. | Yes |
 | port | This key is the FluentD port. This key is required if want to support tcp stream. | Yes |
 | encoder | This key is the encoder type to use while streaming data to FluentD. Raw and 'msgpack' are supported. | No |
-| features | This key defines which data types to stream to the backend. You can set this key to "log", "metric," "edac," "cluster," "topk," or "all". If you do not provide a value, then "all" is used. | No |
+| features | This key defines which data types to stream to the backend. You can set this key to "log", "metric," "edac," "cluster," "topk," and / or "all". If you do not provide a value, then "all" is used. | No |
 
 ```yaml
       - name: fluentd-log-fwd
@@ -648,7 +648,7 @@ You can enable this integration to stream analytics and insights to an Azure Eve
 | type | This key must be set to "eventhubstream" to stream data to Azure Event Hub. | Yes |
 | endpoint | This key is the Event Hub endpoint. | Yes |
 | token | This key is the Azure AD token. | Yes |
-| features | This key defines which data types to stream to the  backend, You can set this key to "log," "metric," "edac," "cluster," "topk," "alert," or "all". If you do not provide a value, then "all" is used. | No |
+| features | This key defines which data types to stream to the  backend, You can set this key to "log," "metric," "edac," "cluster," "topk," "alert," and / or "all". If you do not provide a value, then "all" is used. | No |
 
 ```yaml
       - name: eventhub-stream
