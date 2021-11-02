@@ -8,30 +8,40 @@ description: >-
 
 ## Overview
 
-Edge Delta supports the usage of environment variables as values in configuration file. Variables are especially useful to pass secrets to agent in a secure manner.
+You can use this document to learn how environment variables are used with Edge Delta.
 
-Environment variables values are acquired from the local operating system environment of the Edge Delta agent process during runtime. Values of environment variables are passed in different ways depending on the agent deployment method and the target environment, see [Environment Variables](../installation/environment-variables.md).
+Environment variables are used as values in the configuration files for the Edge Delta Agent. Variables are used to pass secrets to the agent in a secure manner.
 
-## Using Variables in Agent Configuration Files
+During runtime, the agent's local operating system environment obtains the values for the environment variables.
 
-Variables can be referred in one of the following formats in the agent configuration:
+***
+
+## Learn About Variables in Agent Configuration Files
+
+There are 2 ways to reference variables in the agent configuration file:
 
 ```text
 '{{ Env "MY_VARIABLE_NAME" }}'
 '{{ Env "MY_VARIABLE_NAME" "my default value" }}'
 ```
 
-If no default value is provided existence of the variable in agent execution environment is expected. Otherwise agent will stop with error.
+If the default value is **not** provided, then the variable in the agent execution environment must exist. If not, the agent will stop with an error.  
 
-If default value is provided and variable does not exists on agent execution environment default value will be used.
+If the default value is provided, but the variable does not exist in the agent execution environment, then the default value will be used.
 
-Environment variables can only be used for string typed inputs, in other words if a configuration parameter expects anything other than string, environment variable substitution cannot be used.
+> **Note**
+> 
+> Environment variables can only be used with string-typed inputs. In other words, if a configuration parameter expects anything besides a string, then the environment variable substitution cannot be used.
 
-### Example
+***
 
-Slack endpoint is a secret allowing posting directly into a slack channel.
+## Review Example
 
-Instead of explicitly putting it into configuration it can be referred from agent execution environment as below:
+In the following example, the Slack endpoint is a secret that allows posts to be directly made into a Slack channel.
+
+Instead of explicitly putting the variable into the configuration file, the variable can be referred from the agent execution environment. 
+
+Review the following example: 
 
 ```text
   triggers:
@@ -40,15 +50,22 @@ Instead of explicitly putting it into configuration it can be referred from agen
         endpoint: '{{ Env "MY_SLACK_ENDPOINT" }}'
 ```
 
-## Global Configuration Variables
+***
 
-In certain scenarios it is useful to set a variable in a simple way. On production environment with large number of agents it is impractical to toggle certain features, change destinations or update parts of the processing rules by updating operating system variables.
+## Learn About Global Configuration Variables
 
-Configuration Variables table under [Global Settings](https://admin.edgedelta.com/global-settings) provides an easy way to set or override such variables. Variable updates will be detected automatically by the agents and will be in use within a minute.
+In certain cases, it is useful to set a variable in a simple way. For example, on a production environment with a large number of agents, it is not practical to update opearting system variables to toggle certain features, change destinations, or update parts of the processing rules.
 
-Example Configuration Variables:
+> **Note**
+> 
+> To learn how to set or override variables, review the **Configuration Variables** table in the [Global Settings](https://admin.edgedelta.com/global-settings) page in the Edge Delta Admin portal. The agent will automatically detect variable updates.
+
+Review the following examples of configuration variables:
 
 | Name | Value |
 | :--- | :--- |
 | AGENT\_LOG\_LEVEL | error |
 | API\_FILTER\_PATTERN | INFO |
+
+***
+
