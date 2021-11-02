@@ -24,13 +24,13 @@ Edge Delta uses a Kubernetes-recommended, node-level log collecting architecture
 ***
 
 
-## Install the Agent via Helm 
+## Create a Configuration and Install the Agent via Helm 
 
 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**. 
 3. Select **Helm**.
 4. Click **Save**.  
-5. In the table, locate the newly created agent configuration, and then click the corresponding green rocket to deploy additional instructions. 
+5. In the table, locate the newly created configuration, and then click the corresponding green rocket to deploy additional instructions. 
 6. Click **Helm**. 
 7. In the window that appears, follow the on-screen instructions. 
   - This window also displays your API key.  
