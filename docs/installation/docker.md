@@ -18,13 +18,13 @@ Edge Delta has a Docker container image that can be deployed as a Sidecar or Dae
 
 ***
 
-## Step 1: Create and Download the Agent
+## Step 1: Create a Configuration and Download the Agent
 
 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Select **Docker**.
 4. Click **Save**.  
-5. In the table, locate the newly created agent configuration, and then click the corresponding green rocket to deploy additional instructions.
+5. In the table, locate the newly created configuration, and then click the corresponding green rocket to deploy additional instructions.
 6. Click **Docker**.
 7. In the window that appears, copy the command.
   - This window also displays your API key. Copy this key for a later step. 
