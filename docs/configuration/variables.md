@@ -69,8 +69,3 @@ Review the following examples of configuration variables:
 
 ***
 
-## Review Additional Documentation
-
-To learn more, see [Environment Variables](../installation/environment-variables.md).
-
-***
