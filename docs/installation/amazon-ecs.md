@@ -12,13 +12,13 @@ You can use this document to learn how to deploy the Edge Delta Agent as a Daemo
 
 ***
 
-## Step 1: Create an Agent Configuration 
+## Step 1: Create a Configuration 
 
 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Select the desired platform.
 4. Click **Save**.  
-5. In the table, locate the newly created agent configuration, and then click the corresponding green rocket to deploy additional instructions.
+5. In the table, locate the newly created configuration, and then click the corresponding green rocket to deploy additional instructions.
 6. Click the desired platform. 
 7. In the window that appears, copy the API key. 
 
