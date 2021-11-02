@@ -24,7 +24,7 @@ There are 2 ways to create a configuration:
   * Use a template with default settings
     * After you save a template, you can view and update the template's configurations.
   * Use a visual editor to populate a YAML file 
-    * Before you save, you view and can make changes directly in the YAML file.  
+    * Before you save, you can view and make changes directly in the YAML file.  
 
 **Option 1: Use a template with default settings**
 1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**. 
@@ -74,13 +74,13 @@ Any change made to a configuration will be tracked and displayed in the Edge Del
 3. Make your changes, and then click **Save**. 
 4. A new entry will appear in the table, with the date and time of the update. 
 
-After you update a configuration via the portal, the updated configuration version will be automatically propagated to any active agent that uses the same API key. The agents communicate with the CCB and retrieve any update.. Typically, the agent will be updated update within a minute or less. 
+After you update a configuration via the portal, the updated configuration version will be automatically propagated to any active agent that uses the same API key. The agents communicate with the CCB and retrieve any update. Typically, the agent will be updated within a minute or less. 
 
 ***
 
 ## Configure File Management Locally
 
-While you can use the Cloud Configuration Backend \(CCB\) in the Edge Delta Admin portal to update an configuration, you can also manage and deploy configuration files locally, with tools such as Chef, Puppet, Ansible, Salt, Terraform, etc.  
+While you can use the Cloud Configuration Backend \(CCB\) in the Edge Delta Admin portal to update a configuration, you can also manage and deploy configuration files locally, with tools such as Chef, Puppet, Ansible, Salt, Terraform, etc.  
 
 To configure locally, a flag must be provided during agent deployment to let the system know that Local Configuration File Management is in place.
 
