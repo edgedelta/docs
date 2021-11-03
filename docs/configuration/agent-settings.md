@@ -15,7 +15,9 @@ At a high level, there are 2 ways to manage **Agent Settings**:
   * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
   * If you already have an existing configuration, then you can update the configuration in the YAML file. 
 
-While all parameters can be updated in the YAML file, most **Agent Settings** parameters are available in the visual editor. 
+> **Note**
+> 
+> While all parameters can be updated in the YAML file, most **Agent Settings** parameters are available in the visual editor. 
 
 **To access the visual editor for a new configuration:** 
 
