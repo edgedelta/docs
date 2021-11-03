@@ -6,7 +6,32 @@ description: >-
 
 # Agent Settings
 
-## Configuration Parameters
+## Overview
+
+You can use this document to learn about the configuration parameters available in a configuration file, specifically for **Agent Settings**.
+
+At a high level, there are 2 ways to manage **Agent Settings**:
+
+  * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
+  * If you already have an existing configuration, then you can update the configuration in the YAML file. 
+
+While all parameters can be updated in the YAML file, most **Agent Settings** parameters are available in the visual editor. 
+
+**To access the visual editor for a new configuration:** 
+1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+2. Click **Create Configuration**.
+3. Click **Visual**.
+4. On the right-side, select **Agent Settings**. 
+5. Review the list of options. 
+
+**To access the YAML file for an existing configuration:** 
+1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
+3. Review the YAML file.
+
+***
+
+## Review Configuration Parameters
 
 | Key | Description | Default | Required |
 | :--- | :--- | :--- | :--- |
@@ -30,7 +55,9 @@ description: >-
 | ephemeral | It marks the agent as can be down temporarily due to scale down scenarios and it will be used for capturing down agents. | true | No |
 | soft\_cpu\_limit | It is only honored by clustering processor at the moment. 0.5 means 50% of a core. It can be enabled by setting cpu\_friendly=true in clustering rule. | 0.0 | No |
 
-Example:
+***
+
+## Review YAML Example
 
 ```yaml
 agent_settings:
