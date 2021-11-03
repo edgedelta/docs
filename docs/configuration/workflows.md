@@ -23,17 +23,22 @@ At a high level, there are 2 ways to manage **Workflows**:
 
 **To access the visual editor for a new configuration:** 
 
+To create a new workflow, you must have existing inputs, processors, destinations, thresholds, and filters to add to the new workflow. You cannot create a workflow with these existing components.  
+
 1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Click **Visual**.
-4. On the right-side, select **Agent Settings**. 
-5. Review the list of options. 
+4. On the right-side, select **Workflows**. 
+5. Enter a Name and Desacription.
+6. Mark the desired existing inputs, processors, destinations, thresholds, and filters to add to the workflow. 
+7. To make additional configurations to the configuration file, click the back button, and select a new configuration parameter to manage. 
+8. To save the configuraiton and exit the visual editor, click **Save**. 
 
 **To access the YAML file for an existing configuration:** 
 
 1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
-3. Review the YAML file. 
+3. Review the YAML file, make your changes, and then click **Save**. 
 
 ***
 
