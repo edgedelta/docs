@@ -8,19 +8,19 @@ description: >-
 
 ## Overview
 
-You can use this document to learn how environment variables are used with Edge Delta.
+You can use this document to learn about environment variables.
 
-Environment variables are used as values in the configuration files for the Edge Delta Agent. Variables are used to pass secrets to the agent in a secure manner.
+Environment variables are used as values in the configuration files for the Edge Delta agent. Variables are used to pass secrets to the agent in a secure manner.
 
 During runtime, the agent's local operating system environment obtains the values for the environment variables.
 
 ***
 
-## Learn About Variables in Agent Configuration Files
+## Learn About Variables in Configuration Files
 
-There are 2 ways to reference variables in the agent configuration file:
+There are 2 ways to reference variables in the configuration file:
 
-```text
+```
 '{{ Env "MY_VARIABLE_NAME" }}'
 '{{ Env "MY_VARIABLE_NAME" "my default value" }}'
 ```
