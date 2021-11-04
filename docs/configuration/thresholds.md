@@ -25,6 +25,7 @@ Thresholds define alerting conditions at the agent level. Each agent locally eva
 ## Define a Threshold
 
 There are 2 ways to define a threshold:
+
   * Processor-level thresholds
     *  Most processors support the **trigger_thresholds** parameter to define thresholds. 
     *  To learn more, see [Processors](./processors.md).
