@@ -555,7 +555,8 @@ You can enable this integration to stream analytics and insights to a Loki endpo
 
 #### **Message Template**
 
-As an optional step, you can customize the message payload and custom tags that are sent to Loki destinations. Character "-" is not supported as key value by Loki.
+As an optional step, you can customize the message payload and custom tags that are sent to Loki destinations. 
+  * Loki does not support the "-" character as key value.
 
 Review the following avaialble template fields: 
 
