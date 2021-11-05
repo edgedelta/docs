@@ -549,13 +549,14 @@ You can enable this integration to stream analytics and insights to a Loki endpo
 | endpoint | This key is the Loki endpoint. | Yes |
 | api\_key | This key is the Loki API key. | Yes |
 | user | This key is the username for Loki. | Yes |
-| custom\_tags | This key is the user-defined key-values that are streamed to Loki for every request. | No |
+| custom\_tags | This key is the user-defined key-values that are streamed to Loki for every request. This key supports templating. | No |
 | message\_template | This key customizes the message content. This key supports templating. | No |
 | features | This key defines which data types to stream to the Loki backend. You can set this key to "log," "edac," and / or "cluster." | No |
 
 #### **Message Template**
 
-As an optional step, you can customize the message payload that is sent to Loki destinations. 
+As an optional step, you can customize the message payload and custom tags that are sent to Loki destinations. 
+  * Loki does not support the "-" character as key value.
 
 Review the following avaialble template fields: 
 
@@ -633,7 +634,7 @@ You can enable this integration to stream analytics and insights to a FluentD en
         features: log
 ```
 
-### Azure Event Hub
+### Azure Event Hub Stream
 
 You can enable this integration to stream analytics and insights to an Azure Event Hub endpoint.
 
@@ -1236,7 +1237,7 @@ If enabled, the Remedy integration will stream notifications and alerts to the s
           X-header1: "test-header"
 ```
 
-### **Azure Event Hub**
+### **Azure Event Hub Trigger**
 
 You can enable this integration to stream notifications and alerts to a specified Event Hub URL. 
 
