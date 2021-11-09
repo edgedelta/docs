@@ -33,6 +33,7 @@ You can use this document to review software and hardware requirements before yo
 The Edge Delta Admin portal supports the current version of the following browsers:
   - Chrome
   - Firefox
+  - Edge
   
 > **Note**
 >
