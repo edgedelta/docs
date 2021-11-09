@@ -157,7 +157,7 @@ Ports are typically used to listen to incoming traffic from:
 
 To have the agent process lines for a specific line separation rule, you need to define a "line\_pattern" regex rule. When you define a "line\_pattern" regex rule, the agent will not process lines for New Line("\n"). 
 
-  * To learn more, see [MultiLine Detection](/appendices/line_detection/).
+  * To learn more, see [MultiLine Detection](./appendices/line_detection.md).
 
 Review the following example:
 
