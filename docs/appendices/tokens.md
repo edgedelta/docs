@@ -26,10 +26,8 @@ When you create a token, you can add the following permissions for read / write 
 | Rehydrations         | This permission gives you read / write access to manage rehydrations.                                               |
 | Integrations         | This permission gives you read / write access to manage integrations with third-party services.                     |
 | Monitors             | This permission gives you read / write access to manage monitors (alert definitions).                               |
-| Agent Configurations | This permission gives you read / write access to manage agent configurations                                        |
+| Agent Configurations | This permission gives you read / write access to manage agent configurations.                                       |
 | Hosted Agents        | This permission gives you read / write access to manage the agents hosted by Edge Delta.                            |
-| Tokens               | This permission gives you read / write access to manage tokens.                                                     |
-
 
 ***
 
@@ -45,7 +43,7 @@ After you create the token, the unique token key will only display once. Afterwa
 2. In the Tokens sections, click  **Create Token**. 
 3. Under **Name**, enter a descriptive name for the token, such as **john-smith-integrations-token**. 
 4. Click **Add Permissions**.
-5. Under **Select An Access**, click the drop-down menu, and then select the desired access type. 
+5. Under **Select A Resource Type**, click the drop-down menu, and then select the desired access type. 
 6. Under **Select Resources**, mark **All and Current XXXX**, and then click **Done**.
 7. For **Access Type**, mark **Read** or **Write**. 
   - **Read** gives users the ability to view resource information, such as obtain a list of existing integrations. 
@@ -53,7 +51,7 @@ After you create the token, the unique token key will only display once. Afterwa
 8. Click **Add To Token**. 
 9. (Optional) You can add multiple permissions to a token. Repeat steps 5 - 8. 
 10. Click **Token Details**. 
-11. Review the list of permissions, and then click **Done**.
+11. Review the list of permissions, and then click **Create**.
 12. In the window that appears, copy and save the token.
   - Remember, Edge Delta does not store tokens. As a result, a lost or missplaced token cannot be retrieved. 
 13. Click **Close**. 
