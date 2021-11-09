@@ -419,45 +419,60 @@ This input type allows you to specify a command, set of commands, or scripts to 
 
 ## Kubernetes Events
 
-If enabled, Kubernetes events will be collected (namespace independent) and sent to Edge Delta backend. These events can be visualized on the [Insights](https://admin.edgedelta.com/insights) page.
+This input type collects Kubernetes events (namespace independent) and sends these events to the Edge Delta backend. These events can be visualized on the [Insights](https://admin.edgedelta.com/insights) page.
 
-_Note:_ Kubernetes event collection requires agent leader election mechanism to be enabled because only one agent collects the events from cluster. This mechanism is already enabled in the default agent deployment commands via `ED_LEADER_ELECTION_ENABLED=1`.
+> **Note**
+> 
+> > The Kubernetes pod metric collection requires an agent leader election mechanism to be enabled because only 1 agent collects the metrics from cluster.
+> This mechanism is already enabled in the default agent deployment command via `ED_LEADER_ELECTION_ENABLED=1`.
 
 ```yaml
   k8s_events:
     labels: "k8s-events"
 ```
 
+***
+
 ## Kubernetes Stats
 
-If enabled, pod metrics such as cpu/memory usage are collected and sent to configured streaming destinations as well as Edge Delta backend. 
+This input type collects and sends pod metrics, such as CPU and memory usage, to a configured streaming destination, as well as to the Edge Delta backend. 
 
+> **Note**
+> 
+> This input type depends on the Kubernetes metrics API to be enabled on the cluster. To configure, you must install metrics-server. To learn more, review this [document from Kubernetes](https://github.com/kubernetes-sigs/metrics-server).
 
-_Note:_ This input type depends on the Kubernetes metrics API to be enabled on the cluster which can be configured by installing [metrics-server](https://github.com/kubernetes-sigs/metrics-server).
-
-_Note:_ Kubernetes pod metric collection requires agent leader election mechanism to be enabled because only one agent collects the metrics from cluster. This mechanism is already enabled in the default agent deployment commands via `ED_LEADER_ELECTION_ENABLED=1`.
+> **Note**
+> 
+> The Kubernetes pod metric collection requires an agent leader election mechanism to be enabled because only 1 agent collects the metrics from cluster.
+> This mechanism is already enabled in the default agent deployment command via `ED_LEADER_ELECTION_ENABLED=1`.
 
 ```yaml
   kubernetes_stats:
     labels: "k8s-stats"
 ```
 
+***
+
 ## Agent Components Health Stats
 
-Agent component health data contains information about agent's internal state and can be useful for debugging. If enabled, Agent Components Health Stats will report to Edge Delta backend by default to help our support team for troubleshooting agent related issues. It can also report to a 3rd party streaming destination if needed by adding agent_components_health to a workflow.
+This input type contains information about an agent's internal state, which can be useful for debugging. 
+
+By default, this input type reports to the Edge Delta backend to help Edge Delta Support with troubleshooting agent-related issues. 
+
+Additionally, if necessary, this input type can also report to a 3rd-party streaming destination by adding agent_components_health to a workflow.
 
 ```yaml
   agent_components_health:
     labels: "agent-components-health"
 ```
 
+***
+
 ## Elastic Beats
 
-This input type allows you 
+This input type allows you to specify an endpoint to have the agent listen on for incoming traffic from filebeats. This functionality is used in conjunction with the Logstash output configuration of filebeats.
 
-If enabled, Elastic Beats allows you to specify an endpoint to have the agent listen on for incoming traffic from filebeats. This functionality is used in conjunction with the Logstash output configuration of filebeats.
-
-Sample filebeats.yml Logstash Config:
+Review the following sample filebeats.yml Logstash config:
 
 ```yaml
 output.logstash:
@@ -471,3 +486,5 @@ Edge Delta Agent Input Config:
       port: 5044
       labels: "filebeats"
 ```
+
+***
