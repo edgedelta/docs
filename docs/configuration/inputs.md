@@ -150,11 +150,14 @@ Review the following example:
 This input type allows you to specify a set of ports and protocols that the agent will listen for. 
 
 Ports are typically used to listen to incoming traffic from:
+
   * Network devices (firewalls, switches, routers)
   * Time-series metrics (statsd, graphite, carbon)
   * Centralized logging architectures (rsylog, syslog-ng)
 
-If you want the agent process lines for a specific line separation rule (not for New Line\("\n"\)), then you need to define a "line\_pattern" regex rule.
+To have the agent process lines for a specific line separation rule, you need to define a "line\_pattern" regex rule. When you define a "line\_pattern" regex rule, the agent will not process lines for New Line("\n"). 
+
+  * To learn more, see [MultiLine Detection](./appendices/line_detection/).
 
 Review the following example:
 
