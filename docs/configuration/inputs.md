@@ -252,6 +252,8 @@ This input type allows you to specify a set of Kubernetes pods and namespaces fo
 > 
 > In the visual editor, in the **Kubernetes Include** and **Kubernetes Exclude** fields, note that if the value you provide after **pod=**, **namespace=**, or **kind=** is contained anywhere in the pod or namespace name, then the value will match. 
 
+<br>
+
 > **Note**
 > 
 > The **Kubernetes Exclude** field takes precednece over the **Kubernetes Include** field. 
@@ -280,7 +282,7 @@ This input type allows you to specify a set of ECS assets \(tasks, containers, e
 > 
 > In the visual editor, in the **ECS Include** and **ECS Exclude** fields, note that if the value you provide after **container-name=** or **task-family=** is contained anywhere in the pod or namespace name, then the value will match. 
 
-
+<br>
 
 > **Note**
 > 
@@ -325,11 +327,11 @@ With this input, you can monitor multiple regions and log streams.
 
 To define your input, review the following parameters:
 
-| Parameter  | Description                                                                                                                                                                                                                                        | Required or Optional |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
-| AWS Region | You can define a region pattern via regex expression.  For example, for all regions in United States, enter: ```region: "^us.*$"``` To monitor log events for all regions, you do not need to provide or give an all-matches pattern: ".*"         | Optional             |
-| Log Group  | You must enter the Log Group name that is associated with the CloudWatch Logs agent.                                                                                                                                                               | Required             |
-| Log Stream | You can define log streams pattern via regex expression.  For example, for streams that start with log, enter: ```log_stream: ^log.*$""``` To monitor all log events for all regions, you do not need provide or give an all-matches pattern: ".*" | Optional             |
+| Parameter | Description | Required or Optional |
+| :--- | :--- | :--- |
+| AWS Region | You can define a region pattern via regex expression. For example, for all regions in United States, enter: ```region: "^us.*$"``` To monitor log events for all regions, you do not need to provide or give an all-matches pattern: ".*"     | Optional |
+| Log Group | You must enter the Log Group name that is associated with the CloudWatch Logs agent. | Required |
+| Log Stream | You can define log streams pattern via regex expression. For example, for streams that start with log, enter: ```log_stream: ^log.*$""``` To monitor all log events for all regions, you do not need provide or give an all-matches pattern: ".*" | Optional |
 
 > **Note**
 > 
@@ -364,7 +366,6 @@ Review the following sample script to better understand how to define your input
 ## Kafka
 
 With this input type, agents will collect events from a kafka topic.
-
 
 ```yaml
   kafkas:
