@@ -8,11 +8,42 @@ description: >-
 
 ## Overview
 
-Inputs are the mechanism that tells the Edge Delta agent which data types for it to listen to, their location or configuration, as well as associated tags.
+You can use this document to learn about the configuration parameters available in a configuration file, specifically for **Inputs**.
 
-The labels are used to map inputs to specific monitoring rules, or streaming and alerting destinations.
+An inputs tells the Edge Delta agent which data types to listen for, their location or configuration, as well as associated tags.
 
-There are a number of different input types supported by the Edge Delta service. Select from the following input types below to review the appropriate documentation:
+Each input allows you to create a label, which is used to map the input to a specific monitoring rule or streaming and alerting destination.
+
+At a high level, there are 2 ways to manage **Inputs**:
+
+  * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
+  * If you already have an existing configuration, then you can update the configuration in the YAML file. 
+
+> **Note**
+> 
+> The document explains how to define an input; however, an input is not active until the input is added to a workflow. To learn how to create a workflow, see [Workflows](./workflows.md).
+
+***
+
+## Access Input Types
+
+**To access the visual editor for a new configuration:** 
+
+1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+2. Click **Create Configuration**.
+3. Click **Visual**.
+4. On the right-side, select **Inputs**. 
+5. Review the list of options. 
+
+**To access the YAML file for an existing configuration:** 
+
+1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
+3. Review the YAML file.
+
+***
+
+## Review Input Types
 
 * [Agent Stats](./inputs.md#agent-stats)
 * [System Stats](./inputs.md#system-stats)
@@ -32,23 +63,12 @@ There are a number of different input types supported by the Edge Delta service.
 * [Agent Components Health Stats](./inputs.md#agent-components-health-stats)
 * [Elastic Beats](./inputs.md#elastic-beats)
 
-You can specify the filters to monitor sources of containers, Kubernetes and AWS ECS.
 
-* [Input filters](./inputs.md#filters-for-containers-kubernetes-and-aws-ecs)
-
-There are some common options for all input types:
-
-| Key | Description | Required |
-| :--- | :--- | :--- |
-| enable_incoming_line_anomalies | If enabled then anomaly scores are also generated | No |
-| boost_stacktrace_detection | If enabled, gets stack trace that accumulates over date patterns. | No |
-
-
-_Note:_ The example input configurations in this document demonstrate how to define an input. You must put the input in a [workflow](./workflows.md) for it to be active
+***
 
 ## Agent Stats
 
-If enabled, Agent Stats will report agent level metrics, such as lines analyzed, bytes analyzed, etc.
+This input type reports agent-level metrics, such as lines analyzed and bytes analyzed.
 
 ```yaml
   agent_stats:
@@ -56,19 +76,22 @@ If enabled, Agent Stats will report agent level metrics, such as lines analyzed,
     labels: "agent_stats"
 ```
 
+***
+
 ## System Stats
 
-If enabled, System Stats will report host level metrics, such as CPU, Memory, Disk, etc. for the host the agent is deployed on.
+This input type reports host-level metrics, such as CPU, memory, disk, for the host where the agent is deployed on.
 
 ```yaml
   system_stats:
     enabled: true
     labels: "system_stats"
 ```
+***
 
 ## Container Stats \(Docker\)
 
-If enabled, Container Stats will report container level metrics, such as CPU, Memory, Disk, etc. for each container running on the host.
+This input type reports container-level metrics, such as CPU, memory, disk, for each container that runs on the host.
 
 ```yaml
  container_stats:
@@ -76,15 +99,16 @@ If enabled, Container Stats will report container level metrics, such as CPU, Me
     labels: "docker_stats"
 ```
 
+***
+
 ## Files
 
-If enabled, Files allows you to specify a set of files to have monitored by the Edge Delta service.
+This input type allows you to specify a set of files for Edge Delta to monitor. 
 
-Provide the full path to the file\(s\) you want to monitor. Wildcards are supported.
-
-If you want the agent to process lines not for New Line\("\n"\) but for a specific line separation rule then you need to define a "line\_pattern" regex rule.
-
-If you collect the docker container standard output logs on a file with "JSON File logging driver" \([https://docs.docker.com/config/containers/logging/json-file/](https://docs.docker.com/config/containers/logging/json-file/)\) then you need define and enable docker\_mode.
+In **File Path**, enter the full path to the file (or files) that you want monitored. 
+  * Wildcards are supported. 
+  * If you want the agent process lines for a specific line separation rule (not for New Line\("\n"\)), then you need to define a "line\_pattern" regex rule.
+  * If you collect the Docker container standard output logs on a file with the JSON File logging driver \([https://docs.docker.com/config/containers/logging/json-file/](https://docs.docker.com/config/containers/logging/json-file/)\), then you need define and enable docker\_mode.
 
 ```yaml
   files:
@@ -100,11 +124,18 @@ If you collect the docker container standard output logs on a file with "JSON Fi
       docker_mode: true
 ```
 
+***
+
 ## Ports
 
-If enabled, Ports allows you to specify a set of ports and protocols to have the agent listen on for incoming traffic. Ports are typically used to listen for traffic from network devices \(firewalls, switches, routers, ...\), time-series metrics \(statsd, graphite, carbon, ...\), as well as centralized logging architectures \(rsyslog, syslog-ng, ...\).
+This input type allows you to specify a set of ports and protocols that the agent will listen for. 
 
-If you want the agent to process lines not for New Line\("\n"\) but for a specific line separation rule then you need to define a "line\_pattern" regex rule.
+Ports are typically used to listen to incoming traffic from:
+  * Network devices (firewalls, switches, routers)
+  * Time-series metrics (statsd, graphite, carbon)
+  * Centralized logging architectures (rsylog, syslog-ng)
+
+If you want the agent process lines for a specific line separation rule (not for New Line\("\n"\)), then you need to define a "line\_pattern" regex rule.
 
 ```yaml
   ports:
@@ -130,9 +161,12 @@ If you want the agent to process lines not for New Line\("\n"\) but for a specif
       labels: "syslog, metrics, graphite"
 ```
 
+***
+
 ## Windows Events
 
-If enabled, Windows Events allows you to specify a set of Windows Events channels to be monitored by the Edge Delta service.
+This input type allows you to specify a set of Windows Events channels for Edge Delta to monitor. 
+
 
 ```yaml
   winevents:
@@ -146,18 +180,39 @@ If enabled, Windows Events allows you to specify a set of Windows Events channel
       labels: "win_events,sysmon"
 ```
 
+***
+
+## Input Filters
+
+For specific input types, you can specify a filter to monitor sources of containers, Kubernetes, and AWS ECS.
+
+You can specify the filters to monitor sources of containers, Kubernetes, and AWS ECS.
+
+* [Input filters](./inputs.md#filters-for-containers-kubernetes-and-aws-ecs)
+
+There are some common options for all input types:
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| enable_incoming_line_anomalies | When enabled, anomaly scores are also generated. | No |
+| boost_stacktrace_detection | When enabled, obtains stack trace that accumulates over date patterns. | No |
+
+
 ## Filters for Containers, Kubernetes and AWS ECS
 
-You can specify which inputs to add by providing include/exclude regex filters. These filters work only with Containers, Kubernetes and AWS ECS input types.
+To specify which input to add, you must provide include/exclude regex filters. These filters work only with the following input types: 
+  * Containers
+  * Kubernetes 
+  * AWS ECS
 
-* All rules in the same line with a comma\(","\) separated means AND
+* All rules in the same line with a comma\(","\) separated means AND:
 
   ```text
    include:
      - "rule-1,rule-2"
   ```
 
-* All rules under the same part \(include/exclude\) means OR
+* All rules under the same part \(include/exclude\) means OR:
 
   ```text
    include:
@@ -167,11 +222,14 @@ You can specify which inputs to add by providing include/exclude regex filters. 
 
 ## Containers \(Docker\)
 
-If enabled, Containers allows you to specify a set of Docker Containers to be monitored by the Edge Delta service.
+This input type allows you to specify a set of Docker containers for Edge Delta to monitor. 
 
-If you want the agent to process lines not for New Line\("\n"\) but for a specific line separation rule then you need to define a "line\_pattern" regex rule.
+If you want the agent process lines for a specific line separation rule (not for New Line\("\n"\)), then you need to define a "line\_pattern" regex rule.
 
-**Note**: In the 'include' section, after "image=" this is a contains match, so as long as the value provided is contained anywhere in the image name, the value will match.
+> **Note**
+> 
+> In the visual editor, in the **Container Include** field, note that if the value you provide after **image=** is contained anywhere in the image name, then the value will match. 
+
 
 ```yaml
   containers:
@@ -184,13 +242,19 @@ If you want the agent to process lines not for New Line\("\n"\) but for a specif
       labels: "docker, nginx"
 ```
 
+***
+
 ## Kubernetes
 
-If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods and namespaces to be monitored by the Edge Delta service.
+This input type allows you to specify a set of Kubernetes pods and namespaces for Edge Delta to monitor. 
 
-**Note**: In the 'include' and 'exclude' section, after "pod=", "namespace=" or "kind=" this is a contains match, so as long as the value provided is contained anywhere in the pod or namespace name, the value will match.
+> **Note**
+> 
+> In the visual editor, in the **Kubernetes Include** and **Kubernetes Exclude** fields, note that if the value you provide after **pod=**, **namespace=**, or **kind=** is contained anywhere in the pod or namespace name, then the value will match. 
 
-**Note**: Excluded pods/namespaces/kinds take precedence over Included pods/namespaces/kinds.
+> **Note**
+> 
+> The **Kubernetes Exclude** field takes precednece over the **Kubernetes Include** field. 
 
 ```yaml
   kubernetes:
@@ -206,13 +270,21 @@ If enabled, the Kubernetes Input allows you to specify a set of Kubernetes pods 
       auto_detect_line_pattern: true
 ```
 
-## AWS ECS
+***
 
-If enabled, the ECS Input allows you to specify a set of ECS assets \(tasks, containers, etc.\) to be monitored by the Edge Delta service.
+## AWS ECS (ECS Containers)
 
-**Note**: In the 'include' and 'exclude' section, after "container-name=", or "task-family=" this is a contains match, so as long as the value provided is contained anywhere in the container or task name, the value will match.
+This input type allows you to specify a set of ECS assets \(tasks, containers, etc.\) for Edge Delta to monitor. 
 
-**Note**: Excluded container/task take precedence over Included container/task.
+> **Note**
+> 
+> In the visual editor, in the **ECS Include** and **ECS Exclude** fields, note that if the value you provide after **container-name=** or **task-family=** is contained anywhere in the pod or namespace name, then the value will match. 
+
+
+
+> **Note**
+> 
+> The **ECS Exclude** field takes precednece over the **ECS Include** field. 
 
 ```yaml
   ecs:
@@ -225,10 +297,14 @@ If enabled, the ECS Input allows you to specify a set of ECS assets \(tasks, con
       auto_detect_line_pattern: true
 ```
 
-## AWS S3
+***
 
-If enabled, log files in an S3 bucket can be monitored by the Edge Delta service. This input type depends on SQS notifications to be enabled on the target bucket. 
-Details around how to configure S3, SQS and IAM user for this input type can be found [here](../appendices/s3-sqs.md).
+## AWS S3 (S3 via SQS input)
+
+This input type allows you to specify log files in an S3 bucket for Edge Delta to monitor. 
+
+This input type depends on SQS notifications to be enabled on the target bucket. 
+  * To learn how to configure S3, SQS, and IAM user for this input type, see [S3 SQS](../appendices/s3-sqs.md).
 
 ```yaml
   s3_sqs:
@@ -239,22 +315,21 @@ Details around how to configure S3, SQS and IAM user for this input type can be 
       region: "us-west-2" # region where the bucket and sqs queue located
 ```
 
-## AWS CloudWatch Log Events 
+***
 
-You can use the AWS CloudWatch input to specify a set of AWS CloudWatch Log Events that Edge Delta will monitor.  
+## AWS CloudWatch Log Events (Cloudwatch event logs)
 
-With the AWS CloudWatch input, you can monitor multiple regions and log streams. 
+This input type allows you to specify a set of AWS CloudWatch Log Events for Edge Delta to monitor. 
 
-Review the following parameters that you can use to define your input:  
+With this input, you can monitor multiple regions and log streams. 
 
-- Region (Optional)
-    - You can define a region pattern via regex expression. For example, for all regions in United States, use: ```region: "^us.*$"```
-    - To monitor log events for all regions, you do not need to provide or give an all-matches pattern ".*".
-- Log Group
-    - You must enter the Log Group name that is associated with the CloudWatch Logs agent.
-- Log Stream (Optional)
-    - You can define log streams pattern via regex expression. For example, for streams that start with log, use ```log_stream: ^log.*$""```
-    - To monitor all log events for all regions, you do not need provide or give an all-matches pattern ".*".
+To define your input, review the following parameters:
+
+| Parameter  | Description                                                                                                                                                                                                                                        | Required or Optional |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
+| AWS Region | You can define a region pattern via regex expression.  For example, for all regions in United States, enter: ```region: "^us.*$"``` To monitor log events for all regions, you do not need to provide or give an all-matches pattern: ".*"         | Optional             |
+| Log Group  | You must enter the Log Group name that is associated with the CloudWatch Logs agent.                                                                                                                                                               | Required             |
+| Log Stream | You can define log streams pattern via regex expression.  For example, for streams that start with log, enter: ```log_stream: ^log.*$""``` To monitor all log events for all regions, you do not need provide or give an all-matches pattern: ".*" | Optional             |
 
 > **Note**
 > 
@@ -284,10 +359,11 @@ Review the following sample script to better understand how to define your input
       # Default the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.
       result_limit: 5000
 ```
+***
 
 ## Kafka
 
-If enabled, agents will collect events from a kafka topic.
+With this input type, agents will collect events from a kafka topic.
 
 
 ```yaml
@@ -301,13 +377,22 @@ If enabled, agents will collect events from a kafka topic.
       group_id: "my-group"
 ```
 
+***
+
 ## Execs \(Scripted Input\)
 
-If enabled, the Execs Input allows you to specify a command, set of commands, or scripts to have executed on a given frequency by the service. The output of the script is then consumed by the service, similar to any other input type.
+This input type allows you to specify a command, set of commands, or scripts to have executed on a given frequency by Edge Delta. Then, the output of the script is  consumed by the service, similar to any other input type.
 
-**Note**: If the command is a single line, the command can be provided directly in the command parameter, without the need for the script section. If a script is preferred, provide the scripting type / value for the command parameter, and the script inline \(see third example below\).
+> **Note**
+> 
+> If the command is a single line, then the command can be provided directly in the command parameter without the need for the script section.
+> If a script is preferred, then inline, you can provide the scripting type / value for the command parameter.
+>   * Review the third example below. 
 
-A saved script can also be referenced directly via the command parameter \(see second example below\).
+> **Note**
+> 
+> A saved script can also be referenced directly via the command parameter.
+>   * Review the second example below.  
 
 ```yaml
   execs:
@@ -329,6 +414,8 @@ A saved script can also be referenced directly via the command parameter \(see s
             echo "Welcome $i times"
           done
 ```
+
+***
 
 ## Kubernetes Events
 
@@ -365,6 +452,8 @@ Agent component health data contains information about agent's internal state an
 ```
 
 ## Elastic Beats
+
+This input type allows you 
 
 If enabled, Elastic Beats allows you to specify an endpoint to have the agent listen on for incoming traffic from filebeats. This functionality is used in conjunction with the Logstash output configuration of filebeats.
 
