@@ -43,6 +43,17 @@ At a high level, there are 2 ways to manage **Inputs**:
 
 ***
 
+## Review Common Options
+
+Review common options for all input types:
+
+| Key | Description | Required |
+| :--- | :--- | :--- |
+| enable_incoming_line_anomalies | When enabled, anomaly scores are also generated. | No |
+| boost_stacktrace_detection | When enabled, obtains stack trace that accumulates over date patterns. | No |
+
+***
+
 ## Review Input Types
 
 * [Agent Stats](./inputs.md#agent-stats)
@@ -70,6 +81,8 @@ At a high level, there are 2 ways to manage **Inputs**:
 
 This input type reports agent-level metrics, such as lines analyzed and bytes analyzed.
 
+Review the following example:
+
 ```yaml
   agent_stats:
     enabled: true
@@ -82,6 +95,8 @@ This input type reports agent-level metrics, such as lines analyzed and bytes an
 
 This input type reports host-level metrics, such as CPU, memory, disk, for the host where the agent is deployed on.
 
+Review the following example:
+
 ```yaml
   system_stats:
     enabled: true
@@ -92,6 +107,8 @@ This input type reports host-level metrics, such as CPU, memory, disk, for the h
 ## Container Stats \(Docker\)
 
 This input type reports container-level metrics, such as CPU, memory, disk, for each container that runs on the host.
+
+Review the following example:
 
 ```yaml
  container_stats:
@@ -109,6 +126,8 @@ In **File Path**, enter the full path to the file (or files) that you want monit
   * Wildcards are supported. 
   * If you want the agent process lines for a specific line separation rule (not for New Line\("\n"\)), then you need to define a "line\_pattern" regex rule.
   * If you collect the Docker container standard output logs on a file with the JSON File logging driver \([https://docs.docker.com/config/containers/logging/json-file/](https://docs.docker.com/config/containers/logging/json-file/)\), then you need define and enable docker\_mode.
+
+Review the following example:
 
 ```yaml
   files:
@@ -136,6 +155,8 @@ Ports are typically used to listen to incoming traffic from:
   * Centralized logging architectures (rsylog, syslog-ng)
 
 If you want the agent process lines for a specific line separation rule (not for New Line\("\n"\)), then you need to define a "line\_pattern" regex rule.
+
+Review the following example:
 
 ```yaml
   ports:
@@ -167,6 +188,7 @@ If you want the agent process lines for a specific line separation rule (not for
 
 This input type allows you to specify a set of Windows Events channels for Edge Delta to monitor. 
 
+Review the following example:
 
 ```yaml
   winevents:
@@ -182,28 +204,35 @@ This input type allows you to specify a set of Windows Events channels for Edge 
 
 ***
 
-## Input Filters
 
-For specific input types, you can specify a filter to monitor sources of containers, Kubernetes, and AWS ECS.
+## Containers \(Docker\)
 
-You can specify the filters to monitor sources of containers, Kubernetes, and AWS ECS.
+This input type allows you to specify a set of Docker containers for Edge Delta to monitor. 
 
-* [Input filters](./inputs.md#filters-for-containers-kubernetes-and-aws-ecs)
+If you want the agent process lines for a specific line separation rule (not for New Line\("\n"\)), then you need to define a "line\_pattern" regex rule.
 
-There are some common options for all input types:
+> **Note**
+> 
+> In the visual editor, in the **Container Include** field, note that if the value you provide after **image=** is contained anywhere in the image name, then the value will match. 
 
-| Key | Description | Required |
-| :--- | :--- | :--- |
-| enable_incoming_line_anomalies | When enabled, anomaly scores are also generated. | No |
-| boost_stacktrace_detection | When enabled, obtains stack trace that accumulates over date patterns. | No |
+Review the following example: 
 
+```yaml
+  containers:
+    - include:
+        - "image=.*"
+      labels: "docker, all_containers"
+      line_pattern: "^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}"
+    - include:
+        - "image=nginx:latest"
+      labels: "docker, nginx"
+```
 
-## Filters for Containers, Kubernetes and AWS ECS
+***
 
-To specify which input to add, you must provide include/exclude regex filters. These filters work only with the following input types: 
-  * Containers
-  * Kubernetes 
-  * AWS ECS
+### Filters for Containers
+
+To specify which input to add, you must provide include/exclude regex filters. 
 
 * All rules in the same line with a comma\(","\) separated means AND:
 
@@ -219,28 +248,6 @@ To specify which input to add, you must provide include/exclude regex filters. T
      - "rule-1"
      - "rule-2"
   ```
-
-## Containers \(Docker\)
-
-This input type allows you to specify a set of Docker containers for Edge Delta to monitor. 
-
-If you want the agent process lines for a specific line separation rule (not for New Line\("\n"\)), then you need to define a "line\_pattern" regex rule.
-
-> **Note**
-> 
-> In the visual editor, in the **Container Include** field, note that if the value you provide after **image=** is contained anywhere in the image name, then the value will match. 
-
-
-```yaml
-  containers:
-    - include:
-        - "image=.*"
-      labels: "docker, all_containers"
-      line_pattern: "^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}"
-    - include:
-        - "image=nginx:latest"
-      labels: "docker, nginx"
-```
 
 ***
 
@@ -258,6 +265,8 @@ This input type allows you to specify a set of Kubernetes pods and namespaces fo
 > 
 > The **Kubernetes Exclude** field takes precednece over the **Kubernetes Include** field. 
 
+Review the following example:
+
 ```yaml
   kubernetes:
     - labels: "kubernetes_logs"
@@ -271,6 +280,27 @@ This input type allows you to specify a set of Kubernetes pods and namespaces fo
         - "kind=ReplicaSet"
       auto_detect_line_pattern: true
 ```
+
+***
+
+### Filters for Kubernetes 
+
+To specify which input to add, you must provide include/exclude regex filters. 
+
+* All rules in the same line with a comma\(","\) separated means AND:
+
+  ```text
+   include:
+     - "rule-1,rule-2"
+  ```
+
+* All rules under the same part \(include/exclude\) means OR:
+
+  ```text
+   include:
+     - "rule-1"
+     - "rule-2"
+  ```
 
 ***
 
@@ -288,6 +318,8 @@ This input type allows you to specify a set of ECS assets \(tasks, containers, e
 > 
 > The **ECS Exclude** field takes precednece over the **ECS Include** field. 
 
+Review the following example:
+
 ```yaml
   ecs:
     - labels: "docker_logs,all_containers"
@@ -301,12 +333,35 @@ This input type allows you to specify a set of ECS assets \(tasks, containers, e
 
 ***
 
+### Filters for Containers, Kubernetes and AWS ECS
+
+To specify which input to add, you must provide include/exclude regex filters. 
+
+* All rules in the same line with a comma\(","\) separated means AND:
+
+  ```text
+   include:
+     - "rule-1,rule-2"
+  ```
+
+* All rules under the same part \(include/exclude\) means OR:
+
+  ```text
+   include:
+     - "rule-1"
+     - "rule-2"
+  ```
+
+***
+
 ## AWS S3 (S3 via SQS input)
 
 This input type allows you to specify log files in an S3 bucket for Edge Delta to monitor. 
 
 This input type depends on SQS notifications to be enabled on the target bucket. 
   * To learn how to configure S3, SQS, and IAM user for this input type, see [S3 SQS](../appendices/s3-sqs.md).
+
+Review the following example:
 
 ```yaml
   s3_sqs:
@@ -366,6 +421,8 @@ Review the following sample script to better understand how to define your input
 ## Kafka
 
 With this input type, agents will collect events from a kafka topic.
+
+Review the following example:
 
 ```yaml
   kafkas:
@@ -427,6 +484,8 @@ This input type collects Kubernetes events (namespace independent) and sends the
 > > The Kubernetes pod metric collection requires an agent leader election mechanism to be enabled because only 1 agent collects the metrics from cluster.
 > This mechanism is already enabled in the default agent deployment command via `ED_LEADER_ELECTION_ENABLED=1`.
 
+Review the following example:
+
 ```yaml
   k8s_events:
     labels: "k8s-events"
@@ -447,6 +506,8 @@ This input type collects and sends pod metrics, such as CPU and memory usage, to
 > The Kubernetes pod metric collection requires an agent leader election mechanism to be enabled because only 1 agent collects the metrics from cluster.
 > This mechanism is already enabled in the default agent deployment command via `ED_LEADER_ELECTION_ENABLED=1`.
 
+Review the following example:
+
 ```yaml
   kubernetes_stats:
     labels: "k8s-stats"
@@ -461,6 +522,8 @@ This input type contains information about an agent's internal state, which can 
 By default, this input type reports to the Edge Delta backend to help Edge Delta Support with troubleshooting agent-related issues. 
 
 Additionally, if necessary, this input type can also report to a 3rd-party streaming destination by adding agent_components_health to a workflow.
+
+Review the following example:
 
 ```yaml
   agent_components_health:
