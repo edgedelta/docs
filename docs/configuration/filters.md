@@ -18,9 +18,13 @@ You can use a filter to discard unncesary logs or protect sensitive data. As a r
 
 At a high level, to create a filter, you must: 
 
-Step 1: Review filter types
-Step 2: Access the visual editor or YAML file to Define a Filter
-Step 3: Understand the workflow of a filter
+  * Step 1: Review filter types
+  * Step 2: Access and define a filter
+  * Step 3: Understand the workflow of a filter
+
+***
+
+## Step 1: Review Filter Types
 
 You can create the following filter types: 
 
@@ -30,39 +34,26 @@ You can create the following filter types:
 | mask | This filter type hides (or masks) specific data, based on the configured regex pattern. | 
 | buffered-trace | This filter type handles trace logs. | 
 | extract-json-field | This filter type extracts a field's value and replaces the whole JSON content with the field's value. | 
-
-***
-
-
-## Step 1: Review Filter Types
-
-You can create the following filter types:
-
-  * regex
-  * mask
-  * buffered trace
-  * JSON field extractor
-
 ***
 
 ### Option 1: Regex Filters
 
-This filter type passes all log lines that match the specified regular expression. As a result, all unmatched logs are discarded.  
+This filter type passes all log lines that match the specified regular expression. All unmatched logs are discarded.  
 
 In the Edge Delta Admin portal, in the visual editor, when you select **regex** as the filter type, the following fields will appear:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
 | Name | Enter a descriptive name for this filter. When you create an input, processor, or workflow, this name will appear in the list of filters to select. | Required |
-| Type | Select **regex**. | Optional |
+| Type | Select **regex**. | Required |
 | Pattern | Enter a regular expression pattern to define which strings to match on. | Required |
-| Negate | To reverse the effect of the filter, set this parameter to **true**. | Optional |
+| Negate | You can use this parameter pass logs that do not meet the pattern. In other words, to reverse the effect of the filter, set this parameter to **true**. For example, if you set the pattern to only collect error logs, and you set this parameter to **true**, then the filter will collect all logs that are not error logs. | Optional |
 
 ***
 
 #### Review Examples for Regex Filters
 
-The following example obtains the log lines that are error-related, and then discards other lines:
+  * The following example obtains the log lines that are error-related, and then discards other lines:
 
 ```yaml
   - name: error
@@ -70,7 +61,7 @@ The following example obtains the log lines that are error-related, and then dis
     pattern: "error|ERROR|ERR|Err"
 ```
 
-Negative filters are also possibla via the **negate** parameter. The following example discards DEBUG logs, and then passes through other logs:
+  * The following example displays the **negate** parameter. Specifically, the following example discards DEBUG logs, and then passes through other logs:
 
 ```yaml
   - name: not_debug
@@ -92,16 +83,16 @@ In the Edge Delta Admin portal, in the visual editor, when you select **mask** a
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for this filter. When you create an input, processor, or workflow, this name will appear in the list of filters to select. | Required |
 | type | Select **mask**. | Required |
-| pattern | Enter a regular expression pattern to define which strings to match for. You must set **pattern** or **predefined\_pattern**. | Optional |
-| predefined\_pattern | Instead of a custom pattern, you can use a common, predefined pattern, such as **credit\_card** and **us\_phone\_dash**. | Optional |
-| mask | Enter the string to be used as the replacement for the matched part of the log. The default mask is **\*\*\*\*\*\***. If you specify an empty mask ( **""** ), then the filter will remove the matched pattern from the log line. | Optional |
+| pattern | Enter a regular expression pattern to define which strings to match for. You must set the **pattern** parameter or the **predefined\_pattern** parameter. | Optional |
+| predefined\_pattern | Instead of a custom pattern, you can use a common, predefined pattern, such as **credit\_card** and **us\_phone\_dash**. You must set the **pattern** parameter or the **predefined\_pattern** parameter. | Optional |
+| mask | Enter the string to be used as the replacement for the matched part of the log. The default mask is **\*\*\*\*\*\***. If you specify an empty mask ( **""** ), then the filter will remove the matched pattern from the log. | Optional |
 | mask_captured | This parameter supports capture groups for regex masks. In other words, you can replace any match of a capture group with a given map. To replace all matches (not submatch), you can use the **all** keyword. | Optional |
 
 ***
 
 #### Review Examples for Mask Filters
 
-In the following example, the filter replaces **password: SOME\_PASSWORD** with **password: \*\*\*\*\*\***:
+  * The following example diplays a filter that replaces **password: SOME\_PASSWORD** with **password: \*\*\*\*\*\***:
 
 ```yaml
   - name: mask_password
@@ -116,7 +107,7 @@ In the following example, the filter replaces **password: SOME\_PASSWORD** with 
       email: '******'
 ```
 
-Instead of a custom pattern, you can also use a common, predefined pattern, such as **credit\_card** and **us\_phone\_dash**. In the following example, the filter masks US phone numbers: 
+  * Instead of a custom pattern, you can also use a common, predefined pattern, such as **credit\_card** and **us\_phone\_dash**. The following example displays a filter that masks US phone numbers: 
 
 ```yaml
   - name: mask_phone
@@ -150,11 +141,11 @@ In the Edge Delta Admin portal, in the visual editor, when you select **buffered
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for this filter. When you create an input, processor, or workflow, this name will appear in the list of filters to select. | Required |
 | trace\_id\_pattern | Enter a regular expression pattern to extract the trace ID values from logs. Enter a regex with single capture group. | Required |
-| failure\_pattern | Enter a regular expression pattern to indicate that a match with the trace event \(group of logs sharing same ID\) is a failure. Failures are passed through from this filter. | Required |
-| trace\_deadline | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the max duration of a trace. Once the specified trace deadline is reached, the buffered trace filter will take all events belonging to the same trace, apply the filters/sampling \(based on configuration\), and then passes through the relavant events. | Required |
-| success\_sample\_rate | The sample rate \[0,1\] of successfull traces. Default is zero which means successfull traces are discarded. If it's set to 0.2 then 20% of successfull traces will pass thru this filter. _Note:_ Any trace event without a failure\_pattern match indicates successful trace. | Optional |
-| latency\_pattern | Enter a regular expression pattern to extract the latency value \(if applicable\) from the trace logs. You must enter a regex with a single numeric capture group. Only 1 of the logs that belong to the same trace \(sharing same id\) should have such latency information or the last one will be picked to represent the latency of the trace. Once the latency value is extracted and converted to a number, it can be used in conjunction with _latency\_threshold_ to pass thru high latency traces. This is useful to collect the high latency traces in addition to the failed ones which are already pass thru as described in _failure\_pattern_. | Optional |
-| latency\_threshold | Enter a numeric value to represent the threshold for high-latency limit. Latency of a trace is extracted with **latency\_pattern**. | Optional |
+| failure\_pattern | Enter a regular expression pattern to indicate that a match with the trace event \(group of logs sharing same ID\) is a failure. Failures are passed through this filter. | Required |
+| trace\_deadline | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string to represent the max duration of a trace. Once the specified trace deadline is reached, the buffered trace filter will take all events that belong to the same trace, apply the filters/sampling, and then pass through the relavant events. | Required |
+| success\_sample\_rate | Enter a number to indicate the percentage of successful traces that you want to receive. You can enter a number between 0 and 1. The default setting is 0, which means all successful traces are discarded. If you enter 0.2, then 20% of successful traces will pass through the filter. **Note** Any trace event without a **failure\_pattern** match indicates successful trace. | Optional |
+| latency\_pattern | Enter a regular expression pattern to extract the latency value from the trace logs. You must enter a regex with a single numeric capture group. Only 1 of the logs that belongs to the same trace ID should have latency information, or the last log will be picked to represent the latency of the trace. Once the latency value is extracted and converted to a number, this value can be used in conjunction with the **latency\_threshold** parameter to pass through high-latency traces. This process is useful to collect the high-latency traces, in addition to the failed traces that already passed throughou, based on the **failure\_pattern** parameter. | Optional |
+| latency\_threshold | Enter a numeric value to represent the threshold for high-latency limit. The latency of a trace is extracted with the **latency\_pattern** parameter. | Optional |
 
 ***
 
@@ -194,7 +185,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **extract-
 
 #### Review Examples for JSON Field Extractor Filters
 
-The following example extracts the message field:
+  * The following example extracts the message field:
 
   * If the field was nested, then we would set field_path to its path.
 
@@ -204,22 +195,22 @@ The following example extracts the message field:
     field_path: "message"
 ```
 
-Review the following example log:
+  * Review the following example log:
 
 **`{"timestamp":1623793757, "level": "info", "message": "hello world"}`**
 
-Review the following example log after extractor filter is applied:
+  * Review the following example log after extractor filter is applied:
+
 **`hello world`**
 
 ***
 
-## Step 2: Access Filters
+## Step 2: Access and Define a Filter
 
 At a high level, there are 2 ways to access **Filters**:
 
   * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
   * If you already have an existing configuration, then you can update configurations in the YAML file. 
-
 
 ***
 
@@ -254,20 +245,24 @@ filters:
 
 ***
 
-## Step 3: Understand Filter Workflow
+## Step 3: Understand the Workflow for Filters and How to Filter For Specific Inputs, Processors, and Workflows
 
 After you define a filter, filters can be referred at different places in the YAML file:
 
-* Input filters apply right after the data ingestion from the input and before running workflows associated with the input.
-* Workflow filters apply before running processors within the workflow.
+* Input filters apply right after the data ingestion from the input, but before running the workflows associated with the input.
+* Workflow filters apply before running the processors within the workflow.
 * Processor filters apply before the processor runs, regardless of which workflow the processor is running within.
 
 
 ***
 
-## Learn How to Filter For Specific Inputs, Processors, and Workflows
+### Filter For Specific Inputs, Processors, and Workflows
 
 When you create a filter, you must add a name to describe the filter. This name will appear in the list of filters to select when you create an input, processor, or workflow. When multiple filters are provided, the names are applied in given order from top to bottom.
+
+***
+
+#### Inputs
 
 The following example displays a file **input** with **error** and **mask\_card** filters:
 
@@ -282,6 +277,10 @@ The following example displays a file **input** with **error** and **mask\_card*
   ```
 
 To learn how inputs can be filtered, see [Inputs](./inputs.md).
+
+***
+
+#### Workflows
 
 The following example displays a **workflow** with the **error** filter:
 
@@ -304,6 +303,10 @@ The following example displays a **workflow** with the **error** filter:
   ```
 
 To learn how workflows can be filtered, see [Workflows](./workflows.md).
+
+***
+
+#### Processors
 
 The following example displays the **Dimension Counter Processor** with the **not\_debug** filter.
 
