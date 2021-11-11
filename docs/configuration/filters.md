@@ -19,12 +19,13 @@ You can use a filter to discard unncesary logs or protect sensitive data. As a r
 At a high level, to create a filter, you must: 
 
 Step 1: Review filter types
-Step 2: Access the visual editor or YAML file
-Step 3: Define a filter
+Step 2: Access the visual editor or YAML file to Define a Filter
+Step 3: Understand the workflow of a filter
 
 You can create the following filter types: 
 
 | Filter Type | Description | 
+| :--- | :--- | 
 | regex | This filter type passes all log lines that match the specified regular expression. | 
 | mask | This filter type hides (or masks) specific data, based on the configured regex pattern. | 
 | buffered-trace | This filter type handles trace logs. | 
@@ -32,46 +33,8 @@ You can create the following filter types:
 
 ***
 
-## Step 1: Access Filters
 
-At a high level, there are 2 ways to manage **Workflows**:
-
-  * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
-  * If you already have an existing configuration, then you can update the configuration in the YAML file. 
-
-> **Note**
-> 
-> While all parameters can be updated in the YAML file, most **Workflows** parameters are available in the visual editor. 
-
-***
-
-### Option 1: Access the visual editor for a new configuration
-
-> **Note**
-> 
-> To create a new workflow, you must have existing inputs, processors, destinations, thresholds, and filters to add to the new workflow. You cannot create a workflow without these existing components.  
-
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
-2. Click **Create Configuration**.
-3. Click **Visual**.
-4. On the right-side, select **Workflows**. 
-5. Enter a **Name** and **Description**.
-6. Select the desired inputs, processors, destinations, thresholds, and filters to add to the workflow. 
-7. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
-8. To save the configuraiton and exit the visual editor, click **Save**. 
-9. Refresh the screen to view the newly created configuration in the table. 
-
-***
-
-### Option 2: Access the YAML file for an existing configuration
-
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
-2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
-3. Review the YAML file, make your changes, and then click **Save**. 
-
-***
-
-## Step 2: Understand Filter Options
+## Step 1: Review Filter Types
 
 You can create the following filter types:
 
@@ -107,7 +70,7 @@ The following example obtains the log lines that are error-related, and then dis
     pattern: "error|ERROR|ERR|Err"
 ```
 
-Negative filters are also possibla via the **negate** parameter. The following example discards DEBUG logs, then and passes through other logs:
+Negative filters are also possibla via the **negate** parameter. The following example discards DEBUG logs, and then passes through other logs:
 
 ```yaml
   - name: not_debug
@@ -121,7 +84,7 @@ Negative filters are also possibla via the **negate** parameter. The following e
 
 This filter type hides (or masks) specific data, based on the configured regex pattern.
 
-This filter type can be useful to hide sensitive data, such as phone numbers, social security numbers, credit card numbers, etc. Specifically, based on the configured regex pattern, this filter type changes the log lines to hide the content that matched the configured regex pattern.
+This filter type can be useful to hide sensitive data, such as phone numbers, social security numbers, credit card numbers, etc. Specifically, based on the configured regex pattern, this filter type changes the log lines to hide the matched content.
 
 In the Edge Delta Admin portal, in the visual editor, when you select **mask** as the filter type, the following fields will appear:
 
@@ -132,7 +95,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **mask** a
 | pattern | Enter a regular expression pattern to define which strings to match for. You must set **pattern** or **predefined\_pattern**. | Optional |
 | predefined\_pattern | Instead of a custom pattern, you can use a common, predefined pattern, such as **credit\_card** and **us\_phone\_dash**. | Optional |
 | mask | Enter the string to be used as the replacement for the matched part of the log. The default mask is **\*\*\*\*\*\***. If you specify an empty mask ( **""** ), then the filter will remove the matched pattern from the log line. | Optional |
-| mask_captured | This parameter support capture groups for regex masks. In other words, you can replace any match of a capture group with a given map. To replace all match (not submatch), you can use the **all** keyword. | Optional |
+| mask_captured | This parameter supports capture groups for regex masks. In other words, you can replace any match of a capture group with a given map. To replace all matches (not submatch), you can use the **all** keyword. | Optional |
 
 ***
 
@@ -175,7 +138,7 @@ At a high level, this filter type:
   * Verifies that all relavant events of that trace (or request) is collected, and then
   * Discards or passes the trace logs, based on the configuration.
 
-This filter type offers the following options: 
+This filter type offers the following pass options: 
 
 * Pass through failed operation events
 * Pass through high-latency operation events
@@ -187,10 +150,10 @@ In the Edge Delta Admin portal, in the visual editor, when you select **buffered
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for this filter. When you create an input, processor, or workflow, this name will appear in the list of filters to select. | Required |
 | trace\_id\_pattern | Enter a regular expression pattern to extract the trace ID values from logs. Enter a regex with single capture group. | Required |
-| failure\_pattern | Enter a regular expression pattern whose match indicates that the trace event \(group of logs sharing same ID\) is a failure. Failures are passed through from this filter. | Required |
-| trace\_deadline | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the max duration of a trace. Once the specified trace deadline is reached, the buffered trace filter will take all events belonging to the same trace, apply the filters/sampling \(based on configuration\), and then if passed, the events are passed through | Required |
+| failure\_pattern | Enter a regular expression pattern to indicate that a match with the trace event \(group of logs sharing same ID\) is a failure. Failures are passed through from this filter. | Required |
+| trace\_deadline | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the max duration of a trace. Once the specified trace deadline is reached, the buffered trace filter will take all events belonging to the same trace, apply the filters/sampling \(based on configuration\), and then passes through the relavant events. | Required |
 | success\_sample\_rate | The sample rate \[0,1\] of successfull traces. Default is zero which means successfull traces are discarded. If it's set to 0.2 then 20% of successfull traces will pass thru this filter. _Note:_ Any trace event without a failure\_pattern match indicates successful trace. | Optional |
-| latency\_pattern | Regular expression pattern which is used to extract the latency value \(if applicable\) from the trace logs. Must be a regex with single numeric capture group. Only one of the logs belonging to the same trace \(sharing same id\) should have such latency information or the last one will be picked to represent the latency of the trace. Once the latency value is extracted and converted to a number it can be used in conjunction with _latency\_threshold_ to pass thru high latency traces. This is useful to collect the high latency traces in addition to the failed ones which are already pass thru as described in _failure\_pattern_. | Optional |
+| latency\_pattern | Enter a regular expression pattern to extract the latency value \(if applicable\) from the trace logs. You must enter a regex with a single numeric capture group. Only 1 of the logs that belong to the same trace \(sharing same id\) should have such latency information or the last one will be picked to represent the latency of the trace. Once the latency value is extracted and converted to a number, it can be used in conjunction with _latency\_threshold_ to pass thru high latency traces. This is useful to collect the high latency traces in addition to the failed ones which are already pass thru as described in _failure\_pattern_. | Optional |
 | latency\_threshold | Enter a numeric value to represent the threshold for high-latency limit. Latency of a trace is extracted with **latency\_pattern**. | Optional |
 
 ***
@@ -250,9 +213,37 @@ Review the following example log after extractor filter is applied:
 
 ***
 
-## Step 3: Define a Filter and Understand Workflow
+## Step 2: Access Filters
 
-In a YAML file, filters are defined at the top level. Review the following example: 
+At a high level, there are 2 ways to access **Filters**:
+
+  * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
+  * If you already have an existing configuration, then you can update configurations in the YAML file. 
+
+
+***
+
+### Option 1: Access the visual editor for a new configuration
+
+1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+2. Click **Create Configuration**.
+3. Click **Visual**.
+4. On the right-side, select **Filters**. 
+5. Complete the missing fields.  
+    * To learn about these configurations, see **Step 1: Review Filter Types**.
+7. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
+8. To save the configuraiton and exit the visual editor, click **Save**. 
+9. Refresh the screen to view the newly created configuration in the table. 
+
+***
+
+### Option 2: Access the YAML file for an existing configuration
+
+1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
+3. Review the YAML file, make your changes, and then click **Save**. 
+    * To learn about these configurations, see **Step 1: Review Filter Types**.
+    * In a YAML file, filters are defined at the top level. Review the following example: 
 
 ```yaml
 filters:
@@ -260,6 +251,10 @@ filters:
     type: regex
     pattern: "error"
 ```
+
+***
+
+## Step 3: Understand Filter Workflow
 
 After you define a filter, filters can be referred at different places in the YAML file:
 
@@ -270,11 +265,9 @@ After you define a filter, filters can be referred at different places in the YA
 
 ***
 
-## Filter Specific Inputs, Processors, and Workflows
+## Learn How to Filter For Specific Inputs, Processors, and Workflows
 
-When you create a filter, you must add a name to describe the filter. This name will appear in the list of filters to select when you create an input, processor, or workflow.
-
-When multiple filters are provided, the names are applied in given order from top to bottom.
+When you create a filter, you must add a name to describe the filter. This name will appear in the list of filters to select when you create an input, processor, or workflow. When multiple filters are provided, the names are applied in given order from top to bottom.
 
 The following example displays a file **input** with **error** and **mask\_card** filters:
 
