@@ -95,6 +95,10 @@ In the Edge Delta Admin portal, in the visual editor, when you select **regex** 
 | Pattern | Enter a regular expression pattern to define which strings to match on. | Required |
 | Negate | To reverse the effect of the filter, set this parameter to **true**. | Optional |
 
+***
+
+#### Review Examples for Regex Filters
+
 The following example obtains the log lines that are error-related, and then discards other lines:
 
 ```yaml
@@ -129,6 +133,10 @@ In the Edge Delta Admin portal, in the visual editor, when you select **mask** a
 | predefined\_pattern | Instead of a custom pattern, you can use a common, predefined pattern, such as **credit\_card** and **us\_phone\_dash**. | Optional |
 | mask | Enter the string to be used as the replacement for the matched part of the log. The default mask is **\*\*\*\*\*\***. If you specify an empty mask ( **""** ), then the filter will remove the matched pattern from the log line. | Optional |
 | mask_captured | This parameter support capture groups for regex masks. In other words, you can replace any match of a capture group with a given map. To replace all match (not submatch), you can use the **all** keyword. | Optional |
+
+***
+
+#### Review Examples for Mask Filters
 
 In the following example, the filter replaces **password: SOME\_PASSWORD** with **password: \*\*\*\*\*\***:
 
@@ -185,6 +193,10 @@ In the Edge Delta Admin portal, in the visual editor, when you select **buffered
 | latency\_pattern | Regular expression pattern which is used to extract the latency value \(if applicable\) from the trace logs. Must be a regex with single numeric capture group. Only one of the logs belonging to the same trace \(sharing same id\) should have such latency information or the last one will be picked to represent the latency of the trace. Once the latency value is extracted and converted to a number it can be used in conjunction with _latency\_threshold_ to pass thru high latency traces. This is useful to collect the high latency traces in addition to the failed ones which are already pass thru as described in _failure\_pattern_. | Optional |
 | latency\_threshold | Enter a numeric value to represent the threshold for high-latency limit. Latency of a trace is extracted with **latency\_pattern**. | Optional |
 
+***
+
+#### Review Examples for Buffered Trace Filters 
+
 Review the following example:
 
 ```yaml
@@ -215,6 +227,10 @@ In the Edge Delta Admin portal, in the visual editor, when you select **extract-
 | type | Select **extract-json-field**. | Required |
 | field_path | This parameter is a dot-separated path of the field, such as **log.message**. This value will be extracted, and then the original JSON content will be discarded. | Required |
 
+***
+
+#### Review Examples for JSON Field Extractor Filters
+
 The following example extracts the message field:
 
   * If the field was nested, then we would set field_path to its path.
@@ -233,7 +249,6 @@ Review the following example log after extractor filter is applied:
 **`hello world`**
 
 ***
-
 
 ## Step 3: Define a Filter and Understand Workflow
 
