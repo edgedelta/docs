@@ -82,8 +82,7 @@ You can create the following filter types:
 
 ***
 
-
-### Regex Filters
+### Option 1: Regex Filters
 
 This filter type passes all log lines that match the specified regular expression. As a result, all unmatched logs are discarded.  
 
@@ -114,7 +113,7 @@ Negative filters are also possibla via the **negate** parameter. The following e
 
 ***
 
-### Mask Filters
+### Option 2: Mask Filters
 
 This filter type hides (or masks) specific data, based on the configured regex pattern.
 
@@ -156,13 +155,13 @@ Instead of a custom pattern, you can also use a common, predefined pattern, such
 
 ***
 
-## Buffered Trace Filter
+## Option 3: Buffered Trace Filters
 
 This filter type handles trace logs. 
 
-Edge Delta defines trace log as a set of logs that can be tied together with an ID, such as a trace ID or request ID.
+  * Edge Delta defines trace log as a set of logs that can be tied together with an ID, such as a trace ID or request ID.
 
-This filter type:
+At a high level, this filter type:
 
   * Groups logs by a specified ID, then
   * Verifies that all relavant events of that trace (or request) is collected, and then
@@ -184,7 +183,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **buffered
 | trace\_deadline | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the max duration of a trace. Once the specified trace deadline is reached, the buffered trace filter will take all events belonging to the same trace, apply the filters/sampling \(based on configuration\), and then if passed, the events are passed through | Required |
 | success\_sample\_rate | The sample rate \[0,1\] of successfull traces. Default is zero which means successfull traces are discarded. If it's set to 0.2 then 20% of successfull traces will pass thru this filter. _Note:_ Any trace event without a failure\_pattern match indicates successful trace. | Optional |
 | latency\_pattern | Regular expression pattern which is used to extract the latency value \(if applicable\) from the trace logs. Must be a regex with single numeric capture group. Only one of the logs belonging to the same trace \(sharing same id\) should have such latency information or the last one will be picked to represent the latency of the trace. Once the latency value is extracted and converted to a number it can be used in conjunction with _latency\_threshold_ to pass thru high latency traces. This is useful to collect the high latency traces in addition to the failed ones which are already pass thru as described in _failure\_pattern_. | Optional |
-| latency\_threshold | A numeric value representing threshold for high latency limit. Latency of a trace is extracted using latency\_pattern | Optional |
+| latency\_threshold | Enter a numeric value to represent the threshold for high-latency limit. Latency of a trace is extracted with **latency\_pattern**. | Optional |
 
 Review the following example:
 
@@ -202,7 +201,7 @@ filters:
 
 ***
 
-### JSON Field Extractor
+### JSON Field Extractor Filters
 
 This filter type extracts a field's value and replaces the whole JSON content with the field's value. 
 
@@ -236,15 +235,9 @@ Review the following example log after extractor filter is applied:
 ***
 
 
+## Step 3: Define a Filter and Understand Workflow
 
-
-
-
-
-
-## Step 3: Define a Filter
-
-In a YAML files, filters are defined at the top level. Review the following example: 
+In a YAML file, filters are defined at the top level. Review the following example: 
 
 ```yaml
 filters:
@@ -253,16 +246,16 @@ filters:
     pattern: "error"
 ```
 
-After you define a filter, filters can be referred at different places in the config yaml:
+After you define a filter, filters can be referred at different places in the YAML file:
 
 * Input filters apply right after the data ingestion from the input and before running workflows associated with the input.
 * Workflow filters apply before running processors within the workflow.
-* Processor filters apply before the processor runs regardless of which workflow the processor is running within.
+* Processor filters apply before the processor runs, regardless of which workflow the processor is running within.
 
 
 ***
 
-## Filter Inputs, Processors, and Workflows
+## Filter Specific Inputs, Processors, and Workflows
 
 When you create a filter, you must add a name to describe the filter. This name will appear in the list of filters to select when you create an input, processor, or workflow.
 
