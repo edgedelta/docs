@@ -14,7 +14,7 @@ A workflow maps inputs, processors, and outputs that are logically grouped, base
 
 ***
 
-## Access Parameters
+## Step 1: Access Workflows
 
 At a high level, there are 2 ways to manage **Workflows**:
 
@@ -27,7 +27,7 @@ At a high level, there are 2 ways to manage **Workflows**:
 
 ***
 
-### Access the visual editor for a new configuration
+### Option 1: Access the visual editor for a new configuration
 
 > **Note**
 > 
@@ -45,7 +45,7 @@ At a high level, there are 2 ways to manage **Workflows**:
 
 ***
 
-### Access the YAML file for an existing configuration
+### Option 2: Access the YAML file for an existing configuration
 
 1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
@@ -53,7 +53,7 @@ At a high level, there are 2 ways to manage **Workflows**:
 
 ***
 
-## Review Parameters
+## Step 2: Review Parameters
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
@@ -65,7 +65,7 @@ At a high level, there are 2 ways to manage **Workflows**:
 
 ***
 
-## Review YAML Example
+## Step 3: Review YAML Example
 
 ```yaml
 workflows:
