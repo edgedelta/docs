@@ -430,6 +430,8 @@ Review the following sample script to better understand how to define your input
       # The maximum number of log events returned.
       # Default the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.
       result_limit: 5000
+      aws_key_id: ****
+      aws_sec_key: ****
 ```
 ***
 
