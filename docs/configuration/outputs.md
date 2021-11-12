@@ -9,17 +9,58 @@ description: >-
 
 ## Overview
 
-You can use this document to learn how to configure an output.
+You can use this document to learn about the configuration parameters available in a configuration file, specifically for **Outputs**.
 
 An output tells the Edge Delta agent where to send collected and generated data, such as as metrics, patterns, alerts, etc.
 
+> **Note**
+> 
+> The terms **output**, **integration**, and **destination** may be used interchangeably. 
+
 At a high level, there are 3 types of outputs:
 
-| Output Type | Description | 
-| :--- | :--- | 
-| Streaming destinations | This output type focuses on centralized monitoring platforms, such as Splunk, Sumo Logic, Datadog, Snowflake, New Relic, Elastic, etc. | 
-| Trigger destinations | This output type focuses on alerting and automation systems, such as PagerDuty, Slack, ServiceNow, OpsGenie, Runbook, etc., where Edge Delta can send alerts and notifications when an anomaly is detected or when various conditions are met.  | 
-| Archive destinations | This output type focuses on storage solutions where Edge Delta can send compressed raw data logs periodically.  | 
+| Output Type | Description | Supported Platforms and Systems |
+| :--- | :--- | :--- | 
+| Streaming destinations | This output type focuses on centralized monitoring platforms. | Sumo Logic, AWS CloudWatch, Datadog, New Relic, InfluxDB, Wavefront, Scalyr, Elastic Search, Azure AppInsight, Kafka, SignalFx, Humio, Loggly, Logz.io, Loki | 
+| Trigger destinations | This output type focuses on alerting and automation systems. Specifically, this output type allows Edge Delta to send alerts and notifications when an anomaly is detected or when various conditions are met.  | Slack, Microsoft Teams, Pagerduty, Jira, Service Now, Webhook, AWS Lambda, Azure Functions |
+| Archive destinations | This output type focuses on storage solutions where Edge Delta can periodically send compressed raw data logs.  | AWS S3, Azure Blob Storage, Google Cloud Storage, DigitalOcean Spaces, IBM Object Storage, Minio, Zenko CloudServer, Moogsoft, Remedy, Azure Event Hub Trigger |
+
+***
+
+## Step 1: Access Outputs
+
+At a high level, there are 2 ways to manage **Outputs**:
+
+  * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
+  * If you already have an existing configuration, then you can update the configuration in the YAML file. 
+
+***
+
+### Option 1: Access the visual editor for a new configuration
+
+1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+2. Click **Create Configuration**.
+3. Click **Visual**.
+4. On the right-side, select **Streams**, **Triggers**, or **Archives**. 
+5. Select the desired destination, and then complete the missing fields. 
+
+  * To learn more about each destination, see Step 2: 
+
+6. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
+7. To save the configuraiton and exit the visual editor, click **Save**. 
+8. Refresh the screen to view the newly created configuration in the table. 
+
+***
+
+### Option 2: Access the YAML file for an existing configuration
+
+1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
+3. Review the YAML file, make your changes, and then click **Save**. 
+
+***
+
+
 
 
 ***
@@ -45,21 +86,21 @@ Edge Delta supports the following streaming destinations:
 
 ### Splunk
 
-The Splunk integration will stream analytics and insights to a Splunk HEC endpoint. 
+The Splunk output will stream analytics and insights to a Splunk HEC endpoint. 
 
 In the Edge Delta Admin portal, in the visual editor, when you select **Splunk** as the output type, the following fields will appear:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | Enter a descriptive name for the output, which will be used map User this destination to a workflow. | Required |
-| integration\_name | This parameter refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "splunk" to stream data to splunk | Yes |
-| endpoint | Full Splunk HEC URI for this integration | Yes |
-| token | Splunk HEC Token for this integration | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it will be set as "metric,edac,cluster". | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Required |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **splunk**. | Required |
+| endpoint | Enter the full Splunk HEC URI for this integration. | Required |
+| token | Enter the Splunk HEC token for this integration. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **metric,edac,cluster** will be set. | Optional |
 
 
-Review the following example: 
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: splunk-integration
@@ -69,14 +110,13 @@ Review the following example:
         index: "main"
 ```
 
-Or alternatively use the org level splunk integration. In this case other fields are not needed.
+The following example displays if enter the name of the organization-level integration:
 
 ```yaml
       - integration_name: my-org-splunk
 ```
 
-
-In case multiple instances of same splunk destination needed to route different data types to different Splunk indexes:
+The following example displays if there are multiple instances of the same desitnation that need to route different data types to different Splunk indexes: 
 
 ```yaml
 - name: edac-splunk-dest
@@ -167,15 +207,26 @@ Import this dashboard into your Splunk environment for a real-time overview of y
 
 ### Sumo Logic
 
-If enabled, the Sumo Logic integration will stream analytics and insights to a Sumo Logic HTTPs Endpoint
+The Sumo Logic output will stream analytics and insights to a Sumo Logic HTTPs Endpoint.
 
-| Key | Description | Required |
+> **Before you begin**
+> 
+> Before you can create an output, you must have available the Sumo Logic HTTPs Endpoint.
+> To learn how to create new Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url). 
+> To learn how to locate an existing Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url).
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Sumo Logic** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "sumologic" to stream data to sumo logic. | Yes |
-| endpoint | Full HTTPs URL for this endpoint | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **sumologic**. | Required |
+| endpoint | Enter the full HTTPs URL for this endpoint. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
+ 
 
 ```yaml
       - name: sumo-logic-integration
@@ -183,28 +234,36 @@ If enabled, the Sumo Logic integration will stream analytics and insights to a S
         endpoint: "https://[SumoEndpoint]/receiver/v1/http/[UniqueHTTPCollectorCode]"
 ```
 
-**Creating a new Sumo Logic HTTPs Endpoint:** [https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source\#access-a-sources-url](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url) _\*\*_
-
-**Finding an existing Sumo Logic HTTPs Endpoint URL:** [https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source\#access-a-sources-url](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url) _\*\*_
+***
 
 ### AWS CloudWatch
 
-If enabled, the AWS CloudWatch integration will stream logs to a given aws region.
+The AWS CloudWatch output will stream logs to a specified AWS region.  
 
-| Key | Description | Required |
+> **Before you begin**
+> 
+> Before you can create an output, you must have available the CloudWatch log group name and log stream name.
+> To learn how to create a log group, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html).
+> To learn how to create a log stream, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html).
+
+In the Edge Delta Admin portal, in the visual editor, when you select **AWS CloudWatch** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "cloudwatch" to stream data to AWS Cloud Watch | Yes |
-| region | AWS region destination for logs | Yes |
-| log\_group\_name | CloudWatch log group name | Yes |
-| log\_stream\_name | CloudWatch log stream name \(either name or prefix is supported not both\) | Yes |
-| log\_stream\_prefix | CloudWatch log stream prefix \(either name or prefix is supported not both\) | Yes |
-| auto\_create | When necessary iam policies provided if auto\_create is set, log group and log stream will be created if not exists | No |
-| allow\_label\_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed\_log\_group\_name, ed\_log\_stream\_name, ed\_log\_stream\_prefix labels | No |
-| auto\_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task\_definition\_family and LogsStreamPrefix in the format of ecs/container\_name/task\_id | No |
-| type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Yes |
-| features | Features defines which data types stream to backend, it can be "log" only for Amazon Cloudwatch. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **cloudwatch**. | Required |
+| region | Enter the AWS region destination to send logs. | Required |
+| log\_group\_name | Enter the CloudWatch log group name. | Required |
+| log\_stream\_name | Enter the CloudWatch log stream name. You can enter a name or prefix, but not both. | Required |
+| log\_stream\_prefix | Enter the CloudWatch log stream prefix. You can enter a name or prefix, but not both.  | Required |
+| auto\_create | When necessary iam policies provided if auto\_create is set, log group and log stream will be created if not exists | Optional |
+| allow\_label\_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed\_log\_group\_name, ed\_log\_stream\_name, ed\_log\_stream\_prefix labels | Optional |
+| auto\_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task\_definition\_family and LogsStreamPrefix in the format of ecs/container\_name/task\_id | Optional |
+| type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Required |
+| features | This parameter defines which data types to stream to the backend. For Amazon CloudWatch, you can only select **log**. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: cloudwatch
@@ -249,24 +308,37 @@ If enabled, the AWS CloudWatch integration will stream logs to a given aws regio
       }
   ```
 
-**CloudWatch log group name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API\_CreateLogGroup.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html) _\*\*_
 
-**CloudWatch log stream name requirements:** [https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API\_CreateLogStream.html](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html) _\*\*_
 
-### **Datadog**
 
-If enabled, the Datadog integration will stream analytics and insights to your Datadog environment
 
-| Key | Description | Required |
+***
+
+
+### Datadog
+
+The Datadog output will stream analytics and insights to a Datadog environment. 
+
+> **Before you begin**
+> 
+> Before you can create an output, you must have available a Datadog API Key.
+> To learn how to create a new Datadog API key, review this [document from Datadog](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key).
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Datadog** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "datadog" to stream data to Datadog | Yes |
-| log_host | If provided, custom installation of Datadog log host to send log data. | No |
-| metric_host | If provided, custom installation of Datadog metric host to send metric data. | No |
-| api\_key | Datadog API Key | Yes |
-| custom\_tags | Key-values defined in custom tags by the user are streamed to datadog for every request. | No |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **datadog**. | Required |
+| log_host | If provided, custom installation of Datadog log host to send log data. | Optional |
+| metric_host | If provided, custom installation of Datadog metric host to send metric data. | Optional |
+| api\_key | Enter a Datadog API key. | Yes |
+| custom\_tags | Key-values defined in custom tags by the user are streamed to datadog for every request. | Optional |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: datadog-integration-default
@@ -290,19 +362,28 @@ If enabled, the Datadog integration will stream analytics and insights to your D
           "region": "us-west-2"
 ```
 
-**Create a new Datadog API Key:** [https://docs.datadoghq.com/account\_management/api-app-keys/\#add-a-key](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key)
+***
 
-### **New Relic**
+### New Relic
 
-If enabled, the New Relic integration will stream analytics and insights to your New Relic environment
+The New Relic output will stream analytics and insights to a New Relic environment.
 
-| Key | Description | Required |
+> **Before you begin**
+> 
+> Before you can create an output, you must have available the New Relic Insert API key. 
+> To learn how to create new New Relic Insert API key, review this [document from New Relic](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key).
+
+In the Edge Delta Admin portal, in the visual editor, when you select **New Relic** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "newrelic" to stream data to New Relic | Yes |
-| api\_key | New Relic Insert API Key | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **newrelic**. | Required |
+| api\_key | Enter a New Relic Insert API key. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set.  | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: new-relic-integration
@@ -310,25 +391,29 @@ If enabled, the New Relic integration will stream analytics and insights to your
         api_key: "<add new relic insert api key>"
 ```
 
-**Create a new New Relic Insert API Key:** [https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys\#event-insert-key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key)
+***
 
-### **InfluxDB**
+### InfluxDB
 
-If enabled, the InfluxDB integration will stream analytics and insights to your InfluxDB deployment
+The InfluxDB output will stream analytics and insights to your InfluxDB deployment.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **InfluxDB** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "influxdb" to stream data to Influx DB | Yes |
-| version | Version of the InfluxDB deployment. Supports version "1.x" and "2.x". Empty version defaults to "2.x" | No |
-| bucket | Target InfluxDB bucket to send archived logs. Required only for version "2.x" | Yes |
-| organization | InfluxDB buckets for customer organization. Required only for version "2.x" | Yes |
-| endpoint | InfluxDB endpoint | Yes |
-| http\_user | InfluxDB user credentials. Required only for version "1.x". | Yes |
-| http\_password | InfluxDB password for connecting user. Required only for version "1.x". | Yes |
-| db | Specific InfluxDB database to stream data to. Required only for version "1.x" | Yes |
-| features | Features defines which data types stream to backend, it can be "metric", "edac". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **influxdb**. | Required |
+| version | Enter the version number of the InfluxDB deployment. This parameter supports versions 1.x and 2.x. An empty version will default to version 2.x | Optional |
+| bucket | Enter the InfluxDB bucket to send archived logs to. This parameter is only required for version 2.x. | Required |
+| organization | Enter the InfluxDB buckets for customer organization. This parameter is only required for version 2.x. | Required |
+| endpoint | Enter the InfluxDB endpoint. | Required |
+| http\_user | Enter the InfluxDB user credentials. This parameter is only required for version 1.x. | Required |
+| http\_password | Enter the InfluxDB password for connecting user. This parameter is only required for version 1.x. | Required |
+| db | Enter the InfluxDB database to stream data to. This parameter is only required for version 1.x. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: influxdb-integration
@@ -349,18 +434,25 @@ If enabled, the InfluxDB integration will stream analytics and insights to your 
         port: 443
 ```
 
-### **Wavefront**
+***
 
-If enabled, the Wavefront integration will stream analytics and insights to your Wavefront environment
+### Wavefront
 
-| Key | Description | Required |
+The Wavefront output will stream analytics and insights to your Wavefront environment.
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Wavefront** as the output type, the following fields will appear:
+
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "wavefront" to stream data to Wavefront | Yes |
-| endpoint | Wavefront endpoint | Yes |
-| token | Wavefront API token | Yes |
-| features | Features defines which data types stream to backend, it can be "metric" only for Wavefront. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow.  | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **wavefront**. | Required |
+| endpoint | Enter the Wavefront endpoint. | Required |
+| token | Enter the Wavefront API token. | Required |
+| features | This parameter defines which data types to stream to the backend. For Wavefront, you can only select **metric**. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: wavefront-integration
@@ -369,17 +461,24 @@ If enabled, the Wavefront integration will stream analytics and insights to your
         token: "<add wavefront api token>"
 ```
 
-### **Scalyr**
+***
 
-If enabled, the Scalyr integration will stream analytics and insights to your Scalyr environment
+### Scalyr
 
-| Key | Description | Required |
+The Scalyr output will stream analytics and insights to your Scalyr environment.
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Scalyr** as the output type, the following fields will appear:
+
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "scalyr" to stream data to Scalyr | Yes |
-| endpoint | Scalyr endpoint | Yes |
-| features | Features defines which data types stream to backend, it can be "log" for Scalyr. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **scalyr**.| Required |
+| endpoint | Enter the Scalyr endpoint. | Required |
+| features | This parameter defines which data types to stream to the backend. For Scalyr, you can only select **log**. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: scalyr-integration
@@ -387,25 +486,37 @@ If enabled, the Scalyr integration will stream analytics and insights to your Sc
         endpoint: "https://app.scalyr.com/api/uploadLogs?token={scalyr log access write key}"
 ```
 
-### **Elastic Search**
+***
 
-If enabled, the Elastic Search integration will stream analytics and insights to your Elastic Search environment. Elastic index template and lifecycle creation guide can be found [here](../appendices/elastic-index.md). It's not mandatory but highly recommended to complete those steps in the guide to prepare your Elastic Search environment to be Edgedelta streaming target.
+### Elastic Search
 
-| Key | Description | Required |
+The **Elastic Search** output will stream analytics and insights to your Elastic Search environment. 
+
+> **Note**
+> 
+> Edge Delta recommends that you review and complete the steps listed in the [elastic index template and lifecycle creation guide](../appendices/elastic-index.md). This process will help you prepare your Elastic Search environment to become an Edge Detla streaming target.
+
+> Note
+> 
+> For **connection url**, you must provide either the **cloud\_id** or **address**. You cannot enter both parameters. 
+> For the **authentication**, you must provide either the **token** or the **user/password**. You cannot enter both parameters. 
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Elastic Search** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "elastic" to stream data to Elastic | Yes |
-| index | Name of elastic index \(or index template\) where data will be streamed by edgedelta agents. Set this to 'ed-agent-log' if followed the guide above | Yes |
-| cloud\_id | Cloud ID of elastic search backend | No |
-| address | Address list of elastic search backend | No |
-| token | Elastic Search API Key | No |
-| user | Username for elastic search credentials | No |
-| password | Elastic Search password for connecting user | No |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **elastic**. | Required |
+| index | Enter the name of the Elastic index \(or index template\) where Edge Delta should stream the data. If you followed the guide mentioned above, then set this parameter to **ed-agent-log**. | Required |
+| cloud\_id | Enter the cloud ID of the Eastic Search backend. | Optional |
+| address | Enter the address list of the Eastic Search backend. | Optional |
+| token | Enter the Eastic Search API key. | Optional |
+| user | Enter the username of the Elastic Search credentials. | Optional |
+| password | Enter the password for the connecting user. | Optional |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
 
-* For the connection url, you can not provide cloud\_id and address at the same time. And you must provide at least one of them.
-* For the authentication, you can not provide token and user/password at the same time. And you must provide at least one of them.
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: elastic-integration
@@ -422,18 +533,24 @@ If enabled, the Elastic Search integration will stream analytics and insights to
         #password: "elastic search password"
 ```
 
+***
+
 ### Azure AppInsight
 
-If enabled, the Azure AppInsight integration will stream analytics and insights to an Azure endpoint.
+The **Azure AppInsight** output will stream analytics and insights to your Azure endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Azure AppInsight** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "azure" to stream data to Azure AppInsight | Yes |
-| endpoint | Azure AppInsight endpoint. | Yes |
-| api\_key | Azure AppInsight API key. | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **azure**. | Required |
+| endpoint | Enter the Azure AppInsight endpoint. | Required |
+| api\_key | Enter the Azure AppInsight API key. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: azure-integration
@@ -443,18 +560,24 @@ If enabled, the Azure AppInsight integration will stream analytics and insights 
         features: "metric"
 ```
 
+***
+
 ### Kafka
 
-If enabled, the Kafka integration will stream analytics and insights to an Kafka endpoint.
+The **Kafka** output will stream analytics and insights to your Kafka endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Kafka** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "kafka" to stream data to Kafka | Yes |
-| endpoint | Kafka broker addresses. | Yes |
-| topic | Kafka topic name. | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **kafka**. | Required |
+| endpoint | Enter your Kafka broker addresses. | Required |
+| topic | Enter your Kafka topic name. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: kafka-integration
@@ -464,18 +587,24 @@ If enabled, the Kafka integration will stream analytics and insights to an Kafka
         topic: topic
 ```
 
+***
+
 ### SignalFx
 
-If enabled, the SignalFx integration will stream analytics and insights to an SignalFx endpoint.
+The **SignalFx** output will stream analytics and insights to your SignalFx endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **SignalFx** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "signalfx" to stream data to SignalFX | Yes |
-| endpoint | SignalFx endpoint. | Yes |
-| token | SignalFx API token. | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow.  | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **signalfx**. | Required |
+| endpoint | Enter your SignalFx endpoint. | Required |
+| token | Enter your SignalFx API token. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: signalfx-integration
@@ -485,18 +614,24 @@ If enabled, the SignalFx integration will stream analytics and insights to an Si
         features: "metric,log"
 ```
 
+***
+
 ### Humio
 
-If enabled, the Humio integration will stream analytics and insights to an Humio endpoint.
+The **Humio** output will stream analytics and insights to your Humio endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Humio** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "humio" to stream data to Humio | Yes |
-| endpoint | Humio endpoint. One can use cloud one as well as self-hosted one. | Yes |
-| token | Humio API token. | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **humio**. | Required |
+| endpoint | Enter the Humio endpoint. You can use a cloud endpoint or a self-hosted endpoint. | Required |
+| token | Enter the Humio API token. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: humio-integration
@@ -506,18 +641,24 @@ If enabled, the Humio integration will stream analytics and insights to an Humio
         features: "metric,log"
 ```
 
+***
+
 ### Loggly
 
-If enabled, the SolarWinds Loggly integration will stream analytics and insights to an Loggly endpoint.
+The **Loggly** output will stream analytics and insights to your Loggly endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Loggly** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "loggly" to stream data to Loggly | Yes |
-| endpoint | Loggly endpoint. One can use cloud one as well as self-hosted one. Default one is https://logs-01.loggly.com | Yes |
-| token | Loggly API token. | Yes |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **loggly**. | Required |
+| endpoint | Enter a Loggly endpoint. You can use a cloud endpoint or a self-hosted endpoint. The default endpoint is https://logs-01.loggly.com. | Required |
+| token | Enter a Loggly API token. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: loggly-integration
@@ -527,20 +668,26 @@ If enabled, the SolarWinds Loggly integration will stream analytics and insights
         features: "metric,log"
 ```
 
+***
+
 ### Logz.io
 
-If enabled, the Logz.io integration will stream analytics and insights to a Logz.io endpoint.
+The **Logz.io** output will stream analytics and insights to your Logz.io endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Logz.io** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "logzio" to stream data to Logz.io | Yes |
-| endpoint | Logz.io endpoint. One can use cloud one as well as self-hosted one. | Yes |
-| token | Logz.io log token. Required if want to support log stream. | No |
-| metric_token | Logz.io metric token. Required if want to support metric stream. | No |
-| custom\_tags | Key-values defined in custom tags by the user are streamed to Logz.io for every request. | No |
-| features | Features defines which data types stream to backend, it can be "log", "metric", "edac", "cluster", "topk" or "all". If you don't provide any value then it is all. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **logzio**. | Required |
+| endpoint | Enter the Logz.io endpoint. You can use a cloud endpoint or a self-hosted endpoint. | Required |
+| token | Enter the Logz.io log token. This parameter is required if you want to support log stream. | Optional |
+| metric_token | Enter the Logz.io metric token. This parameter is required if you want to support metric stream. | Optional |
+| custom\_tags | With this parameter, you can create key-values to stream to Logz.io with every request. | Optional |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: logzio
@@ -553,26 +700,30 @@ If enabled, the Logz.io integration will stream analytics and insights to a Logz
           "region": "us-west-2"
 ```
 
+***
+
 ### Loki
 
-You can enable this integration to stream analytics and insights to a Loki endpoint.
+The **Loki** output will stream analytics and insights to your Loki endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Loki** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
-| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custom name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
-| type | This key must be set to "loki" to stream data to Loki. | Yes |
-| endpoint | This key is the Loki endpoint. | Yes |
-| api\_key | This key is the Loki API key. | Yes |
-| user | This key is the username for Loki. | Yes |
-| custom\_tags | This key is the user-defined key-values that are streamed to Loki for every request. This key supports templating. | No |
-| message\_template | This key customizes the message content. This key supports templating. | No |
-| features | This key defines which data types to stream to the Loki backend. You can set this key to "log," "edac," and / or "cluster." | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | No |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | No |
+| type | Select loki. | Yes |
+| endpoint | Enter the Loki endpoint. | Yes |
+| api\_key | Enter the Loki API key.  | Yes |
+| user | Enter the username for Loki. | Yes |
+| custom\_tags | With this parameter, you can create key-values to stream to Loki with every request. This parameter supports templating. | No |
+| message\_template | This parameters customizes the message content. This parameter supports templating. | No |
+| features | This parameter defines which data types to stream to the backend. You can select **log**, **edac**, and / or **cluster**. | No |
 
 #### **Message Template**
 
 As an optional step, you can customize the message payload and custom tags that are sent to Loki destinations. 
-  * Loki does not support the "-" character as key value.
+  * Loki does not support the "-" character as a key value.
 
 Review the following avaialble template fields: 
 
@@ -596,6 +747,7 @@ Review the following avaialble template fields:
 | ECSTaskFamily | This field is the ECS task family. | 
 | DockerContainerName | This field is the Docker container name. | 
 
+Review the following example: 
 
 ```yaml
       - name: loki-integration
@@ -625,6 +777,8 @@ Review the following avaialble template fields:
           "SourceType": "{{.SourceType}}"
           "Tag": "{{.Tag}}"
 ```
+
+***
 
 ### FluentD
 
