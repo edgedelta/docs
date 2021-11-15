@@ -710,30 +710,30 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Loki** a
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | No |
-| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | No |
-| type | Select loki. | Yes |
-| endpoint | Enter the Loki endpoint. | Yes |
-| api\_key | Enter the Loki API key.  | Yes |
-| user | Enter the username for Loki. | Yes |
-| custom\_tags | With this parameter, you can create key-values to stream to Loki with every request. This parameter supports templating. | No |
-| message\_template | This parameters customizes the message content. This parameter supports templating. | No |
-| features | This parameter defines which data types to stream to the backend. You can select **log**, **edac**, and / or **cluster**. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select loki. | Required |
+| endpoint | Enter the Loki endpoint. | Required |
+| api\_key | Enter the Loki API key.  | Required |
+| user | Enter the username for Loki. | Required |
+| custom\_tags | With this parameter, you can create key-values to stream to Loki with every request. This parameter supports templating. | Optional |
+| message\_template | This parameters customizes the message content. This parameter supports templating. | Optional |
+| features | This parameter defines which data types to stream to the backend. You can select **log**, **edac**, and / or **cluster**. | Optional |
 
 #### **Message Template**
 
 As an optional step, you can customize the message payload and custom tags that are sent to Loki destinations. 
-  * Loki does not support the "-" character as a key value.
+  * Loki does not support the **-** character as a key value.
 
-Review the following avaialble template fields: 
+Review the following template fields: 
 
 | Field | Description |
 | :--- | :--- | 
-| Tag | This field is the user-defined tag that describes the environment, such as . prod\_us\_west\_2\_cluster. | 
+| Tag | This field is the user-defined tag that describes the environment, such as **prod\_us\_west\_2\_cluster**. | 
 | Host | This field is the hostname of the environment where the agent is running on. | 
 | ConfigID | This field is the configuration ID of the corresponding agent. | 
 | Source | This field is the source name, specifically the identifier of the source, such as docker container id or file name. | 
-| SourceType | This field is the source type, such as "Docker" or "system." | 
+| SourceType | This field is the source type, such as **Docker** or **system**. | 
 | FileGlobPath | This field is the file global path. | 
 | K8sPodName | This field is the Kubernetes pod name. | 
 | K8sNamespace | This field is the Kubernetes namespace. | 
@@ -747,7 +747,7 @@ Review the following avaialble template fields:
 | ECSTaskFamily | This field is the ECS task family. | 
 | DockerContainerName | This field is the Docker container name. | 
 
-Review the following example: 
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: loki-integration
@@ -782,17 +782,22 @@ Review the following example:
 
 ### FluentD
 
-You can enable this integration to stream analytics and insights to a FluentD endpoint.
+The **FluentD** output will stream analytics and insights to your FluentD endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **FluentD** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
-| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custom name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
-| type | This key must be set to "fluentd" to stream data to FluentD. | Yes |
-| host | This key is the FluentD host. This key is required if you want to support tcp stream. | Yes |
-| port | This key is the FluentD port. This key is required if want to support tcp stream. | Yes |
-| encoder | This key is the encoder type to use while streaming data to FluentD. Raw and 'msgpack' are supported. | No |
-| features | This key defines which data types to stream to the backend. You can set this key to "log", "metric," "edac," "cluster," "topk," and / or "all". If you do not provide a value, then "all" is used. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **fluentd**. | Required |
+| host | Enter the FluentD host. This parametetr is required to support tcp stream. | Required |
+| port | Enter the FluentD port. This parameter is required to support tcp stream. | Required |
+| encoder | Enter the encoder type to use while streaming data to FluentD. Raw and 'msgpack' are supported. | Optional |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set.  | Optional |
+
+The following example displays an output without the name of the organization-level integration:
+
 
 ```yaml
       - name: fluentd-log-fwd
@@ -804,22 +809,32 @@ You can enable this integration to stream analytics and insights to a FluentD en
         features: log
 ```
 
+***
+
 ### Azure Event Hub Stream
 
-You can enable this integration to stream analytics and insights to an Azure Event Hub endpoint.
+The **Azure Event Hub Stream** output will stream analytics and insights to your Azure Event Hub Stream endpoint.
+
+> **Note**
+> 
+> This output is not avaialble in the visual editor. To configure, you must make changes directly in the YAML file.  
+
+<br>
 
 > **Note**
 > 
 > To enable this integration, you must have an Azure AD token. To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
-| Key | Description | Required |
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
-| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custom name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
-| type | This key must be set to "eventhubstream" to stream data to Azure Event Hub. | Yes |
-| endpoint | This key is the Event Hub endpoint. | Yes |
-| token | This key is the Azure AD token. | Yes |
-| features | This key defines which data types to stream to the  backend, You can set this key to "log," "metric," "edac," "cluster," "topk," "alert," and / or "all". If you do not provide a value, then "all" is used. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow.  | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **eventhubstream**. | Required |
+| endpoint | Enter the Event Hub endpoint. | Required |
+| token | Enter the Azure AD token. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: eventhub-stream
@@ -829,21 +844,31 @@ You can enable this integration to stream analytics and insights to an Azure Eve
         features: log,metric
 ```
 
+***
+
 ## Review Trigger Destinations 
 
 ### **Slack**
 
-If enabled, the Slack integration will stream notifications and alerts to the specified Slack channel
+The **Slack** output will stream notifications and alerts to a specified Slack channel.
 
-| Key | Description | Required |
+> **Before you begin**
+> 
+> To use this output, you must provide a Slack webhook or endpoint URL. To learn more about webhooks, review [this document from Slack](https://api.slack.com/messaging/webhooks).
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Slack** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "slack" to send alerts to Slack | Yes |
-| endpoint | Slack Webhook or APP endpoint URL | Yes |
-| suppression\_window | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once agent detects an issue and notifies this slack endpoint it will suppress any new issues for this duration. Default is "20m". | No |
-| suppression\_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents \(the ones sharing same tag in config\). | No |
-| notify\_content | Used to customize the notification content. It supports templating. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **slack**.| Required |
+| endpoint | Enter the Slack Webhook or APP endpoint URL. | Required |
+| suppression\_window | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once the agent detects an issue and notifies the Slack endpoint, the agent will suppress any new issues for this time period. The default setting is **20m**. | Optional |
+| suppression\_mode | Enter a supression mode, which can be **local** or **global**. The default mode is **local**, which indicates that an individual agent suppresses an issue if the agent has already made a local notification for a similar issue in the last suppresson window. **Global** mode indicates that an individual agent checks with the Edge Delta backend to see if there were similar alerts from other sibling agents \(agents that share the same tag in the configuration\). | Optional |
+| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: slack-integration
@@ -860,21 +885,25 @@ If enabled, the Slack integration will stream notifications and alerts to the sp
             "Matched Term": "{{.MatchedTerm}}"
 ```
 
-**Getting started with Slack Incoming Webhooks:** [https://api.slack.com/messaging/webhooks](https://api.slack.com/messaging/webhooks)
+***
 
 ### **Microsoft Teams**
 
-If enabled, the Microsoft Teams integration will stream notifications and alerts to the specified Teams channel using hook URL
+The **Microsoft Teams** output will stream notifications and alerts to a specified Teams channel.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Microsoft Teams** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "teams" to send alerts to Microsoft Teams | Yes |
-| endpoint | Microsoft Teams Webhook URL | Yes |
-| suppression\_window | A [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once agent detects an issue and notifies this Microsoft Teams endpoint it will suppress any new issues for this duration. Default is "20m". | No |
-| suppression\_mode | Suppression mode can be "local" or "global". Default is "local" which means an individual agent suppresses an issue only if it has locally notified a similar issue in last suppresson window. When "global" mode is selected an individual agent checks with Edge Delta backend to see whether there were similar alerts from other sibling agents \(the ones sharing same tag in config\). | No |
-| notify\_content | Used to customize the notification content. It supports templating. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **teams**. | Required |
+| endpoint | Enter the Microsoft Teams webhook URL. | Required |
+| suppression\_window | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once the agent detects an issue and notifies the Slack endpoint, the agent will suppress any new issues for this time period. The default setting is **20m**.| Optional |
+| suppression\_mode | Enter a supression mode, which can be **local** or **global**. The default mode is **local**, which indicates that an individual agent suppresses an issue if the agent has already made a local notification for a similar issue in the last suppresson window. **Global** mode indicates that an individual agent checks with the Edge Delta backend to see if there were similar alerts from other sibling agents \(agents that share the same tag in the configuration\).  | Optional |
+| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating.| Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: microsoft-teams-integration
@@ -999,16 +1028,20 @@ Notify Content is optional way to customize the notification content for some (s
 
 ### **Pagerduty**
 
-If enabled, the Pagerduty integration will stream notifications and alerts to the specified Pagerduty API endpoint
+The **Pagerduty** output will stream notifications and alerts to a specified Pagerduty API endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Pagerduty** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "pagerduty" to send alerts to Pagerduty | Yes |
-| endpoint | Pagerduty API endpoint URL | Yes |
-| custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
-| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **pagerduty**. | Required |
+| endpoint | Enter the Pagerduty API endpoint URL. | Required |
+| custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: pagerduty-integration
@@ -1032,17 +1065,23 @@ If enabled, the Pagerduty integration will stream notifications and alerts to th
             }
 ```
 
+***
+
 ### **Jira**
 
-If enabled, the Jira integration (it makes use of CodeBarrel webhook) will stream notifications and alerts to the specified Jira webhook URL
+The **Jira** output will stream notifications and alerts to a specified Jira webhook URL.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Jira** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "jira" to send alerts to Jira | Yes |
-| endpoint | Jira webhook URL | Yes |
-| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **jira**. | Required |
+| endpoint | Enter the Jira webhook URL. | Required |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: jira-integration
@@ -1058,20 +1097,26 @@ If enabled, the Jira integration (it makes use of CodeBarrel webhook) will strea
             }
 ```
 
+***
+
 ### **Service Now**
 
-If enabled, the Service Now integration will stream notifications and alerts to the specified Service Now API endpoint
+The **Service Now** output will stream notifications and alerts to a specified Service Now API endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Service Now** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "servicenow" to send alerts to Service Now | Yes |
-| endpoint | Service Now URL | Yes |
-| username | Username for Service Now basic authentication | No |
-| password | Password for Service Now basic authentication | No |
-| custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
-| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **servicenow**. | Required |
+| endpoint | Enter the Service Now URL. | Required |
+| username | Enter the username for Service Now basic authentication. | Optional |
+| password | Enter the password for Service Now basic authentication. | Optional |
+| custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: service-now-integration
@@ -1087,19 +1132,25 @@ If enabled, the Service Now integration will stream notifications and alerts to 
             }
 ```
 
+***
+
 ### **Webhook**
 
-If enabled, the Webhook integration will stream notifications and alerts to the specified Webhook URL
+The **Webhook** output will stream notifications and alerts to the specified Webhook URL.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Webhook** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "webhook" to send alerts to custom Webhook | Yes |
-| endpoint | Webhook API endpoint | Yes |
-| username | Username for Webhook basic authentication | No |
-| password | Password for Webhook basic authentication | No |
-| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **webhook**. | Required |
+| endpoint | Enter the Webhook API endpoint. | Required |
+| username | Enter the username for Webhook basic authentication. | Optional |
+| password | Enter the password for Webhook basic authentication. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: webhook-integration
@@ -1126,17 +1177,23 @@ If enabled, the Webhook integration will stream notifications and alerts to the 
             }
 ```
 
+***
+
 ### **AWS Lambda**
 
-If enabled, the AWS Lambda integration will stream notifications and alerts to the specified AWS Lambda FaaS endpoint
+The **AWS Lambda** output will stream notifications and alerts to  the specified AWS Lambda FaaS endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **AWS Lambda** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "awslambda" to send alerts to AWS Lambda | Yes |
-| endpoint | AWS Lambda FaaS Endpoint | Yes |
-| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **awslambda**. | Required |
+| endpoint | Enter the AWS Lambda FaaS endpoint. | Required |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: aws-lambda-integration
@@ -1151,17 +1208,23 @@ If enabled, the AWS Lambda integration will stream notifications and alerts to t
             }
 ```
 
+***
+
 ### **Azure Functions**
 
-If enabled, the Azure Functions integration will stream notifications and alerts to the specified AWS Lambda FaaS endpoint
+The **Azure Functions** output will stream notifications and alerts to Azure endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Azure Functions** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "azurefunctions" to send alerts to Azure Functions | Yes |
-| endpoint | Azure Functions FaaS Endpoint | Yes |
-| notify\_content | Used to customize the notification content. It supports templating. It is not required but advised to use `advanced_content` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **azurefunctions**. | Required |
+| endpoint | Enter the Azure Functions FaaS endpoint. | Required |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: azure-functions-integration
@@ -1176,7 +1239,11 @@ If enabled, the Azure Functions integration will stream notifications and alerts
             }
 ```
 
-### Examples
+***
+
+### Example of Stream and Trigger
+
+The following example displays a configuration with a stream output and a trigger output: 
 
 ```yaml
 outputs:
@@ -1190,21 +1257,32 @@ outputs:
         endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 ```
 
+***
+
 ## Review Archive Destinations
 
 ### **AWS S3**
 
-If enabled, the AWS S3 integration will stream logs to an AWS S3 endpoint.
+The **AWS S3** output will stream logs to an AWS S3 endpoint.
 
-| Key | Description | Required |
+> **Before you begin**
+> 
+> Before you can create an output, you must have the AWS Key ID and the AWS Secret Key ID available. 
+> To learn how to create an AWS access key, review this [document from AWS](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key).
+
+In the Edge Delta Admin portal, in the visual editor, when you select **AWS S3** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "s3" to send archived logs to AWS S3 | Yes |
-| bucket | Target s3 bucket to send archived logs | Yes |
-| region | The specified s3 bucket's region | Yes |
-| aws\_key\_id | AWS key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key) | Yes |
-| aws\_sec\_key | AWS secret key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key) | Yes |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **s3**. | Required |
+| bucket | Enter the target S3 bucket to send archived logs. | Required |
+| region | Enter the specified S3 bucket's region. | Required |
+| aws\_key\_id | Enter the AWS key ID that has the PutObject permission to target the bucket. | Required |
+| aws\_sec\_key | Enter the AWS secret key ID that has the PutObject permission to target the bucket.  | Required |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: my-s3
@@ -1215,19 +1293,29 @@ If enabled, the AWS S3 integration will stream logs to an AWS S3 endpoint.
         aws_sec_key: "<add aws secure key>"
 ```
 
+***
+
 ### **Azure Blob Storage**
 
-If enabled, the Azure Blob Storage integration will stream logs to an Azure Blob Storage endpoint.
+The **Azure Blob Storage** output will stream logs to an Azure Blob Storage endpoint.
 
-| Key | Description | Required |
+> **Before you begin**
+> 
+> Before you can create an output, you must have an account key. To learn more, review this [document from Microsoft](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal). 
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Azure Blob Storage** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "blob" to send archived logs to Azure blob | Yes |
-| account\_name | Account Name for the azure account. | Yes |
-| account\_key | Account Key for azure account. You can visit [https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) | Yes |
-| container | Container to upload. | Yes |
-| auto_create_container | Create the container on the service (with no metadata and no public access). | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow.  | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **blob**. | Required |
+| account\_name | Enter the account name for the Azure account. | Required |
+| account\_key | Enter the account key for Azure account. | Required |
+| container | Enter the container name to upload. | Required |
+| auto_create_container | Create the container on the service, with no metadata and no public access. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: my-blob
@@ -1236,6 +1324,8 @@ If enabled, the Azure Blob Storage integration will stream logs to an Azure Blob
         account_key: "<add account key>"
         container: testcontainer
 ```
+
+***
 
 ### **Google Cloud Storage**
 
@@ -1249,6 +1339,8 @@ If enabled, the Google Cloud Storage integration will stream logs to an GCS endp
 | bucket | Target gcs bucket to send archived logs. | Yes |
 | hmac\_access\_key | GCS HMAC Access Key which has permissions to upload files to specified bucket. See [https://cloud.google.com/storage/docs/authentication/managing-hmackeys](https://cloud.google.com/storage/docs/authentication/managing-hmackeys) for details on how to create new keys | Yes |
 | hmac\_secret | GCS HMAC secret associated with the access key specified. | Yes |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: my-gcs
