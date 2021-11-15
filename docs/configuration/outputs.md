@@ -848,7 +848,7 @@ The following example displays an output without the name of the organization-le
 
 ## Review Trigger Destinations 
 
-### **Slack**
+### Slack
 
 The **Slack** output will stream notifications and alerts to a specified Slack channel.
 
@@ -887,7 +887,7 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-### **Microsoft Teams**
+### Microsoft Teams
 
 The **Microsoft Teams** output will stream notifications and alerts to a specified Teams channel.
 
@@ -920,7 +920,7 @@ The following example displays an output without the name of the organization-le
             "Matched Term": "{{.MatchedTerm}}"
 ```
 
-#### **Notify Content**
+#### Notify Content
 
 Notify Content is optional way to customize the notification content for some (such as Slack, Microsoft Teams, Webhook etc.) triggers. It supports templating.
  **Available template fields**:
@@ -1026,7 +1026,7 @@ Notify Content is optional way to customize the notification content for some (s
            }
 ```
 
-### **Pagerduty**
+### Pagerduty
 
 The **Pagerduty** output will stream notifications and alerts to a specified Pagerduty API endpoint.
 
@@ -1067,7 +1067,7 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-### **Jira**
+### Jira
 
 The **Jira** output will stream notifications and alerts to a specified Jira webhook URL.
 
@@ -1099,7 +1099,7 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-### **Service Now**
+### Service Now
 
 The **Service Now** output will stream notifications and alerts to a specified Service Now API endpoint.
 
@@ -1134,7 +1134,7 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-### **Webhook**
+### Webhook
 
 The **Webhook** output will stream notifications and alerts to the specified Webhook URL.
 
@@ -1179,7 +1179,7 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-### **AWS Lambda**
+### AWS Lambda
 
 The **AWS Lambda** output will stream notifications and alerts to  the specified AWS Lambda FaaS endpoint.
 
@@ -1210,7 +1210,7 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-### **Azure Functions**
+### Azure Functions
 
 The **Azure Functions** output will stream notifications and alerts to Azure endpoint.
 
@@ -1261,7 +1261,7 @@ outputs:
 
 ## Review Archive Destinations
 
-### **AWS S3**
+### AWS S3
 
 The **AWS S3** output will stream logs to an AWS S3 endpoint.
 
@@ -1277,7 +1277,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **AWS S3**
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
 | type | Select **s3**. | Required |
-| bucket | Enter the target S3 bucket to send archived logs. | Required |
+| bucket | Enter the target S3 bucket to send the archived logs. | Required |
 | region | Enter the specified S3 bucket's region. | Required |
 | aws\_key\_id | Enter the AWS key ID that has the PutObject permission to target the bucket. | Required |
 | aws\_sec\_key | Enter the AWS secret key ID that has the PutObject permission to target the bucket.  | Required |
@@ -1295,7 +1295,7 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-### **Azure Blob Storage**
+### Azure Blob Storage
 
 The **Azure Blob Storage** output will stream logs to an Azure Blob Storage endpoint.
 
@@ -1327,18 +1327,24 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-### **Google Cloud Storage**
+### Google Cloud Storage
 
-If enabled, the Google Cloud Storage integration will stream logs to an GCS endpoint.
+The **Google Cloud Storage** output will stream logs to a GCS endpoint.
 
-| Key | Description | Required |
+> **Before you begin**
+> 
+> Before you can create an output, you must have a GCS HMAC Access key. To learn how to create a new key, review this [document from Google](https://cloud.google.com/storage/docs/authentication/managing-hmackeys). 
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Google Cloud Storage** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "gcs" to send archived logs to Google Cloud Storage | Yes |
-| bucket | Target gcs bucket to send archived logs. | Yes |
-| hmac\_access\_key | GCS HMAC Access Key which has permissions to upload files to specified bucket. See [https://cloud.google.com/storage/docs/authentication/managing-hmackeys](https://cloud.google.com/storage/docs/authentication/managing-hmackeys) for details on how to create new keys | Yes |
-| hmac\_secret | GCS HMAC secret associated with the access key specified. | Yes |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **gcs**. | Required |
+| bucket | Enter the target GCS bucket to send the archived logs. | Required |
+| hmac\_access\_key | Enter the GCS HMAC Access key that has permissions to upload files to specified bucket. | Required |
+| hmac\_secret | GCS HMAC secret associated with the access key specified. | Required |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -1350,19 +1356,25 @@ The following example displays an output without the name of the organization-le
         hmac_secret: my_hmac_secret_123
 ```
 
-### **DigitalOcean Spaces**
+***
 
-If enabled, the DigitalOcean Spaces integration will stream logs to an DigitalOcean Spaces endpoint.
+### DigitalOcean Spaces
 
-| Key | Description | Required |
+The **DigitalOcean Spaces** output will stream logs to a DigitalOcean Spaces endpoint.
+
+In the Edge Delta Admin portal, in the visual editor, when you select **DigitalOcean Spaces** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "dos" to send archived logs to DigitalOcean Spaces | Yes |
-| endpoint | DigitalOcean Spaces Endpoint | Yes |
-| bucket | Target DOS bucket to send archived logs. | Yes |
-| access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
-| secret\_key | Secret Key associated with the access key specified. | Yes |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | Select **dos**.| Required |
+| endpoint | Enter the DigitalOcean Spaces endpoint. | Required |
+| bucket | Enter the target DOS bucket to send the archived logs. | Required |
+| access\_key | Enter the access key that has permissions to upload files to the specified bucket. | Required |
+| secret\_key | Enter the secret key associated with the specified access key. | Required |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: my-digitalocean-spaces
@@ -1373,19 +1385,26 @@ If enabled, the DigitalOcean Spaces integration will stream logs to an DigitalOc
         secret_key: my_secret_key_123
 ```
 
-### **IBM Object Storage**
+***
 
-If enabled, the IBM Object Storage integration will stream logs to an IBM Object Storage endpoint.
+### IBM Object Storage
 
-| Key | Description | Required |
+The **IBM Object Storage** output will stream logs to an IBM Object Storage endpoint.
+
+In the Edge Delta Admin portal, in the visual editor, when you select **IBM Object Storage** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "ibmos" to send archived logs to IBM Object Storage | Yes |
-| endpoint | IBM Object Storage Endpoint | Yes |
-| bucket | Target IBM OS bucket to send archived logs. | Yes |
-| access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
-| secret\_key | Secret Key associated with the access key specified. | Yes |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | Select **ibmos**. | Required |
+| endpoint | Enter the IBM Object Storage endpoint | Required |
+| bucket | Enter the desired IBM Object Storage bucket to send the archived logs. | Required |
+| access\_key | Enter the access key that has permission to upload files to the specified bucket. | Required |
+| secret\_key | Enter the secret key associated with the specified access key. | Required |
+
+The following example displays an output without the name of the organization-level integration:
+
 
 ```yaml
       - name: my-ibm-object-storage
@@ -1396,21 +1415,27 @@ If enabled, the IBM Object Storage integration will stream logs to an IBM Object
         secret_key: my_secret_key_123
 ```
 
+***
+
 ### **Minio**
 
-If enabled, the Minio integration will stream logs to an Minio endpoint.
+The **Minio** output will stream logs to a Minio endpoint.
 
-| Key | Description | Required |
+In the Edge Delta Admin portal, in the visual editor, when you select **Minio** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "minio" to send archived logs to Minio | Yes |
-| endpoint | Minio Endpoint | Yes |
-| bucket | Target Minio bucket to send archived logs. | Yes |
-| access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
-| secret\_key | Secret Key associated with the access key specified. | Yes |
-| disable\_ssl | Disable SSL requirement when pushing logs to Minio endpoint | No |
-| s3\_force\_path\_style | Force archive destination to use `{endpoint}/{bucket}` format instead of `{bucket}.{endpoint}/` when reaching buckets`) | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | This parametert must be set **minio**. | Required |
+| endpoint | Enter the Minio endpoint. | Required |
+| bucket | Enter the Minio bucket to send the archived logs. | Required |
+| access\_key | Enter the access key that has permissions to upload files to the specified bucket. | Yes |
+| secret\_key | Enter the secret key associated with the specified access key. | Required |
+| disable\_ssl | You can disable the SSL requirement when logs are pushed to the Minio endpoint. | Optional |
+| s3\_force\_path\_style | You can force the archive destination to use the `{endpoint}/{bucket}` format instead of the `{bucket}.{endpoint}/` format when reaching buckets. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: my-minio
@@ -1423,19 +1448,25 @@ If enabled, the Minio integration will stream logs to an Minio endpoint.
         s3_force_path_style: true
 ```
 
-### **Zenko CloudServer**
+***
 
-If enabled, the Zenko CloudServer integration will stream logs to an CloudServer endpoint.
+### Zenko CloudServer
 
-| Key | Description | Required |
+The **Zenko CloudServer** output will stream logs to a CloudServer endpoint.
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Zenko CloudServer** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows. | No |
-| type | Must be set to "zenko" to send archived logs to Zenko | Yes |
-| endpoint | Zenko Endpoint | Yes |
-| bucket | Target Zenko bucket to send archived logs. | Yes |
-| access\_key | Access Key which has permissions to upload files to specified bucket. | Yes |
-| secret\_key | Secret Key associated with the access key specified. | Yes |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | This parameter must be set to zenko. | Required |
+| endpoint | Enter the Zenko endpoint. | Required |
+| bucket | Enter the desired Zenko bucket to send the archived logs. | Required |
+| access\_key | Enter the access key that has permissions to upload files to the specified bucket. | Required |
+| secret\_key | Enter the secret key associated with the specified access key. | Required |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: my-zenko-cloudserver
@@ -1446,20 +1477,26 @@ If enabled, the Zenko CloudServer integration will stream logs to an CloudServer
         secret_key: my_secret_key_123
 ```
 
-### **Moogsoft**
+***
 
-If enabled, the Moogsoft integration will stream notifications and alerts to the specified Moogsoft URL
+### Moogsoft
 
-| Key | Description | Required |
+The **Moogsoft** output will stream notifications and alerts to a specified Moogsoft URL.
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Moogsoft** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "moogsoft" to send alerts to Moogsoft | Yes |
-| endpoint | Moogsoft API endpoint | Yes |
-| api_key | Moogsoft API Key. One of the fields API Key or username/password is required. | No |
-| username | Username for Moogsoft basic authentication. One of the fields username/password or API Key is required. | No |
-| password | Password for Moogsoft basic authentication. One of the fields username/password or API Key is required. | No |
-| notify\_content | Used to customize the notification content. It supports templating. Moogsoft only supports `custom_fields` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | This parameter must be set to **moogsoft**. | Required |
+| endpoint | Enter the Moogsoft API endpoint. | Required |
+| api_key | Enter the Moogsoft API key. You must enter an API key or a username/password. | Optional |
+| username | Enter the username for Moogsoft basic authentication. You must enter an API key or a username/password. | Optional |
+| password | Enter the password for Moogsoft basic authentication. You must enter an API key or a username/password. | Optional |
+| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. Moogsoft only supports the **custom_fields** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: moogsoft-default
@@ -1471,21 +1508,27 @@ If enabled, the Moogsoft integration will stream notifications and alerts to the
             "jira-ticket": "ticket"
 ```
 
-### **Remedy**
+***
 
-If enabled, the Remedy integration will stream notifications and alerts to the specified Remedy URL.
+### Remedy
 
-| Key | Description | Required |
+The **Remedy** output will stream notifications and alerts to a specified Remedy URL.
+
+In the Edge Delta Admin portal, in the visual editor, when you select **Remedy** as the output type, the following fields will appear:
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | User defined name of this specific destination, used for mapping this destination to a workflow | No |
-| integration\_name | Integration name refers to the organization level integration created on [Integrations page](https://admin.edgedelta.com/integrations). It can be referred in the rest of the config via _integration\_name_ in which case rest of the fields are not required to be set because rest is auto-populated from org level integration spec. In case multiple instances of same integration needs to be added to a config then a custom name can be given to each via _name_ field. In that case name should be used to refer the specific instance of the destination in workflows.  | No |
-| type | Must be set to "remedy" to send alerts to Remedy | Yes |
-| endpoint | Remedy API endpoint | Yes |
-| token | Remedy token. One of the fields token or username/password is required. | No |
-| username | Username for Remedy basic authentication. One of the fields username/password or token is required. | No |
-| password | Password for Remedy basic authentication. One of the fields username/password or token is required. | No |
-| custom\_headers | Used to append some custom headers (such as Authorization etc.) to requests done by the integration | No |
-| notify\_content | Used to customize the notification content. It supports templating. Moogsoft only supports `custom_fields` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | This parameter must be set to **remedy**. | Required |
+| endpoint | Enter the Remedy API endpoint. | Required |
+| token | Enter the Remedy token. You must enter a token or a username/password. | Optional |
+| username | Enter the username for Remedy basic authentication. You must enter a token or a username/password. | Optional |
+| password | Enter the password for Remedy basic authentication. You must enter a token or a username/password. | Optional |
+| custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
+| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. Remedy only supports the **custom_fields** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
       - name: remedy-default
@@ -1499,24 +1542,29 @@ If enabled, the Remedy integration will stream notifications and alerts to the s
           X-header1: "test-header"
 ```
 
+***
+
 ### **Azure Event Hub Trigger**
 
-You can enable this integration to stream notifications and alerts to a specified Event Hub URL. 
+The **Azure Event Hub Trigger** output will stream notifications and alerts to a specified Remedy URL.
+
 
 > **Note**
 > 
 > To enable this integration, you must have an Azure AD token. To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
+In the Edge Delta Admin portal, in the visual editor, when you select **Azure Event Hub Trigger** as the output type, the following fields will appear:
 
-| Key | Description | Required |
+
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | This key is the user-defined name of the specific destination. This key is used for mapping this destination to a workflow. | No |
-| integration\_name | This key refers to the organization-level integration created on the [Integrations page](https://admin.edgedelta.com/integrations). This key can be referred in the rest of the config via _integration\_name_ . In this case, the rest of the fields are not required to be set because the additional fields are auto-populated from the organization-level integration spec. If there are multiple instances in the same integration that need to be added to a config, then you can create a custom name for each instance via the via _name_ field. In this case, each name should be used to refer to a destination's specific instance in the workflow. | No |
-| type | This key must be set to "eventhub" to send alerts to Event Hub. | Yes |
-| endpoint | This key is the Event Hub endpoint. | Yes |
-| token | This key is the Azure AD token. | Yes |
-| custom\_headers | This key appends custom headers, such as Authorization, to requests performed by the integration. | No |
-| notify\_content | This key customizes the notification content. This key supports templating. Event Hub only supports the `custom_fields` subfield. | No |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
+| type | This parameter must be set to **eventhub**. | Required |
+| endpoint | Enter the Event Hub endpoint. | Required |
+| token | Enter the Azure AD token. | Required |
+| custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
+| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. Event Hub only supports the **custom_fields** subfield. | Optional |
 
 ```yaml
        - name: eventhub-test
@@ -1536,4 +1584,4 @@ You can enable this integration to stream notifications and alerts to a specifie
 
 > **Note**
 > 
-> In the Edge Delta Admin portal, the term **output** is represented by the **Integrations** page. To create an output, access the **Integrations** page. After you create an output, you will be asked to add the output to an existin agent configuration. If you do not have an agent configuration, then you can create the configuration, and then return to the **Integrations** page to add the output to the configuration.  
+> In the Edge Delta Admin portal, the term **output** is represented by the **Integrations** page. To create an output, access the **Integrations** page. After you create an output, you will be asked to add the output to an existing agent configuration. If you do not have an agent configuration, then you can create the configuration, and then return to the **Integrations** page to add the output to the configuration.  
