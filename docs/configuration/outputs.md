@@ -1026,7 +1026,12 @@ outputs:
 
 If enabled, the AWS S3 integration will send logs to an AWS S3 endpoint.
 
-Before you configure your Edge Delta account to sends logs to an AWS S3 endpoint, you must first access the AWS console to attach the following custom policy to the IAM user that will have access to the AWS S3 bucket: 
+Before you configure your Edge Delta account to sends logs to an AWS S3 endpoint, you must first access the AWS console to:
+
+  * Create an IAM user to access the AWS S3 bucket
+    * To learn how to create an IAM user, review this [document from AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html).
+  * Attach the following custom policy to the newly created IAM user
+    * To learn how to create and add a custom policy, review this [document from AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html). 
 
 ```
 {
@@ -1055,8 +1060,8 @@ After you attach the policy in the AWS console, review the following parameters 
 | type | Must be set to "s3" to send archived logs to AWS S3 | Yes |
 | bucket | Target s3 bucket to send archived logs | Yes |
 | region | The specified s3 bucket's region | Yes |
-| aws\_key\_id | AWS key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key). If you use role-based AWS authentication where keys are not provided, then you should keep this field empty. | No |
-| aws\_sec\_key | AWS secret key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key). If you use role-based AWS authentication where keys are not provided, then you should keep this field empty.  | No |
+| aws\_key\_id | AWS key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key). If you use role-based AWS authentication where keys are not provided, then you should keep this field empty; however, you must still attach the custom policy listed above. | No |
+| aws\_sec\_key | AWS secret key id that has PutObject permission to target bucket. How do I create an AWS access key? [https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key). If you use role-based AWS authentication where keys are not provided, then you should keep this field empty; however, you must still attach the custom policy listed above.   | No |
 
 ```yaml
       - name: my-s3
