@@ -118,7 +118,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Microsof
 | endpoint | Enter the Microsoft Teams webhook URL. | Required |
 | suppression\_window | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once the agent detects an issue and notifies the Slack endpoint, the agent will suppress any new issues for this time period. The default setting is **20m**.| Optional |
 | suppression\_mode | Enter a supression mode, which can be **local** or **global**. The default mode is **local**, which indicates that an individual agent suppresses an issue if the agent has already made a local notification for a similar issue in the last suppresson window. **Global** mode indicates that an individual agent checks with the Edge Delta backend to see if there were similar alerts from other sibling agents \(agents that share the same tag in the configuration\).  | Optional |
-| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating.| Optional |
+| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters).| Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -152,7 +152,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Pagerdut
 | type | You must set this parameter to **pagerduty**. | Required |
 | endpoint | Enter the Pagerduty API endpoint URL. | Required |
 | custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
-| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters). | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -192,7 +192,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Jira** a
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
 | type | You must set this parameter to **jira**. | Required |
 | endpoint | Enter the Jira webhook URL. | Required |
-| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters). | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -227,7 +227,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Service 
 | username | Enter the username for Service Now basic authentication. | Optional |
 | password | Enter the password for Service Now basic authentication. | Optional |
 | custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
-| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters). | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -261,7 +261,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Webhook*
 | endpoint | Enter the Webhook API endpoint. | Required |
 | username | Enter the username for Webhook basic authentication. | Optional |
 | password | Enter the password for Webhook basic authentication. | Optional |
-| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters). | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -304,7 +304,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **AWS Lamb
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
 | type | You must set this parameter to **awslambda**. | Required |
 | endpoint | Enter the AWS Lambda FaaS endpoint. | Required |
-| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters). | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -335,7 +335,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Azure Fu
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
 | type | You must set this parameter to **azurefunctions**. | Required |
 | endpoint | Enter the Azure Functions FaaS endpoint. | Required |
-| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. | Optional |
+| notify\_content | This parameter is used to customize the notification content. This parameter supports templating. While this parameter is optional, Edge Delta recommends that you use the **advanced_content** subfield. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters). | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -356,14 +356,9 @@ The following example displays an output without the name of the organization-le
 
 ### (Optional) Step 3: Review Notify Content Parameters 
 
-The Notify Content parameter is an optional way to customize the notification content for specific Outputs - Triggers. 
-
-This parameter supports templating. 
+The **Notify Content** parameter is an optional way to customize the notification content for specific Outputs - Triggers. This parameter supports templating. 
 
 Review the following template fields: 
-
-Notify Content is optional way to customize the notification content for some (such as Slack, Microsoft Teams, Webhook etc.) triggers. It supports templating.
- **Available template fields**:
 
 * **Tag**: User defined tag to describe the environment. e.g. prod\_us\_west\_2\_cluster.
 * **EDAC**: Edge Delta Anomaly Context ID.
