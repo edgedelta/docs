@@ -42,7 +42,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 4. On the right-side, select **Triggers**.
 5. Select the desired destination, and then complete the missing fields. 
 
-  * To learn more about each destination, see Step 2: 
+  * To learn more about each destination, specifically parameters, see [Step 2: Review Trigger Destinations](#step-2-review-trigger-destinations).
 
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
 7. To save the configuraiton and exit the visual editor, click **Save**. 
@@ -56,11 +56,13 @@ At a high level, there are 2 ways to manage **Outputs**:
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
+* To learn more about each destination, specifically parameters, see [Step 2: Review Trigger Destinations](#step-2-review-trigger-destinations).
+
 ***
 
-## Step 2: Review Trigger Destinations 
+## Step 2: Review Parameters for Trigger Destinations
 
-Edge Delta supports the following streaming destinations: 
+Edge Delta supports the following trigger destinations: 
 
 ### Slack
 
