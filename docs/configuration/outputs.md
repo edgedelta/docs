@@ -1,15 +1,14 @@
 ---
 description: >-
-  This document outlines the various Output types (Streaming, Triggers and
-  Archives) supported by the Edge Delta agent, and how the outputs are
-  configured.
+  This document is the landing page for Outputs with links to the Output types (Streaming, Triggers and
+  Archives) 
 ---
 
 # Outputs
 
 ## Overview
 
-You can use this document to learn about the configuration parameters available in a configuration file, specifically for **Outputs**.
+You can use this document to learn about the output types available to manage in a configuration file.
 
 An output tells the Edge Delta agent where to send collected and generated data, such as as metrics, patterns, alerts, etc.
 
@@ -17,11 +16,90 @@ An output tells the Edge Delta agent where to send collected and generated data,
 > 
 > The terms **output**, **integration**, and **destination** may be used interchangeably. 
 
+There are 3 types of outputs:
+
+  * Stream
+  * Trigger
+  * Archive
+
+***
+
+## Output - Stream 
+
+This output type focuses on centralized monitoring platforms.
+
+Edge Delta supports the following platforms: 
+
+  * Sumo Logic 
+  * AWS CloudWatch
+  * Datadog
+  * New Relic
+  * InfluxDB
+  * Wavefront
+  * Scalyr
+  * Elastic Search
+  * Azure AppInsight
+  * Kafka
+  * SignalFx
+  * Humio
+  * Loggly
+  * Logz.io
+  * Loki
+
+To learn more, see [Outputs-Streams](outputs-streams.md).
+
+***
+
+## Output - Trigger
+
+This output type focuses on alerting and automation systems. Specifically, this output type tells the Edge Delta agent to send alerts and notifications when an anomaly is detected or when various conditions are met. 
+
+Edge Delta supports the following platforms: 
+
+  * Slack
+  * Microsoft Teams
+  * Pagerduty
+  * Jira
+  * Service Now
+  * Webhook
+  * AWS Lambda
+  * Azure Functions
+
+To learn more, see [Outputs-Triggers](outputs-triggers.md).
+
+***
+
+## Output - Archive
+
+This output type focuses on storage solutions where the Edge Delta agent can periodically send compressed raw data logs.
+
+Edge Delta supports the following platforms: 
+
+  * AWS S3
+  * Azure Blob Storage
+  * Google Cloud Storage
+  * DigitalOcean Spaces
+  * IBM Object Storage
+  * Minio
+  * Zenko CloudServer
+  * Moogsoft
+  * Remedy
+  * Azure Event Hub Trigger
+
+To learn more, see [Outputs-Archives](outputs-archives.md).
+
+***
+
+
+
+
+
+
 At a high level, there are 3 types of outputs:
 
 | Output Type | Description | Supported Platforms and Systems |
 | :--- | :--- | :--- | 
-| Streaming destinations | This output type focuses on centralized monitoring platforms. | Sumo Logic, AWS CloudWatch, Datadog, New Relic, InfluxDB, Wavefront, Scalyr, Elastic Search, Azure AppInsight, Kafka, SignalFx, Humio, Loggly, Logz.io, Loki | 
+| Streaming destinations | This output type focuses on centralized monitoring platforms. To learn more, see [Outputs-Streams](outputs-streams.md). | Sumo Logic, AWS CloudWatch, Datadog, New Relic, InfluxDB, Wavefront, Scalyr, Elastic Search, Azure AppInsight, Kafka, SignalFx, Humio, Loggly, Logz.io, Loki | 
 | Trigger destinations | This output type focuses on alerting and automation systems. Specifically, this output type allows Edge Delta to send alerts and notifications when an anomaly is detected or when various conditions are met.  | Slack, Microsoft Teams, Pagerduty, Jira, Service Now, Webhook, AWS Lambda, Azure Functions |
 | Archive destinations | This output type focuses on storage solutions where Edge Delta can periodically send compressed raw data logs.  | AWS S3, Azure Blob Storage, Google Cloud Storage, DigitalOcean Spaces, IBM Object Storage, Minio, Zenko CloudServer, Moogsoft, Remedy, Azure Event Hub Trigger |
 
@@ -1582,6 +1660,4 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Azure Ev
 
 
 
-> **Note**
-> 
-> In the Edge Delta Admin portal, the term **output** is represented by the **Integrations** page. To create an output, access the **Integrations** page. After you create an output, you will be asked to add the output to an existing agent configuration. If you do not have an agent configuration, then you can create the configuration, and then return to the **Integrations** page to add the output to the configuration.  
+
