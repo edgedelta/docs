@@ -83,7 +83,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Slack** 
 | endpoint | Enter the Slack Webhook or APP endpoint URL. | Required |
 | suppression\_window | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once the agent detects an issue and notifies the Slack endpoint, the agent will suppress any new issues for this time period. The default setting is **20m**. | Optional |
 | suppression\_mode | Enter a supression mode, which can be **local** or **global**. The default mode is **local**, which indicates that an individual agent suppresses an issue if the agent has already made a local notification for a similar issue in the last suppresson window. **Global** mode indicates that an individual agent checks with the Edge Delta backend to see if there were similar alerts from other sibling agents \(agents that share the same tag in the configuration\). | Optional |
-| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. | Optional |
+| notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters). | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
