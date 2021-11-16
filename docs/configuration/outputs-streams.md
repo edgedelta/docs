@@ -22,14 +22,13 @@ An **Output - Stream** focuses on centralized monitoring platforms. Specificaill
 > 
 > The terms **output**, **integration**, and **destination** may be used interchangeably. 
 
-
 ***
 
 ## Step 1: Review Feature Types
 
 In the Edge Delta Admin portal, **features** are the data types that the Edge Delta agent should collect (or generate), and then send to a streaming destination. 
 
-When you create Outputs - Streams, you can add the following features to the output: 
+When you create an **Output - Stream**, you can add the following features to the output: 
 
 | Feature Type | Description | 
 | :--- | :--- | 
@@ -44,7 +43,7 @@ When you create Outputs - Streams, you can add the following features to the out
 
 ## Step 2: Create or Update Outputs - Streams
 
-At a high level, there are 2 ways to manage **Outputs - Streaming**:
+At a high level, there are 2 ways to manage **Outputs - Streams**:
 
   * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
   * If you already have an existing configuration, then you can update the configuration in the YAML file. 
