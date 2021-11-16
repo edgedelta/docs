@@ -659,6 +659,23 @@ You can enable this integration to stream analytics and insights to an Azure Eve
         features: log,metric
 ```
 
+***
+
+### Snowflake
+
+The Snowflake output will stream logs to a Snowflake environment. 
+
+> **Note**
+> 
+> To send logs to Snowflake, you must have access to an AWS account, specifically for S3. 
+
+1. Basically the way it works is, we upload customer logs into s3 buckets, from s3 buckets snowflake recieves a notification via SQS, and execute snowpipe job which trnsform s3 data into snowflake tables
+
+
+In the Edge Delta Admin portal, 
+
+***
+
 ## Trigger Destinations
 
 ### **Slack**
