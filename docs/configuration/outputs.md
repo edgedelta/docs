@@ -50,6 +50,8 @@ To learn more, see [Outputs-Streams](outputs-streams.md).
 
 ***
 
+Delete the rest
+
 ## Output - Trigger
 
 This output type focuses on alerting and automation systems. Specifically, this output type tells the Edge Delta agent to send alerts and notifications when an anomaly is detected or when various conditions are met. 
