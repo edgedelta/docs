@@ -87,8 +87,8 @@ The Splunk output will stream analytics and insights to a Splunk HEC endpoint.
 
 > **Before you begin**
 > 
-> To create an output, you must have available Splunk HEC token and HEC endpont.
-> To learn how to create and obtain this information, see
+> To create an output, you must have available a Splunk HEC token and HEC endpont.
+> To learn how to create and obtain this information, see [Set Up the Splunk Integration](#set-up-the-splunk-integration).
 
 In the Edge Delta Admin portal, in the visual editor, when you select **Splunk** as the output type, the following fields will appear:
 
@@ -130,17 +130,22 @@ The following example displays if there are multiple instances of the same desit
   index: metric-index
 ```
 
+***
+
 #### Set Up the Splunk Integration
 
-At a high level, to set up a Splunk output, you must: 
+Before you can set up a Splunk output, you must have the HEC token and HEC endpoint avaialble. At a high level, to set up a Splunk output, you must: 
 
 * Configure an HEC token in Splunk
 * Determine the correct HEC endpoint in Splunk
 * Import the Edge Delta dashboard into Splunk
 
-#### Step 1: Configure an HEC Token in Splunk
+> **Note**
+> 
+> The process to set up a Splunk output varies for Splunk Cloud and Splunk Enterprise users.
 
-The process to set up a Splunk integration varies between Splunk Cloud and Splunk Enterprise.
+
+#### Step 1: Configure an HEC Token in Splunk
 
 ##### Option 1: Splunk Cloud
 * Create a Splunk HTTP Event Collector (HEC) and Token
@@ -205,6 +210,7 @@ Review the following instructions to learn how to import your Edge Delta dashboa
 * Switch back to UI (instead of source)
 * Click **Save**.
 
+  
 ***
 
 ### Sumo Logic
