@@ -1024,7 +1024,29 @@ outputs:
 
 ### **AWS S3**
 
-If enabled, the AWS S3 integration will stream logs to an AWS S3 endpoint.
+If enabled, the AWS S3 integration will send logs to an AWS S3 endpoint.
+
+Before you configure your Edge Delta account to sends logs to an AWS S3 endpoint, you must first access the AWS console to attach the following custom policy to the IAM user that will have access to the AWS S3 bucket: 
+
+```
+{
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Action":[
+            "s3:PutObject"
+         ],
+         "Effect":"Allow",
+         "Resource":[
+            "arn:aws:s3:::your_bucketname/*",
+            "arn:aws:s3:::your_bucketname"
+         ]
+      }
+   ]
+}
+```
+
+After you attach the policy in the AWS console, review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Key | Description | Required |
 | :--- | :--- | :--- |
