@@ -59,7 +59,7 @@ At a high level, there are 2 ways to manage **Outputs - Streaming**:
 4. On the right-side, select **Streams**.
 5. Select the desired destination, and then complete the missing fields. 
 
-  * To learn more about each destination, specifically parameters, see [Step 3: Understand Parameters for Streaming Destinations](#step-3-understand-parameters-for-streaming-destinations).
+  * To learn more about each destination, specifically parameters, see [Step 3: Review Parameters for Streaming Destinations](#step-3-review-parameters-for-streaming-destinations).
 
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration section to manage. 
 7. To save the configuration and exit the visual editor, click **Save**. 
@@ -73,7 +73,7 @@ At a high level, there are 2 ways to manage **Outputs - Streaming**:
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
-  * To learn more about each destination, specifically parameters, see [Step 3: Understand Parameters for Streaming Destinations](#step-3-understand-parameters-for-streaming-destinations).
+  * To learn more about each destination, specifically parameters, see [Step 3: Review Parameters for Streaming Destinations](#step-3-review-parameters-for-streaming-destinations).
 
 ***
 
