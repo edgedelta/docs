@@ -14,7 +14,7 @@ An **Output - Archive** focuses on storage solutions. Specifically, this output 
 > **Note**
 > 
 > Edge Delta offers additional output types, specifically **Stream** and **Triggers**. 
-> To learn more, see XXXXXXX and XXXXXX
+> > To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Triggers](outputs-triggers.md).
 
 <br>
 
@@ -31,6 +31,10 @@ At a high level, there are 2 ways to manage **Outputs**:
 
   * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
   * If you already have an existing configuration, then you can update the configuration in the YAML file. 
+
+> **Note**
+> 
+> In the Edge Delta Admin portal, the term **output** is represented by the **Integrations** page. To create an output, access the **Integrations** page. After you create an output, you will be asked to add the output to an existing agent configuration. If you do not have an agent configuration, then you can create the configuration, and then return to the **Integrations** page to add the output to the configuration.  
 
 ***
 
