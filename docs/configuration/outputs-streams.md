@@ -9,19 +9,19 @@ description: >-
 
 You can use this document to learn about the configuration parameters available in a configuration file, specifically for **Outputs - Streams**.
 
-An output tells the Edge Delta agent where to send collected and generated data, such as as metrics, patterns, alerts, etc.
+An **Output - Stream** tells the Edge Delta agent which centralized monitoring platform to send collected and generated data. 
+
+> **Note**
+> 
+> Edge Delta offers additional output types, specifically **Trigger** and **Archive**. 
+> To learn more, see XXXXXXX and XXXXXX
+
+<br>
 
 > **Note**
 > 
 > The terms **output**, **integration**, and **destination** may be used interchangeably. 
 
-At a high level, there are 3 types of outputs:
-
-| Output Type | Description | Supported Platforms and Systems |
-| :--- | :--- | :--- | 
-| Streaming destinations | This output type focuses on centralized monitoring platforms. | Sumo Logic, AWS CloudWatch, Datadog, New Relic, InfluxDB, Wavefront, Scalyr, Elastic Search, Azure AppInsight, Kafka, SignalFx, Humio, Loggly, Logz.io, Loki | 
-| Trigger destinations | This output type focuses on alerting and automation systems. Specifically, this output type allows Edge Delta to send alerts and notifications when an anomaly is detected or when various conditions are met. To learn about Outputs - Triggers, see XXXXXX.  | Slack, Microsoft Teams, Pagerduty, Jira, Service Now, Webhook, AWS Lambda, Azure Functions |
-| Archive destinations | This output type focuses on storage solutions where Edge Delta can periodically send compressed raw data logs. To learn about Outputs - Archiving, see XXXXX. | AWS S3, Azure Blob Storage, Google Cloud Storage, DigitalOcean Spaces, IBM Object Storage, Minio, Zenko CloudServer, Moogsoft, Remedy, Azure Event Hub Trigger |
 
 ***
 
