@@ -42,7 +42,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 4. On the right-side, select **Archive**.
 5. Select the desired destination, and then complete the missing fields. 
 
-  * To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Trigger Destinations](#step-2-review-parameters-for-trigger-destinations).
+  * To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
 
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
 7. To save the configuraiton and exit the visual editor, click **Save**. 
@@ -56,35 +56,59 @@ At a high level, there are 2 ways to manage **Outputs**:
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
-* To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Trigger Destinations](#step-2-review-parameters-for-trigger-destinations).
+* To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
 
 ***
 
 ## Step 2: Review Parameters for Archive Destinations
 
+Edge Delta supports the following archive destinations: 
 
-## Review Archive Destinations
+***
 
 ### AWS S3
 
 The **AWS S3** output will stream logs to an AWS S3 endpoint.
 
-> **Before you begin**
-> 
-> Before you can create an output, you must have the AWS Key ID and the AWS Secret Key ID available. 
-> To learn how to create an AWS access key, review this [document from AWS](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key).
+Before you configure your Edge Delta account to sends logs to an AWS S3 endpoint, you must first access the AWS console to:
 
-In the Edge Delta Admin portal, in the visual editor, when you select **AWS S3** as the output type, the following fields will appear:
+  * Create an IAM user to access the AWS S3 bucket
+    * To learn how to create an IAM user, review this [document from AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html).
+  * Attach the following custom policy to the newly created IAM user
+    * To learn how to create and add a custom policy, review this [document from AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html). 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::bucket-name",
+                "arn:aws:s3:::bucket-name/*"
+            ]
+        }
+    ]
+}
+```
+
+After you attach the policy in the AWS console, review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
-| type | Select **s3**. | Required |
+| type | You must set this parameter to **s3**. | Required |
 | bucket | Enter the target S3 bucket to send the archived logs. | Required |
 | region | Enter the specified S3 bucket's region. | Required |
-| aws\_key\_id | Enter the AWS key ID that has the PutObject permission to target the bucket. If you use role-based AWS authentication where keys are not provided, then you should keep this field empty. | Optional |
-| aws\_sec\_key | Enter the AWS secret key ID that has the PutObject permission to target the bucket. If you use role-based AWS authentication where keys are not provided, then you should keep this field empty. | Optional |
+| aws\_key\_id | Enter the AWS key ID that has the PutObject permission to target the bucket. If you use role-based AWS authentication where keys are not provided, then you should keep this field empty; however, you must still attach the custom policy listed above. | Optional |
+| aws\_sec\_key | Enter the AWS secret key ID that has the PutObject permission to target the bucket. If you use role-based AWS authentication where keys are not provided, then you should keep this field empty; however, you must still attach the custom policy listed above.| Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -113,7 +137,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Azure Bl
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow.  | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
-| type | Select **blob**. | Required |
+| type | You must set this parameter to **blob**. | Required |
 | account\_name | Enter the account name for the Azure account. | Required |
 | account\_key | Enter the account key for Azure account. | Required |
 | container | Enter the container name to upload. | Required |
@@ -145,7 +169,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Google C
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
-| type | Select **gcs**. | Required |
+| type | You must set this parameter to **gcs**. | Required |
 | bucket | Enter the target GCS bucket to send the archived logs. | Required |
 | hmac\_access\_key | Enter the GCS HMAC Access key that has permissions to upload files to specified bucket. | Required |
 | hmac\_secret | GCS HMAC secret associated with the access key specified. | Required |
@@ -172,7 +196,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **DigitalO
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
-| type | Select **dos**.| Required |
+| type | You must set this parameter to **dos**.| Required |
 | endpoint | Enter the DigitalOcean Spaces endpoint. | Required |
 | bucket | Enter the target DOS bucket to send the archived logs. | Required |
 | access\_key | Enter the access key that has permissions to upload files to the specified bucket. | Required |
@@ -201,7 +225,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **IBM Obje
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
-| type | Select **ibmos**. | Required |
+| type | You must set this parameter to **ibmos**. | Required |
 | endpoint | Enter the IBM Object Storage endpoint | Required |
 | bucket | Enter the desired IBM Object Storage bucket to send the archived logs. | Required |
 | access\_key | Enter the access key that has permission to upload files to the specified bucket. | Required |
@@ -231,7 +255,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Minio** 
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
-| type | This parametert must be set **minio**. | Required |
+| type | You must set this parameter to **minio**. | Required |
 | endpoint | Enter the Minio endpoint. | Required |
 | bucket | Enter the Minio bucket to send the archived logs. | Required |
 | access\_key | Enter the access key that has permissions to upload files to the specified bucket. | Yes |
@@ -264,7 +288,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Zenko Cl
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
-| type | This parameter must be set to zenko. | Required |
+| type | You must set this parameter to **zenko**. | Required |
 | endpoint | Enter the Zenko endpoint. | Required |
 | bucket | Enter the desired Zenko bucket to send the archived logs. | Required |
 | access\_key | Enter the access key that has permissions to upload files to the specified bucket. | Required |
@@ -293,7 +317,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Moogsoft
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
-| type | This parameter must be set to **moogsoft**. | Required |
+| type | You must set this parameter to **moogsoft**. | Required |
 | endpoint | Enter the Moogsoft API endpoint. | Required |
 | api_key | Enter the Moogsoft API key. You must enter an API key or a username/password. | Optional |
 | username | Enter the username for Moogsoft basic authentication. You must enter an API key or a username/password. | Optional |
@@ -324,7 +348,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Remedy**
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
-| type | This parameter must be set to **remedy**. | Required |
+| type | You must set this parameter to **remedy**. | Required |
 | endpoint | Enter the Remedy API endpoint. | Required |
 | token | Enter the Remedy token. You must enter a token or a username/password. | Optional |
 | username | Enter the username for Remedy basic authentication. You must enter a token or a username/password. | Optional |
@@ -364,7 +388,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Azure Ev
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows. | Optional |
-| type | This parameter must be set to **eventhub**. | Required |
+| type | You must set this parameter to **eventhub**. | Required |
 | endpoint | Enter the Event Hub endpoint. | Required |
 | token | Enter the Azure AD token. | Required |
 | custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
