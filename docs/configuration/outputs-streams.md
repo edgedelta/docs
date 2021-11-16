@@ -9,7 +9,7 @@ description: >-
 
 You can use this document to learn about the configuration parameters available in a configuration file, specifically for **Outputs - Streams**.
 
-An **Output - Stream** tells the Edge Delta agent which centralized monitoring platform to send collected and generated data. 
+An **Output - Stream** focuses on centralized monitoring platforms. Specificailly, this output type tells the Edge Delta agent which centralized monitoring platform to send collected and generated data. 
 
 > **Note**
 > 
@@ -77,7 +77,7 @@ At a high level, there are 2 ways to manage **Outputs - Streaming**:
 
 ***
 
-## Step 3: Understand Parameters for Streaming Destinations
+## Step 3: Review Parameters for Streaming Destinations
 
 Edge Delta supports the following streaming destinations: 
 
