@@ -1279,8 +1279,8 @@ In the Edge Delta Admin portal, in the visual editor, when you select **AWS S3**
 | type | Select **s3**. | Required |
 | bucket | Enter the target S3 bucket to send the archived logs. | Required |
 | region | Enter the specified S3 bucket's region. | Required |
-| aws\_key\_id | Enter the AWS key ID that has the PutObject permission to target the bucket. | Required |
-| aws\_sec\_key | Enter the AWS secret key ID that has the PutObject permission to target the bucket.  | Required |
+| aws\_key\_id | Enter the AWS key ID that has the PutObject permission to target the bucket. If you use role-based AWS authentication where keys are not provided, then you should keep this field empty. | Optional |
+| aws\_sec\_key | Enter the AWS secret key ID that has the PutObject permission to target the bucket. If you use role-based AWS authentication where keys are not provided, then you should keep this field empty. | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
