@@ -123,6 +123,7 @@ There are 2 ways to create an output. You can create an output at the organizati
 
     * To learn more about the parameters for each destination, see [Outputs-Streams](outputs-streams.md), [Outputs-Triggers](outputs-triggers.md), or [Outputs-Archives](outputs-archives.md).
 
+
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
 7. To save the configuration and exit the visual editor, click **Save**. 
 8. Refresh the screen to view the newly created configuration in the table. 

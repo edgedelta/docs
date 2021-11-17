@@ -30,6 +30,9 @@ nav:
     - Filters: configuration/filters.md
     - Thresholds: configuration/thresholds.md
     - Outputs: configuration/outputs.md
+    - Outputs - Streams: configuration/outputs-streams.md
+    - Outputs - Triggers: configuration/outputs-triggers.md
+    - Outputs - Archives: configuration/outputs-archives.md
     - Processors: configuration/processors.md
     - Workflows: configuration/workflows.md
     - Variables: configuration/variables.md
