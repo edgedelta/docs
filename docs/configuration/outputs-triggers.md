@@ -350,51 +350,61 @@ The following example displays an output without the name of the organization-le
 
 ### (Optional) Step 3: Review Notify Content Parameters 
 
-The **Notify Content** parameter is an optional way to customize the notification content for specific Outputs - Triggers. This parameter supports templating. 
+The **Notify Content** parameter is an optional way to customize the notification content for specific Outputs - Triggers. 
+
+Review the following fields:  
+
+* **Title**: This field is the title text for the webhook message. This field can be customized with custom template fields.
+* **Disable default fields**: This field is used to disable default fields in notification messages. By default, the value is false. 
+* **Custom Fields**: You can extend the notification content by adding name-value pairs, which you can build with the template fields listed below.
+* **Advanced Content**: This field provides full flexibility to define the payload in Slack notification post requests.
+  
+    * **Advanced Content** overrides other settings, such as title, custom fields, etc. 
+    * Custom templates are also supported in **Advanced Content**.
+    * You can use block kit builder tool provided by Slack to test your notification content. To learn more, see [Block Kit Builder](https://app.slack.com/block-kit-builder). 
+
+
+> **Note**
+> 
+> While this parameter supports templating, consider the following statements: 
+> 
+>   * If the value is empty, then the item will not be sent to Slack.
+>   * Keys are sorted alphabetically before being sent to Slack. As a result, keys will not appear in the order specified in the configuration. 
+
 
 Review the following template fields: 
 
-* **Tag**: User defined tag to describe the environment. e.g. prod\_us\_west\_2\_cluster.
-* **EDAC**: Edge Delta Anomaly Context ID.
-* **Host**: Hostname of the environment where agent running on.
-* **ConfigID**: Configuration ID which agent is using.
-* **MetricName**: Metric name causing the anomaly.
-* **Source**: Source name is the identifier of the source such as docker container id or file name.
-* **SourceType**: Source type. e.g. "Docker", "system"
-* **SourceAttributes**: List of source attributes.
-* **Timestamp**: Timestamp when event triggered.
-* **Epoch**: Timestamp in epoch format when event triggered. [epoch](https://en.wikipedia.org/wiki/Epoch)
-* **CurrentValue**: Metric current value.
-* **ThresholdValue**: Threshold value.
-* **ThresholdDescription**: Detailed threshold description including threshold type, value, etc.
-* **MatchedTerm**: A sample log message causing the anomaly event.
-* **ThresholdType**: Threshold type.
-* **FileGlobPath**: File global path.
-* **K8sPodName**: Kubernetes pod name.
-* **K8sNamespace**: Kubernetes namespace.
-* **K8sControllerKind**: Kubernetes controller kind.
-* **K8sContainerName**: Kubernetes container name.
-* **K8sContainerImage** Kubernetes container image.
-* **K8sControllerLogicalName**: Kubernetes controller logical name.
-* **ECSCluster**: ECS cluster name.
-* **ECSContainerName**: ECS container name.
-* **ECSTaskVersion**: ECS task version/
-* **ECSTaskFamily**: ECS task family.
-* **DockerContainerName**: Docker container name.
+* **Tag**: This field is a tag to describe the environment, such as **prod\_us\_west\_2\_cluster**.
+* **EDAC**: This field is the Edge Delta Anomaly Context ID.
+* **Host**: This field is the hostname of the environment where the agent runs on.
+* **ConfigID**: This field is the configuration ID for the agent. 
+* **MetricName**: This field is the metric name that causes the anomaly.
+* **Source**: This field is the identifier name of the source, such as docker container id or file name.
+* **SourceType**: This field is the source type, such as **Docker** or **system**.  
+* **SourceAttributes**: This field is list of source attributes.
+* **Timestamp**: This field is the timestamp for when an event is triggered.
+* **Epoch**: This field is the timestamp (in epoch format) for when an event triggered. 
+* **CurrentValue**: This field is the metric current value.
+* **ThresholdValue**: This field is the threshold value.
+* **ThresholdDescription**: This field is a detailed threshold description that includes the threshold type, value, etc.
+* **MatchedTerm**: This field is a sample log message to describe the anomaly event.
+* **ThresholdType**: This field is the threshold type.
+* **FileGlobPath**: This field is the file global path.
+* **K8sPodName**: This field is the Kubernetes pod name.
+* **K8sNamespace**: This field is the Kubernetes namespace.
+* **K8sControllerKind**: This field is the Kubernetes controller kind.
+* **K8sContainerName**: This field is the Kubernetes container name.
+* **K8sContainerImage**: This field is the Kubernetes container image.
+* **K8sControllerLogicalName**: This field is the Kubernetes controller logical name.
+* **ECSCluster**: This field is the ECS cluster name.
+* **ECSContainerName**: This field is the ECS container name.
+* **ECSTaskVersion**: This field is the ECS task version.
+* **ECSTaskFamily**: This field is the ECS task family.
+* **DockerContainerName**: This field is the Docker container name.
 
-  _Note:_ About templates you should read before use:
 
-* if the value is empty the item will not be sent to slack
-* the keys are sorted alphabetically before sending to slack so they will not appear in the order specified in the config
 
-**Title**: Title text for webhook message. It can be customized with custom template fields.
- **Disable default fields**: It is used for disabling default fields in notify message. Its value is false by default.
- **Custom Fields**: You can extend the notification content by adding name-value pairs. You can build by using template fields given above.
- **Advanced Content**: It provides full flexibility to define the payload in slack notification post requests.
-
-* Advanced content overrides the other settings\(title, custom fields...\)
-* Custom templates are also supported in advanced content.
-* You can use block kit builder tool provided by Slack [https://app.slack.com/block-kit-builder](https://app.slack.com/block-kit-builder) prior to test.
+The following example dispalys the use of custom fields:
 
 ```yaml
        notify_content:
@@ -431,6 +441,8 @@ Review the following template fields:
            "Tag": "{{.Tag}}"
 ```
 
+The following example displays the uses of advanced content:  
+
 ```yaml
        notify_content:
          title: "Anomaly Detected: {{.ProcessorDescription}}"
@@ -458,7 +470,7 @@ Review the following template fields:
 ***
 
 
-### Example of Stream and Trigger
+### Example of Stream and Trigger Outputs
 
 The following example displays a configuration with a stream output and a trigger output: 
 
