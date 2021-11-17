@@ -13,7 +13,7 @@ An **Output - Stream** focuses on centralized monitoring platforms. Specifically
 
 > **Note**
 > 
-> Edge Delta offers additional output types, specifically **Trigger** and **Archive**. 
+> Edge Delta offers additional output types, specifically **Triggers** and **Archives**. 
 >   * To learn more, see [Outputs-Triggers](outputs-triggers.md) and [Outputs-Archives](outputs-archives.md).
 
 ***
@@ -67,6 +67,7 @@ At a high level, there are 2 ways to manage **Outputs - Streams**:
 3. Review the YAML file, make your changes, and then click **Save**. 
 
     * To learn more about the parameters for each destination, see [Step 3: Review Parameters for Streaming Destinations](#step-3-review-parameters-for-streaming-destinations).
+    * To add an existing integration, access the YAML file, and then enter ``integration_name: <name of existing integration>``.  
 
 ***
 
@@ -141,39 +142,43 @@ Before you can set up a Splunk output, you must have the HEC token and HEC endpo
 #### Step 1: Configure an HEC Token in Splunk
 
 ##### Option 1: Splunk Cloud
-* Create a Splunk HTTP Event Collector (HEC) and Token
-* In the Splunk Web UI, navigate to Settings -> Add Data
-* Click “Monitor” -> “HTTP Event Listener”
-* Provide a name for the HEC in the name field -> Click “Next”
-* Confirm Index information or use default index -> “Click Review”
-* Click “Submit”
-* Copy the Token Value displayed in the Splunk Web into the “Token” field of the Edge Delta - Splunk Streaming Destination Configuration
+
+**To create a Splunk HTTP Event Collector (HEC) and token:**
+
+1. In the Splunk Web UI, navigate to **Settings**, then click **Add Data**.
+2. Click **Monitor**, and then click **HTTP Event Listener**.
+3. In the field, enter a name for the HEC, and then click **Next**.
+4. Confirm the index information or use the default index, and then click **Click Review**.
+5. Click **Submit**.
+6. Copy the displayed token value. You can enter this information in the **Token** field in the Edge Delta Admin portal. 
 
 ##### Option 2: Splunk Enterprise
 
-* Ensure HTTP Event Collector (HEC) is enabled
-* In the Splunk Enterprise Web UI, navigate to Settings -> Data Inputs
-* Click “HTTP Event Collector”
-* Click “Global Settings”
-* In the “All Tokens” toggle button, select “Enabled”
-* Create a Splunk HTTP Event Collector (HEC) and Token
-* In the Splunk Web UI, navigate to Settings -> Add Data
-* Click “Monitor” -> “HTTP Event Collector”
-* Provide a name for the HEC in the name field -> Click “Next”
-* Confirm Index information or use default index -> “Click Review”
-* Click “Submit”
-* Copy the Token Value displayed in the Splunk Web into the “Token” field of the Edge Delta - Splunk Streaming Destination Configuration
+**To ensure HTTP Event Collector (HEC) is enabled:**
 
+1. In the Splunk Enterprise Web UI, navigate to **Settings**, then click **Data Inputs**.
+2. Click **HTTP Event Collector**.
+3. Click **Global Settings**.
+4. In the **All Tokens** toggle button, select **Enabled**.
+
+**To create a Splunk HTTP Event Collector (HEC) and token:**
+
+1. In the Splunk Web UI, navigate to **Settings**, then click **Add Data**.
+2. Click **Monitor**, and then click **HTTP Event Listener**.
+3. In the field, enter a name for the HEC, and then click **Next**.
+4. Confirm the index information or use the default index, and then click **Click Review**.
+5. Click **Submit**.
+6. Copy the displayed token value. You can enter this information in the **Token** field in the Edge Delta Admin portal. 
 
 #### Step 2: Determine your HEC Endpoint
 
 Before you continue, verify that you have the following information: 
 
-* Splunk deployment type (Enterprise, Cloud, Free Trial, etc)
+* Splunk deployment type (Enterprise, Cloud, Free Trial, etc.)
 * Splunk hostname (from Splunk Browser URI) 
-* Input  Protocol (HTTPS is default)
+* Input Protocol (HTTPS is default)
 
-##### Option 1: Splunk Cloud (Cloud, Free Trial, Cloud on GCP) Format
+##### Option 1: Splunk Cloud Format (Cloud, Free Trial, Cloud on GCP) 
 
 Replace <splunk_hostname> with your organization’s hostname
 
@@ -189,20 +194,17 @@ Replace <splunk_hostname> with your organization’s hostname
 * URI Format: https://<splunk_hostname>:8088/services/collector/event
 
 
-#### Step 3: Import the Edge Delta Dashboard
+#### Step 3: Import the Edge Delta Dashboard to Splunk
 
-Review the following instructions to learn how to import your Edge Delta dashboard into your Splunk environment: 
-
-* In Splunk, navigate to Search UI.
-* Click **Dashboards**.
-* Click **Create New Dashboard**.
-* Input Dashboard Name/Description/Permissions
-* Click “Classic Dashboards” -> “Create”
-* In the Edit Dashboard Screen, switch from UI to Source
-* Replace existing XML with copied XML from clipboard
-* Switch back to UI (instead of source)
-* Click **Save**.
-
+1. In Splunk, navigate to Search UI.
+2. Click **Dashboards**.
+3. Click **Create New Dashboard**.
+4. Input Dashboard Name/Description/Permissions
+5. Click “Classic Dashboards” -> “Create”
+6. In the Edit Dashboard Screen, switch from UI to Source
+7. Replace existing XML with copied XML from clipboard
+8. Switch back to UI (instead of source)
+9. Click **Save**.
   
 ***
 
@@ -836,4 +838,20 @@ The following example displays an output without the name of the organization-le
 
 ***
 
+### Example of Stream and Trigger Outputs
 
+The following example displays a configuration with a stream output and a trigger output: 
+
+```yaml
+outputs:
+  streams:
+      - name: sumo-logic-integration
+        type: sumologic
+        endpoint: "https://[SumoEndpoint]/receiver/v1/http/[UniqueHTTPCollectorCode]"
+  triggers:
+      - name: slack-integration
+        type: slack
+        endpoint: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+```
+
+***
