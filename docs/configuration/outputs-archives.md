@@ -13,7 +13,7 @@ An **Output - Archive** focuses on storage solutions. Specifically, this output 
 
 > **Note**
 > 
-> Edge Delta offers additional output types, specifically **Stream** and **Triggers**. 
+> Edge Delta offers additional output types, specifically **Streams** and **Triggers**. 
 >   * To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Triggers](outputs-triggers.md).
 
 ***
