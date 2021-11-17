@@ -14,6 +14,7 @@ An **Output - Archive** focuses on storage solutions. Specifically, this output 
 > **Note**
 > 
 > Edge Delta offers additional output types, specifically **Streams** and **Triggers**. 
+> 
 >   * To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Triggers](outputs-triggers.md).
 
 ***
@@ -124,6 +125,7 @@ The **Azure Blob Storage** output will stream logs to an Azure Blob Storage endp
 > **Before you begin**
 > 
 > Before you can create an output, you must have an account key. 
+> 
 >   * To learn more, review this [document from Microsoft](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal). 
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
@@ -157,6 +159,7 @@ The **Google Cloud Storage** output will stream logs to a GCS endpoint.
 > **Before you begin**
 > 
 > Before you can create an output, you must have a GCS HMAC Access key. 
+> 
 >   * To learn how to create a new key, review this [document from Google](https://cloud.google.com/storage/docs/authentication/managing-hmackeys). 
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
@@ -374,6 +377,7 @@ The **Azure Event Hub Trigger** output will stream notifications and alerts to a
 > **Before you begin**
 > 
 > To create this output, you must have an Azure AD token. 
+> 
 >   * To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
