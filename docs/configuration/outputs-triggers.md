@@ -14,14 +14,7 @@ An **Output - Trigger** focuses on alerting and automation systems. Specifically
 > **Note**
 > 
 > Edge Delta offers additional output types, specifically **Stream** and **Archive**. 
-> To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Archives](outputs-archives.md).
-
-<br>
-
-> **Note**
-> 
-> The terms **output**, **integration**, and **destination** may be used interchangeably. 
-
+>   * To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Archives](outputs-archives.md).
 
 ***
 
@@ -31,10 +24,6 @@ At a high level, there are 2 ways to manage **Outputs**:
 
   * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
   * If you already have an existing configuration, then you can update the configuration in the YAML file. 
-
-> **Note**
-> 
-> In the Edge Delta Admin portal, the term **output** is represented by the **Integrations** page. To create an output, access the **Integrations** page. After you create an output, you will be asked to add the output to an existing agent configuration. If you do not have an agent configuration, then you can create the configuration, and then return to the **Integrations** page to add the output to the configuration.  
 
 ***
 
@@ -46,7 +35,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 4. On the right-side, select **Triggers**.
 5. Select the desired destination, and then complete the missing fields. 
 
-  * To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Trigger Destinations](#step-2-review-parameters-for-trigger-destinations).
+   * To learn more about the parameters for each destination, see [Step 2: Review Parameters for Trigger Destinations](#step-2-review-parameters-for-trigger-destinations).
 
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
 7. To save the configuraiton and exit the visual editor, click **Save**. 
@@ -60,7 +49,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
-* To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Trigger Destinations](#step-2-review-parameters-for-trigger-destinations).
+    * To learn more about the parameters for each destination, see [Step 2: Review Parameters for Trigger Destinations](#step-2-review-parameters-for-trigger-destinations).
 
 ***
 
@@ -75,9 +64,9 @@ The **Slack** output will stream notifications and alerts to a specified Slack c
 > **Before you begin**
 > 
 > To use this output, you must provide a Slack webhook or endpoint URL. 
-> To learn more about webhooks, review [this document from Slack](https://api.slack.com/messaging/webhooks).
+>   * To learn more about webhooks, review [this document from Slack](https://api.slack.com/messaging/webhooks).
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Slack** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -112,7 +101,7 @@ The following example displays an output without the name of the organization-le
 
 The **Microsoft Teams** output will stream notifications and alerts to a specified Teams channel.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Microsoft Teams** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -147,7 +136,7 @@ The following example displays an output without the name of the organization-le
 
 The **Pagerduty** output will stream notifications and alerts to a specified Pagerduty API endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Pagerduty** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -188,7 +177,7 @@ The following example displays an output without the name of the organization-le
 
 The **Jira** output will stream notifications and alerts to a specified Jira webhook URL.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Jira** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -220,7 +209,7 @@ The following example displays an output without the name of the organization-le
 
 The **Service Now** output will stream notifications and alerts to a specified Service Now API endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Service Now** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -255,7 +244,7 @@ The following example displays an output without the name of the organization-le
 
 The **Webhook** output will stream notifications and alerts to the specified Webhook URL.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Webhook** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -300,7 +289,7 @@ The following example displays an output without the name of the organization-le
 
 The **AWS Lambda** output will stream notifications and alerts to  the specified AWS Lambda FaaS endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **AWS Lambda** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -331,7 +320,7 @@ The following example displays an output without the name of the organization-le
 
 The **Azure Functions** output will stream notifications and alerts to Azure endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Azure Functions** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
