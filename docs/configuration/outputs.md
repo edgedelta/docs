@@ -14,7 +14,10 @@ An output tells the Edge Delta agent where to send collected and generated data,
 
 > **Note**
 > 
-> The terms **output**, **integration**, and **destination** may be used interchangeably. 
+> The terms **output**, **integration**, and **destination** are used frequently in these documents. At Edge Delta:
+> **Output** refers to the high-level concept of sending data to another software platform via a configuration.
+> **Integration** refers to an organization-level output. 
+> **Destination** refers to the software platform that will receive the data, such as Splunk or AWS. 
 
 There are 3 types of outputs:
 
@@ -94,7 +97,8 @@ To learn more, see [Outputs-Archives](outputs-archives.md).
 
 There are 2 ways to create an output. You can create an output at the organization level or for an individual configuration. 
 
-  * When you create an output at the organization level, you can add the output to an existing configuration. 
+  * An output at the organization level is called an integration. 
+  * When you create an integration, you must add the integration to an existing configuration. 
 
 ### Option 1: Create an Output at the Organization Level
 
@@ -102,7 +106,7 @@ There are 2 ways to create an output. You can create an output at the organizati
 2. Under **Add Integrations**, select the desired destination and output type.
 3. Complete the missing fields, and then click **Save**.
 
-  * To learn more about each destination type, especially parameters, see [Outputs-Streams](outputs-streams.md), [Outputs-Triggers](outputs-triggers.md), or [Outputs-Archives](outputs-archives.md).
+  * To learn more about the parameters for each destination, see [Outputs-Streams](outputs-streams.md), [Outputs-Triggers](outputs-triggers.md), or [Outputs-Archives](outputs-archives.md).
   
 4. Select the desired configuration to add the integration, and then click **Add To Configuration**.
 
@@ -118,10 +122,10 @@ There are 2 ways to create an output. You can create an output at the organizati
 4. On the right-side, select **Streams**, **Triggers**, or **Archives**.
 5. Select the desired destination, and then complete the missing fields. 
 
-  * To learn more about each destination type, especially parameters, see [Outputs-Streams](outputs-streams.md), [Outputs-Triggers](outputs-triggers.md), or [Outputs-Archives](outputs-archives.md).
+  * To learn more about the parameters for each destination, see [Outputs-Streams](outputs-streams.md), [Outputs-Triggers](outputs-triggers.md), or [Outputs-Archives](outputs-archives.md).
 
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
-7. To save the configuraiton and exit the visual editor, click **Save**. 
+7. To save the configuration and exit the visual editor, click **Save**. 
 8. Refresh the screen to view the newly created configuration in the table. 
 
 > **Note**
