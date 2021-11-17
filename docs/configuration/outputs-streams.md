@@ -84,7 +84,7 @@ The Splunk output will stream analytics and insights to a Splunk HEC endpoint.
 > 
 > To create an output, you must have available a Splunk HEC token and HEC endpont.
 > 
->   * To learn how to create and obtain this information, see [Set Up the Splunk Integration](#set-up-the-splunk-integration).
+>   * To learn how to create and obtain this information, see [Supplemental Information for Splunk Integration](#supplemental-information-for-splunk-integration).
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
 
