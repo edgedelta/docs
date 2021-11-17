@@ -13,7 +13,7 @@ An **Output - Trigger** focuses on alerting and automation systems. Specifically
 
 > **Note**
 > 
-> Edge Delta offers additional output types, specifically **Stream** and **Archive**. 
+> Edge Delta offers additional output types, specifically **Streams** and **Archives**. 
 >   * To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Archives](outputs-archives.md).
 
 ***
@@ -50,6 +50,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 3. Review the YAML file, make your changes, and then click **Save**. 
 
     * To learn more about the parameters for each destination, see [Step 2: Review Parameters for Trigger Destinations](#step-2-review-parameters-for-trigger-destinations).
+    * To add an existing integration, access the YAML file, and then enter ``integration_name: <name of existing integration>``.    
 
 ***
 
