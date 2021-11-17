@@ -1,0 +1,41 @@
+# reference https://docs.openfaas.com/reference/yaml/
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  rehydrate:
+    skip_build: true
+    # image built on 2021-11-17
+    image: gcr.io/edgedelta/function@sha256:5ba73697b0cdf8e15572e0ac74b8112607a83425f30b444b6d99ca156b946532
+    environment:
+      ED_MODE: prod
+      ED_REHYDRATION_PUSH_BATCH_SIZE: 10000
+      ED_HANDLER_NAME: rehydrate
+      ED_REMOTE_REPOSITORY: "1"
+      ED_REMOTE_TOKEN_FILE: /var/openfaas/secrets/ed-rehydration-token
+    secrets:
+      - ed-rehydration-token
+    # in order to run rehydration function handler on specific nodes, uncomment below and specify a node label.
+    # constraints:
+    #  - "eks.amazonaws.com/nodegroup=rehydration-node-group"
+    labels:
+      com.openfaas.scale.min: 1
+      com.openfaas.scale.max: 10
+      com.openfaas.scale.zero: true
+    annotations:
+     com.openfaas.health.http.path: "/healthz"
+     com.openfaas.health.http.initialDelay: "5s"
+  echofaas:
+    skip_build: true
+    # image built on 2021-11-17
+    image: gcr.io/edgedelta/function@sha256:5ba73697b0cdf8e15572e0ac74b8112607a83425f30b444b6d99ca156b946532
+    environment:
+      ED_HANDLER_NAME: echo
+    labels:
+      com.openfaas.scale.min: 1
+      com.openfaas.scale.max: 1
+      com.openfaas.scale.zero: false
+    annotations:
+     com.openfaas.health.http.path: "/healthz"
+     com.openfaas.health.http.initialDelay: "5s"
