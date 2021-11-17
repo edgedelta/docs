@@ -97,8 +97,7 @@ To learn more, see [Outputs-Archives](outputs-archives.md).
 
 There are 2 ways to create an output. You can create an output at the organization level or for an individual configuration. 
 
-  * An output at the organization level is called an integration. 
-  * When you create an integration, you must add the integration to an existing configuration. 
+  * An output at the organization level is called an integration. When you create an integration, you must add the integration to an existing configuration. 
 
 ### Option 1: Create an Output at the Organization Level
 
