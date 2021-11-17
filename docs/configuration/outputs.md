@@ -109,7 +109,7 @@ There are 2 ways to create an output. You can create an output at the organizati
   
 4. Select the desired configuration to add the integration, and then click **Add To Configuration**.
 
-   * If you have not yet created the desired configuration, then click **Skip**. You can add the integration later when you create the configuration. 
+   * If you have not yet created the desired configuration, then click **Skip**. You can add the integration later when you create the configuration. Specifically, when you create a configuration, in the YAML file, enter **integration_name: <name from integration page>**.  
 
 5. The newly created integration will be listed under **Existing Integrations**. 
 
