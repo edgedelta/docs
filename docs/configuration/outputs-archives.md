@@ -50,6 +50,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 3. Review the YAML file, make your changes, and then click **Save**. 
 
   * To learn more about the parameters for each destination, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
+  * To add an existing integration, access the YAML file, and then enter: integration_name: <name of existing integration>  
 
 ***
 
