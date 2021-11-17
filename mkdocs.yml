@@ -58,4 +58,5 @@ nav:
     - S3 monitoring via SQS: appendices/s3-sqs.md
     - Create an Okta SAML Integration: appendices/okta-saml.md
     - Tokens: appendices/tokens.md
+    - On-Prem Rehydrations: appendices/on-prem-rehydration.md
   - Release Notes: release-notes.md    
