@@ -16,6 +16,7 @@ You can use this document to learn how to:
 >  
 > To ensure an easy installation process, review the [Pre-Installation Agent Requirements](agent-requirements.md) document.
 
+<br>
 
 >  **Before you begin**
 >  
@@ -35,17 +36,17 @@ You can use this document to learn how to:
 1. In the Edge Delta Admin portal, select your operating platform.
 2. In **Enter Environment Tag**, enter a descriptive tag to explain where the agent will be deployed.
 3. Click **Continue**.
-4. Select an integration type to send data from Edge Delta.
+4. Select a destination type to create an organization-level output to send data from Edge Delta.
 5. Complete the missing fields, and then click **Continue**.
+    * To learn more about outputs, including parameters, see [Outputs](configuration/outputs.md). 
 6. Copy the pre-populated agent command.
 7. Open a terminal or command line prompt, then paste and run the command.  
 8. In the portal, click **I Ran Deploy Commands**.
 9. The agent will take a few minutes to deploy and authenticate with Edge Delta.
 10. After a successful deployment, click **Go To Status Page**.
-11. In the window that appears, you can click **Go To Demo Environment** to see a pre-populated account where you can view and test data.
-12. To view your own account, click **X** to close the window.
-13. If you access the demo environment, but you want to access your own account, in the top, click **Return To Your Own Account**.
-
+    * In the window that appears, you can click **Go To Demo Environment** to see a pre-populated account where you can view and test data.
+    * To view your own account, click **X** to close the window.
+    * If you access the demo environment, but you want to access your own account, in the top, click **Return To Your Own Account**
 
 ***
 
@@ -54,7 +55,7 @@ You can use this document to learn how to:
 There are 2 ways to verify agent deployment:
 
   * In the portal
-  * In the existing streaming data service
+  * In the target software platform
 
 ***
 
@@ -70,7 +71,7 @@ There are 2 ways to verify agent deployment:
 
 ***
 
-### Option 2: Verify Agent Deployment in the Streaming Data Service  
+### Option 2: Verify Agent Deployment in the Target Software Platform
 
 1. Log in to the configured streaming destination \(Output\) platform, such as Splunk, Sumo Logic, Datadog, New Relic, etc.
 2. Identify the appropriate source metadata to query for incoming Edge Delta data. This source should match the source configuration details provided in the configuration file, such as HTTPs Endpoint, HEC endpoint, API URL, etc.
@@ -82,11 +83,9 @@ There are 2 ways to verify agent deployment:
 ## Next Steps
 
 After you create an account and install the agent, you can configure your account.
-
-To learn more, see [Configuration](configuration/index.md).
+    * To learn more, see [Configuration](configuration/index.md).
 
 ***
-
 
 ## Troubleshoot Agent Deployment
 

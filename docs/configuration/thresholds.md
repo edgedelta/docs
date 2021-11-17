@@ -16,6 +16,8 @@ Thresholds define alerting conditions at the agent level. Each agent locally eva
 > 
 > By default, alerts are saved in the Edge Delta SaaS backend, which powers the [insights](https://admin.edgedelta.com/insights) page.
 
+<br>
+
 > **Note**
 > 
 > While there are 2 ways to define a threshold, this document applies to workflow-level thresholds.

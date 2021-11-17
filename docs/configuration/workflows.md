@@ -12,6 +12,10 @@ You can use this document to learn about the configuration parameters available 
 
 A workflow maps inputs, processors, and outputs that are logically grouped, based on the underlying use-cases and analytics being performed.
 
+> **Note**
+> 
+> To create a new workflow, you must have existing inputs, processors, destinations, thresholds, and filters to add to the new workflow. You cannot create a workflow without these existing components.  
+
 ***
 
 ## Step 1: Access Workflows
@@ -55,17 +59,19 @@ At a high level, there are 2 ways to manage **Workflows**:
 
 ## Step 2: Review Parameters
 
-| Key | Description | Required |
+| Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
-| name | This key is a user-defined name for the specific workflow. Workflow names are only used for labeling and organizing workflows within a configuration. Workflow names are not reported to any destination. | Yes |
-| input\_labels | This key represents a list of input labels to feed to the workflow. Input labels are defined as part of the input configuration. To learn more about available inputs, see [Inputs](./inputs.md). | Yes |
-| filters | This key represents a list of filter names that apply to the workflow before incoming logs are passed to the processors. To learn more about filters, see [Filters](./filters.md). | No |
-| processors | This key represents a list of processor names that apply to the workflow. To learn about available processors, see [Processors](./processors.md). | Yes |
-| destinations | This key represents a list of output names that apply to the workflow. To learn about available integrations, see [Outputs](./outputs.md). | No |
+| name | Enter a descriptive name for the workflow. A workflow name is used for labeling and organizing workflows within a configuration. A workflow name is not reported to any destination. | Required |
+| input\_labels | This parameter displays existing inputs that you can add to the workflow. To learn more about available inputs, see [Inputs](./inputs.md). | Required |
+| filters | This parameter displays existing filters that you can add to the workflow. The filter step takes place before incoming logs are passed to the processors. To learn more about filters, see [Filters](./filters.md). | Optional |
+| processors | This parameter displays existing processors that you can add to the workflow. To learn about available processors, see [Processors](./processors.md). | Required |
+| destinations | This parameter displays existing outputs that you can add to the workflow. To learn about available integrations, see [Outputs](./outputs.md). | Optional |
 
 ***
 
-## Step 3: Review YAML Example
+## (Optional) Step 3: Review YAML Example
+
+Review the following example of a YAML file populated with parameters: 
 
 ```yaml
 workflows:
@@ -100,7 +106,7 @@ workflows:
 
 ***
 
-## Configure an Expiring Workflow
+## (Optional) Step 4: Configure an Expiring Workflow
 
 To define an expiring workflow, set an expiration time in the workflow definition with the **expires_in** parameter.
 

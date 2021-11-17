@@ -117,7 +117,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **mask** a
 
 ***
 
-## Option 3: Buffered Trace Filters
+### Option 3: Buffered Trace Filters
 
 This filter type handles trace logs. 
 
@@ -245,7 +245,7 @@ filters:
 
 ***
 
-## Step 3: Understand the Workflow for Filters and How to Filter For Specific Inputs, Processors, and Workflows
+## Step 3: Understand the Workflow of a Filter
 
 After you define a filter, filters can be referred at different places in the YAML file:
 
