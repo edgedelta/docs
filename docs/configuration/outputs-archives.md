@@ -50,7 +50,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 3. Review the YAML file, make your changes, and then click **Save**. 
 
   * To learn more about the parameters for each destination, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
-  * To add an existing integration, access the YAML file, and then enter: integration_name: <name of existing integration>  
+  * To add an existing integration, access the YAML file, and then enter ``integration_name: <name of existing integration>``.  
 
 ***
 
@@ -348,7 +348,7 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | token | Enter the Remedy token. You must enter a token or a username/password. | Optional |
 | username | Enter the username for Remedy basic authentication. You must enter a token or a username/password. | Optional |
 | password | Enter the password for Remedy basic authentication. You must enter a token or a username/password. | Optional |
-| custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
+| custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the output. | Optional |
 | notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. Remedy only supports the **custom_fields** subfield. | Optional |
 
 The following example displays an output without the name of the organization-level integration:
@@ -371,10 +371,9 @@ The following example displays an output without the name of the organization-le
 
 The **Azure Event Hub Trigger** output will stream notifications and alerts to a specified Remedy URL.
 
-
 > **Before you begin**
 > 
-> To enable this integration, you must have an Azure AD token. 
+> To create this output, you must have an Azure AD token. 
 >   * To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
@@ -386,7 +385,7 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | type | You must set this parameter to **eventhub**. | Required |
 | endpoint | Enter the Event Hub endpoint. | Required |
 | token | Enter the Azure AD token. | Required |
-| custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
+| custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the output. | Optional |
 | notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. Event Hub only supports the **custom_fields** subfield. | Optional |
 
 The following example displays an output without the name of the organization-level integration:
