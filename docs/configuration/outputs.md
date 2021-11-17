@@ -109,11 +109,11 @@ There are 2 ways to create an output. You can create an output at the organizati
   
 4. Select the desired configuration to add the integration, and then click **Add To Configuration**.
 
-   * If you have not yet created the desired configuration, then click **Skip**. You can add the integration later when you create the configuration. Specifically, when you create a configuration, in the YAML file, enter: integration_name: <name of existing integration>  
+   * If you have not yet created the desired configuration, then click **Skip**. You can add the integration later when you create the configuration. Specifically, when you create a configuration, in the YAML file, enter ``integration_name: <name of existing integration>``.  
 
 5. The newly created integration will be listed under **Existing Integrations**. 
 
-#### Option 2: Create an Output for a New Configuration
+### Option 2: Create an Output for a New Configuration
 
 1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
