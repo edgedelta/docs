@@ -9,18 +9,12 @@ description: >-
 
 You can use this document to learn about the configuration parameters available in a configuration file, specifically for **Outputs - Streams**.
 
-An **Output - Stream** focuses on centralized monitoring platforms. Specificailly, this output type tells the Edge Delta agent which centralized monitoring platform to send collected and generated data. 
+An **Output - Stream** focuses on centralized monitoring platforms. Specifically, this output type tells the Edge Delta agent which centralized monitoring platform to send collected and generated data. 
 
 > **Note**
 > 
 > Edge Delta offers additional output types, specifically **Trigger** and **Archive**. 
-> To learn more, see [Outputs-Triggers](outputs-triggers.md) and [Outputs-Archives](outputs-archives.md).
-
-<br>
-
-> **Note**
-> 
-> The terms **output**, **integration**, and **destination** may be used interchangeably. 
+>   * To learn more, see [Outputs-Triggers](outputs-triggers.md) and [Outputs-Archives](outputs-archives.md).
 
 ***
 
@@ -48,10 +42,6 @@ At a high level, there are 2 ways to manage **Outputs - Streams**:
   * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
   * If you already have an existing configuration, then you can update the configuration in the YAML file. 
 
-> **Note**
-> 
-> In the Edge Delta Admin portal, the term **output** is represented by the **Integrations** page. To create an output, access the **Integrations** page. After you create an output, you will be asked to add the output to an existing agent configuration. If you do not have an agent configuration, then you can create the configuration, and then return to the **Integrations** page to add the output to the configuration.  
-
 ***
 
 ### Option 1: Access the visual editor for a new configuration
@@ -62,7 +52,7 @@ At a high level, there are 2 ways to manage **Outputs - Streams**:
 4. On the right-side, select **Streams**.
 5. Select the desired destination, and then complete the missing fields. 
 
-  * To learn more about each destination, specifically parameters, see [Step 3: Review Parameters for Streaming Destinations](#step-3-review-parameters-for-streaming-destinations).
+   * To learn more about the parameters for each destination, see [Step 3: Review Parameters for Streaming Destinations](#step-3-review-parameters-for-streaming-destinations).
 
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration section to manage. 
 7. To save the configuration and exit the visual editor, click **Save**. 
@@ -76,7 +66,7 @@ At a high level, there are 2 ways to manage **Outputs - Streams**:
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
-  * To learn more about each destination, specifically parameters, see [Step 3: Review Parameters for Streaming Destinations](#step-3-review-parameters-for-streaming-destinations).
+    * To learn more about the parameters for each destination, see [Step 3: Review Parameters for Streaming Destinations](#step-3-review-parameters-for-streaming-destinations).
 
 ***
 
@@ -91,9 +81,9 @@ The Splunk output will stream analytics and insights to a Splunk HEC endpoint.
 > **Before you begin**
 > 
 > To create an output, you must have available a Splunk HEC token and HEC endpont.
-> To learn how to create and obtain this information, see [Set Up the Splunk Integration](#set-up-the-splunk-integration).
+>   * To learn how to create and obtain this information, see [Set Up the Splunk Integration](#set-up-the-splunk-integration).
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Splunk** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -223,10 +213,10 @@ The Sumo Logic output will stream analytics and insights to a Sumo Logic HTTPs E
 > **Before you begin**
 > 
 > Before you can create an output, you must have available the Sumo Logic HTTPs Endpoint.
-> To learn how to create new Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url). 
-> To learn how to locate an existing Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url).
+>   * To learn how to create new Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url). 
+>   * To learn how to locate an existing Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url).
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Sumo Logic** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
@@ -254,10 +244,10 @@ The AWS CloudWatch output will stream logs to a specified AWS region.
 > **Before you begin**
 > 
 > Before you can create an output, you must have available the CloudWatch log group name and log stream name.
-> To learn how to create a log group, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html).
-> To learn how to create a log stream, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html).
+>   * To learn how to create a log group, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html).
+>   * To learn how to create a log stream, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html).
 
-In the Edge Delta Admin portal, in the visual editor, when you select **AWS CloudWatch** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
@@ -321,7 +311,6 @@ The following example displays an output without the name of the organization-le
 
 ***
 
-
 ### Datadog
 
 The Datadog output will stream analytics and insights to a Datadog environment. 
@@ -329,9 +318,9 @@ The Datadog output will stream analytics and insights to a Datadog environment.
 > **Before you begin**
 > 
 > Before you can create an output, you must have available a Datadog API Key.
-> To learn how to create a new Datadog API key, review this [document from Datadog](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key).
+>   * To learn how to create a new Datadog API key, review this [document from Datadog](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key).
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Datadog** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -343,7 +332,6 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Datadog*
 | api\_key | Enter a Datadog API key. | Yes |
 | custom\_tags | Key-values defined in custom tags by the user are streamed to datadog for every request. | Optional |
 | features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
-
 
 The following example displays an output without the name of the organization-level integration:
 
@@ -378,9 +366,9 @@ The New Relic output will stream analytics and insights to a New Relic environme
 > **Before you begin**
 > 
 > Before you can create an output, you must have available the New Relic Insert API key. 
-> To learn how to create new New Relic Insert API key, review this [document from New Relic](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key).
+>   * To learn how to create new New Relic Insert API key, review this [document from New Relic](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key).
 
-In the Edge Delta Admin portal, in the visual editor, when you select **New Relic** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -404,7 +392,7 @@ The following example displays an output without the name of the organization-le
 
 The InfluxDB output will stream analytics and insights to your InfluxDB deployment.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **InfluxDB** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -447,7 +435,7 @@ The following example displays an output without the name of the organization-le
 
 The Wavefront output will stream analytics and insights to your Wavefront environment.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Wavefront** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -473,7 +461,7 @@ The following example displays an output without the name of the organization-le
 
 The Scalyr output will stream analytics and insights to your Scalyr environment.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Scalyr** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -497,16 +485,19 @@ The following example displays an output without the name of the organization-le
 
 The **Elastic Search** output will stream analytics and insights to your Elastic Search environment. 
 
-> **Note**
+> **Before you begin**
 > 
-> Edge Delta recommends that you review and complete the steps listed in the [elastic index template and lifecycle creation guide](../appendices/elastic-index.md). This process will help you prepare your Elastic Search environment to become an Edge Detla streaming target.
+> Edge Delta recommends that you review and complete the steps listed in the [elastic index template and lifecycle creation guide](../appendices/elastic-index.md). 
+> This process will help you prepare your Elastic Search environment to become an Edge Detla streaming target.
 
-> Note
+<br>
+
+> **Note**
 > 
 > For **connection url**, you must provide either the **cloud\_id** or **address**. You cannot enter both parameters. 
 > For the **authentication**, you must provide either the **token** or the **user/password**. You cannot enter both parameters. 
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Elastic Search** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -544,7 +535,7 @@ The following example displays an output without the name of the organization-le
 
 The **Azure AppInsight** output will stream analytics and insights to your Azure endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Azure AppInsight** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -571,7 +562,7 @@ The following example displays an output without the name of the organization-le
 
 The **Kafka** output will stream analytics and insights to your Kafka endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Kafka** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -598,7 +589,7 @@ The following example displays an output without the name of the organization-le
 
 The **SignalFx** output will stream analytics and insights to your SignalFx endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **SignalFx** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -625,7 +616,7 @@ The following example displays an output without the name of the organization-le
 
 The **Humio** output will stream analytics and insights to your Humio endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Humio** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -652,7 +643,7 @@ The following example displays an output without the name of the organization-le
 
 The **Loggly** output will stream analytics and insights to your Loggly endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Loggly** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
@@ -679,7 +670,7 @@ The following example displays an output without the name of the organization-le
 
 The **Logz.io** output will stream analytics and insights to your Logz.io endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Logz.io** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -711,7 +702,7 @@ The following example displays an output without the name of the organization-le
 
 The **Loki** output will stream analytics and insights to your Loki endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Loki** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -725,9 +716,7 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Loki** a
 | message\_template | This parameters customizes the message content. This parameter supports templating. | Optional |
 | features | This parameter defines which data types to stream to the backend. You can select **log**, **edac**, and / or **cluster**. | Optional |
 
-#### **Message Template**
-
-As an optional step, you can customize the message payload and custom tags that are sent to Loki destinations. 
+As an optional step, you can customize the message payload and custom tags that are sent to a Loki destination. 
   * Loki does not support the **-** character as a key value.
 
 Review the following template fields: 
@@ -789,7 +778,7 @@ The following example displays an output without the name of the organization-le
 
 The **FluentD** output will stream analytics and insights to your FluentD endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **FluentD** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -802,7 +791,6 @@ In the Edge Delta Admin portal, in the visual editor, when you select **FluentD*
 | features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set.  | Optional |
 
 The following example displays an output without the name of the organization-level integration:
-
 
 ```yaml
       - name: fluentd-log-fwd
@@ -820,15 +808,12 @@ The following example displays an output without the name of the organization-le
 
 The **Azure Event Hub Stream** output will stream analytics and insights to your Azure Event Hub Stream endpoint.
 
-> **Note**
+> **Before you begin**
 > 
-> This output is not avaialble in the visual editor. To configure, you must make changes directly in the YAML file.  
+> To enable this integration, you must have an Azure AD token. 
+>   * To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
-<br>
-
-> **Note**
-> 
-> To enable this integration, you must have an Azure AD token. To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
