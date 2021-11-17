@@ -4,13 +4,13 @@ Azure functions generate various telemetry data e.g. \(Traces, Error, Exceptions
 
 ## Prepare edgedelta processor in AKS cluster
 
-Create a new config on [admin.edgedelta.com](https://admin.edgedelta.com/) with the content from [here](https://github.com/eddocs/doc/tree/51eff2ab7f42d72460f771c88a373ea5fee305e4/appendices/aks_appinsight_trace_processor_agent_config.yaml)
+Create a new config on [admin.edgedelta.com](https://admin.edgedelta.com/) with the content from [here](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/aks_appinsight_trace_processor_agent_config.yaml)
 
 Replace INSTRUMENTATION\_KEY with your the instrumentation key
 
 Create a new AKS cluster or use an existing one
 
-Add a new node pool on AKS with below spec. If you skip this step update the nodeSelector in [ed-appinsights-trace-processor.yaml](https://github.com/eddocs/doc/tree/51eff2ab7f42d72460f771c88a373ea5fee305e4/appendices/ed-appinsights-trace-processor.yaml).
+Add a new node pool on AKS with below spec. If you skip this step update the nodeSelector in [ed-appinsights-trace-processor.yaml](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/ed-appinsights-trace-processor.yaml).
 
 ```text
   name: processors
@@ -71,7 +71,7 @@ helm install \
     jetstack/cert-manager
 ```
 
-Update the host values in edgedelta-ingress resource defined in [ed-appinsights-trace-processor.yaml](https://github.com/eddocs/doc/tree/51eff2ab7f42d72460f771c88a373ea5fee305e4/appendices/ed-appinsights-trace-processor.yaml) with the dns entry you configured above.
+Update the host values in edgedelta-ingress resource defined in [ed-appinsights-trace-processor.yaml](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/ed-appinsights-trace-processor.yaml) with the dns entry you configured above.
 
 Create edgedelta http recorder and agent
 
@@ -106,7 +106,7 @@ dotnet add package Microsoft.Azure.Functions.Extensions
 dotnet add package Microsoft.Extensions.Logging.ApplicationInsights
 ```
 
-Create a StartUp.cs file under targeted azure function application. [Here](https://github.com/eddocs/doc/tree/51eff2ab7f42d72460f771c88a373ea5fee305e4/appendices/azure_function_startup.cs) is the content of the StartUp.cs file. Make sure to update the namepace at the top. As seen below, this custom sinker implementation called ForkingTelemetryChannel and replicates telemetry data to be ingested into secondary ingestion endpoint. It is worth to note that dual ingestion process is parallelized to reduce the overall latency.
+Create a StartUp.cs file under targeted azure function application. [Here](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/azure_function_startup.cs) is the content of the StartUp.cs file. Make sure to update the namepace at the top. As seen below, this custom sinker implementation called ForkingTelemetryChannel and replicates telemetry data to be ingested into secondary ingestion endpoint. It is worth to note that dual ingestion process is parallelized to reduce the overall latency.
 
 ```text
 ...

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rehydration-poller
+  namespace: edgedelta-rehydration
+  labels:
+    k8s-app: rehydration-poller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: rehydration-poller
+  template:
+    metadata:
+      labels:
+        k8s-app: rehydration-poller
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: poller
+        # image built on 2021-11-16
+        image: gcr.io/edgedelta/rehydrationpoller@sha256:d970ffbb1a07d5bd78c22f19f69d919d77720cfe137fc64069779233ccf0de6b
+        command:
+          - /edgedelta/rehydrationpoller
+        env:
+          - name: ED_REHYDRATION_POLL_INTERVAL
+            value: "10s"
+          - name: ED_ORG_ID
+            value: "" # put your edge delta org id here
+          - name: ED_OPENFAAS_GATEWAY
+            value: http://gateway-external.edgedelta-rehydration.svc.cluster.local:8080
+          - name: ED_REMOTE_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: ed-rehydration-token
+                name: ed-rehydration-token
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        imagePullPolicy: Always
