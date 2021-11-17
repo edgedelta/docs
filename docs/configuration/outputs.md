@@ -15,6 +15,7 @@ An output tells the Edge Delta agent where to send collected and generated data,
 > **Note**
 > 
 > The terms **output**, **integration**, and **destination** are used frequently in these documents. At Edge Delta:
+> 
 >   * **Output** refers to the high-level concept of sending data to another software platform via a configuration.
 >   * **Integration** refers to an organization-level output. 
 >   * **Destination** refers to the software platform that will receive the data, such as Splunk or AWS. 
@@ -27,7 +28,7 @@ There are 3 types of outputs:
 
 ***
 
-## Output - Stream 
+## Outputs - Streams 
 
 This output type focuses on centralized monitoring platforms.
 
@@ -53,7 +54,7 @@ To learn more, see [Outputs-Streams](outputs-streams.md).
 
 ***
 
-## Output - Trigger
+## Outputs - Triggers
 
 This output type focuses on alerting and automation systems. Specifically, this output type tells the Edge Delta agent to send alerts and notifications when an anomaly is detected or when various conditions are met. 
 
@@ -72,7 +73,7 @@ To learn more, see [Outputs-Triggers](outputs-triggers.md).
 
 ***
 
-## Output - Archive
+## Outputs - Archives
 
 This output type focuses on storage solutions where the Edge Delta agent can periodically send compressed raw data logs.
 
