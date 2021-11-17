@@ -14,7 +14,7 @@ An **Output - Archive** focuses on storage solutions. Specifically, this output 
 > **Note**
 > 
 > Edge Delta offers additional output types, specifically **Stream** and **Triggers**. 
-> > To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Triggers](outputs-triggers.md).
+>   * To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Triggers](outputs-triggers.md).
 
 ***
 
@@ -35,7 +35,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 4. On the right-side, select **Archive**.
 5. Select the desired destination, and then complete the missing fields. 
 
-    * To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
+    * To learn more about the parameters for each destination, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
 
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
 7. To save the configuraiton and exit the visual editor, click **Save**. 
@@ -49,7 +49,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
-  * To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
+  * To learn more about the parameters for each destination, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
 
 ***
 
@@ -122,9 +122,10 @@ The **Azure Blob Storage** output will stream logs to an Azure Blob Storage endp
 
 > **Before you begin**
 > 
-> Before you can create an output, you must have an account key. To learn more, review this [document from Microsoft](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal). 
+> Before you can create an output, you must have an account key. 
+>   * To learn more, review this [document from Microsoft](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal). 
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Azure Blob Storage** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -154,9 +155,10 @@ The **Google Cloud Storage** output will stream logs to a GCS endpoint.
 
 > **Before you begin**
 > 
-> Before you can create an output, you must have a GCS HMAC Access key. To learn how to create a new key, review this [document from Google](https://cloud.google.com/storage/docs/authentication/managing-hmackeys). 
+> Before you can create an output, you must have a GCS HMAC Access key. 
+>   * To learn how to create a new key, review this [document from Google](https://cloud.google.com/storage/docs/authentication/managing-hmackeys). 
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Google Cloud Storage** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -183,7 +185,7 @@ The following example displays an output without the name of the organization-le
 
 The **DigitalOcean Spaces** output will stream logs to a DigitalOcean Spaces endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **DigitalOcean Spaces** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -212,7 +214,7 @@ The following example displays an output without the name of the organization-le
 
 The **IBM Object Storage** output will stream logs to an IBM Object Storage endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **IBM Object Storage** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -225,7 +227,6 @@ In the Edge Delta Admin portal, in the visual editor, when you select **IBM Obje
 | secret\_key | Enter the secret key associated with the specified access key. | Required |
 
 The following example displays an output without the name of the organization-level integration:
-
 
 ```yaml
       - name: my-ibm-object-storage
@@ -242,7 +243,7 @@ The following example displays an output without the name of the organization-le
 
 The **Minio** output will stream logs to a Minio endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Minio** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -275,7 +276,7 @@ The following example displays an output without the name of the organization-le
 
 The **Zenko CloudServer** output will stream logs to a CloudServer endpoint.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Zenko CloudServer** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -304,7 +305,7 @@ The following example displays an output without the name of the organization-le
 
 The **Moogsoft** output will stream notifications and alerts to a specified Moogsoft URL.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Moogsoft** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -335,7 +336,7 @@ The following example displays an output without the name of the organization-le
 
 The **Remedy** output will stream notifications and alerts to a specified Remedy URL.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Remedy** as the output type, the following fields will appear:
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -370,12 +371,12 @@ The following example displays an output without the name of the organization-le
 The **Azure Event Hub Trigger** output will stream notifications and alerts to a specified Remedy URL.
 
 
-> **Note**
+> **Before you begin**
 > 
-> To enable this integration, you must have an Azure AD token. To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
+> To enable this integration, you must have an Azure AD token. 
+>   * To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
-In the Edge Delta Admin portal, in the visual editor, when you select **Azure Event Hub Trigger** as the output type, the following fields will appear:
-
+Review the following parameters that you can configure in the Edge Delta Admin portal:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -386,6 +387,8 @@ In the Edge Delta Admin portal, in the visual editor, when you select **Azure Ev
 | token | Enter the Azure AD token. | Required |
 | custom\_headers | This parameter is used to append custom headers, such as Authorization, to requests from the integration. | Optional |
 | notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. Event Hub only supports the **custom_fields** subfield. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
 
 ```yaml
        - name: eventhub-test
