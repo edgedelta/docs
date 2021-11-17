@@ -16,13 +16,6 @@ An **Output - Archive** focuses on storage solutions. Specifically, this output 
 > Edge Delta offers additional output types, specifically **Stream** and **Triggers**. 
 > > To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Triggers](outputs-triggers.md).
 
-<br>
-
-> **Note**
-> 
-> The terms **output**, **integration**, and **destination** may be used interchangeably. 
-
-
 ***
 
 ## Step 1: Access Outputs
@@ -30,11 +23,7 @@ An **Output - Archive** focuses on storage solutions. Specifically, this output 
 At a high level, there are 2 ways to manage **Outputs**:
 
   * If you need to create a new configuration, then you can use the visual editor to populate a YAML file, as well as make changes directly in the YAML file.
-  * If you already have an existing configuration, then you can update the configuration in the YAML file. 
-
-> **Note**
-> 
-> In the Edge Delta Admin portal, the term **output** is represented by the **Integrations** page. To create an output, access the **Integrations** page. After you create an output, you will be asked to add the output to an existing agent configuration. If you do not have an agent configuration, then you can create the configuration, and then return to the **Integrations** page to add the output to the configuration.  
+  * If you already have an existing configuration, then you can update the configuration in the YAML file.  
 
 ***
 
@@ -46,7 +35,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 4. On the right-side, select **Archive**.
 5. Select the desired destination, and then complete the missing fields. 
 
-  * To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
+    * To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
 
 6. To make additional configurations to the configuration file, click the back button, and then select a new configuration parameter to manage. 
 7. To save the configuraiton and exit the visual editor, click **Save**. 
@@ -60,7 +49,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
-* To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
+  * To learn more about each destination, specifically parameters, see [Step 2: Review Parameters for Archive Destinations](##step-2-review-parameters-for-archive-destinations).
 
 ***
 
