@@ -14,6 +14,7 @@ An **Output - Stream** focuses on centralized monitoring platforms. Specifically
 > **Note**
 > 
 > Edge Delta offers additional output types, specifically **Triggers** and **Archives**. 
+> 
 >   * To learn more, see [Outputs-Triggers](outputs-triggers.md) and [Outputs-Archives](outputs-archives.md).
 
 ***
@@ -82,6 +83,7 @@ The Splunk output will stream analytics and insights to a Splunk HEC endpoint.
 > **Before you begin**
 > 
 > To create an output, you must have available a Splunk HEC token and HEC endpont.
+> 
 >   * To learn how to create and obtain this information, see [Set Up the Splunk Integration](#set-up-the-splunk-integration).
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
@@ -105,7 +107,7 @@ The following example displays an output without the name of the organization-le
         index: "main"
 ```
 
-The following example displays if enter the name of the organization-level integration:
+The following example displays when the name of the organization-level integration is entered: 
 
 ```yaml
       - integration_name: my-org-splunk
@@ -200,10 +202,10 @@ Replace <splunk_hostname> with your organization’s hostname
 2. Click **Dashboards**.
 3. Click **Create New Dashboard**.
 4. Input Dashboard Name/Description/Permissions
-5. Click “Classic Dashboards” -> “Create”
-6. In the Edit Dashboard Screen, switch from UI to Source
-7. Replace existing XML with copied XML from clipboard
-8. Switch back to UI (instead of source)
+5. Click **Classic Dashboards**, and then click **Create**.
+6. In the **Edit Dashboard** screen, switch from **UI** to **Source**.
+7. Replace the existing XML with the copied XML.
+8. Switch back to UI.
 9. Click **Save**.
   
 ***
@@ -215,6 +217,7 @@ The Sumo Logic output will stream analytics and insights to a Sumo Logic HTTPs E
 > **Before you begin**
 > 
 > Before you can create an output, you must have available the Sumo Logic HTTPs Endpoint.
+> 
 >   * To learn how to create new Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url). 
 >   * To learn how to locate an existing Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url).
 
@@ -229,7 +232,6 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set. | Optional |
 
 The following example displays an output without the name of the organization-level integration:
-
 
 ```yaml
       - name: sumo-logic-integration
@@ -246,6 +248,7 @@ The AWS CloudWatch output will stream logs to a specified AWS region.
 > **Before you begin**
 > 
 > Before you can create an output, you must have available the CloudWatch log group name and log stream name.
+> 
 >   * To learn how to create a log group, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html).
 >   * To learn how to create a log stream, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html).
 
@@ -260,10 +263,10 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | log\_group\_name | Enter the CloudWatch log group name. | Required |
 | log\_stream\_name | Enter the CloudWatch log stream name. You can enter a name or prefix, but not both. | Required |
 | log\_stream\_prefix | Enter the CloudWatch log stream prefix. You can enter a name or prefix, but not both.  | Required |
-| auto\_create | When necessary iam policies provided if auto\_create is set, log group and log stream will be created if not exists | Optional |
-| allow\_label\_override | monitored container can override the default values of log group name, logs stream name and log stream prefix, by setting ed\_log\_group\_name, ed\_log\_stream\_name, ed\_log\_stream\_prefix labels | Optional |
-| auto\_configure | only supported for ECS environments, and when provided only region configuration can be provided. Automatically create LogGroupName in the format of /ecs/task\_definition\_family and LogsStreamPrefix in the format of ecs/container\_name/task\_id | Optional |
-| type | Streaming destination type \(i.e. sumologic, datadog, splunk, etc.\) | Required |
+| auto\_create | If this parameter is set, then IAM policies will be set. If this parameter is not set, then log group and log stream will be created. To learn more, review the examples below. | Optional |
+| allow\_label\_override | The monitored container can override the default values of log group name, logs stream name, and log stream prefix by setting the ed\_log\_group\_name, ed\_log\_stream\_name, and ed\_log\_stream\_prefix labels | Optional |
+| auto\_configure | This parameter is only supported for ECS environments. Additionally, only region configurations can be provided. This parameter automatically creates LogGroupName in the format of **/ecs/task\_definition\_family**, and LogsStreamPrefix in the format of **ecs/container\_name/task\_id**. | Optional |
+| type | Enter the streaming destination type, such as sumologic, datadog, splunk, etc. | Required |
 | features | This parameter defines which data types to stream to the backend. For Amazon CloudWatch, you can only select **log**. | Optional |
 
 The following example displays an output without the name of the organization-level integration:
@@ -278,7 +281,7 @@ The following example displays an output without the name of the organization-le
         features: log
 ```
 
-* Assign below permission to taskExecutionRoleArn for putting log events into CloudWatch when auto\_create is not set
+* If the **auto\_create** parameter is not set, then assign the following permission to **taskExecutionRoleArn** to put log events into CloudWatch. Review the following example:   
 
   ```yaml
       {
@@ -293,7 +296,7 @@ The following example displays an output without the name of the organization-le
       }
   ```
 
-* Assign below permission to taskExecutionRoleArn if auto\_create is set
+* If the **auto\_create** parameter is set, then assign the following permission to **taskExecutionRoleArn**. Review the following example:
 
   ```yaml
       {
@@ -320,6 +323,7 @@ The Datadog output will stream analytics and insights to a Datadog environment.
 > **Before you begin**
 > 
 > Before you can create an output, you must have available a Datadog API Key.
+> 
 >   * To learn how to create a new Datadog API key, review this [document from Datadog](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key).
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
@@ -368,6 +372,7 @@ The New Relic output will stream analytics and insights to a New Relic environme
 > **Before you begin**
 > 
 > Before you can create an output, you must have available the New Relic Insert API key. 
+> 
 >   * To learn how to create new New Relic Insert API key, review this [document from New Relic](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key).
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
@@ -719,6 +724,7 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | features | This parameter defines which data types to stream to the backend. You can select **log**, **edac**, and / or **cluster**. | Optional |
 
 As an optional step, you can customize the message payload and custom tags that are sent to a Loki destination. 
+
   * Loki does not support the **-** character as a key value.
 
 Review the following template fields: 
@@ -813,6 +819,7 @@ The **Azure Event Hub Stream** output will stream analytics and insights to your
 > **Before you begin**
 > 
 > To enable this integration, you must have an Azure AD token. 
+> 
 >   * To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
