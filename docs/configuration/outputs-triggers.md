@@ -14,6 +14,7 @@ An **Output - Trigger** focuses on alerting and automation systems. Specifically
 > **Note**
 > 
 > Edge Delta offers additional output types, specifically **Streams** and **Archives**. 
+> 
 >   * To learn more, see [Outputs-Streams](outputs-streams.md) and [Outputs-Archives](outputs-archives.md).
 
 ***
@@ -65,6 +66,7 @@ The **Slack** output will stream notifications and alerts to a specified Slack c
 > **Before you begin**
 > 
 > To use this output, you must provide a Slack webhook or endpoint URL. 
+> 
 >   * To learn more about webhooks, review [this document from Slack](https://api.slack.com/messaging/webhooks).
 
 Review the following parameters that you can configure in the Edge Delta Admin portal:
@@ -401,7 +403,6 @@ Review the following template fields:
 * **ECSTaskVersion**: This field is the ECS task version.
 * **ECSTaskFamily**: This field is the ECS task family.
 * **DockerContainerName**: This field is the Docker container name.
-
 
 
 The following example dispalys the use of custom fields:
