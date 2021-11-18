@@ -331,11 +331,11 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
 | type | You must set this parameter to **honeycomb**. | Required |
 | host | Enter a name to create a custom installation of the Honeycomb host that will receive the data. | Optional |
-| api\_key | Honeycomb API Key | Required |
+| api\_key | Enter the Honeycomb API key. | Required |
 | dataset\_name | Enter a name to create a dataset that will send data to Honeycomb. | Required |
-| unpacking | Should be set to "false" if nested fields are not desired to be flattened. | Optional |
+| unpacking | If you do not want to flatten nested fields, then enter **false**. | Optional |
 | features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set.  | Optional |
-| custom\_tags | Key-values defined in custom tags by the user are streamed to Honeycomb for every request. | Optional |
+| custom\_tags | This parameter defines key-value pairs that are streamed to Honeycomb for every request. | Optional |
 
 The following example displays an output without the name of the organization-level integration:
 
