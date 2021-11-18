@@ -196,7 +196,7 @@ curl https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-
 7. Deploy rehydration poller:
 
 ```
-kubectl apply -f /tmp/rehydration-poller.yml;
+kubectl apply -f /tmp/rehydration-poller-faasless.yml;
 ```
 
 8. Review the logs to verify a poller has no errors:
