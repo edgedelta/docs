@@ -19,7 +19,7 @@ spec:
       containers:
       - name: poller
         # image built on 2021-11-18
-        image: gcr.io/edgedelta/function@sha256:950de4ceab2a3a50ce00b40ede637f73c4ac08367d1fd4d15b53bd8bc0a36b2c
+        image: gcr.io/edgedelta/function@sha256:3be42c1acf1887025e602d8d91c76462375ca5af789255b4365487ab129e9e12
         command:
           - /edgedelta/faas
         env:
