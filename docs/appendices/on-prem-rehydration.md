@@ -2,22 +2,24 @@
 
 You can use this document to learn how to deploy and run rehydration components on your own infrastructure (on-prem).
 
-This process is useful if you have sensitve data that cannot leave your infrastructure.
+This process is useful if you have sensitive data that cannot leave your infrastructure.
 
 ***
 
-## Understand Rehydration  Concepts
+## Understand Rehydration Concepts
 
 **Archiving**
 <p>
-<p>By default, the Edge Delta agent archives logs on customer S3 buckets owned by Edge Delta. This action can be disabled for user-owned S3 buckets. 
+<p>By default, the Edge Delta agent archives logs on customer S3 buckets owned by Edge Delta. 
+    
+  * This action can be disabled for user-owned S3 buckets. 
 <p>A custom S3 bucket (or GCS, Blob, Minio, etc.) can be created in the Integrations page of the Edge Delta Admin portal. 
 <p>After you create and add the bucket to a workflow in the agent configuration, the agent will start to send gzipped logs to the custom bucket.
 
 **Rehydration**
 <p>    
 <p>Rehydration is the process of pushing already-archived data to a target streaming platform, such as Splunk, Elasticsearch, etc.
-<p>You can use the **Rehydration** section of the Edge Delta Admin portal to initiate a rehydration for a specific time range, source filter, and keyword filters.
+<p>You can use the Rehydration section of the Edge Delta Admin portal to initiate a rehydration for a specific time range, source filter, and keyword filters.
 <p>By default, the Edge Delta backend handles rehydrations. 
 <p> Rehydration handlers will: 
     
@@ -28,7 +30,7 @@ This process is useful if you have sensitve data that cannot leave your infrastr
     
 Rehydration components can be deployed to any K8s cluster. OpenFaaS technology is used to handle rehydration requests and can scale out to multiple instances as needed.
 
-After you follow the steps below, you will still be able to use the **Rehydrations** page to trigger rehydrations and Edge Delta backend will **not** be involved in the handling of raw data. The Edge Delta backend will simply serve as metadata storage for rehydrations, such as input/filters/destination and status.
+After you follow the steps below, you will still be able to use the **Rehydrations** page to trigger rehydrations and the Edge Delta backend will **not** be involved in the handling of raw data. The Edge Delta backend will simply serve as metadata storage for rehydrations, such as input/filters/destination and status.
     
 ***    
 
