@@ -21,7 +21,7 @@ At a high level, there are 2 ways to manage **Agent Settings**:
 
 ***
 
-## Access Parameters
+## Step 1: Access Parameters
 
 **To access the visual editor for a new configuration:** 
 
@@ -39,11 +39,13 @@ At a high level, there are 2 ways to manage **Agent Settings**:
 
 ***
 
-## Review Parameters
+## Step 2: Review Parameters
 
 | Key | Description | Default Value | Required? | Available in Visual Editor? |
 |---|---|---|---|---|
 | Anomaly Capture Size (anomaly_capture_size) | This key represents the number of log lines (buffer size) to capture during an anomaly capture. | 125 | No | Yes |
+| Anomaly Capture Byte Size (anomaly_capture_bytesize) | This key represents the maximum buffer size (in bytes) to capture during an anomaly capture. | 0b (Dsabled) | No | No |
+| Anomaly Capture Duration (anomaly_capture_duration) | This key represents the maximum time span that the logs of an anomaly capture can belong to, such as logs from the last 10 minutes.  | 0s (Disabled) | No | No |
 | Anomaly Coefficient (anomaly_coefficient) | This key represents the anomaly coefficient used to multiply the final score to a range of 0 - 100. <br><br>The higher the coefficient, the higher the anomaly score will be. <br><br>For some rules types, this key can be set at the rule level. | 10 | No | Yes |
 | Anomaly Confidence Period (anomaly_confidence_period) | After a source is found, anomaly scores will not be calculated for the first-given period. <br><br>For some rules types, this key can be set at the rule level. | 30M | No | Yes |
 | Anomaly Tolerance (anomaly_tolerance) | When it is non-zero, anomaly scores handle edge cases better when standard deviation is too small. <br><br>For some rules types, this key can be set at the rule level. | 0.01 | No | Yes |
@@ -57,7 +59,6 @@ At a high level, there are 2 ways to manage **Agent Settings**:
 | Skip Empty Intervals (skip_empty_intervals) | This key configures if empty intervals should be skipped so that anomaly scores are calculated based on non-zero intervals. <br><br>For some rules types, this key can be set at the rule level. | False | No | Yes |
 | Soft CPU Limit (soft_cpu_limit) | This key allows you to use more CPU than what is specified in the allocation. <br><br>It is only honored by clustering processor at the moment. 0.5 means 50% of a core. <br><br>To enable, in the clustering rule, set cpu_friendly=true. | 0.0 | No | Yes |
 | Tag (tag) | This key is a user-defined tag used to describe the environment, such as prod_us_west_2_cluster. <br><br>While the default value is Edge, Edge Delta recommends that you set a value. | Edge | No | Yes |
-
 
 ***
 
