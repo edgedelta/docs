@@ -714,7 +714,7 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | host | Enter the FluentD host. This parametetr is required to support tcp stream. | Required |
 | port | Enter the FluentD port. This parameter is required to support tcp stream. | Required |
 | encoder | Enter the encoder type to use while streaming data to FluentD. Raw and 'msgpack' are supported. | Optional |
-| tag_prefix | TagPrefix is used by fluentd pusher to determine fluentd tag to be used. If the data already has a tag enrichment (defined in the source config) then it will be used. Otherwise a tag will be generated with following format: "{TagPrefix}{Agent's Tag}" | Optional |
+| tag_prefix | This parameter is used by the fluentd pusher to determine what fluentd tag to use. If the source config already defines a tag enrichment, then that configuration will be used. Otherwise, a tag will be generated in the following format: "{TagPrefix}{Agent's Tag}" | Optional |
 | features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set.  | Optional |
 
 The following example displays an output without the name of the organization-level integration:
