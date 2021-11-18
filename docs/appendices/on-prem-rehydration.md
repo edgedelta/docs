@@ -22,19 +22,16 @@ Setup details are explained below. Once you complete them you will still be able
 
 ### Setup
 
-Prerequisites:
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [helm](https://helm.sh/docs/helm/helm_install/)
-- [faas](https://docs.openfaas.com/cli/install/#installation)
+Prerequisites: [kubectl](https://kubernetes.io/docs/tasks/tools/), [helm](https://helm.sh/docs/helm/helm_install/), [faas](https://docs.openfaas.com/cli/install/#installation)
 
 
-1. Create edgedelta-rehydration namespace
+- Create edgedelta-rehydration namespace
 
 ```
 kubectl create namespace edgedelta-rehydration
 ```
 
-2. Install openfaas via helm chart
+- Install openfaas via helm chart
 
 ```
 helm repo add openfaas https://openfaas.github.io/faas-netes;
@@ -45,21 +42,19 @@ helm upgrade openfaas --wait --install openfaas/openfaas \
 ```
 
 
-3. Create an Edge Delta token
+- Create an Edge Delta token
 
-Visit [Settings page](https://app.edgedelta.com/global-settings) and create a token with following permissions:
-- Write permission on Rehydration resources
-- Read permission on Integration resources
+Visit [Settings page](https://app.edgedelta.com/global-settings) and create a token with following permissions: Write permission on Rehydration resources, Read permission on Integration resources.
 
 
-Create a k8s secret to store the token:
+- Create a k8s secret to store the token:
 ```
 kubectl create secret generic ed-rehydration-token \
   --namespace=edgedelta-rehydration \
   --from-literal=ed-rehydration-token="<token value goes here>"
 ```
 
-4. Mark your organization's rehydrations as "on-prem"
+- Mark your organization's rehydrations as "on-prem"
 
 Visit [Rehydrations page](https://app.edgedelta.com/rehydrations).
 
@@ -69,7 +64,7 @@ Enable On Prem Rehydration.
 
 Note: This setting can be hidden for your org. Please contact us if that's the case.
 
-5. Deploy rehydration function handler
+- Deploy rehydration function handler
 
 We didn't expose an external load balancer for the OpenFaaS gateway when we installed helm chart. 
 So in order to deploy our rehydration function we will enable port forwarding temporarily to connect to OpenFaas.
@@ -85,7 +80,7 @@ faas deploy -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appe
 
 Now stop the port forwarding.
 
-6. Prepare rehydration poller deployment yml
+- Prepare rehydration poller deployment yml
 
 Download [this file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml) to a local file /tmp/rehydration-poller.yml
 
@@ -95,7 +90,7 @@ curl https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-
 
 Put your org id as the value of `ED_ORG_ID` in /tmp/rehydration-poller.yml. You can find your org id in the url of the api requests made by app.edgedelta.com. We will expose it on the UI soon.
 
-7. Deploy rehydration poller
+- Deploy rehydration poller
 
 ```
 kubectl apply -f /tmp/rehydration-poller.yml;
@@ -107,4 +102,4 @@ Check its logs to see if it can successfully connect to the OpenFaaS gateway:
 kubectl logs deployment/rehydration-poller -n edgedelta-rehydration
 ```
 
-8. Now you can go to [Rehydrations page](https://app.edgedelta.com/rehydrations) to create rehydration requests. It will be processed by the rehydration components we just installed to your k8s cluster.
+- Now you can go to [Rehydrations page](https://app.edgedelta.com/rehydrations) to create rehydration requests. It will be processed by the rehydration components we just installed to your k8s cluster.
