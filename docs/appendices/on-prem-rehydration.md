@@ -39,7 +39,7 @@ After you follow the steps below, you will still be able to use the **Rehydratio
     
 ***    
 
-## Pre-Deployment Considerations
+## Step 1: Review Pre-Deployment Considerations
     
 Review the following prerequisites:  
 
@@ -49,7 +49,7 @@ Review the following prerequisites:
 
 ***    
 
-## Deploy an On-Prem Rehydration 
+## Step 2: Deploy an On-Prem Rehydration 
     
 1. Create the edgedelta-rehydration namespace:
 
@@ -102,7 +102,7 @@ kubectl port-forward -n edgedelta-rehydration svc/gateway 8080:8080
 faas deploy -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-function.yml;
 ```
 
-8. Stop the port forwarding.
+8. Stop port forwarding.
 
 9. Prepare for rehydration poller deployment yml. Specifically:
 
@@ -126,7 +126,7 @@ kubectl apply -f /tmp/rehydration-poller.yml;
 kubectl logs deployment/rehydration-poller -n edgedelta-rehydration
 ```
 
-9. Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the portal, and create rehydration requests. 
+9. Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the portal, and then create rehydration requests. 
 
     * The requests will be processed by the rehydration components that was just installed on your k8s cluster.
 
