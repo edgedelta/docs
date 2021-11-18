@@ -61,9 +61,11 @@ kubectl create secret generic ed-rehydration-token \
 
 4. Mark your organization's rehydrations as "on-prem"
 
-- Visit [Rehydrations page](https://app.edgedelta.com/rehydrations).
-- Click on Settings.
-- Enable On Prem Rehydration.
+Visit [Rehydrations page](https://app.edgedelta.com/rehydrations).
+
+Click on Settings.
+
+Enable On Prem Rehydration.
 
 Note: This setting can be hidden for your org. Please contact us if that's the case.
 
@@ -85,12 +87,13 @@ Now stop the port forwarding.
 
 6. Prepare rehydration poller deployment yml
 
-- Download [this file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml) to a local file /tmp/rehydration-poller.yml
+Download [this file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml) to a local file /tmp/rehydration-poller.yml
+
 ```
 curl https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml -o /tmp/rehydration-poller.yml
 ```
 
-- Put your org id as the value of `ED_ORG_ID` in /tmp/rehydration-poller.yml. You can find your org id in the url of the api requests made by app.edgedelta.com. We will expose it on the UI soon.
+Put your org id as the value of `ED_ORG_ID` in /tmp/rehydration-poller.yml. You can find your org id in the url of the api requests made by app.edgedelta.com. We will expose it on the UI soon.
 
 7. Deploy rehydration poller
 
