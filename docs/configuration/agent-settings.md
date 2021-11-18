@@ -21,7 +21,7 @@ At a high level, there are 2 ways to manage **Agent Settings**:
 
 ***
 
-## Access Parameters
+## Step 1: Access Parameters
 
 **To access the visual editor for a new configuration:** 
 
@@ -39,7 +39,7 @@ At a high level, there are 2 ways to manage **Agent Settings**:
 
 ***
 
-## Review Parameters
+## Step 2: Review Parameters
 
 | Key | Description | Default Value | Required? | Available in Visual Editor? |
 |---|---|---|---|---|
@@ -59,7 +59,6 @@ At a high level, there are 2 ways to manage **Agent Settings**:
 | Skip Empty Intervals (skip_empty_intervals) | This key configures if empty intervals should be skipped so that anomaly scores are calculated based on non-zero intervals. <br><br>For some rules types, this key can be set at the rule level. | False | No | Yes |
 | Soft CPU Limit (soft_cpu_limit) | This key allows you to use more CPU than what is specified in the allocation. <br><br>It is only honored by clustering processor at the moment. 0.5 means 50% of a core. <br><br>To enable, in the clustering rule, set cpu_friendly=true. | 0.0 | No | Yes |
 | Tag (tag) | This key is a user-defined tag used to describe the environment, such as prod_us_west_2_cluster. <br><br>While the default value is Edge, Edge Delta recommends that you set a value. | Edge | No | Yes |
-
 
 ***
 
