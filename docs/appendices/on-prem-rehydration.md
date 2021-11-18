@@ -1,37 +1,63 @@
+# Set Up On-Prem Rehydration
+
 ## Overview
 
+You can use this document to learn how to deploy and run rehydration components on your own infrastructure (on-prem).
 
-**Archiving:**
-Edge Delta agents archive logs on per-customer S3 buckets owned by Edge Delta by default. This can be disabled if a user-owned S3 bucket is desired.
-A custom s3 bucket (or GCS, Blob, Minio etc.) can be created on [integrations page](https://app.edgedelta.com/integrations).
-Once created you can add it to a workflow in the agent config. The agents will start sending gzipped logs to the custom bucket.
-
-**Rehydration:**
-Rehydration is the process of pushing the already archived data to the target streaming platform such as Splunk, Elasticsearch etc.
-[Rehydrations page](https://app.edgedelta.com/rehydrations) can be used to initiate a rehydration for a given time range, source filter and keyword filters.
-Rehydrations are handled by Edge Delta backend by default. Rehydration handlers will scan the s3 bucket, filter the logs as requested and push them to the target platform.
-
-If this flow sounds good then you can use rehydrations as is without any further configuration/deployment.
-Rest of this document explains how to run rehydration components on your own infrastructure. You would only need on-prem rehydration setup if you have sensitive data that shouldn't leave your infrastructure.
+This process is useful if you have sensitive data that cannot leave your infrastructure.
 
 
-## On-prem Rehydrations
+***
 
-Rehydration components can be deployed to any K8s cluster. It uses OpenFaaS technology to handle rehydration requests and can scale out to multiple instances as needed.
-Setup details are explained below. Once you complete them you will still be able to use [Rehydrations page](https://app.edgedelta.com/rehydrations) to trigger rehydrations and Edge Delta backend will not be involved in raw data handling. Edge Delta backend will serve as metadata storage for rehydrations such as input/filters/destination and status.
+## Understand Rehydration Concepts
 
-### Setup
+**Archiving**
 
-Prerequisites: [kubectl](https://kubernetes.io/docs/tasks/tools/), [helm](https://helm.sh/docs/helm/helm_install/), [faas](https://docs.openfaas.com/cli/install/#installation)
+By default, the Edge Delta agent archives logs on customer S3 buckets owned by Edge Delta. 
 
+  * This action can be disabled for user-owned S3 buckets. 
 
-- Create edgedelta-rehydration namespace
+A custom S3 bucket (or GCS, Blob, Minio, etc.) can be created in the Integrations page of the Edge Delta Admin portal. 
+After you create and add the bucket to a workflow in the agent configuration, the agent will start to send gzipped logs to the custom bucket.
+
+**Rehydration**
+
+Rehydration is the process of pushing already-archived data to a target streaming platform, such as Splunk, Elasticsearch, etc.
+
+You can use the Rehydration section of the Edge Delta Admin portal to initiate a rehydration for a specific time range, source filter, and keyword filters.
+
+By default, the Edge Delta backend handles rehydrations. Rehydration handlers will: 
+    
+  * Scan the S3 bucket, then
+  * Filter the logs as requested, and then 
+  * Push the logs to the target streaming platform.
+
+    
+Rehydration components can be deployed to any K8s cluster. OpenFaaS technology is used to handle rehydration requests and can scale out to multiple instances as needed.
+
+After you follow the steps below, you will still be able to use the **Rehydrations** page to trigger rehydrations and the Edge Delta backend will **not** be involved in the handling of raw data. The Edge Delta backend will simply serve as metadata storage for rehydrations, such as input/filters/destination and status.
+    
+***    
+
+## Step 1: Review Pre-Deployment Considerations
+    
+Review the following prerequisites:  
+
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [helm](https://helm.sh/docs/helm/helm_install/)
+- [faas](https://docs.openfaas.com/cli/install/#installation)
+
+***    
+
+## Step 2: Deploy an On-Prem Rehydration 
+    
+1. Create the edgedelta-rehydration namespace:
 
 ```
 kubectl create namespace edgedelta-rehydration
 ```
 
-- Install openfaas via helm chart
+2. Install openfaas via helm chart:
 
 ```
 helm repo add openfaas https://openfaas.github.io/faas-netes;
@@ -41,65 +67,69 @@ helm upgrade openfaas --wait --install openfaas/openfaas \
     -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-helm-values.yml;
 ```
 
+3. Access the Edge Delta Admin portal, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions: 
 
-- Create an Edge Delta token
+    * Write permission on Rehydration resources
+    * Read permission on Integration resources
 
-Visit [Settings page](https://app.edgedelta.com/global-settings) and create a token with following permissions: Write permission on Rehydration resources, Read permission on Integration resources.
+> **Note**
+> 
+> To learn how to access and create a token, see [Tokens](tokens.md).
 
+4. Create a k8s secret to store the token:
 
-- Create a k8s secret to store the token:
 ```
 kubectl create secret generic ed-rehydration-token \
   --namespace=edgedelta-rehydration \
   --from-literal=ed-rehydration-token="<token value goes here>"
 ```
 
-- Mark your organization's rehydrations as "on-prem"
+5. Access the Edge Delta Admin portal, specifically the [Rehydrations](https://app.edgedelta.com/rehydrations) page, click **Settings**, and then enable **On Prem Rehydration** for your organization's rehydrations.
 
-Visit [Rehydrations page](https://app.edgedelta.com/rehydrations).
+> **Note**
+> 
+> This setting may be hidden for your organization. If you do not see this option, then please contact Edge Delta. 
 
-Click on Settings.
-
-Enable On Prem Rehydration.
-
-Note: This setting can be hidden for your org. Please contact us if that's the case.
-
-- Deploy rehydration function handler
-
-We didn't expose an external load balancer for the OpenFaaS gateway when we installed helm chart. 
-So in order to deploy our rehydration function we will enable port forwarding temporarily to connect to OpenFaas.
+6. Deploy the rehydration function handler. (The external load balancer for the OpenFaaS gateway was not exposed when helm chart was installed. As a result, you need to temporarily enable port forwarding to connect to OpenFaaS.)
 
 ```
 kubectl port-forward -n edgedelta-rehydration svc/gateway 8080:8080
 ```
 
-On another terminal, deploy the function handler:
+7. On another terminal, deploy the function handler:
+
 ```
 faas deploy -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-function.yml;
 ```
 
-Now stop the port forwarding.
+8. Stop port forwarding.
 
-- Prepare rehydration poller deployment yml
+9. Deploy the rehydration poller YML. Specifically:
 
-Download [this file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml) to a local file /tmp/rehydration-poller.yml
-
+- Download [this file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml) to a local file /tmp/rehydration-poller.yml
+    
 ```
 curl https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml -o /tmp/rehydration-poller.yml
 ```
 
-Put your org id as the value of `ED_ORG_ID` in /tmp/rehydration-poller.yml. You can find your org id in the url of the api requests made by app.edgedelta.com. We will expose it on the UI soon.
+- Put your organization ID as the value of `ED_ORG_ID` in /tmp/rehydration-poller.yml. You can find your organization ID in the URL of the API requests made by app.edgedelta.com. 
 
-- Deploy rehydration poller
+7. Deploy rehydration poller:
 
 ```
 kubectl apply -f /tmp/rehydration-poller.yml;
 ```
 
+8. Review the logs to verify a successful connection to the OpenFaaS gateway:
 
-Check its logs to see if it can successfully connect to the OpenFaaS gateway:
 ```
 kubectl logs deployment/rehydration-poller -n edgedelta-rehydration
 ```
 
-- Now you can go to [Rehydrations page](https://app.edgedelta.com/rehydrations) to create rehydration requests. It will be processed by the rehydration components we just installed to your k8s cluster.
+
+9. Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the portal, and then create rehydration requests. 
+
+    * The requests will be processed by the rehydration components that was just installed on your k8s cluster.
+
+***
+
