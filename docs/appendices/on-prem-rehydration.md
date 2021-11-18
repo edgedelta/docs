@@ -6,6 +6,13 @@ You can use this document to learn how to deploy and run rehydration components 
 
 This process is useful if you have sensitive data that cannot leave your infrastructure.
 
+You can deploy an on-prem rehydration with or without the OpenFaaS dependency.
+
+> **Note**
+>
+> OpenFaaS depends on apiextensions.k8s.io/v1beta1, which is compatible with Kubernetes v1.16 and higher.
+>
+> Edge Delta recommends that you deploy with the OpenFaaS dependency; however, if your cluster is older than v1.16, then you must deploy without the OpenFaaS dependency.
 
 ***
 
@@ -39,9 +46,11 @@ After you follow the steps below, you will still be able to use the **Rehydratio
     
 ***    
 
-## Setup with OpenFaaS
+## Deploy with OpenFaaS
 
-This is the recommended setup.
+Edge Delta recommends that you deploy with the OpenFaaS dependency.
+
+***
 
 ### Step 1: Review Pre-Deployment Considerations
     
@@ -51,6 +60,7 @@ Review the following prerequisites:
 - [helm](https://helm.sh/docs/helm/helm_install/)
 - [faas](https://docs.openfaas.com/cli/install/#installation)
 
+***
 
 ### Step 2: Deploy an On-Prem Rehydration 
     
@@ -136,15 +146,19 @@ The requests will be processed by the rehydration components that was just insta
 
 ***
 
-## Setup without OpenFaaS dependency
+## Deploy Without OpenFaaS
 
-OpenFaaS depends on apiextensions.k8s.io/v1beta1 and it's available after Kubernetes v1.16. If your cluster is older than v1.16, you can use the following setup which doesn't install OpenFaaS components.
+OpenFaaS depends on apiextensions.k8s.io/v1beta1, which is compatible with Kubernetes v1.16 and higher. As a result, if your cluster is older than v1.16, then you can use the following instructions to deploy without installing the OpenFaaS components.
+
+***
 
 ### Step 1: Review Pre-Deployment Considerations
     
 Review the following prerequisites:  
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
+
+***
 
 ### Step 2: Deploy an On-Prem Rehydration 
 
@@ -177,7 +191,7 @@ kubectl create secret generic ed-rehydration-token \
 > 
 > This setting may be hidden for your organization. If you do not see this option, then please contact Edge Delta. 
 
-5.Deploy the rehydration handler.
+5.Deploy the rehydration handler:
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-handler-faasless.yml;
