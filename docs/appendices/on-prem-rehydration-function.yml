@@ -6,10 +6,10 @@ provider:
 functions:
   rehydrate:
     skip_build: true
-    # image built on 2021-11-17
-    image: gcr.io/edgedelta/function@sha256:5ba73697b0cdf8e15572e0ac74b8112607a83425f30b444b6d99ca156b946532
+    # image built on 2021-11-18
+    image: gcr.io/edgedelta/function@sha256:3be42c1acf1887025e602d8d91c76462375ca5af789255b4365487ab129e9e12
     environment:
-      ED_MODE: prod
+      ED_MODE: staging
       ED_REHYDRATION_PUSH_BATCH_SIZE: 10000
       ED_HANDLER_NAME: rehydrate
       ED_REMOTE_REPOSITORY: "1"
@@ -28,8 +28,8 @@ functions:
      com.openfaas.health.http.initialDelay: "5s"
   echofaas:
     skip_build: true
-    # image built on 2021-11-17
-    image: gcr.io/edgedelta/function@sha256:5ba73697b0cdf8e15572e0ac74b8112607a83425f30b444b6d99ca156b946532
+    # image built on 2021-11-18
+    image: gcr.io/edgedelta/function@sha256:3be42c1acf1887025e602d8d91c76462375ca5af789255b4365487ab129e9e12
     environment:
       ED_HANDLER_NAME: echo
     labels:

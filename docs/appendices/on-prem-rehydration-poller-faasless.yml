@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rehydration-handler
+  namespace: edgedelta-rehydration
+  labels:
+    k8s-app: rehydration-handler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: rehydration-handler
+  template:
+    metadata:
+      labels:
+        k8s-app: rehydration-handler
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: poller
+        # image built on 2021-11-18
+        image: gcr.io/edgedelta/function@sha256:950de4ceab2a3a50ce00b40ede637f73c4ac08367d1fd4d15b53bd8bc0a36b2c
+        command:
+          - /edgedelta/faas
+        env:
+          - name: ED_MODE
+            value: "prod"
+          - name: ED_REHYDRATION_PUSH_BATCH_SIZE
+            value: "10000"
+          - name: ED_HANDLER_NAME
+            value: "rehydrate"
+          - name: ED_REMOTE_REPOSITORY
+            value: "1"
+          - name: ED_REMOTE_TOKEN
+            valueFrom: 
+              secretKeyRef:
+                key: ed-rehydration-token
+                name: ed-rehydration-token
+        resources:
+          limits:
+            memory: 3000Mi
+          requests:
+            cpu: 1000m
+            memory: 3000Mi
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rehydration-handler
+  namespace: edgedelta-rehydration
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+  selector:
+    k8s-app: rehydration-handler
