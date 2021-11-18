@@ -4,24 +4,26 @@ You can use this document to learn how to deploy and run rehydration components 
 
 This process is useful if you have sensitive data that cannot leave your infrastructure.
 
+
 ***
 
 ## Understand Rehydration Concepts
 
 **Archiving**
-<p>
-<p>By default, the Edge Delta agent archives logs on customer S3 buckets owned by Edge Delta. 
-    
+By default, the Edge Delta agent archives logs on customer S3 buckets owned by Edge Delta. 
+
   * This action can be disabled for user-owned S3 buckets. 
-<p>A custom S3 bucket (or GCS, Blob, Minio, etc.) can be created in the Integrations page of the Edge Delta Admin portal. 
-<p>After you create and add the bucket to a workflow in the agent configuration, the agent will start to send gzipped logs to the custom bucket.
+
+A custom S3 bucket (or GCS, Blob, Minio, etc.) can be created in the Integrations page of the Edge Delta Admin portal. 
+After you create and add the bucket to a workflow in the agent configuration, the agent will start to send gzipped logs to the custom bucket.
 
 **Rehydration**
-<p>    
-<p>Rehydration is the process of pushing already-archived data to a target streaming platform, such as Splunk, Elasticsearch, etc.
-<p>You can use the Rehydration section of the Edge Delta Admin portal to initiate a rehydration for a specific time range, source filter, and keyword filters.
-<p>By default, the Edge Delta backend handles rehydrations. 
-<p> Rehydration handlers will: 
+
+Rehydration is the process of pushing already-archived data to a target streaming platform, such as Splunk, Elasticsearch, etc.
+
+You can use the Rehydration section of the Edge Delta Admin portal to initiate a rehydration for a specific time range, source filter, and keyword filters.
+
+By default, the Edge Delta backend handles rehydrations. Rehydration handlers will: 
     
   * Scan the S3 bucket, then
   * Filter the logs as requested, and then 
@@ -37,6 +39,7 @@ After you follow the steps below, you will still be able to use the **Rehydratio
 ## Pre-Deployment Considerations
     
 Review the following prerequisites:  
+
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [helm](https://helm.sh/docs/helm/helm_install/)
 - [faas](https://docs.openfaas.com/cli/install/#installation)
