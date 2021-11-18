@@ -104,7 +104,7 @@ faas deploy -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appe
 
 8. Stop port forwarding.
 
-9. Prepare for rehydration poller deployment yml. Specifically:
+9. Deploy the rehydration poller YML. Specifically:
 
 - Download [this file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml) to a local file /tmp/rehydration-poller.yml
     
@@ -126,8 +126,10 @@ kubectl apply -f /tmp/rehydration-poller.yml;
 kubectl logs deployment/rehydration-poller -n edgedelta-rehydration
 ```
 
+
 9. Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the portal, and then create rehydration requests. 
 
     * The requests will be processed by the rehydration components that was just installed on your k8s cluster.
 
 ***
+
