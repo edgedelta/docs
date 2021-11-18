@@ -54,7 +54,6 @@ After you follow the steps below, you will still be able to use the **Rehydratio
 
 Edge Delta recommends that you deploy with the OpenFaaS dependency.
 
-***
 
 ### Step 1: Review Pre-Deployment Considerations
     
@@ -63,8 +62,6 @@ Review the following prerequisites:
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [helm](https://helm.sh/docs/helm/helm_install/)
 - [faas](https://docs.openfaas.com/cli/install/#installation)
-
-***
 
 ### Step 2: Deploy an On-Prem Rehydration 
     
@@ -154,15 +151,12 @@ The requests will be processed by the rehydration components that was just insta
 
 OpenFaaS depends on apiextensions.k8s.io/v1beta1, which is compatible with Kubernetes v1.16 and higher. As a result, if your cluster is older than v1.16, then you can use the following instructions to deploy without installing the OpenFaaS components.
 
-***
 
 ### Step 1: Review Pre-Deployment Considerations
     
 Review the following prerequisites:  
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
-
-***
 
 ### Step 2: Deploy an On-Prem Rehydration 
 
