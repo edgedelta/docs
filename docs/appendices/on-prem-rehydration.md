@@ -13,6 +13,10 @@ You can deploy an on-prem rehydration with or without the OpenFaaS dependency.
 > OpenFaaS depends on apiextensions.k8s.io/v1beta1, which is compatible with Kubernetes v1.16 and higher.
 >
 > Edge Delta recommends that you deploy with the OpenFaaS dependency; however, if your cluster is older than v1.16, then you must deploy without the OpenFaaS dependency.
+> 
+> To deploy with OpenFaaS, see [Deploy With OpenFaas](#deploy-with-openfaas).
+> 
+> To deploy without OpenFaaS, see [Deploy Without OpenFaas](#deploy-without-openfaas).
 
 ***
 
