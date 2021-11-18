@@ -90,7 +90,7 @@ kubectl create secret generic ed-rehydration-token \
 > 
 > This setting may be hidden for your organization. If you do not see this option, then please contact Edge Delta. 
 
-6. Deploy the rehydration function handler. (The external load balancer for the OpenFaaS gateway was not exposed when helm chart was installed. As a result, Edge Delta will temporarily enable port forwarding to connect to OpenFaas.)
+6. Deploy the rehydration function handler. (The external load balancer for the OpenFaaS gateway was not exposed when helm chart was installed. As a result, you need to temporarily enable port forwarding to connect to OpenFaaS.)
 
 ```
 kubectl port-forward -n edgedelta-rehydration svc/gateway 8080:8080
