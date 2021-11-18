@@ -89,9 +89,9 @@ helm install \
     jetstack/cert-manager
 ```
 
-11. With the DNS entry you configured earlier, update the host values in edgedelta-ingress resource, as defined in [ed-appinsights-trace-processor.yaml](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/ed-appinsights-trace-processor.yaml).
+11. With the DNS entry you configured earlier, update the host values in the edgedelta-ingress resource, as defined in [ed-appinsights-trace-processor.yaml](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/ed-appinsights-trace-processor.yaml).
 
-12. Create the edgedelta http recorder and agent: 
+12. Create the Edge Delta http recorder and agent: 
 
 ```text
 kubectl apply -f ed-appinsights-trace-processor.yaml`
@@ -117,7 +117,7 @@ https://ingest.edgedelta.198de54f02b345ab92a8.centralus.aksapp.io/
 
 ***
 
-## Step 2: Set Up Azure function With Dual Telemetry Write Mode
+## Step 2: Set Up Azure Function With Dual Telemetry Write Mode
 
 1. Navigate to the Azure application folder, and then add dependencies:
 
@@ -126,7 +126,7 @@ dotnet add package Microsoft.Azure.Functions.Extensions
 dotnet add package Microsoft.Extensions.Logging.ApplicationInsights
 ```
 
-2. Create a StartUp.cs file under the targeted Azure function application. Use the content of this [StartUp.cs file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/azure_function_startup.cs). 
+2. Create a StartUp.cs file under the targeted Azure function application. Use the content in this [StartUp.cs file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/azure_function_startup.cs). 
 
   * Update the namepace at the top. In the example below, the custom sinker implementation called ForkingTelemetryChannel replicates telemetry data for ingestion into a secondary ingestion endpoint. Note that the dual ingestion process is parallelized to reduce the overall latency.
 
@@ -147,7 +147,7 @@ dotnet add package Microsoft.Extensions.Logging.ApplicationInsights
 3. Set the secondary application insight connection string. 
 
   * Provide the secondary endpoint address created in the AKS cluster ingress endpoint. 
-  * Provide the secondary instrumentation key that will be used to forward the matching telemetry data to the application insight from edgedelta processor.
+  * Provide the secondary instrumentation key that will be used to forward the matching telemetry data to the application insight from the Edge Delta processor.
 
 ```text
 {
@@ -167,9 +167,9 @@ dotnet add package Microsoft.Extensions.Logging.ApplicationInsights
 
 ***
 
-## Step 3: Set Up Azure function Without Dual Writes
+## Step 3: Set Up Azure Function Without Dual Writes
 
-1. Set the application insight connection string to point it to the public endpoint previously. Use your target appinsight instrumentation key.
+1. Set the application insight connection string to point to the public endpoint previously. Use your target appinsight instrumentation key.
 
 ```text
 "APPLICATIONINSIGHTS_CONNECTION_STRING": "InstrumentationKey=***;IngestionEndpoint=https://ingest.edgedelta.198de54f02b345ab92a8.centralus.aksapp.io",
@@ -177,8 +177,9 @@ dotnet add package Microsoft.Extensions.Logging.ApplicationInsights
 
 ***
 
-## Next Steps
+## Step 4: Test the Setup
 
-Run the Azure functions and simulate failure scenarios. Visit application insights to check failed traces are forwarded by edgedelta agent.
+1. Run the Azure functions and simulate failure scenarios. 
+2. Visit application insights to check if failed traces are forwarded by the Edge Delta agent.
 
 ***
