@@ -12,6 +12,7 @@ This process is useful if you have sensitive data that cannot leave your infrast
 ## Understand Rehydration Concepts
 
 **Archiving**
+
 By default, the Edge Delta agent archives logs on customer S3 buckets owned by Edge Delta. 
 
   * This action can be disabled for user-owned S3 buckets. 
