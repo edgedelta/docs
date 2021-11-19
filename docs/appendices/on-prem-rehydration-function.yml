@@ -9,7 +9,7 @@ functions:
     # image built on 2021-11-18
     image: gcr.io/edgedelta/function@sha256:3be42c1acf1887025e602d8d91c76462375ca5af789255b4365487ab129e9e12
     environment:
-      ED_MODE: staging
+      ED_MODE: prod
       ED_REHYDRATION_PUSH_BATCH_SIZE: 10000
       ED_HANDLER_NAME: rehydrate
       ED_REMOTE_REPOSITORY: "1"
