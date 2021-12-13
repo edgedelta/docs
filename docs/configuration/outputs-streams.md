@@ -300,7 +300,7 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
 | integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
 | type | You must set this parameter to **newrelic**. | Required |
-| api\_key | Enter a New Relic Insert API key. | Required |
+| api\_key | Enter a New Relic Ingest- License key. | Required |
 | features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set.  | Optional |
 
 The following example displays an output without the name of the organization-level integration:
