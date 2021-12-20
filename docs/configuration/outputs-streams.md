@@ -356,6 +356,49 @@ The following example displays an output without the name of the organization-le
 
 ***
 
+### **AppDynamics**
+
+The AppDynamics output will stream analytics and insights to an AppDynamics environment.
+
+> **Before you begin**
+> 
+> Before you can create an output, you must have available the AppDynamics Global account name and an API key. 
+> 
+>   * To find your Global Account name, review this [document from AppDynamics](https://docs.appdynamics.com/21.1/en/application-monitoring/install-app-server-agents/agent-to-controller-connections#Agent-to-ControllerConnections-findaccountFindYourAccountNameandAccessKey).
+>   * To learn how to create new AppDynamics API key, review this [document from AppDynamics](https://docs.appdynamics.com/21.2/en/analytics/deploy-analytics-with-the-analytics-agent/analytics-and-data-security/manage-api-keys#ManageAPIKeys-CreateAPIKeys).
+
+Review the following parameters that you can configure in the Edge Delta Admin portal:
+
+| Parameter | Description | Required or Optional |
+| :--- | :--- | :--- |
+| name | Enter a descriptive name for the output, which will be used to map this destination to a workflow. | Optional |
+| integration\_name | This parameter refers to the organization-level integration created in the **Integrations** page. If you enter this name, then the rest of the fields will be automatically populated. If you need to add multiple instances of the same integration into the config, then you can add a custom name to each instance via the **name** field. In this situation, the name should be used to refer to the specific instance of the destination in the workflows.  | Optional |
+| type | You must set this parameter to **appdynamics**. | Required |
+| host | To create a custom installation, enter the name of the AppDynamics host that will receive the data. | Optional |
+| api\_key | Enter the AppDynamics API key. | Required |
+| schema\_name | Enter a name to create a schema that will send data to AppDynamics. | Required |
+| features | This parameter defines which data types to stream to the backend. If you do not provide a value, then **all** will be set.  | Optional |
+| custom\_tags | This parameter defines key-value pairs that are streamed to AppDynamics for every request. | Optional |
+
+The following example displays an output without the name of the organization-level integration:
+
+```yaml
+      - name: appdynamics-integration
+        type: appdynamics
+        # If provided, custom installation of appdynamics host can be reached.
+        host: "<add appdynamics host>"
+        global_account_name: "<add global account name>"
+        api_key: "<add appdynamics api key>"
+        # No whitespaces in schema name
+        schema_name: "<add-schema-name>"
+        features: log,metric,edac
+        custom_tags:
+          "app": "transaction_manager"
+          "region": "us-west-2"
+```
+
+***
+
 ### InfluxDB
 
 The InfluxDB output will stream analytics and insights to your InfluxDB deployment.
