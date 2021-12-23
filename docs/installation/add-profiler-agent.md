@@ -26,6 +26,8 @@ Deploy the Agent with a Profiler
 
 To deploy the agent with a profiler, follow the installation instructions for each agent type; however, you must add **PROFILER_PORT** for port **6060** to the installation command.
 
+**Linux Example**
+
 For instance, for **Linux**, the regular deployment command is: 
 
 <code>ED_API_KEY=f1111e-e1d1-1ad1-b11d-d1a11111b1 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"</code>
@@ -33,6 +35,8 @@ For instance, for **Linux**, the regular deployment command is: 
 To deploy with a profiler, the command would be:
 
 <code>PROFILER_PORT=6060 ED_API_KEY=f1111e-e1d1-1ad1-b11d-d1a11111b1 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"</code>
+
+**Docker Example**
 
 In another example, for **Docker**, the regular deployment is:
 
