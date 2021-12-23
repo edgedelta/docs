@@ -14,6 +14,7 @@ nav:
   - Installation:
     - Overview: installation/index.md
     - Environment Variables: installation/environment-variables.md
+    - Agent Profiler: installation/add-profiler-agent.md
     - Windows: installation/windows.md
     - Linux: installation/linux.md
     - Docker: installation/docker.md
