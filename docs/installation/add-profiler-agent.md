@@ -7,11 +7,9 @@ You can use this document to learn how to deploy the Edge Delta Agent with a pro
 >
 > This document only applies to Go-based web applications.
 
-For Go-based web applications, you can add a profiler during agent deployment. A profiler is useful to obtain data about instances where the agent is deployed. 
+For Go-based web applications, you can add a profiler during agent deployment. A profiler is useful to obtain data about instances where the agent is deployed, such as reviewing why CPU usage is high. 
 
--   For instance, you can use a profiler to determine why CPU usage is high.  
-
-To obtain data, you can run a command to obtain and download a report. 
+Afterwards, to obtain the data data, you can run a command to download a report. 
 
 * * * * *
 
