@@ -27,7 +27,7 @@ Edge Delta uses a Kubernetes-recommended, node-level logging architecture, also 
 
 ## Step 1: Create a Configuration and Download and Install the Agent
 
-1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Select **Kubernetes**.
 4. Click **Save**.  
