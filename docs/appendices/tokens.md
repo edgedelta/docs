@@ -39,7 +39,7 @@ After you create the token, the unique token key will only display once. Afterwa
 > 
 > You can only create a token based on the permisssions that you already have. For example, if you have read-only access for **Integrations**, then you can create a token with read-only access for **Integrations**; however, you cannot create a token with write-only access for **Integrations** because you do not currently have that permission. 
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Global Settings**. 
+1. In the Edge Delta App, on the left-side navigation, click **Global Settings**. 
 2. In the Tokens sections, click  **Create Token**. 
 3. Under **Name**, enter a descriptive name for the token, such as **john-smith-integrations-token**. 
 4. Click **Add Permissions**.
@@ -53,7 +53,7 @@ After you create the token, the unique token key will only display once. Afterwa
 10. Click **Token Details**. 
 11. Review the list of permissions, and then click **Create**.
 12. In the window that appears, copy and save the token.
-  - Remember, Edge Delta does not store tokens. As a result, a lost or missplaced token cannot be retrieved. 
+  - Remember, Edge Delta does not store tokens. As a result, a lost or misplaced token cannot be retrieved. 
 13. Click **Close**. 
 14. The newly created token will be listed in the **Tokens** table. 
 15. You can use the newly created token to make API calls to the Edge Delta backend system. Tokens should be sent in the **X-ED-API-Token** request header.
@@ -76,7 +76,7 @@ Review the following table to understand the information listed in the **Tokens*
 
 ## Delete a Token 
   
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Global Settings**.   
+1. In the Edge Delta App, on the left-side navigation, click **Global Settings**.   
 2. Navigate to **Tokens**.
 3. Under **Actions**, click the trash icon for the corresponding token. 
 4. Click **Yes** to confirm your action. 
