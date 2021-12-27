@@ -12,7 +12,7 @@ You can use this document to learn how to create and manage the Edge Delta Cloud
 
 The CCB is a service provided by Edge Delta to help generate and deploy configuration files used by the Edge Delta service.
 
-With the CCB, you can use the Edge Delta Admin portal to create and manage configuration files. The CCB also automatically generates configuration API keys that are used to pre-configure agents during deployment.
+With the CCB, you can use the Edge Delta App to create and manage configuration files. The CCB also automatically generates configuration API keys that are used to pre-configure agents during deployment.
 
 Additionally, CCB allows you to update and modify configuration files directly through the portal, which automatically propagates changes down to running agents.
 
@@ -30,7 +30,7 @@ There are 2 ways to create a configuration:
 
 **Option 1: Use a template with default settings**
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Select a template, and then click **Save**.
 4. Refresh the screen to view the newly created configuration in the table.
@@ -46,7 +46,7 @@ As an optional step, you can view and update the configurations in the template.
 
 **Option 2: Use a visual editor to populate a YAML file**
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Click **Visual**.
 4. On the right-side, select a configuration option. In the empty field, enter your configurations. When you are done, click the back button on top of the form to return to the list of configuration options. **Do not click Save.**  
@@ -61,9 +61,9 @@ As an optional step, you can view and update the configurations in the template.
 
 ## View Configuration History
 
-Any change made to a configuration will be tracked and displayed in the Edge Delta Admin portal.
+Any change made to a configuration will be tracked and displayed in the Edge Delta App.
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Review the listed entries.
 3. To filter for specific entry types, click **Filter** and then mark a filter option.
 4. To view a diff, locate the desired configuration, and then under **Actions**, click the corresponding diff icon.
@@ -75,7 +75,7 @@ Any change made to a configuration will be tracked and displayed in the Edge Del
 
 ## Update an Existing Configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Make your changes, and then click **Save**.
 4. A new entry will appear in the table, with the date and time of the update.
@@ -86,7 +86,7 @@ After you update a configuration via the portal, the updated configuration versi
 
 ## Configure File Management Locally
 
-While you can use the Cloud Configuration Backend \(CCB\) in the Edge Delta Admin portal to update a configuration, you can also manage and deploy configuration files locally, with tools such as Chef, Puppet, Ansible, Salt, Terraform, etc.  
+While you can use the Cloud Configuration Backend \(CCB\) in the Edge Delta App to update a configuration, you can also manage and deploy configuration files locally, with tools such as Chef, Puppet, Ansible, Salt, Terraform, etc.  
 
 To configure locally, a flag must be provided during agent deployment to let the system know that Local Configuration File Management is in place.
 
