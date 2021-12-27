@@ -12,7 +12,7 @@ The Edge Delta installation package is available and fully supported on hosts th
 
 Additionally, a Docker image is available for containerized environments.
 
-Review the following installaiton documents: 
+Review the following installation documents: 
 
 * [Windows](windows.md)
 * [Linux](linux.md)
