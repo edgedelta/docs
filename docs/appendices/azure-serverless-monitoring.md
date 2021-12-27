@@ -16,13 +16,13 @@ This document explains how to deploy Edge Delta components to an AKS cluster.
 
 ## Step 1: Set Up the Edge Delta Processor in an AKS Cluster
 
-1. Create a new config in the [Edge Delta Admin portal](https://admin.edgedelta.com/) with the content from [this file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/aks_appinsight_trace_processor_agent_config.yaml).
+1. Create a new config in the [Edge Delta App](https://app.edgedelta.com/) with the content from [this file](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/aks_appinsight_trace_processor_agent_config.yaml).
 
 2. Replace **INSTRUMENTATION\_KEY** with your the instrumentation key.
 
 3. Create a new AKS cluster or use an existing cluster.
 
-4. Add a new node pool on AKS with the sepcs below. 
+4. Add a new node pool on AKS with the specs below. 
 
    * If you skip this step, then update the nodeSelector in [ed-appinsights-trace-processor.yaml](https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/ed-appinsights-trace-processor.yaml).
 
