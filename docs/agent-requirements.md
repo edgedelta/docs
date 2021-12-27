@@ -30,7 +30,7 @@ You can use this document to review software and hardware requirements before yo
 
 ## Browser Support
   
-The Edge Delta App portal supports the current version of the following browsers:
+The Edge Delta App supports the current version of the following browsers:
   - Chrome
   - Firefox
   - Edge
@@ -41,7 +41,7 @@ The Edge Delta App portal supports the current version of the following browsers
   
 > **Note**
 > 
-> Edge Delta does not recommend that you use a mobile device to access the Edge Delta App portal.
+> Edge Delta does not recommend that you use a mobile device to access the Edge Delta App.
 
 ***
 
