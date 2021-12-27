@@ -30,7 +30,7 @@ You can use this document to review software and hardware requirements before yo
 
 ## Browser Support
   
-The Edge Delta Admin portal supports the current version of the following browsers:
+The Edge Delta App portal supports the current version of the following browsers:
   - Chrome
   - Firefox
   - Edge
@@ -41,7 +41,7 @@ The Edge Delta Admin portal supports the current version of the following browse
   
 > **Note**
 > 
-> Edge Delta does not recommend that you use a mobile device to access the Edge Delta Admin portal.
+> Edge Delta does not recommend that you use a mobile device to access the Edge Delta App portal.
 
 ***
 
@@ -63,12 +63,4 @@ Review the following network access requirements to ensure a successful connecti
 
 ***
   
-## Additional Documentation
-  
-Outputs to 3rd party or on-premise systems also require outbound network access. When you configure the agent, verify that the **endpoint** of the configured output is also accessible by the agent through the network. Outputs instruct the agent where to send collected and generated data, such as metrics, patterns, and alerts.
-
-  * To learn more, see [Outputs](./configuration/outputs.md).  
-  
-  
-***  
   
