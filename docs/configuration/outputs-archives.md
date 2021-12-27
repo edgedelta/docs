@@ -30,7 +30,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 
 ### Option 1: Access the visual editor for a new configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Click **Visual**.
 4. On the right-side, select **Archive**.
@@ -46,7 +46,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 
 ### Option 2: Access the YAML file for an existing configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
@@ -93,7 +93,7 @@ Before you configure your Edge Delta account to sends logs to an AWS S3 endpoint
 }
 ```
 
-After you attach the policy in the AWS console, review the following parameters that you can configure in the Edge Delta Admin portal:
+After you attach the policy in the AWS console, review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -128,7 +128,7 @@ The **Azure Blob Storage** output will stream logs to an Azure Blob Storage endp
 > 
 >   * To learn more, review this [document from Microsoft](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal). 
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -162,7 +162,7 @@ The **Google Cloud Storage** output will stream logs to a GCS endpoint.
 > 
 >   * To learn how to create a new key, review this [document from Google](https://cloud.google.com/storage/docs/authentication/managing-hmackeys). 
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -189,7 +189,7 @@ The following example displays an output without the name of the organization-le
 
 The **DigitalOcean Spaces** output will stream logs to a DigitalOcean Spaces endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -218,7 +218,7 @@ The following example displays an output without the name of the organization-le
 
 The **IBM Object Storage** output will stream logs to an IBM Object Storage endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -247,7 +247,7 @@ The following example displays an output without the name of the organization-le
 
 The **Minio** output will stream logs to a Minio endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -280,7 +280,7 @@ The following example displays an output without the name of the organization-le
 
 The **Zenko CloudServer** output will stream logs to a CloudServer endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -309,7 +309,7 @@ The following example displays an output without the name of the organization-le
 
 The **Moogsoft** output will stream notifications and alerts to a specified Moogsoft URL.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -340,7 +340,7 @@ The following example displays an output without the name of the organization-le
 
 The **Remedy** output will stream notifications and alerts to a specified Remedy URL.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -380,7 +380,7 @@ The **Azure Event Hub Trigger** output will stream notifications and alerts to a
 > 
 >   * To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |

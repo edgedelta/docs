@@ -20,7 +20,7 @@ Edge Delta uses 64-bit or 32-bit MSI installation process.
 
 ## Step 1: Create a Configuration and Download the Agent
 
-1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Select **Windows**.
 4. Click **Save**.  
@@ -63,7 +63,7 @@ start /wait msiexec /qn /i edgedelta-version_64bit.msi APIKEY="<YOUR_API_KEY>"
 
 > To automate:
 
-> 1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+> 1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 
 > 2. In the list of configurations, locate the **Windows** tag, and then click the corresponding deploy icon (green rocket).
 

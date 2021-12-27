@@ -10,7 +10,7 @@ description: >-
 
 You can use this document to learn about the configuration parameters available in a configuration file, specifically for **Inputs**.
 
-An inputs tells the Edge Delta agent:
+An input tells the Edge Delta agent:
 
   * Data types to listen for
   * Data locations
@@ -34,7 +34,7 @@ At a high level, there are 2 ways to manage **Inputs**:
 
 **To access the visual editor for a new configuration:**
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Click **Visual**.
 4. On the right-side, select **Inputs**.
@@ -42,7 +42,7 @@ At a high level, there are 2 ways to manage **Inputs**:
 
 **To access the YAML file for an existing configuration:**
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file.
 
@@ -496,7 +496,7 @@ This input type allows you to specify a command, set of commands, or scripts to 
 
 ## Kubernetes Events
 
-This input type collects Kubernetes events (namespace independent) and sends these events to the Edge Delta backend, which can be configured to display in the Edge Delta Admin portal, specifically in the **Insights** page.
+This input type collects Kubernetes events (namespace independent) and sends these events to the Edge Delta backend, which can be configured to display in the Edge Delta App, specifically in the **Insights** page.
 
 > **Note**
 >

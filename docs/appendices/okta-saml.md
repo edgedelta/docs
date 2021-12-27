@@ -42,10 +42,10 @@ You can use this document to learn how to set up an Okta SAML integration with E
 13. In Okta, register your users to use SAML authentication. 
     * To learn more, review this [article from Okta](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-add-users.htm). 
 14. Visit https://admin.edgedelta.com/saml , and then enter your Okta credentials. You will be redirected to Okta. 
-15. Enter your Okta credentials, and then you will be redirected to the Edge Delta Admin portal. 
+15. Enter your Okta credentials, and then you will be redirected to the Edge Delta App. 
 
 > **Note**
 > 
-> When you use the same browser to access the Edge Delta Admin portal, by default SAML authentication will take place. 
+> When you use the same browser to access the Edge Delta App, by default SAML authentication will take place. 
 
 ***

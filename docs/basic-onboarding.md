@@ -26,14 +26,14 @@ You can use this document to learn how to:
 
 ## Step 1: Access Edge Delta
 
-1. Navigate to [admin.edgedelta.com](https://admin.edgedelta.com/), and then click **Sign up**.
-2. Complete the missing fields, and then click **Register**. You will be redirected to the **Welcome to Edge Delta** screen in the Edge Delta Admin portal.
+1. Navigate to [app.edgedelta.com](https://app.edgedelta.com/), and then click **Sign up**.
+2. Complete the missing fields, and then click **Register**. You will be redirected to the **Welcome to Edge Delta** screen in the Edge Delta App.
 
 ***
 
 ## Step 2: Deploy the Agent
 
-1. In the Edge Delta Admin portal, select your operating platform.
+1. In the Edge Delta App, select your operating platform.
 2. In **Enter Environment Tag**, enter a descriptive tag to explain where the agent will be deployed.
 3. Click **Continue**.
 4. Select a destination type to create an organization-level output to send data from Edge Delta.
@@ -41,7 +41,7 @@ You can use this document to learn how to:
     * To learn more about outputs, including parameters, see [Outputs](configuration/outputs.md). 
 6. Copy the pre-populated agent command.
 7. Open a terminal or command line prompt, then paste and run the command.  
-8. In the portal, click **I Ran Deploy Commands**.
+8. In the app, click **I Ran Deploy Commands**.
 9. The agent will take a few minutes to deploy and authenticate with Edge Delta.
 10. After a successful deployment, click **Go To Status Page**.
     * In the window that appears, you can click **Go To Demo Environment** to see a pre-populated account where you can view and test data.
@@ -54,20 +54,20 @@ You can use this document to learn how to:
 
 There are 2 ways to verify agent deployment:
 
-  * In the portal
+  * In the app
   * In the target software platform
 
 ***
 
-### Option 1: Verify Agent Deployment in the Portal
+### Option 1: Verify Agent Deployment in the App
 
-1. In the Edge Delta Admin Portal, on the left-side navigation, under **Data Pipeline**, click **Pipeline Status**.
+1. In the Edge Delta App, on the left-side navigation, under **Data Pipeline**, click **Pipeline Status**.
 2. Review the **Active Nodes** section.
 3. If the agent was successfully installed, then there will be at least 1 active node.
 
 >  **Note**
 >
-> After an initial agent deployment, the portal may only display non-zero values.
+> After an initial agent deployment, the app may only display non-zero values.
 
 ***
 

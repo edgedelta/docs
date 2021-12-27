@@ -21,7 +21,7 @@ An **Output - Stream** focuses on centralized monitoring platforms. Specifically
 
 ## Step 1: Review Feature Types
 
-In the Edge Delta Admin portal, **features** are the data types that the Edge Delta agent should collect (or generate), and then send to a streaming destination.
+In the Edge Delta App, **features** are the data types that the Edge Delta agent should collect (or generate), and then send to a streaming destination.
 
 When you create an **Output - Stream**, you can add the following features to the output:
 
@@ -47,7 +47,7 @@ At a high level, there are 2 ways to manage **Outputs - Streams**:
 
 ### Option 1: Access the visual editor for a new configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Click **Visual**.
 4. On the right-side, select **Streams**.
@@ -63,7 +63,7 @@ At a high level, there are 2 ways to manage **Outputs - Streams**:
 
 ### Option 2: Access the YAML file for an existing configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**.
 
@@ -86,7 +86,7 @@ The Splunk output will stream analytics and insights to a Splunk HEC endpoint.
 >
 >   * To learn how to create and obtain this information, see [Supplemental Information for Splunk Integration](#supplemental-information-for-splunk-integration).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -113,7 +113,7 @@ The following example displays when the name of the organization-level integrati
       - integration_name: my-org-splunk
 ```
 
-The following example displays if there are multiple instances of the same desitnation that need to route different data types to different Splunk indexes:
+The following example displays if there are multiple instances of the same destination that need to route different data types to different Splunk indexes:
 
 ```yaml
 - name: edac-splunk-dest
@@ -139,7 +139,7 @@ The Sumo Logic output will stream analytics and insights to a Sumo Logic HTTPs E
 >   * To learn how to create new Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url).
 >   * To learn how to locate an existing Sumo Logic HTTPs endpoint, review this [document from Sumo Logic](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source#access-a-sources-url).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
@@ -170,7 +170,7 @@ The AWS CloudWatch output will stream logs to a specified AWS region.
 >   * To learn how to create a log group, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html).
 >   * To learn how to create a log stream, review this [document from Amazon](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
@@ -244,7 +244,7 @@ The Datadog output will stream analytics and insights to a Datadog environment.
 >
 >   * To learn how to create a new Datadog API key, review this [document from Datadog](https://docs.datadoghq.com/account_management/api-app-keys/#add-a-key).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -293,7 +293,7 @@ The New Relic output will stream analytics and insights to a New Relic environme
 >
 >   * To learn how to create new New Relic Insert API key, review this [document from New Relic](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#event-insert-key).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -323,7 +323,7 @@ The Honeycomb output will stream analytics and insights to a Honeycomb environme
 >
 >   * To learn how to create new Honeycomb API key, review this [document from Honeycomb](https://docs.honeycomb.io/api/api-keys/#manage-api-keys).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -367,7 +367,7 @@ The AppDynamics output will stream analytics and insights to an AppDynamics envi
 >   * To find your Global Account name, review this [document from AppDynamics](https://docs.appdynamics.com/21.1/en/application-monitoring/install-app-server-agents/agent-to-controller-connections#Agent-to-ControllerConnections-findaccountFindYourAccountNameandAccessKey).
 >   * To learn how to create new AppDynamics API key, review this [document from AppDynamics](https://docs.appdynamics.com/21.2/en/analytics/deploy-analytics-with-the-analytics-agent/analytics-and-data-security/manage-api-keys#ManageAPIKeys-CreateAPIKeys).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -403,7 +403,7 @@ The following example displays an output without the name of the organization-le
 
 The InfluxDB output will stream analytics and insights to your InfluxDB deployment.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -446,7 +446,7 @@ The following example displays an output without the name of the organization-le
 
 The Wavefront output will stream analytics and insights to your Wavefront environment.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -472,7 +472,7 @@ The following example displays an output without the name of the organization-le
 
 The Scalyr output will stream analytics and insights to your Scalyr environment.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -499,7 +499,7 @@ The **Elastic Search** output will stream analytics and insights to your Elastic
 > **Before you begin**
 >
 > Edge Delta recommends that you review and complete the steps listed in the [elastic index template and lifecycle creation guide](../appendices/elastic-index.md).
-> This process will help you prepare your Elastic Search environment to become an Edge Detla streaming target.
+> This process will help you prepare your Elastic Search environment to become an Edge Delta streaming target.
 
 <br>
 
@@ -508,7 +508,7 @@ The **Elastic Search** output will stream analytics and insights to your Elastic
 > For **connection url**, you must provide either the **cloud\_id** or **address**. You cannot enter both parameters.
 > For the **authentication**, you must provide either the **token** or the **user/password**. You cannot enter both parameters.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -529,7 +529,7 @@ The following example displays an output without the name of the organization-le
       - name: elastic-integration
         type: elastic
         index: "index name"
-        # you can provide cloud or adress list but not both at the same time
+        # you can provide cloud or address list but not both at the same time
         cloud_id: "<add elasticsearch cloud_id>"
         #address:
          #- <elastic search endpoint address_1>
@@ -546,7 +546,7 @@ The following example displays an output without the name of the organization-le
 
 The **Azure AppInsight** output will stream analytics and insights to your Azure endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -573,7 +573,7 @@ The following example displays an output without the name of the organization-le
 
 The **Kafka** output will stream analytics and insights to your Kafka endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -600,7 +600,7 @@ The following example displays an output without the name of the organization-le
 
 The **SignalFx** output will stream analytics and insights to your SignalFx endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -627,7 +627,7 @@ The following example displays an output without the name of the organization-le
 
 The **Humio** output will stream analytics and insights to your Humio endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -654,7 +654,7 @@ The following example displays an output without the name of the organization-le
 
 The **Loggly** output will stream analytics and insights to your Loggly endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional|
 | :--- | :--- | :--- |
@@ -681,7 +681,7 @@ The following example displays an output without the name of the organization-le
 
 The **Logz.io** output will stream analytics and insights to your Logz.io endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -713,7 +713,7 @@ The following example displays an output without the name of the organization-le
 
 The **Loki** output will stream analytics and insights to your Loki endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -790,7 +790,7 @@ The following example displays an output without the name of the organization-le
 
 The **FluentD** output will stream analytics and insights to your FluentD endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -827,7 +827,7 @@ The **Azure Event Hub Stream** output will stream analytics and insights to your
 >
 >   * To learn how to create an Azure AD token, review this [document from Microsoft](https://docs.microsoft.com/en-us/rest/api/eventhub/get-azure-active-directory-token).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -892,7 +892,7 @@ Before you can set up a Splunk output, you must have the HEC token and HEC endpo
 3. In the field, enter a name for the HEC, and then click **Next**.
 4. Confirm the index information or use the default index, and then click **Click Review**.
 5. Click **Submit**.
-6. Copy the displayed token value. You can enter this information in the **Token** field in the Edge Delta Admin portal.
+6. Copy the displayed token value. You can enter this information in the **Token** field in the Edge Delta App.
 
 #### Option 2: Splunk Enterprise
 
@@ -910,7 +910,7 @@ Before you can set up a Splunk output, you must have the HEC token and HEC endpo
 3. In the field, enter a name for the HEC, and then click **Next**.
 4. Confirm the index information or use the default index, and then click **Click Review**.
 5. Click **Submit**.
-6. Copy the displayed token value. You can enter this information in the **Token** field in the Edge Delta Admin portal.
+6. Copy the displayed token value. You can enter this information in the **Token** field in the Edge Delta App.
 
 ### Step 2: Determine your HEC Endpoint
 

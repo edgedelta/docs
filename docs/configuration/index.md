@@ -26,7 +26,7 @@ The configuration file is automatically loaded into memory at runtime.
 
 Updates to the configuration file are typically made via the CCB \(Central Configuration Backend\), or locally against the file itself.
 
-  * If configuration updates are made in the Edge Delta Admin Portal \(via the CCB\), then the updates are automatically propagated to the agent without a restart.
+  * If configuration updates are made in the Edge Delta App \(via the Cloud Configuration Backend (CCB)\), then the updates are automatically propagated to the agent without a restart.
 
 ***
 

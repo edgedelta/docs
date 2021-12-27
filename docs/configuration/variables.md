@@ -58,7 +58,7 @@ In certain cases, it is useful to set a variable in a simple way. For example, o
 
 > **Note**
 > 
-> To learn how to set or override variables, review the **Configuration Variables** table in the [Global Settings](https://admin.edgedelta.com/global-settings) page in the Edge Delta Admin portal. The agent will automatically detect variable updates.
+> To learn how to set or override variables, review the **Configuration Variables** table in the [Global Settings](https://app.edgedelta.com/global-settings) page in the Edge Delta App. The agent will automatically detect variable updates.
 
 Review the following examples of configuration variables:
 

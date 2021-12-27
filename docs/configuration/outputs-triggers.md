@@ -30,7 +30,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 
 ### Option 1: Access the visual editor for a new configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Click **Visual**.
 4. On the right-side, select **Triggers**.
@@ -46,7 +46,7 @@ At a high level, there are 2 ways to manage **Outputs**:
 
 ### Option 2: Access the YAML file for an existing configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
 
@@ -69,7 +69,7 @@ The **Slack** output will stream notifications and alerts to a specified Slack c
 > 
 >   * To learn more about webhooks, review [this document from Slack](https://api.slack.com/messaging/webhooks).
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -78,7 +78,7 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | type | You must set this parameter to **slack**.| Required |
 | endpoint | Enter the Slack Webhook or APP endpoint URL. | Required |
 | suppression\_window | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once the agent detects an issue and notifies the Slack endpoint, the agent will suppress any new issues for this time period. The default setting is **20m**. | Optional |
-| suppression\_mode | Enter a supression mode, which can be **local** or **global**. The default mode is **local**, which indicates that an individual agent suppresses an issue if the agent has already made a local notification for a similar issue in the last suppresson window. **Global** mode indicates that an individual agent checks with the Edge Delta backend to see if there were similar alerts from other sibling agents \(agents that share the same tag in the configuration\). | Optional |
+| suppression\_mode | Enter a supression mode, which can be **local** or **global**. The default mode is **local**, which indicates that an individual agent suppresses an issue if the agent has already made a local notification for a similar issue in the last suppression window. **Global** mode indicates that an individual agent checks with the Edge Delta backend to see if there were similar alerts from other sibling agents \(agents that share the same tag in the configuration\). | Optional |
 | notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters). | Optional |
 
 The following example displays an output without the name of the organization-level integration:
@@ -104,7 +104,7 @@ The following example displays an output without the name of the organization-le
 
 The **Microsoft Teams** output will stream notifications and alerts to a specified Teams channel.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -113,7 +113,7 @@ Review the following parameters that you can configure in the Edge Delta Admin p
 | type | Select **teams**. | Required |
 | endpoint | Enter the Microsoft Teams webhook URL. | Required |
 | suppression\_window | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string that represents the suppression window. Once the agent detects an issue and notifies the Slack endpoint, the agent will suppress any new issues for this time period. The default setting is **20m**.| Optional |
-| suppression\_mode | Enter a supression mode, which can be **local** or **global**. The default mode is **local**, which indicates that an individual agent suppresses an issue if the agent has already made a local notification for a similar issue in the last suppresson window. **Global** mode indicates that an individual agent checks with the Edge Delta backend to see if there were similar alerts from other sibling agents \(agents that share the same tag in the configuration\).  | Optional |
+| suppression\_mode | Enter a supression mode, which can be **local** or **global**. The default mode is **local**, which indicates that an individual agent suppresses an issue if the agent has already made a local notification for a similar issue in the last suppression window. **Global** mode indicates that an individual agent checks with the Edge Delta backend to see if there were similar alerts from other sibling agents \(agents that share the same tag in the configuration\).  | Optional |
 | notify\_content | You can use this parameter to customize the notification content. This parameter supports templating. To learn more, see [(Optional) Step 3: Review Notify Content Parameters](#optional-step-3-review-notify-content-parameters).| Optional |
 
 The following example displays an output without the name of the organization-level integration:
@@ -139,7 +139,7 @@ The following example displays an output without the name of the organization-le
 
 The **Pagerduty** output will stream notifications and alerts to a specified Pagerduty API endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -180,7 +180,7 @@ The following example displays an output without the name of the organization-le
 
 The **Jira** output will stream notifications and alerts to a specified Jira webhook URL.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -212,7 +212,7 @@ The following example displays an output without the name of the organization-le
 
 The **Service Now** output will stream notifications and alerts to a specified Service Now API endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -247,7 +247,7 @@ The following example displays an output without the name of the organization-le
 
 The **Webhook** output will stream notifications and alerts to the specified Webhook URL.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -292,7 +292,7 @@ The following example displays an output without the name of the organization-le
 
 The **AWS Lambda** output will stream notifications and alerts to  the specified AWS Lambda FaaS endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -323,7 +323,7 @@ The following example displays an output without the name of the organization-le
 
 The **Azure Functions** output will stream notifications and alerts to Azure endpoint.
 
-Review the following parameters that you can configure in the Edge Delta Admin portal:
+Review the following parameters that you can configure in the Edge Delta App:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |

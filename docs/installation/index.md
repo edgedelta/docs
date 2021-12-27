@@ -6,9 +6,13 @@ description: >-
 
 # Installation
 
-The Edge Delta installation package is available and fully supported for install on hosts running Windows, Linux, and MacOS operating systems. A Docker image is also available for containerized environments.
+## Overview 
 
-Select from the following deployment types below to review the appropriate documentation:
+The Edge Delta installation package is available and fully supported on hosts that run Windows, Linux, and MacOS operating systems. 
+
+Additionally, a Docker image is available for containerized environments.
+
+Review the following installation documents: 
 
 * [Windows](windows.md)
 * [Linux](linux.md)
@@ -18,16 +22,12 @@ Select from the following deployment types below to review the appropriate docum
 * [Kubernetes via Helm](helm.md)
 * [AWS ECS](amazon-ecs.md)
 
-In addition - within the admin console, many of the commands needed for installation can be created for you automatically through the wizard.
+***
 
-To configure specific environment variables for your agents see [Environment Variables](environment-variables.md).
+## Additional Documentation
 
-If you have a deployment environment with restricted outgoing network policy see [Agent Network Access Requirements](network-access.md).
+To configure specific environment variables for your agents, see [Environment Variables](environment-variables.md).
 
-Linux Example:
+If you have a deployment environment with restricted outgoing network policies, see [Agent Network Access Requirements](network-access.md).
 
-![](../assets/edge_delta_deploy.jpg)
-
-Kubernetes Example:
-
-![](../assets/edge_delta_dk8s.jpg)
+***
