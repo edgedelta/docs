@@ -40,7 +40,7 @@ You can create the following filter types:
 
 This filter type passes all log lines that match the specified regular expression. All unmatched logs are discarded.  
 
-In the Edge Delta Admin portal, in the visual editor, when you select **regex** as the filter type, the following fields will appear:
+In the Edge Delta App, in the visual editor, when you select **regex** as the filter type, the following fields will appear:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -77,7 +77,7 @@ This filter type hides (or masks) specific data, based on the configured regex p
 
 This filter type can be useful to hide sensitive data, such as phone numbers, social security numbers, credit card numbers, etc. Specifically, based on the configured regex pattern, this filter type changes the log lines to hide the matched content.
 
-In the Edge Delta Admin portal, in the visual editor, when you select **mask** as the filter type, the following fields will appear:
+In the Edge Delta App, in the visual editor, when you select **mask** as the filter type, the following fields will appear:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -126,7 +126,7 @@ This filter type handles trace logs.
 At a high level, this filter type:
 
   * Groups logs by a specified ID, then
-  * Verifies that all relavant events of that trace (or request) is collected, and then
+  * Verifies that all relevant events of that trace (or request) is collected, and then
   * Discards or passes the trace logs, based on the configuration.
 
 This filter type offers the following pass options: 
@@ -135,14 +135,14 @@ This filter type offers the following pass options:
 * Pass through high-latency operation events
 * Pass through certain percentage of successful events
 
-In the Edge Delta Admin portal, in the visual editor, when you select **buffered-trace** as the filter type, the following fields will appear:
+In the Edge Delta App, in the visual editor, when you select **buffered-trace** as the filter type, the following fields will appear:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
 | name | Enter a descriptive name for this filter. When you create an input, processor, or workflow, this name will appear in the list of filters to select. | Required |
 | trace\_id\_pattern | Enter a regular expression pattern to extract the trace ID values from logs. Enter a regex with single capture group. | Required |
 | failure\_pattern | Enter a regular expression pattern to indicate that a match with the trace event \(group of logs sharing same ID\) is a failure. Failures are passed through this filter. | Required |
-| trace\_deadline | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string to represent the max duration of a trace. Once the specified trace deadline is reached, the buffered trace filter will take all events that belong to the same trace, apply the filters/sampling, and then pass through the relavant events. | Required |
+| trace\_deadline | Enter a [golang duration](https://golang.org/pkg/time/#ParseDuration) string to represent the max duration of a trace. Once the specified trace deadline is reached, the buffered trace filter will take all events that belong to the same trace, apply the filters/sampling, and then pass through the relevant events. | Required |
 | success\_sample\_rate | Enter a number to indicate the percentage of successful traces that you want to receive. You can enter a number between 0 and 1. The default setting is 0, which means all successful traces are discarded. If you enter 0.2, then 20% of successful traces will pass through the filter. **Note** Any trace event without a **failure\_pattern** match indicates successful trace. | Optional |
 | latency\_pattern | Enter a regular expression pattern to extract the latency value from the trace logs. You must enter a regex with a single numeric capture group. Only 1 of the logs that belongs to the same trace ID should have latency information, or the last log will be picked to represent the latency of the trace. Once the latency value is extracted and converted to a number, this value can be used in conjunction with the **latency\_threshold** parameter to pass through high-latency traces. This process is useful to collect the high-latency traces, in addition to the failed traces that already passed throughou, based on the **failure\_pattern** parameter. | Optional |
 | latency\_threshold | Enter a numeric value to represent the threshold for high-latency limit. The latency of a trace is extracted with the **latency\_pattern** parameter. | Optional |
@@ -173,7 +173,7 @@ This filter type extracts a field's value and replaces the whole JSON content wi
 
 When this filter is applied, the original JSON is discarded. As a result, if the original JSON needs to be fed into another workflow or processor, then Edge Delta recommends that you attach this filter to the processor. 
 
-In the Edge Delta Admin portal, in the visual editor, when you select **extract-json-field** as the filter type, the following fields will appear:
+In the Edge Delta App, in the visual editor, when you select **extract-json-field** as the filter type, the following fields will appear:
 
 | Parameter | Description | Required or Optional |
 | :--- | :--- | :--- |
@@ -216,7 +216,7 @@ At a high level, there are 2 ways to access **Filters**:
 
 ### Option 1: Access the visual editor for a new configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Click **Visual**.
 4. On the right-side, select **Filters**. 
@@ -230,7 +230,7 @@ At a high level, there are 2 ways to access **Filters**:
 
 ### Option 2: Access the YAML file for an existing configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 3. Review the YAML file, make your changes, and then click **Save**. 
     * To learn about these configurations, see **Step 1: Review Filter Types**.
