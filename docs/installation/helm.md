@@ -26,7 +26,7 @@ Edge Delta uses a Kubernetes-recommended, node-level log collecting architecture
 
 ## Create a Configuration and Install the Agent via Helm 
 
-1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**. 
 3. Select **Helm**.
 4. Click **Save**.  
@@ -96,7 +96,7 @@ STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
-1. Visit https://admin.edgedelta.com
+1. Visit https://app.edgedelta.com
 2. Find the configuration with <API-KEY> to check if agents are active
 ```
 
@@ -121,7 +121,7 @@ helm ls -n edgedelta
 
 | Name | Description | Example Value |
 | :--- | :--- | :--- |
-| apiKey | API Key used to pull agent's configuration details (generated via ED Admin Portal), should not be specified when secretApiKey is set | "8d32..." |
+| apiKey | API Key used to pull agent's configuration details (generated via the Edge Delta App), should not be specified when secretApiKey is set | "8d32..." |
 | secretApiKey.name | Reference to Edge Delta Agent API Key secret name in same namespace, should not be specified when apiKey is set | "ed-api-key" |
 | storePort | Reference to Edge Delta Agent API Key secret key in same namespace, should not be specified when apiKey is set | "ed-api-key" |
 | httpProxy | Proxy details for routing Edge Delta agent's outbound traffic through an HTTP internal proxy | "http://127.0.0.1:3128" |
