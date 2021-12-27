@@ -102,7 +102,7 @@ There are 2 ways to create an output. You can create an output at the organizati
 
 ### Option 1: Create an Output at the Organization Level
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Integrations**.
+1. In the Edge Delta App, on the left-side navigation, click **Integrations**.
 2. Under **Add Integrations**, select the desired destination and output type.
 3. Complete the missing fields, and then click **Save**.
 
@@ -116,7 +116,7 @@ There are 2 ways to create an output. You can create an output at the organizati
 
 ### Option 2: Create an Output for a New Configuration
 
-1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Click **Visual**.
 4. On the right-side, select **Streams**, **Triggers**, or **Archives**.
@@ -133,7 +133,7 @@ There are 2 ways to create an output. You can create an output at the organizati
 > 
 > To add an output to an existing configuration, you must access the configuration's YAML file. Additionally, to make changes outside of the visual editor, you can access the configuration's YAML file.
 > 
->  1. In the Edge Delta Admin portal, on the left-side navigation, click **Agent Settings**.
+>  1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 >  2. Locate the desired configuration, and then under **Actions**, click the corresponding edit icon.
 >  3. Review the YAML file, make your changes, and then click **Save**.  
 
