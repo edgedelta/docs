@@ -14,7 +14,7 @@ You can use this document to learn how to deploy the Edge Delta Agent as a Daemo
 
 ## Step 1: Create a Configuration 
 
-1. In the Edge Delta Admin Portal, on the left-side navigation, click **Agent Settings**.
+1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
 2. Click **Create Configuration**.
 3. Select the desired platform.
 4. Click **Save**.  
@@ -62,7 +62,7 @@ While you can use the agent as an ordinary ECS task, you will only collect logs 
 ## Step 4: Verify Defintions and Configurations
 
 1. Verify that the container definition for other tasks or services does not have the`logConfiguration.logDriver` parameter. Without a logging driver, logs are written to standard output and collected by the agent service.
-2. In the Edge Delta Admin portal, in the left-side navigation, click **Agent Settings**. Locate the agent configuration, and then click the edit icon. 
+2. In the Edge Delta App, in the left-side navigation, click **Agent Settings**. Locate the agent configuration, and then click the edit icon. 
 3. In the agent YAML configuration file, verify that you have the container input source is enabled. Review the following example to view how to collect container logs:
 
 ```yaml
