@@ -28,14 +28,14 @@ By default, the Edge Delta agent archives logs on customer S3 buckets owned by E
 
   * This action can be disabled for user-owned S3 buckets. 
 
-A custom S3 bucket (or GCS, Blob, Minio, etc.) can be created in the Integrations page of the Edge Delta Admin portal. 
+A custom S3 bucket (or GCS, Blob, Minio, etc.) can be created in the Integrations page of the Edge Delta App. 
 After you create and add the bucket to a workflow in the agent configuration, the agent will start to send gzipped logs to the custom bucket.
 
 **Rehydration**
 
 Rehydration is the process of pushing already-archived data to a target streaming platform, such as Splunk, Elasticsearch, etc.
 
-You can use the Rehydration section of the Edge Delta Admin portal to initiate a rehydration for a specific time range, source filter, and keyword filters.
+You can use the Rehydration section of the Edge Delta App to initiate a rehydration for a specific time range, source filter, and keyword filters.
 
 By default, the Edge Delta backend handles rehydrations. Rehydration handlers will: 
     
@@ -81,7 +81,7 @@ helm upgrade openfaas --wait --install openfaas/openfaas \
     -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-helm-values.yml;
 ```
 
-3.Access the Edge Delta Admin portal, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions: 
+3.Access the Edge Delta App, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions: 
 
   - Write permission on Rehydration resources
   - Read permission on Integration resources
@@ -98,7 +98,7 @@ kubectl create secret generic ed-rehydration-token \
   --from-literal=ed-rehydration-token="<token value goes here>"
 ```
 
-5.Access the Edge Delta Admin portal, specifically the [Rehydrations](https://app.edgedelta.com/rehydrations) page, click **Settings**, and then enable **On Prem Rehydration** for your organization's rehydrations.
+5.Access the Edge Delta App, specifically the [Rehydrations](https://app.edgedelta.com/rehydrations) page, click **Settings**, and then enable **On Prem Rehydration** for your organization's rehydrations.
 
 > **Note**
 > 
@@ -141,7 +141,7 @@ kubectl logs deployment/rehydration-poller -n edgedelta-rehydration
 ```
 
 
-12.Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the portal, and then create rehydration requests. 
+12.Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the app, and then create rehydration requests. 
 
 The requests will be processed by the rehydration components that was just installed on your k8s cluster.
 
@@ -166,7 +166,7 @@ Review the following prerequisites:
 kubectl create namespace edgedelta-rehydration
 ```
 
-2.Access the Edge Delta Admin portal, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions: 
+2.Access the Edge Delta App, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions: 
 
     * Write permission on Rehydration resources
     * Read permission on Integration resources
@@ -183,7 +183,7 @@ kubectl create secret generic ed-rehydration-token \
   --from-literal=ed-rehydration-token="<token value goes here>"
 ```
 
-4.Access the Edge Delta Admin portal, specifically the [Rehydrations](https://app.edgedelta.com/rehydrations) page, click **Settings**, and then enable **On Prem Rehydration** for your organization's rehydrations.
+4.Access the Edge Delta App, specifically the [Rehydrations](https://app.edgedelta.com/rehydrations) page, click **Settings**, and then enable **On Prem Rehydration** for your organization's rehydrations.
 
 > **Note**
 > 
@@ -218,7 +218,7 @@ kubectl logs deployment/rehydration-poller -n edgedelta-rehydration
 ```
 
 
-10.Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the portal, and then create rehydration requests. 
+10.Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the app, and then create rehydration requests. 
 
 The requests will be processed by the rehydration components that was just installed on your k8s cluster.
 
