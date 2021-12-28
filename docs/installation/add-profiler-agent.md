@@ -3,13 +3,7 @@ Overview
 
 You can use this document to learn how to deploy the Edge Delta Agent with a profiler.
 
-> **Note**
->
-> This document only applies to Go-based web applications.
-
-For Go-based web applications, you can add a profiler during agent deployment. A profiler is useful to obtain data about instances where the agent is deployed, such as reviewing why CPU usage is high. 
-
-Afterwards, to obtain the data data, you can run a command to download a report. 
+The Edge Delta agent is a Go-based binary that (when specified during deployment) can expose CPU and memory profiling information. This information can be useful to understand specific activity, such as understanding why CPU usage is high. Afterwards deployment, to obtain the data, you can run a command to download a report. 
 
 * * * * *
 
