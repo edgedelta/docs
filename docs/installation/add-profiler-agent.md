@@ -3,9 +3,9 @@ Overview
 
 You can use this document to learn how to deploy the Edge Delta Agent with a profiler.
 
-The Edge Delta Agent is a Go-based binary that (when specified during deployment) can expose CPU and memory profiling information. 
+The Edge Delta Agent is a Go-based binary that (when specified during deployment) can expose CPU and memory profiling information.
 
-This information can be useful to understand specific activity, such as understanding why CPU usage is high. 
+This information can be useful to understand specific activity, such as understanding why CPU usage is high.
 
 After deployment, to obtain the data, you can run a command to download a report. 
 
@@ -26,7 +26,7 @@ Review the following examples.
 
 > **Note**
 >
-> In the examples below, replace the ED API KEY with your own key. 
+> In the examples below, replace the ED API KEY with your own key.
 
 **Linux Example**
 
@@ -39,7 +39,7 @@ To deploy with a profiler, the command would be:
 <code>ED_ENV_VARS=PROFILER_PORT=6060 ED_API_KEY=f1111e-e1d1-1ad1-b11d-d1a11111b1 bash -c "$(curl -L https://release.edgedelta.com/release/install.sh)"</code>
 
 **Docker Example**
-  
+
 In another example, for **Docker**, the regular deployment is:
 
 <code>docker run --rm -d --name edgedelta -v /var/run/docker.sock:/var/run/docker.sock:ro -e "ED_API_KEY=f1111e-e1d1-1ad1-b11d-d1a11111b1" gcr.io/edgedelta/agent:latest</code>
@@ -51,7 +51,7 @@ To deploy with a profiler, the command would be: 
 Review the following installation documents. Remember to add **PROFILER_PORT** for port **6060** to the installation command:
 
 -   [Install the Agent for Windows](./windows.md)
--   [Install the Agent for MacOS](macos.md) 
+-   [Install the Agent for MacOS](macos.md)
 -   [Install the Agent for Linux](linux.md)
 -   [Install the Agent for Docker](docker.md)
 -   [Install the Agent for Kubernetes](kubernetes.md)
@@ -67,11 +67,9 @@ When you obtain a profiler report, you can send the report to Edge Delta for ana
 
 > **Note**
 >
-> You can also view the data using the ppof tool. 
-> 1. Run the following command to install pprof, which requires golang installed: 
-<code>go install github.com/google/pprof@latest</code>
-> 2. Run the following command to visualize pprof results: 
-<code>pprof -web /tmp/cpu.pb.gz</code>
+> You can also view the data using the ppof tool.
+> <br> 1. Run the following command to install pprof, which requires golang installed: <code>go install github.com/google/pprof@latest</code>
+> <br> 2. Run the following command to visualize pprof results: <code>pprof -web /tmp/cpu.pb.gz</code>
 
 
 
@@ -90,4 +88,3 @@ For information on goroutine, run: 
 <code>curl <http://localhost:6060/debug/pprof/goroutine> --output /tmp/goroutine.pb.gx</code>
 
 * * * * *
-        
