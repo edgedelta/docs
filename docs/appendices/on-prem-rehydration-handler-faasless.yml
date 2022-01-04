@@ -17,9 +17,11 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: poller
+      - name: handler
         # image built on 2021-11-18
         image: gcr.io/edgedelta/function@sha256:3be42c1acf1887025e602d8d91c76462375ca5af789255b4365487ab129e9e12
+        ports:
+          - containerPort: 8080
         command:
           - /edgedelta/faas
         env:
