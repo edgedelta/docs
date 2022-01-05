@@ -91,7 +91,7 @@ The following example displays an output without the name of the organization-le
           title: "Anomaly Detected: {{.ProcessorDescription}}"
           disable_default_fields: false
           custom_fields:
-            "Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
+            "Dashboard": "https://app.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
             "Current Value": "{{.CurrentValue}}"
             "Threshold Value": "{{.ThresholdValue}}"
             "Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
@@ -126,7 +126,7 @@ The following example displays an output without the name of the organization-le
           title: "Anomaly Detected: {{.ProcessorDescription}}"
           disable_default_fields: false
           custom_fields:
-            "Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
+            "Dashboard": "https://app.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
             "Current Value": "{{.CurrentValue}}"
             "Threshold Value": "{{.ThresholdValue}}"
             "Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
@@ -412,7 +412,7 @@ The following example dispalys the use of custom fields:
          title: "Anomaly Detected: {{.ProcessorDescription}}"
          disable_default_fields: false
          custom_fields:
-           "Dashboard": "https://admin.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
+           "Dashboard": "https://app.edgedelta.com/investigation?edac={{.EDAC}}&timestamp={{.Timestamp}}"
            "Current Value": "{{.CurrentValue}}"
            "Threshold Value": "{{.ThresholdValue}}"
            "Custom Message": "{{.CurrentValue}} exceeds {{.ThresholdValue}}"
