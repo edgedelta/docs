@@ -269,36 +269,32 @@ To specify which input to add, you must provide include/exclude regex filters.
 
 This input type allows you to specify a set of Kubernetes pods and namespaces for Edge Delta to monitor.
 
-> **Note**
->
-> In the visual editor, in the **Kubernetes Include** and **Kubernetes Exclude** fields, note that if the value you provide after **pod=**, **namespace=**, or **kind=** is contained anywhere in the pod or namespace name, then the value will match.
+> **Before you begin**
+> 
+> Before you begin, consider the following statements: 
+> 
+>   * In the Edge Delta App portal, in the **Kubernetes Include** and **Kubernetes Exclude** fields, note that if the value you provide after **pod=**, **namespace=**, or **kind=** is contained anywhere in the pod or namespace name, then the value will match.
+> 
+>   * The **Kubernetes Exclude** field takes precedence over the Kubernetes Include field.
 
 <br>
 
 > **Note**
->
-> The **Kubernetes Exclude** field takes precedence over the **Kubernetes Include** field.
+> 
+> You can also use universal filters, such as regex, that are applicable to most inputs. 
+> You can use a filter to discard unnecessary logs or protect sensitive data. As a result, filters can help reduce the agent's resource load because of the reduced log ingestion.
+> To use a universal filter, you must: 
+> 1. Create a filter
+> 2. Add the filter to the input
+> 3. Review the following example of how to add the regex-error-doc-example filter into a YAML file:
+  ```filters:
+     - name: regex-error-doc-example
+       type: regex
+       pattern: error|ERROR|ERR|Err     
+  ```
+> To learn more about universal filters, see [Filters](./filters.md).
 
-Review the following example:
-
-```yaml
-  kubernetes:
-    - labels: "kubernetes_logs"
-      include:
-        - "namespace=.*"
-      exclude:
-        - "namespace=kube-system"
-        - "namespace=kube-public"
-        - "namespace=kube-node-lease"
-        - "pod=edgedelta"
-        - "kind=ReplicaSet"
-      auto_detect_line_pattern: true
-```
-
-***
-
-### Filters for Kubernetes
-
+<br>
 To specify which input to add, you must provide include/exclude regex filters.
 
 * All rules in the same line with a comma\(","\) separated means AND:
@@ -315,6 +311,22 @@ To specify which input to add, you must provide include/exclude regex filters.
      - "rule-1"
      - "rule-2"
   ```
+
+Review the following complete example of how to add Kubernetes-specific filters in a Kubernetes input:
+
+```yaml
+  kubernetes:
+    - labels: "kubernetes_logs"
+      include:
+        - "namespace=.*"
+      exclude:
+        - "namespace=kube-system"
+        - "namespace=kube-public"
+        - "namespace=kube-node-lease"
+        - "pod=edgedelta"
+        - "kind=ReplicaSet"
+      auto_detect_line_pattern: true
+```
 
 ***
 
