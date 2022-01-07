@@ -270,28 +270,33 @@ To specify which input to add, you must provide include/exclude regex filters.
 This input type allows you to specify a set of Kubernetes pods and namespaces for Edge Delta to monitor.
 
 > **Before you begin**
-> 
-> Before you begin, consider the following statements: 
-> 
+>
+> Before you begin, consider the following statements:
+>
 >   * In the Edge Delta App portal, in the **Kubernetes Include** and **Kubernetes Exclude** fields, note that if the value you provide after **pod=**, **namespace=**, or **kind=** is contained anywhere in the pod or namespace name, then the value will match.
-> 
+>
 >   * The **Kubernetes Exclude** field takes precedence over the Kubernetes Include field.
 
 <br>
 
 > **Note**
-> 
-> You can also use universal filters, such as regex, that are applicable to most inputs. 
+>
+> You can also use universal filters, such as regex, that are applicable to most inputs.
+> <br>
+> <br>
 > You can use a filter to discard unnecessary logs or protect sensitive data. As a result, filters can help reduce the agent's resource load because of the reduced log ingestion.
-> To use a universal filter, you must: 
-> 1. Create a filter
-> 2. Add the filter to the input
-> 3. Review the following example of how to add the regex-error-doc-example filter into a YAML file:
+> <br>
+> <br>
+> To use a universal filter, you must create a filter, and add the filter to the input.
+> <br>
+> <br>
+> Review the following example of how to add the regex-error-doc-example filter into a YAML file:
+
   ```filters:
-     - name: regex-error-doc-example
-       type: regex
-       pattern: error|ERROR|ERR|Err     
-  ```
+    - name: regex-error-doc-example
+      type: regex
+       pattern: error|ERROR|ERR|Err  
+     ```
 > To learn more about universal filters, see [Filters](./filters.md).
 
 <br>
