@@ -24,16 +24,20 @@ Edge Delta uses a Kubernetes-recommended, node-level log collecting architecture
 ***
 
 
-## Create a Configuration and Install the Agent via Helm 
+## Create a Configuration and Install the Agent via Helm
 
 1. In the Edge Delta App, on the left-side navigation, click **Agent Settings**.
-2. Click **Create Configuration**. 
+2. Click **Create Configuration**.
 3. Select **Helm**.
 4. Click **Save**.  
-5. In the table, locate the newly created configuration, and then click the corresponding green rocket to deploy additional instructions. 
-6. Click **Helm**. 
-7. In the window that appears, follow the on-screen instructions. 
-  - This window also displays your API key.  
+5. In the table, locate the newly created configuration, and then click the corresponding green rocket to deploy additional instructions.
+6. Click **Helm**.
+7. In the window that appears, follow the on-screen instructions. (This window also displays your API key.)
+8. To view helm-installed packages in the **edgedelta** namespace, run the following command:
+
+```
+helm ls -n edgedelta
+```
 
 <!--
 
@@ -55,17 +59,17 @@ helm install edgedelta edgedelta/edgedelta --set apiKey=<API-KEY> -n edgedelta -
 
 3. To set your **API-KEY**, you can use either **apiKey** or **secretApiKey** in the values.yml file.
 
-  - To use **apiKey** as a Kubernetes secret, change the values.yml file: 
+  - To use **apiKey** as a Kubernetes secret, change the values.yml file:
 
 ```yaml
 apiKey: "API-KEY"
 ```
 
 > **Note**
-> 
+>
 > **apiKey** will be kept in clear text as part of your pod property.
 
-  - To use **secretApiKey** as a Kubernetes secret, change the values.yml file: 
+  - To use **secretApiKey** as a Kubernetes secret, change the values.yml file:
 
 ```yaml
 # apiKey: ""
@@ -84,9 +88,9 @@ kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed
 
 > **Note**
 >
-> You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file. For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**. 
+> You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file. For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**.
 
-9. Review the following output: 
+9. Review the following output:
 
 ```
 NAME: edgedelta
@@ -109,11 +113,6 @@ helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f va
 
 -->
 
-8. View helm-installed packages in the **edgedelta** namespace:
-
-```
-helm ls -n edgedelta
-```
 
 ***
 
