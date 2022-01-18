@@ -32,8 +32,7 @@ Edge Delta uses a Kubernetes-recommended, node-level log collecting architecture
 4. Click **Save**.  
 5. In the table, locate the newly created configuration, and then click the corresponding green rocket to deploy additional instructions. 
 6. Click **Helm**. 
-7. In the window that appears, follow the on-screen instructions. 
-  - This window also displays your API key.  
+7. In the window that appears, follow the on-screen instructions. (This window also displays your API key.) 
 
 <!--
 
