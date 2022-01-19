@@ -46,17 +46,13 @@ helm ls -n edgedelta
 
 1. To set your **API-KEY**, you can use either **apiKey** or **secretApiKey** in the values.yml file.
 
-  - To use **apiKey** as a Kubernetes secret, change the values.yml file:
+    * To use **apiKey** as a Kubernetes secret, change the values.yml file. (Note: **apiKey** will be kept in clear text as part of your pod property.)
 
 ```yaml
 apiKey: "API-KEY"
 ```
 
-> **Note**
->
-> **apiKey** will be kept in clear text as part of your pod property.
-
-  - To use **secretApiKey** as a Kubernetes secret, change the values.yml file:
+  * To use **secretApiKey** as a Kubernetes secret, change the values.yml file:
 
 ```yaml
 # apiKey: ""
@@ -66,7 +62,7 @@ secretApiKey:
   key: "ed-api-key"
 ```
 
-2. Create **API-KEY** as a Kubernetes secret:
+2.Create **API-KEY** as a Kubernetes secret:
 
 ```
 kubectl create namespace edgedelta
@@ -75,10 +71,10 @@ kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed
 
 > **Note**
 >
-> You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file. For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml). 
+> You can also add environment variables or refer secrets as environment variables using commented samples in the values.yml file. For additional environment variables, you can download and edit [https://edgedelta.github.io/k8s/edgedelta-agent.yml](https://edgedelta.github.io/k8s/edgedelta-agent.yml).
 > To learn more, review the [Environment Variables](https://docs.edgedelta.com/installation/environment-variables/) document, specially the **Examples - Kubernetes (yml configuration) section**.
 
-3. Review the following output:
+3.Review the following output:
 
 ```
 NAME: edgedelta
@@ -93,7 +89,7 @@ NOTES:
 ```
 
 
-4. In the same folder, install the helm chart using values.yml:
+4.In the same folder, install the helm chart using values.yml:
 
 ```
 helm install edgedelta edgedelta/edgedelta -n edgedelta --create-namespace -f values.yaml
