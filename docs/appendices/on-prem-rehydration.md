@@ -13,9 +13,9 @@ You can deploy an on-prem rehydration with or without the OpenFaaS dependency.
 > OpenFaaS depends on apiextensions.k8s.io/v1beta1, which is compatible with Kubernetes v1.16 and higher.
 >
 > Edge Delta recommends that you deploy with the OpenFaaS dependency; however, if your cluster is older than v1.16, then you must deploy without the OpenFaaS dependency.
-> 
+>
 > To deploy with OpenFaaS, see [Deploy With OpenFaas](#deploy-with-openfaas).
-> 
+>
 > To deploy without OpenFaaS, see [Deploy Without OpenFaas](#deploy-without-openfaas).
 
 ***
@@ -24,11 +24,11 @@ You can deploy an on-prem rehydration with or without the OpenFaaS dependency.
 
 **Archiving**
 
-By default, the Edge Delta agent archives logs on customer S3 buckets owned by Edge Delta. 
+By default, the Edge Delta agent archives logs on customer S3 buckets owned by Edge Delta.
 
-  * This action can be disabled for user-owned S3 buckets. 
+  * This action can be disabled for user-owned S3 buckets.
 
-A custom S3 bucket (or GCS, Blob, Minio, etc.) can be created in the Integrations page of the Edge Delta App. 
+A custom S3 bucket (or GCS, Blob, Minio, etc.) can be created in the Integrations page of the Edge Delta App.
 After you create and add the bucket to a workflow in the agent configuration, the agent will start to send gzipped logs to the custom bucket.
 
 **Rehydration**
@@ -37,18 +37,18 @@ Rehydration is the process of pushing already-archived data to a target streamin
 
 You can use the Rehydration section of the Edge Delta App to initiate a rehydration for a specific time range, source filter, and keyword filters.
 
-By default, the Edge Delta backend handles rehydrations. Rehydration handlers will: 
-    
+By default, the Edge Delta backend handles rehydrations. Rehydration handlers will:
+
   * Scan the S3 bucket, then
-  * Filter the logs as requested, and then 
+  * Filter the logs as requested, and then
   * Push the logs to the target streaming platform.
 
-    
+
 Rehydration components can be deployed to any K8s cluster. OpenFaaS technology is used to handle rehydration requests and can scale out to multiple instances as needed.
 
 After you follow the steps below, you will still be able to use the **Rehydrations** page to trigger rehydrations and the Edge Delta backend will **not** be involved in the handling of raw data. The Edge Delta backend will simply serve as metadata storage for rehydrations, such as input/filters/destination and status.
-    
-***    
+
+***
 
 ## Deploy with OpenFaaS
 
@@ -56,15 +56,15 @@ Edge Delta recommends that you deploy with the OpenFaaS dependency.
 
 
 ### Step 1: Review Pre-Deployment Considerations
-    
-Review the following prerequisites:  
+
+Review the following prerequisites:
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [helm](https://helm.sh/docs/helm/helm_install/)
 - [faas](https://docs.openfaas.com/cli/install/#installation)
 
-### Step 2: Deploy an On-Prem Rehydration 
-    
+### Step 2: Deploy an On-Prem Rehydration
+
 1.Create the edgedelta-rehydration namespace:
 
 ```
@@ -81,13 +81,13 @@ helm upgrade openfaas --wait --install openfaas/openfaas \
     -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-helm-values.yml;
 ```
 
-3.Access the Edge Delta App, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions: 
+3.Access the Edge Delta App, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions:
 
   - Write permission on Rehydration resources
   - Read permission on Integration resources
 
 > **Note**
-> 
+>
 > To learn how to access and create a token, see [Tokens](tokens.md).
 
 4.Create a k8s secret to store the token:
@@ -101,8 +101,8 @@ kubectl create secret generic ed-rehydration-token \
 5.Access the Edge Delta App, specifically the [Rehydrations](https://app.edgedelta.com/rehydrations) page, click **Settings**, and then enable **On Prem Rehydration** for your organization's rehydrations.
 
 > **Note**
-> 
-> This setting may be hidden for your organization. If you do not see this option, then please contact Edge Delta. 
+>
+> This setting may be hidden for your organization. If you do not see this option, then please contact Edge Delta.
 
 6.Deploy the rehydration function handler. (The external load balancer for the OpenFaaS gateway was not exposed when helm chart was installed. As a result, you need to temporarily enable port forwarding to connect to OpenFaaS.)
 
@@ -121,12 +121,12 @@ faas deploy -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appe
 9.Deploy the rehydration poller YML. Specifically:
 
 - Download poller YML to a local file /tmp/rehydration-poller.yml
-    
+
 ```
 curl https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller.yml -o /tmp/rehydration-poller.yml
 ```
 
-- Put your organization ID as the value of `ED_ORG_ID` in /tmp/rehydration-poller.yml. You can find your organization ID in the URL of the API requests made by app.edgedelta.com. 
+- Put your organization ID as the value of `ED_ORG_ID` in /tmp/rehydration-poller.yml. You can find your organization ID in the URL of the API requests made by app.edgedelta.com.
 
 10.Deploy rehydration poller:
 
@@ -140,8 +140,7 @@ kubectl apply -f /tmp/rehydration-poller.yml;
 kubectl logs deployment/rehydration-poller -n edgedelta-rehydration
 ```
 
-
-12.Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the app, and then create rehydration requests. 
+12.Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the app, and then create rehydration requests.
 
 The requests will be processed by the rehydration components that was just installed on your k8s cluster.
 
@@ -151,14 +150,13 @@ The requests will be processed by the rehydration components that was just insta
 
 OpenFaaS depends on apiextensions.k8s.io/v1beta1, which is compatible with Kubernetes v1.16 and higher. As a result, if your cluster is older than v1.16, then you can use the following instructions to deploy without installing the OpenFaaS components.
 
-
 ### Step 1: Review Pre-Deployment Considerations
-    
-Review the following prerequisites:  
+
+Review the following prerequisites:
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 
-### Step 2: Deploy an On-Prem Rehydration 
+### Step 2: Deploy an On-Prem Rehydration
 
 1.Create the edgedelta-rehydration namespace:
 
@@ -166,13 +164,13 @@ Review the following prerequisites:
 kubectl create namespace edgedelta-rehydration
 ```
 
-2.Access the Edge Delta App, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions: 
+2.Access the Edge Delta App, specifically the [Global Settings](https://app.edgedelta.com/global-settings) page, and then create an Edge Delta token with the following permissions:
 
     * Write permission on Rehydration resources
     * Read permission on Integration resources
 
 > **Note**
-> 
+>
 > To learn how to access and create a token, see [Tokens](tokens.md).
 
 3.Create a k8s secret to store the token:
@@ -186,8 +184,8 @@ kubectl create secret generic ed-rehydration-token \
 4.Access the Edge Delta App, specifically the [Rehydrations](https://app.edgedelta.com/rehydrations) page, click **Settings**, and then enable **On Prem Rehydration** for your organization's rehydrations.
 
 > **Note**
-> 
-> This setting may be hidden for your organization. If you do not see this option, then please contact Edge Delta. 
+>
+> This setting may be hidden for your organization. If you do not see this option, then please contact Edge Delta.
 
 5.Deploy the rehydration handler:
 
@@ -198,12 +196,12 @@ kubectl apply -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/ap
 6.Deploy the rehydration poller YML. Specifically:
 
 - Download poller YML to a local file /tmp/rehydration-poller.yml
-    
+
 ```
 curl https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-poller-faasless.yml -o /tmp/rehydration-poller-faasless.yml
 ```
 
-- Put your organization ID as the value of `ED_ORG_ID` in /tmp/rehydration-poller-faasless.yml. You can find your organization ID in the URL of the API requests made by app.edgedelta.com. 
+- Put your organization ID as the value of `ED_ORG_ID` in /tmp/rehydration-poller-faasless.yml. You can find your organization ID in the URL of the API requests made by app.edgedelta.com.
 
 7.Deploy rehydration poller:
 
@@ -217,10 +215,8 @@ kubectl apply -f /tmp/rehydration-poller-faasless.yml;
 kubectl logs deployment/rehydration-poller -n edgedelta-rehydration
 ```
 
-
-10.Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the app, and then create rehydration requests. 
+9.Return to the [Rehydrations](https://app.edgedelta.com/rehydrations) page in the app, and then create rehydration requests.
 
 The requests will be processed by the rehydration components that was just installed on your k8s cluster.
 
 ***
-
