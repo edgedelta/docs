@@ -44,30 +44,20 @@ helm ls -n edgedelta
 
 ## Configure Helm
 
-1. To set your **API-KEY**, you can use either **apiKey** or **secretApiKey** in the values.yml file.
-
-    * To use **apiKey** as a Kubernetes secret, change the values.yml file. (Note: **apiKey** will be kept in clear text as part of your pod property.)
+1.To provide **API-KEY** as clear text, set **apiKey** in values.yml
 
 ```yaml
 apiKey: "API-KEY"
 ```
 
-  * To use **secretApiKey** as a Kubernetes secret, change the values.yml file:
+2.To provide **API-KEY** as a k8s secret, set **secretApiKey** in values.yml. Note that this secret must be created before running helm.
 
 ```yaml
-# apiKey: ""
-
 secretApiKey:
   name: "ed-api-key"
   key: "ed-api-key"
 ```
 
-2.Create **API-KEY** as a Kubernetes secret:
-
-```
-kubectl create namespace edgedelta
-kubectl create secret generic ed-api-key --namespace=edgedelta --from-literal=ed-api-key="API-KEY"
-```
 
 > **Note**
 >
