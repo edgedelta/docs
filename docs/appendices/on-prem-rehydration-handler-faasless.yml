@@ -18,8 +18,8 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: handler
-        # image built on 2022-01-25
-        image: gcr.io/edgedelta/function@sha256:899a13abff3bcc395bd5877f627382a6859436338cc2d9f4edf92ac14a46af8a
+        # image built on 2022-02-04
+        image: gcr.io/edgedelta/function@sha256:f8e8c79fdebd06caf7e512fce9b6d4e52877ec1667d3886c31abe35d035ec83c
         ports:
           - containerPort: 8080
         command:
@@ -41,7 +41,7 @@ spec:
           - name: ED_REHYDRATION_MEMORY_THRESHOLD
             value: 15G # This value should be less than memory limit of the pod, ideally 90% of the limit
           - name: GOGC
-            value: "60"
+            value: "20"
           - name: GODEBUG
             value: madvdontneed=1
         resources:
