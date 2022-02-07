@@ -6,8 +6,8 @@ provider:
 functions:
   rehydrate:
     skip_build: true
-    # image built on 2022-01-25
-    image: gcr.io/edgedelta/function@sha256:899a13abff3bcc395bd5877f627382a6859436338cc2d9f4edf92ac14a46af8a 
+    # image built on 2022-02-04
+    image: gcr.io/edgedelta/function@sha256:f8e8c79fdebd06caf7e512fce9b6d4e52877ec1667d3886c31abe35d035ec83c
     limits:
       memory: 16000Mi
     requests:
@@ -19,7 +19,7 @@ functions:
       ED_REMOTE_REPOSITORY: "1"
       ED_REMOTE_TOKEN_FILE: /var/openfaas/secrets/ed-rehydration-token
       ED_REHYDRATION_MEMORY_THRESHOLD: 15G # This value should be less than memory limit of the pod, ideally 90% of the limit
-      GOGC: 60
+      GOGC: 20
       GODEBUG: madvdontneed=1
     secrets:
       - ed-rehydration-token
@@ -36,8 +36,8 @@ functions:
      com.openfaas.health.http.initialDelay: "5s"
   echofaas:
     skip_build: true
-    # image built on 2022-01-25
-    image: gcr.io/edgedelta/function@sha256:899a13abff3bcc395bd5877f627382a6859436338cc2d9f4edf92ac14a46af8a
+    # image built on 2022-02-04
+    image: gcr.io/edgedelta/function@sha256:f8e8c79fdebd06caf7e512fce9b6d4e52877ec1667d3886c31abe35d035ec83c
     environment:
       ED_HANDLER_NAME: echo
     labels:
