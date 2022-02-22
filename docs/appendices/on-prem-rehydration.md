@@ -190,7 +190,7 @@ kubectl create secret generic ed-rehydration-token \
 5.Deploy the rehydration handler:
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-handler-faasless.yml;
+kubectl apply -f https://raw.githubusercontent.com/edgedelta/docs/master/docs/appendices/on-prem-rehydration-handler-faasless.yml
 ```
 
 6.Deploy the rehydration poller YML. Specifically:
