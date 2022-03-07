@@ -38,6 +38,7 @@ spec:
                 name: ed-rehydration-token
         resources:
           limits:
+            cpu: 200m
             memory: 200Mi
           requests:
             cpu: 100m

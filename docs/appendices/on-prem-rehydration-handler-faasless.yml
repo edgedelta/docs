@@ -18,8 +18,8 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: handler
-        # image built on 2022-02-04
-        image: gcr.io/edgedelta/function@sha256:f8e8c79fdebd06caf7e512fce9b6d4e52877ec1667d3886c31abe35d035ec83c
+        # image built on 2022-02-28
+        image: gcr.io/edgedelta/function@sha256:5972d8f598370590de0431c5c953a7ca7355762cf7e4739705a55dad7317ed9e
         ports:
           - containerPort: 8080
         command:
@@ -46,6 +46,7 @@ spec:
             value: madvdontneed=1
         resources:
           limits:
+            cpu: 2000m
             memory: 16000Mi
           requests:
             cpu: 1000m
