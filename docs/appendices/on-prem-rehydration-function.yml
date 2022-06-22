@@ -7,7 +7,7 @@ functions:
   rehydrate:
     skip_build: true
     # image built on 2022-02-28
-    image: gcr.io/edgedelta/function@sha256:5972d8f598370590de0431c5c953a7ca7355762cf7e4739705a55dad7317ed9e
+    image: gcr.io/edgedelta/function@sha256:7bb8216fcf16338c38d11f0bf6eafe6d5ef1a158a6860b6393a1c07c0910f6c2
     limits:
       memory: 16000Mi
     requests:
@@ -37,7 +37,7 @@ functions:
   echofaas:
     skip_build: true
     # image built on 2022-02-28
-    image: gcr.io/edgedelta/function@sha256:5972d8f598370590de0431c5c953a7ca7355762cf7e4739705a55dad7317ed9e
+    image: gcr.io/edgedelta/function@sha256:7bb8216fcf16338c38d11f0bf6eafe6d5ef1a158a6860b6393a1c07c0910f6c2
     environment:
       ED_HANDLER_NAME: echo
     labels:

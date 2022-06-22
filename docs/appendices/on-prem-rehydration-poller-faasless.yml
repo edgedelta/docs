@@ -19,7 +19,7 @@ spec:
       containers:
       - name: poller
         # image built on 2021-11-16
-        image: gcr.io/edgedelta/rehydrationpoller@sha256:19145381aa8660c130465f84550865652909a19611c0f21ec818c0e4ad247673
+        image: gcr.io/edgedelta/rehydrationpoller@sha256:a6abad62aa3cdaa55e54207201a56b0a49779aa0db5d3c8cc5b2b4b72ec6748f
         command:
           - /edgedelta/rehydrationpoller
         env:
