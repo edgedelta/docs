@@ -18,8 +18,8 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: handler
-        # image built on 2022-02-28
-        image: gcr.io/edgedelta/function@sha256:7bb8216fcf16338c38d11f0bf6eafe6d5ef1a158a6860b6393a1c07c0910f6c2
+        # image built on 2022-06-23 for on-prem release v0.1.2
+        image: gcr.io/edgedelta/function@sha256:6bd3d40a73656585fc44f53ed79ebb9e2b816e663584d6d4069423f7de853a95
         ports:
           - containerPort: 8080
         command:
